@@ -1,0 +1,36 @@
+﻿@page
+@model RegisterModel
+
+<section class="container-register pt-5">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="container-fluid justify-content-center w-25 mt-5">
+            <h3 class="text-center">Register</h3>
+            <hr />
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.UserName"></label>
+                <input asp-for="Input.UserName" class="form-control" />
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="button-holder mt-5 d-flex justify-content-center">
+                <button type="submit" class="btn btn-outline-primary">Register</button>
+            </div>
+        </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

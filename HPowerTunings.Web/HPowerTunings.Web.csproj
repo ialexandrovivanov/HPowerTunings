@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-HPowerTunings.Web-0C5BB449-9B58-4ACF-931A-F5CBFF33793F</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Appointment\SuccessCreate.cshtml" />
+    <Content Remove="Views\CarsForParts\Index.cshtml" />
+    <Content Remove="Views\Car\CarStatistic.cshtml" />
+    <Content Remove="Views\Car\DeleteYourCar.cshtml" />
+    <Content Remove="Views\Car\Details.cshtml" />
+    <Content Remove="Views\Car\SuccessCreate.cshtml" />
+    <Content Remove="Views\Car\SuccessDelete.cshtml" />
+    <Content Remove="Views\Client\Index.cshtml" />
+    <Content Remove="Views\Company\Index.cshtml" />
+    <Content Remove="Views\Employee\Index.cshtml" />
+    <Content Remove="Views\Mail\Index.cshtml" />
+    <Content Remove="Views\Repair\Index.cshtml" />
+    <Content Remove="Views\Repair\RepairStartEnd.cshtml" />
+    <Content Remove="Views\Service\Index.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+    <PackageReference Include="bootstrap" Version="4.3.1" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.8.0" />
+    <PackageReference Include="Google.Apis" Version="1.40.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\HPowerTunings.Attributes\HPowerTunings.Attributes.csproj" />
+    <ProjectReference Include="..\HPowerTunings.Common\HPowerTunings.Common.csproj" />
+    <ProjectReference Include="..\HPowerTunings.Data.Models\HPowerTunings.Data.Models.csproj" />
+    <ProjectReference Include="..\HPowerTunings.Data\HPowerTunings.Data.csproj" />
+    <ProjectReference Include="..\HPowerTunings.Services\HPowerTunings.Services.csproj" />
+    <ProjectReference Include="..\HPowerTunings.ViewModels\HPowerTunings.ViewModels.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Views\Possition\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Views\Appointment\SuccessCreate.cshtml" />
+    <None Include="Views\CarsForParts\Index.cshtml" />
+    <None Include="Views\Car\CarStatistic.cshtml" />
+    <None Include="Views\Car\DeleteYourCar.cshtml" />
+    <None Include="Views\Car\Details.cshtml" />
+    <None Include="Views\Car\SuccessCreate.cshtml" />
+    <None Include="Views\Car\SuccessDelete.cshtml" />
+    <None Include="Views\Client\Index.cshtml" />
+    <None Include="Views\Company\Index.cshtml" />
+    <None Include="Views\Employee\Index.cshtml" />
+    <None Include="Views\Home\Gallery.cshtml" />
+    <None Include="Views\Mail\Index.cshtml" />
+    <None Include="Views\Repair\RepairStartEnd.cshtml" />
+    <None Include="Views\Repair\Index.cshtml" />
+    <None Include="Views\Service\Index.cshtml" />
+  </ItemGroup>
+
+</Project>

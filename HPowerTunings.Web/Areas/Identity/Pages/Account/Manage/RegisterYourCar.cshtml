@@ -1,0 +1,32 @@
+﻿@page
+@model RegCarModel
+
+<div class="text-center mt-3">
+    <h4>Register your car</h4>
+</div>
+<br />
+<div class="container-fluid justify-content-center w-50">
+    <form id="register-car-form" method="post">
+        <select class="custom-select" id="CarBrand" name="carBrand">
+            <option selected disabled>-- Choose Car Brand --</option>
+            @foreach (var item in Model.Input.CarBrands)
+            {
+                <option>@item</option>
+            }
+        </select>
+        <div class="button-holder mt-4 d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-primary">Select Brand</button>
+        </div>
+    </form>
+</div>
+<br />
+<h4 class="text-center">My registered car(s)</h4>
+<hr />
+<br />
+<div class="text-center">
+    @foreach (var item in Model.Input.ClientCars)
+    {
+    <p><a href="/Car/Details?carId=@item.Id"><h4>@item.CarBrand &nbsp;-&nbsp; @item.CarModel</h4></a></p>
+    }
+</div>
+

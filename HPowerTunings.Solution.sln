@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{C0DF558C-0BF9-4FEE-8B7E-1CE4AF2190E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C2A4BFD1-1ABD-41D3-8C6A-932404493B93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AD53024C-4CBD-45FF-8983-4B532364601D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{97E2B8D5-7431-4A37-9C54-04113E64C098}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{59C7DD7E-E8E5-4F6D-81DD-729CEA43653A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPowerTunings.Data.Models", "HPowerTunings.Data.Models\HPowerTunings.Data.Models.csproj", "{E70DBCC2-8A4A-448E-B134-38F428DFFFDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPowerTunings.Data", "HPowerTunings.Data\HPowerTunings.Data.csproj", "{75CAB7AE-1590-48DF-8BA9-59A7F963EF35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPowerTunings.Web", "HPowerTunings.Web\HPowerTunings.Web.csproj", "{D5A157A6-F43A-41D9-9344-3F2485C5B7ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPowerTunings.ViewModels", "HPowerTunings.ViewModels\HPowerTunings.ViewModels.csproj", "{121FFECE-6C13-4129-9128-55FB33F1E64E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPowerTunings.Services", "HPowerTunings.Services\HPowerTunings.Services.csproj", "{970C1C20-4A6F-4948-AF37-49082327E491}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Attributes", "Attributes", "{F1823DCF-79AE-4B03-A9AD-99162160EC04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPowerTunings.Attributes", "HPowerTunings.Attributes\HPowerTunings.Attributes.csproj", "{DA5EFC1A-76F0-4A11-BDA3-31B773C7F26E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7386BDA4-42DA-4EF0-B838-4E80AD9F68D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPowerTunings.Common", "HPowerTunings.Common\HPowerTunings.Common.csproj", "{47C9B4E8-F89B-434C-A9AB-D73D648041EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E70DBCC2-8A4A-448E-B134-38F428DFFFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E70DBCC2-8A4A-448E-B134-38F428DFFFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E70DBCC2-8A4A-448E-B134-38F428DFFFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E70DBCC2-8A4A-448E-B134-38F428DFFFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75CAB7AE-1590-48DF-8BA9-59A7F963EF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75CAB7AE-1590-48DF-8BA9-59A7F963EF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75CAB7AE-1590-48DF-8BA9-59A7F963EF35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75CAB7AE-1590-48DF-8BA9-59A7F963EF35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A157A6-F43A-41D9-9344-3F2485C5B7ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A157A6-F43A-41D9-9344-3F2485C5B7ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A157A6-F43A-41D9-9344-3F2485C5B7ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A157A6-F43A-41D9-9344-3F2485C5B7ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{121FFECE-6C13-4129-9128-55FB33F1E64E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{121FFECE-6C13-4129-9128-55FB33F1E64E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{121FFECE-6C13-4129-9128-55FB33F1E64E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{121FFECE-6C13-4129-9128-55FB33F1E64E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{970C1C20-4A6F-4948-AF37-49082327E491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{970C1C20-4A6F-4948-AF37-49082327E491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{970C1C20-4A6F-4948-AF37-49082327E491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{970C1C20-4A6F-4948-AF37-49082327E491}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA5EFC1A-76F0-4A11-BDA3-31B773C7F26E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA5EFC1A-76F0-4A11-BDA3-31B773C7F26E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA5EFC1A-76F0-4A11-BDA3-31B773C7F26E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA5EFC1A-76F0-4A11-BDA3-31B773C7F26E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47C9B4E8-F89B-434C-A9AB-D73D648041EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47C9B4E8-F89B-434C-A9AB-D73D648041EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47C9B4E8-F89B-434C-A9AB-D73D648041EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47C9B4E8-F89B-434C-A9AB-D73D648041EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E70DBCC2-8A4A-448E-B134-38F428DFFFDF} = {C0DF558C-0BF9-4FEE-8B7E-1CE4AF2190E0}
+		{75CAB7AE-1590-48DF-8BA9-59A7F963EF35} = {C0DF558C-0BF9-4FEE-8B7E-1CE4AF2190E0}
+		{D5A157A6-F43A-41D9-9344-3F2485C5B7ED} = {59C7DD7E-E8E5-4F6D-81DD-729CEA43653A}
+		{121FFECE-6C13-4129-9128-55FB33F1E64E} = {97E2B8D5-7431-4A37-9C54-04113E64C098}
+		{970C1C20-4A6F-4948-AF37-49082327E491} = {C2A4BFD1-1ABD-41D3-8C6A-932404493B93}
+		{DA5EFC1A-76F0-4A11-BDA3-31B773C7F26E} = {F1823DCF-79AE-4B03-A9AD-99162160EC04}
+		{47C9B4E8-F89B-434C-A9AB-D73D648041EA} = {7386BDA4-42DA-4EF0-B838-4E80AD9F68D0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DF21D88-2F21-4581-84FE-5006CB961100}
+	EndGlobalSection
+EndGlobal

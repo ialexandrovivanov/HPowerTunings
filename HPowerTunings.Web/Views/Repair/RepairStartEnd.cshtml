@@ -1,0 +1,62 @@
+﻿@using HPowerTunings.ViewModels.RepairModels
+@model List<AdminRepairViewModel>
+@{ Layout = "_LayoutBoss";}
+<style>
+    body {
+        background-color: rgb(255, 249, 227)
+    }
+</style>
+<body>
+    <h1 class="mt-2">Repairs Table Page</h1>
+    <br />
+    @for (var i = 0; i < @Model.Count; i++)
+    {
+        <div style="background-color:honeydew">
+            <br />
+            <h3>&nbsp;&nbsp;&nbsp;&nbsp;Repair @(i + 1)&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+        </div>
+        <br />
+        <div class="text-center">
+            <p>Car brand: @Model[i].Car.CarBrand / Car model: @Model[i].Car.CarModel</p>
+            <p>Car registrational number: @Model[i].Car.RegistrationNumber</p>
+            <p>Repair started on: @Model[i].CreatedOn</p>
+            <p>Repair finished on:  @Model[i].FinishedOn</p>
+            <p>Repair price was: @Model[i].RepairPrice</p>
+        </div>
+        <br />
+        <div style="background-color:beige"><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mechanics operated in this repair:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5></div>
+        <br />
+        <div>
+            @foreach (var empl in Model[i].Employees)
+            {
+                <h5>@empl.FullName</h5>
+            }
+        </div>
+        <br />
+        <div style="background-color:beige"><h5>Parts used in this repair</h5></div>
+        <hr />
+        @foreach (var part in Model[i].Parts)
+        {
+            <div>Part name: @part.Name / Part price: @part.Price</div>
+        }
+        <hr />
+    }
+    <hr>
+    <div class="container-fluid justify-content-center w-50 text-center" style="background-color:azure  ">
+        <br />
+        <h5>Total incomes for period: $@Model.FirstOrDefault().TotalIncomes</h5>
+        <h5>Total outgoings for periods:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $@Model.Sum(r => r.TotalOutgoings)</h5>
+        @{
+            var incomes = Model.FirstOrDefault().TotalIncomes;
+            var outgoings = Model.Sum(r => r.TotalOutgoings);
+            var result = incomes - outgoings;
+            <h5>Total (incomes - outgoings) for period:&nbsp;&nbsp; $@result</h5>
+        }
+        <br />
+    </div>
+    <div class="pt-5 mt-5"></div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

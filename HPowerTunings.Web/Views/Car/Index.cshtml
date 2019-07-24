@@ -1,0 +1,53 @@
+﻿@using HPowerTunings.ViewModels.CarModels
+@model UserRegisterCarModel
+
+
+<div class="container-fluid justify-content-center w-50 pt-5 mt-5">
+    <h4 class="text-center">Register your car</h4>
+    <br />
+    <form id="Car" action="" method="post" class="text-center">
+        <div class="container-fluid justify-content-center w-50">
+            <div class="form-group">
+                <label asp-for="CarBrand"></label>
+                <input asp-for="CarBrand" class="form-control" disabled="disabled" value="@ViewData["CarBrand"]" />
+                <span asp-validation-for="CarBrand" class="text-danger"></span>
+            </div>
+            <label asp-for="CarModel"></label>
+            <select class="custom-select" id="CarModel" asp-for="CarModel">
+                <option selected disabled>-- Choose Model --</option>
+                @foreach (var item in ViewData["CarModels"] as List<string>)
+                {
+                    <option>@item</option>
+                }
+            </select>
+            <span asp-validation-for="CarModel" class="text-danger"></span>
+            <div class="form-group mt-5">
+                <input asp-for="RegistrationNumber" class="form-control w-100" placeholder="RegNumber">
+                <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-5">
+                <input asp-for="Rama" class="form-control w-100" placeholder="VIN Number" />
+                <span asp-validation-for="Rama" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-5">
+                <input asp-for="DistancePassed" class="form-control w-100" placeholder="Passed distance /km" />
+                <span asp-validation-for="DistancePassed" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="button-holder mt-5 d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-primary">Save Car</button>
+        </div>
+    </form>
+    <br />
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+

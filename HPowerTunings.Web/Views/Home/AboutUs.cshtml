@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0,
+    width=device-width" />
+    <title></title>
+</head>
+
+<body class="flex-grow-1 d-flex flex-column">
+    <div class="container-fluid text-center mt-5 pt-4 w-50">
+        <h1 class="mb-3">Welcome to HPowerTunings</h1>
+        <hr />
+        <h4> Our company has more than 20 years of experience in maintaining and servicing</h4>
+        <h3 class="mt-5">BMW, MINI COOPER,</h3>
+        <h4>and</h4>
+        <h3>RANGE ROVER</h3>
+        <h4>cars only.</h4>
+        <h4 class="mt-5">We would like to represent to you our newly opened car service center, which includes free parking, carwash and coffe bar</h4>
+        <hr />
+        <br />
+    </div>
+    <a class="text-center" href='http://maps-website.com/'>google maps embed</a>
+    <div class="about-item container-fluid justify-content-center" style='overflow:hidden;height:400px;width:840px;'>
+        <div id='gmap_canvas' style='height:400px;width:800px;'></div>
+        <style>
+            #gmap_canvas img {
+                max-width: none !important;
+                background: none !important
+            }
+        </style>
+    </div>
+    <div class="container-fluid text-center mt-3 mb-5 w-50">
+        <br />
+        <hr />
+        <h4>You can contact us on:</h4>
+        <h5 class="mt-3"><strong>tel.</strong> +359887216452</h5>
+        <h5><strong>tel.</strong> +359887216453</h5>
+        <h5><strong>web:</strong> www.HPowerTunings.bg</h5>
+        <h5><strong>email:</strong> pesho@hpowertunings.bg</h5>
+        <h5><strong>We are open:</strong> Mon - Sat 9:00h - 19:00h</h5>
+        <hr />
+        <div class="pt-5 mt-5"></div>
+        <p>&copy;HpowerTunings</p>
+        <hr class="w-25" />
+    </div>
+</body>
+</html>
+
+
+<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBp015ljmmAmpAOT3k5VpPAOfM2aJH6HU0'></script>
+<script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=3805386b679888ba417e71795c598f6ef3bf2c09'></script>
+<script type='text/javascript'>
+    function init_map() {
+        var myOptions = {
+            zoom: 12, center: new google.maps.LatLng(42.651537, 23.219843),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+        marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(42.651537, 23.219843) });
+        infowindow = new google.maps.InfoWindow({ content: '<strong>HPowerTunings Car Service</strong><br>Sofia<br>' });
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.open(map, marker);
+        });
+        infowindow.open(map, marker);
+    }
+    google.maps.event.addDomListener(window, 'load', init_map);
+</script>

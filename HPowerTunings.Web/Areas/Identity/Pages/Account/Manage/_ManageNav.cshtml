@@ -1,0 +1,27 @@
+﻿@using HPowerTunings.Data.Models
+
+<ul class="manage-nav nav nav-pills flex-column mt-3 container-fluid justify-content-center w-75">
+    <li class="nav-item">
+        <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+            Profile
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)"
+           id="change-password" asp-page="./ChangePassword">
+            Password
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)"
+           id="personal-data" asp-page="./PersonalData">
+            Personal data
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @ManageNavPages.RegisterYourCarNavClass(ViewContext)"
+           id="register-car" asp-page="./RegisterYourCar">
+            View or register your car
+        </a>
+    </li>
+</ul>

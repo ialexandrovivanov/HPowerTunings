@@ -1,0 +1,28 @@
+﻿@using HPowerTunings.ViewModels.Appointment
+@model CreateAppointmetModel
+
+
+<section class="pt-5 mt-5 container-fluid justify-content-center text-center w-25">
+    <form id="account" method="post">
+        <div class="form-group">
+            <h3>Create an appointment</h3>
+            <hr />
+            <br>
+            <label>Problem description</label>
+            <textarea rows="10" cols="60" asp-for="@Model.ProblemDescription" class="form-control"></textarea>
+            <span asp-validation-for="@Model.ProblemDescription" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Choose desired date</label>
+            <input type="date" asp-for="@Model.DesiredDate" class="form-control" />
+            <span asp-validation-for="@Model.DesiredDate" class="text-danger"></span>
+        </div>
+        <div class="text-center mt-5">
+            <button type="submit" class="btn btn-outline-primary" href="">Proceed appointmet</button>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

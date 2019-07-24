@@ -1,0 +1,39 @@
+﻿@page
+@model LoginModel
+
+
+<section class="container-login">
+    <form id="account" method="post" class="container-fluid justify-content-center w-25 pt-5 mt-5">
+        <h3 class="text-center">Login</h3>
+        <hr />
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label asp-for="Input.RememberMe">
+                    <input asp-for="Input.RememberMe" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+        </div>
+        <div class="button-holder mt-4 d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-primary">Log in</button>
+        </div>
+        <hr />
+        <div class="container-fluid justify-content-center text-center mt-4">
+            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

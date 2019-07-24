@@ -1,0 +1,59 @@
+﻿@using HPowerTunings.ViewModels.CarModels
+@model CarRepairsViewModel
+
+    <body>
+        @if (Model == null)
+        {
+            <div class="mt-5 pt-5 mb-3 text-center"><h3>No service history yet</h3></div>
+        }
+        else
+        {
+            <div class="container-fluid w-50 mt-3 text-center pt-5">
+                <h2>Service history of my @Model.CarBrand @Model.CarModel</h2>
+                <hr />
+            </div>
+            <div class="container-fluid text-center w-50">
+
+                @foreach (var item in Model.Repairs)
+                {
+                    <div class="container-fluid" style="background-color:lightblue">
+                        <br />
+                        <h4>@item.Description</h4>
+                        <br />
+                    </div>
+                    <div class="container-fluid" style="background-color:lightyellow">
+                        <p>This service has started on : @item.CreatedOn</p>
+                        <p>This service has finished on : @item.FinishedOn</p>
+                        <br />
+                        <h4>Mechanics operated</h4>
+                        @foreach (var mechanic in item.Mechanics)
+                        {
+                            <p>@mechanic.FullName</p>
+                        }
+                        <br>
+                        <h4>Parts used for this service</h4>
+                        @foreach (var part in item.Parts)
+                        {
+                            <p>Part name: @part.Name / Part brand: @part.Brand</p>
+                        }
+                        <br />
+                        <p>How much I paid: $@item.RepairPrice</p>
+                    </div>
+                }
+
+                <div class="container-fluid w-50">
+                    <hr />
+                    <div class="mt-5 mb-3 text-center"><h4 style="color:brown">I would like to delete this car and this service history</h4></div>
+                    <a href="/Car/DeleteYourCar?carid=@Model.CarId" method="get">
+                        <div class="conteiner-fluid button-holder mt-4 d-flex justify-content-center pt-3">
+                            <input type="button" class="btn btn-outline-primary" value="Delete this car">
+                        </div>
+                    </a>
+                </div>
+                <div class="pt-5 pb-5 mb-5">
+                </div>
+            </div>
+        }
+
+
+    </body>

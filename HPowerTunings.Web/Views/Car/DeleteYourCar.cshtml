@@ -1,0 +1,30 @@
+﻿@using HPowerTunings.ViewModels.CarModels
+@model DeleteYourCarModel
+
+<div class="container-fluid justify-content-center w-50 text-center pt-5 mt-5">
+    <h3>Delete your car</h3>
+    <hr />
+    <div class="delete-personal-data alert alert-warning" role="alert">
+        <p>
+            <span class="glyphicon btn-outline-light"></span>
+            <div>
+                <strong>This will permanently remove this @Model.CarBrand - @Model.CarModel from the system</strong>
+            </div>
+        </p>
+    </div>
+    <form action="/car/deleteyourcar" method="post" class="container-fluid form-group w-50 pt-5">
+        <label>Insert your password</label>
+        <input asp-for="Password" class="form-control" />
+        <input asp-for="CarBrand" />
+        <input asp-for="CarModel" />
+        <input asp-for="CarId" />
+        <span asp-validation-for=@Model.Password class="text-danger"></span>
+        <div class="conteiner-fluid button-holder mt-4 d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-danger">Delete this car</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

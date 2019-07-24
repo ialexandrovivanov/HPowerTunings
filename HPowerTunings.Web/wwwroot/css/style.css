@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Orbitron:400,700,900&display=swap');
+@import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
+@import url('index.css');
+@import url('navigation.css');
+@import url('carousel.css');
+@import url('gallery.css');
+
+ body {
+    height: 100%;
+    font-family: 'Open Sans';
+    font-size: 16px;
+  }
+
+ li {
+     list-style: none outside;
+ }
+
+ .main {
+     flex-wrap: wrap;   
+ }
+
+.welcome {
+    /*max-width: 70rem;*/
+}
+
+
+/*.wrapper {
+    height: 100vh;
+    margin: auto
+}*/
+
+.site-header,
+.site-footer {
+    background: rgba(17,49,107,0.87);
+}
+
+.site-header .nav-link-white,
+.site-footer > p{
+    color: #FFF !important;
+}
+
+.site-title {
+    font-family: "Orbitron";
+    position: absolute;
+    z-index: 10;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    text-shadow: 2px 2px 2px rgba(255,255,255,0.6);
+    background: rgba(240, 240, 230, 0.6);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+    padding: 0 1em;
+    line-height: 1;
+    border-radius: 8px;
+}
+
+.cookieconsent {
+   background: rgba(164, 226, 240, 0.8);
+}
+
+.site-footer {
+    margin-top: auto;
+}
+
+.site-footer > p {
+    font-size: 0.8rem;
+}
+
+.nav-pills .nav-link.active {
+    background: #11316B;
+}
+.manage-nav {
+    padding: 0 15px;
+}
+.manage-nav a.nav-link {
+    font-size: 1.1em;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active {
+    border-color: #11316B;
+    background: #11316B;
+}
+
+.container-login {
+    position: absolute;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+form {
+    position: relative; 
+    z-index: 30;
+}
+
+.boss {
+    font-size: 3.2rem;
+}
+
+.delete-personal-data {
+    background-color: rgba(164, 226, 240, 0.8);
+    color: #000;
+    border: 0;
+}
+
+
+
+.container-register {
+    position: absolute;
+    border-radius: 32px;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.container-forgotPassword {
+    position: absolute;
+    background-size: cover;
+    border-radius: 32px;
+    width: 100%;
+    height: 100%;
+}
+
+.container-privacy {
+    position: absolute;
+    border-radius: 32px;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.container-logout {
+    position: absolute;
+    border-radius: 32px;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
