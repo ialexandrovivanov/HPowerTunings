@@ -1,6 +1,12 @@
 ﻿@using HPowerTunings.ViewModels.CarModels
 @model DeleteYourCarModel
 
+    <style>
+        body {
+            background-color: rgb(240, 240, 232)
+        }
+    </style>
+
 <div class="container-fluid justify-content-center w-50 text-center pt-5 mt-5">
     <h3>Delete your car</h3>
     <hr />
@@ -12,7 +18,7 @@
             </div>
         </p>
     </div>
-    <form action="/car/deleteyourcar" method="post" class="container-fluid form-group w-50 pt-5">
+    <form action="/car/deleteyourcar" method="post" class="container-fluid form-group w-50 pt-4">
         <label>Insert your password</label>
         <input asp-for="Password" class="form-control" />
         <input asp-for="CarBrand" />
@@ -20,7 +26,7 @@
         <input asp-for="CarId" />
         <span asp-validation-for=@Model.Password class="text-danger"></span>
         <div class="conteiner-fluid button-holder mt-4 d-flex justify-content-center">
-            <button type="submit" class="btn btn-outline-danger">Delete this car</button>
+            <button type="submit" class="btn btn-danger">Delete this car</button>
         </div>
     </form>
 </div>

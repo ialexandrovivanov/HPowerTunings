@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using HPowerTunings.Attributes;
+using HPowerTunings.Data;
 using HPowerTunings.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +17,15 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<Client> _userManager;
         private readonly SignInManager<Client> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly ApplicationDbContext context;
 
         public DeletePersonalDataModel(
             UserManager<Client> userManager,
             SignInManager<Client> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            ApplicationDbContext context)
         {
+            this.context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -68,9 +73,16 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account.Manage
                     return Page();
                 }
             }
+            var userId = await _userManager.GetUserIdAsync(user);
+
+            var clientCars = this.context.Cars.Where(c => c.ClientId == userId);
+
+            foreach (var car in clientCars)
+                car.ClientId = null;
+
+            await this.context.SaveChangesAsync();
 
             var result = await _userManager.DeleteAsync(user);
-            var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Unexpected error occurred deleteing user with ID '{userId}'.");

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.CarModels;
@@ -16,6 +17,24 @@ namespace HPowerTunings.Services.Repair
         {
             this.context = context;
         }
+
+        public async Task<bool> CreateRepair(CreateRepairOutputModel model)
+        {
+            var car = this.context.Cars.FirstOrDefault(c => c.RegistrationNumber == model.CarRegNumber);
+            var result = await this.context.AddAsync(new Data.Models.Repair() { RepairName = model.RepairName, Car = car });
+            return result == null ? false : true;                              
+        }
+
+        public ICollection<string> GetAllMechanicNames()
+        {
+            return this.context.Employees.Where(e => e.Possition == "Mechanic").Select(e => e.FullName).ToList();
+        }
+
+        public ICollection<string> GetAllRegNumbers()
+        {
+            return this.context.Cars.Select(c => c.RegistrationNumber).OrderByDescending(a => a).ToList();
+        }
+
         public ICollection<AdminRepairViewModel> GetAllRepairsPeriod(RepairStartEndDateViewModel model)
         {
             ICollection<AdminRepairViewModel> result = new List<AdminRepairViewModel>();

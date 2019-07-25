@@ -108,7 +108,7 @@ namespace HPowerTunings.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(ViewModels.ErrorViewModel).GetTypeInfo().Assembly);
 
             if (env.IsDevelopment() || env.IsEnvironment("QA"))
             {

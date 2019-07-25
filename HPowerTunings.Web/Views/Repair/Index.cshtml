@@ -30,9 +30,14 @@
             <span asp-validation-for=@Model.EndDate class="text-danger"></span>
         </div>
         <div class="text-center mt-5">
-            <button type="submit" class="btn btn-outline-primary">Select repairs</button>
+                <button type="submit" class="btn btn-outline-primary">Select repairs</button>
         </div>
     </form>
+    <div class="text-center mt-5">
+        <form action="/repair/createrepair" method="get">
+            <button class="btn btn-outline-primary">Create repair</button>
+        </form>
+    </div>
 </body>
 </html>
 

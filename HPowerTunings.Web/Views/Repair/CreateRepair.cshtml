@@ -1,0 +1,64 @@
+﻿@using HPowerTunings.ViewModels.RepairModels
+@model CreateRepairOutputModel
+@{ Layout = "_LayoutBoss";}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            background-color: rgb(242, 242, 232)
+        }
+    </style>
+</head>
+
+<body>
+    <h3 class="pt-5">Create repair</h3>
+    <form id="Car" action="/Repair/CreateRepair" method="post"
+          class="form-group mt-3 container-fluid justify-content-center text-center w-25">
+        <label>Select car</label>
+        <input asp-for="@Model.CarRegNumber" class="form-control" placeholder="Reg.number">
+        <span asp-validation-for="@Model.CarRegNumber" class="text-danger"></span>
+        <p></p>
+        <label>Repair name</label>
+        <input asp-for="@Model.RepairName" class="form-control" placeholder="Repair name">
+        <label>Description</label>
+        <textarea rows="6" cols="60" asp-for="@Model.Description"
+                  class="form-control" placeholder="Description"></textarea>
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+        @{ var result = (List<string>)@ViewData["AllNames"]; }
+        <label>Select mechanic one</label>
+        <select asp-for="@Model.Mechanic1FullName" class="form-control">
+            <option selected disabled>-- Select mechanic --</option>
+            @foreach (var item in result)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+        <label>Select mechanic two</label>
+        <select asp-for="@Model.Mechanic1FullName" class="form-control">
+            <option selected disabled>-- Select mechanic --</option>
+            @foreach (var item in result)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+
+
+
+
+
+
+        <div class="button-holder mt-4">
+            <button type="submit" class="btn btn-outline-primary">Create repair</button>
+        </div>
+    </form>
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+</html>
+

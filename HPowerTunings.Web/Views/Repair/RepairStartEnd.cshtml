@@ -3,25 +3,26 @@
 @{ Layout = "_LayoutBoss";}
 <style>
     body {
-        background-color: rgb(255, 249, 227)
+        background-color: rgb(240, 240, 230)
     }
 </style>
 <body>
-    <h1 class="mt-2">Repairs Table Page</h1>
-    <br />
+    <h2 class="mt-4">Repairs for Period</h2>
+    <p>________________________________________________________________________________________________</p>
     @for (var i = 0; i < @Model.Count; i++)
     {
-        <div style="background-color:honeydew">
+        <div style="background-color:honeydew; border-radius:8px">
             <br />
             <h3>&nbsp;&nbsp;&nbsp;&nbsp;Repair @(i + 1)&nbsp;&nbsp;&nbsp;&nbsp;</h3>
         </div>
         <br />
         <div class="text-center">
-            <p>Car brand: @Model[i].Car.CarBrand / Car model: @Model[i].Car.CarModel</p>
-            <p>Car registrational number: @Model[i].Car.RegistrationNumber</p>
-            <p>Repair started on: @Model[i].CreatedOn</p>
-            <p>Repair finished on:  @Model[i].FinishedOn</p>
-            <p>Repair price was: @Model[i].RepairPrice</p>
+            <p>Car brand: <strong>@Model[i].Car.CarBrand</strong> / Car model: <strong>@Model[i].Car.CarModel</strong></p>
+            <p>Car registrational number: <strong>@Model[i].Car.RegistrationNumber</strong></p>
+            <p>Car VIN number: <strong>@Model[i].Car.Rama</strong></p>
+            <p>Repair started on: <strong>@Model[i].CreatedOn</strong></p>
+            <p>Repair finished on:  <strong>@Model[i].FinishedOn</strong></p>
+            <p>Repair price was: <strong>@Model[i].RepairPrice</strong></p>
         </div>
         <br />
         <div style="background-color:beige"><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mechanics operated in this repair:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5></div>
@@ -29,7 +30,7 @@
         <div>
             @foreach (var empl in Model[i].Employees)
             {
-                <h5>@empl.FullName</h5>
+                <h5><strong>@empl.FullName</strong></h5>
             }
         </div>
         <br />
@@ -37,20 +38,20 @@
         <hr />
         @foreach (var part in Model[i].Parts)
         {
-            <div>Part name: @part.Name / Part price: @part.Price</div>
+            <div>Part name: <strong>@part.Name</strong> / Part price: <strong>@part.Price</strong></div>
         }
         <hr />
     }
-    <hr>
-    <div class="container-fluid justify-content-center w-50 text-center" style="background-color:azure  ">
+    <p>________________________________________________________________________________________________</p>
+    <div class="container-fluid justify-content-center w-50 text-center" style="background-color:azure; border-radius:8px">
         <br />
-        <h5>Total incomes for period: $@Model.FirstOrDefault().TotalIncomes</h5>
-        <h5>Total outgoings for periods:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $@Model.Sum(r => r.TotalOutgoings)</h5>
+        <h5>Total incomes for period: <strong>$@Model.FirstOrDefault().TotalIncomes</strong></h5>
+        <h5>Total outgoings for periods:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>$@Model.Sum(r => r.TotalOutgoings)</strong></h5>
         @{
             var incomes = Model.FirstOrDefault().TotalIncomes;
             var outgoings = Model.Sum(r => r.TotalOutgoings);
             var result = incomes - outgoings;
-            <h5>Total (incomes - outgoings) for period:&nbsp;&nbsp; $@result</h5>
+            <h5>Total (incomes - outgoings) for period:&nbsp;&nbsp; <strong>$@result</strong></h5>
         }
         <br />
     </div>
