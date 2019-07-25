@@ -53,7 +53,7 @@ namespace HPowerTunings.Services.Car
             return false;
         }
 
-        public async Task<IEnumerable<string>> GetAllCarBrands(string brand)
+        public async Task<IEnumerable<string>> GetAllCarModels(string brand)
         {
             var result = this.context   
                              .CarModels
@@ -140,6 +140,11 @@ namespace HPowerTunings.Services.Car
             await this.context.SaveChangesAsync();
 
             return true;
+        }
+
+        public ICollection<string> GetAllCarBrands()
+        {
+            return this.context.CarBrands.Select(c => c.Name).ToList();
         }
     }
 }

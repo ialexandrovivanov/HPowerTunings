@@ -50,8 +50,8 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult CreateRepair()
         {
-            var allMechanicNames = this.repairService.GetAllMechanicNames();
-            ViewData["AllNames"] = allMechanicNames.ToList();
+            ViewData["AllNames"] = this.repairService.GetAllMechanicNames().ToList();
+
             return View();
         }
 
@@ -59,11 +59,29 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateRepair(CreateRepairOutputModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) 
+            {
+                ViewData["AllNames"] = this.repairService.GetAllMechanicNames().ToList();
+                return View(model);
+            }
 
             var result = await this.repairService.CreateRepair(model);
+            if (result)
+            {
+                return Redirect("/Repair/SuccesCreate");
+            }
+            else
+            {
+                ViewData["AllNames"] = this.repairService.GetAllMechanicNames().ToList();
+                return View(model);
+            }
+        }
 
-            return View(model);
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult SuccessCreate()
+        {
+            return View();
         }
     }
 }

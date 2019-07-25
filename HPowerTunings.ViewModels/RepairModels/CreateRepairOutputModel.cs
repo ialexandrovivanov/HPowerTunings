@@ -8,7 +8,7 @@ namespace HPowerTunings.ViewModels.RepairModels
     public class CreateRepairOutputModel
     {
         [Required]
-        [IsRegNumberRegistered]
+        [IsRegNumberExists]
         public string CarRegNumber { get; set; }
         public string Description { get; set; }
         public string RepairName { get; set; }

@@ -20,7 +20,7 @@ namespace HPowerTunings.Web.Controllers
         public async Task<IActionResult>Index(string carBrand)
         {
             ViewData["CarBrand"] = carBrand;
-            ViewData["CarModels"] = await this.carService.GetAllCarBrands(carBrand);
+            ViewData["CarModels"] = await this.carService.GetAllCarModels(carBrand);
 
             return this.View();
         }
@@ -45,7 +45,7 @@ namespace HPowerTunings.Web.Controllers
             }
 
             ViewData["CarBrand"] = model.CarBrand;
-            ViewData["CarModels"] = await this.carService.GetAllCarBrands(model.CarBrand);
+            ViewData["CarModels"] = await this.carService.GetAllCarModels(model.CarBrand);
 
             return View(model);
         }
@@ -78,11 +78,11 @@ namespace HPowerTunings.Web.Controllers
         {
             var carViewModel = await this.carService.GetCarDetailsAsync(carId);
             var deleteYourCarModel = new DeleteYourCarModel()
-                           {
-                                CarModel = carViewModel.CarModel,
-                                CarBrand = carViewModel.CarBrand,
-                                CarId = carViewModel.CarId
-                           };
+                                     {
+                                          CarModel = carViewModel.CarModel,
+                                          CarBrand = carViewModel.CarBrand,
+                                          CarId = carViewModel.CarId
+                                     };
             return View(deleteYourCarModel);
         }
 
@@ -99,6 +99,13 @@ namespace HPowerTunings.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AdminCreateCar()
+        {
+            var result = await Task.Run(() => this.carService.GetAllCarBrands());
+            return this.View(new AdminCreateCarOutputModel() { CarBrands = result });
         }
     }
 }
