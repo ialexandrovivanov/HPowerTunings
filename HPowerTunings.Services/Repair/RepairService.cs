@@ -22,6 +22,7 @@ namespace HPowerTunings.Services.Repair
         {
             var car = this.context.Cars.FirstOrDefault(c => c.RegistrationNumber == model.CarRegNumber);
             var result = await this.context.AddAsync(new Data.Models.Repair() { RepairName = model.RepairName, Car = car });
+            await this.context.SaveChangesAsync();
             return result == null ? false : true;                              
         }
 
@@ -40,7 +41,7 @@ namespace HPowerTunings.Services.Repair
             ICollection<AdminRepairViewModel> result = new List<AdminRepairViewModel>();
             var repairs = this.context
                               .Repairs
-                              .Where(r => r.FinishedOn >= model.StartDate && r.FinishedOn <= model.EndDate)
+                              .Where(r => r.StartedOn >= model.StartDate && r.StartedOn <= model.EndDate)
                               .Select(r => r)
                               .ToList();
 

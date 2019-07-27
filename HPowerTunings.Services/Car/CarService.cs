@@ -1,5 +1,5 @@
-﻿using HPowerTunings.Data;
-using HPowerTunings.Data.Models;
+﻿using AutoMapper;
+using HPowerTunings.Data;
 using HPowerTunings.ViewModels.CarModels;
 using HPowerTunings.ViewModels.EmployeeModels;
 using HPowerTunings.ViewModels.PartModels;
@@ -16,10 +16,10 @@ namespace HPowerTunings.Services.Car
     {
         private ApplicationDbContext context;
         private IHttpContextAccessor httpContext;
-        private UserManager<Client> userManager;
+        private UserManager<Data.Models.Client> userManager;
         public CarService(ApplicationDbContext context,
                           IHttpContextAccessor httpContext,
-                          UserManager<Client> userManager)
+                          UserManager<Data.Models.Client> userManager)
         {
             this.context = context;
             this.userManager = userManager;
@@ -53,7 +53,7 @@ namespace HPowerTunings.Services.Car
             return false;
         }
 
-        public async Task<IEnumerable<string>> GetAllCarModels(string brand)
+        public async Task<ICollection<string>> GetAllCarModels(string brand)
         {
             var result = this.context   
                              .CarModels
@@ -145,6 +145,60 @@ namespace HPowerTunings.Services.Car
         public ICollection<string> GetAllCarBrands()
         {
             return this.context.CarBrands.Select(c => c.Name).ToList();
+        }
+
+        public async Task<bool> AdminRegisterCar(AdminRegisterCarOutputModel model)
+        {
+            var carBrand = this.context.CarBrands.SingleOrDefault(b => b.Name.ToLower() == model.CarBrand.ToLower());
+            var carModel = this.context.CarModels.SingleOrDefault(m => m.Name.ToLower() == model.CarModel.ToLower());
+            var client = this.context.Users.SingleOrDefault(c => c.Email == model.Email);
+
+
+            var carForDb = new Data.Models.Car()
+                           {
+                               RegistrationNumber = model.RegNumber,
+                               CarBrand = carBrand,
+                               CarModel = carModel,
+                               CarBrandId = carBrand.Id,
+                               CarModelId = carModel.Id,
+                               Client = client,
+                               ClientId = client.Id,
+                               Rama = model.Rama,
+                               IsDeleted = false,
+                               TraveledDistance = model.DistancePassed,
+                           };
+
+            var result = await this.context.Cars.AddAsync(carForDb);
+            await this.context.SaveChangesAsync();
+            return result == null ? false : true;
+        }
+
+        public async Task<ICollection<CarStatisticViewModel>> GetAllCarsPeriod(CarStartEndDateViewModel model)
+        {
+            ICollection<CarStatisticViewModel> result = new List<CarStatisticViewModel>();
+            var cars = this.context
+                              .Cars
+                              .Where(r => r.CreatedOn >= model.StartDate && r.CreatedOn <= model.EndDate)
+                              .Select(r => r);
+
+            var config = new MapperConfiguration(c =>
+            {
+                c.CreateMap<Data.Models.Car, CarStatisticViewModel>();
+            });
+
+            var mapper = config.CreateMapper();
+
+            foreach (var car in cars)
+            {
+                var modelForCollection = mapper.Map<Data.Models.Car, CarStatisticViewModel>(car);
+                modelForCollection.ClientEmail = car.Client.Email;
+                modelForCollection.ClientUserName = car.Client.UserName;
+                modelForCollection.RegisteredOn = car.CreatedOn.Value.ToString("MM/dd/yyyy HH:mm");
+                result.Add(modelForCollection);
+            }
+
+            await Task.Delay(0);
+            return result;
         }
     }
 }

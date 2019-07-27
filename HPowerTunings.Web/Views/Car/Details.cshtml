@@ -50,11 +50,11 @@
                 <div class="container-fluid w-50">
                     <hr />
                     <div class="mt-5 mb-3 text-center"><h4 style="color:brown">I would like to delete this car and this service history</h4></div>
-                    <a href="/Car/DeleteYourCar?carid=@Model.CarId" method="get">
-                        <div class="conteiner-fluid button-holder mt-4 d-flex justify-content-center pt-3">
-                            <input type="button" class="btn btn-outline-primary" value="Delete this car">
+                    <form action="/Car/DeleteYourCar?carid=@Model.CarId" method="post" >
+                        <div  class="conteiner-fluid button-holder mt-4 d-flex justify-content-center pt-3">
+                            <input type="submit" class="btn btn-outline-primary" value="Delete this car">
                         </div>
-                    </a>
+                    </form>
                 </div>
                 <div class="pt-5 pb-5 mb-5">
                 </div>

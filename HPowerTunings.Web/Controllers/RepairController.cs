@@ -34,6 +34,10 @@ namespace HPowerTunings.Web.Controllers
                 return RedirectToAction("Index", "Repair", model);
 
             var result = this.repairService.GetAllRepairsPeriod(model);
+            if (result == null)
+            {
+                return View();
+            }
 
             return View(result);
         }
@@ -68,7 +72,7 @@ namespace HPowerTunings.Web.Controllers
             var result = await this.repairService.CreateRepair(model);
             if (result)
             {
-                return Redirect("/Repair/SuccesCreate");
+                return Redirect("/Repair/SuccessCreate");
             }
             else
             {

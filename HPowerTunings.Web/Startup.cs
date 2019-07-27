@@ -15,13 +15,11 @@ using HPowerTunings.Web.Core;
 using HPowerTunings.Services.Car;
 using HPowerTunings.Data.Models;
 using System.Threading.Tasks;
-using HPowerTunings.ViewModels;
 using System.Reflection;
 using HPowerTunings.Common.Mapping;
-using AutoMapper;
 using HPowerTunings.Services.Repair;
 using HPowerTunings.Services.Appointment;
-using CloudinaryDotNet;
+using HPowerTunings.Services.Client;
 
 namespace HPowerTunings.Web
 {
@@ -95,6 +93,7 @@ namespace HPowerTunings.Web
             services.AddTransient<IRepairService, RepairService>();
             services.AddSingleton<IDayCreator, DayCreator>();
             services.AddSingleton<IAppointmentService, AppointmentService>();
+            services.AddSingleton<ICustomClientService, CustomClientService>();
 
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -113,7 +112,7 @@ namespace HPowerTunings.Web
             if (env.IsDevelopment() || env.IsEnvironment("QA"))
             {
                 var seeder = new DatabaseSeeder(app.ApplicationServices.GetService<ApplicationDbContext>());
-                Task.Run(() => seeder.SeedCarModels());
+                seeder.SeedDatabase().GetAwaiter().GetResult();
                 var dayCreator = new DayCreator(app.ApplicationServices.GetService<ApplicationDbContext>());
                 Task.Run(() => dayCreator.CreateDay());
 

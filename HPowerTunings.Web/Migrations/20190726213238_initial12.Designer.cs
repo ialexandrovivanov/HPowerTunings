@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HPowerTunings.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190715121232_carBrandFixed")]
-    partial class carBrandFixed
+    [Migration("20190726213238_initial12")]
+    partial class initial12
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,8 @@ namespace HPowerTunings.Web.Migrations
 
                     b.Property<DateTime?>("AppointmentDate");
 
+                    b.Property<string>("ClientId");
+
                     b.Property<DateTime?>("CreatedOn");
 
                     b.Property<string>("DayId");
@@ -36,15 +38,19 @@ namespace HPowerTunings.Web.Migrations
 
                     b.Property<DateTime?>("DesiredDate");
 
+                    b.Property<bool?>("IsAppointmentPending");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("ProblemDescription");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClientId");
+
                     b.HasIndex("DayId");
 
-                    b.ToTable("Appointment");
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("HPowerTunings.Data.Models.Car", b =>
@@ -287,15 +293,17 @@ namespace HPowerTunings.Web.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Brand");
+
                     b.Property<DateTime?>("CreatedOn");
 
                     b.Property<string>("Description");
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<DateTime?>("OrderedOn");
+                    b.Property<string>("Name");
 
-                    b.Property<string>("PartName");
+                    b.Property<DateTime?>("OrderedOn");
 
                     b.Property<decimal>("Price");
 
@@ -504,6 +512,10 @@ namespace HPowerTunings.Web.Migrations
 
             modelBuilder.Entity("HPowerTunings.Data.Models.Appointment", b =>
                 {
+                    b.HasOne("HPowerTunings.Data.Models.Client", "Client")
+                        .WithMany("Appointments")
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("HPowerTunings.Data.Models.Day", "Day")
                         .WithMany("Appointments")
                         .HasForeignKey("DayId");

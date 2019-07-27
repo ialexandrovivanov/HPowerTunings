@@ -83,6 +83,7 @@ namespace HPowerTunings.Web.Controllers
                                           CarBrand = carViewModel.CarBrand,
                                           CarId = carViewModel.CarId
                                      };
+
             return View(deleteYourCarModel);
         }
 
@@ -102,10 +103,81 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AdminCreateCar()
         {
             var result = await Task.Run(() => this.carService.GetAllCarBrands());
             return this.View(new AdminCreateCarOutputModel() { CarBrands = result });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminCreateCar(AdminCreateCarOutputModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return Redirect($"/Car/AdminRegisterCar?carBrand={model.CarBrand}&regNumber={model.RegNumber}");
+            }
+
+            await Task.Delay(0);
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminRegisterCar(string carBrand, string regNumber)
+        {
+            ViewData["CarBrand"] = carBrand;
+            ViewData["RegNumber"] = regNumber;
+            ViewData["CarModels"] = await this.carService.GetAllCarModels(carBrand);
+            await Task.Delay(0);
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminRegisterCar(AdminRegisterCarOutputModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (await this.carService.AdminRegisterCar(model))
+                {
+                    return Redirect("/Car/AdminSuccessRegisterCar");
+                }
+            }
+
+            ViewData["CarBrand"] = model.CarBrand;
+            ViewData["RegNumber"] = model.RegNumber;
+            ViewData["CarModels"] = await this.carService.GetAllCarModels(model.CarBrand);
+
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminSuccessRegisterCar()
+        {
+            await Task.Delay(0);
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CarStatisticStartEnd(CarStartEndDateViewModel model)
+        {
+            if (model.StartDate > model.EndDate)
+                ModelState.AddModelError(string.Empty, "Insert correct period of time");
+
+            if (!ModelState.IsValid)
+                return RedirectToAction("CarStatistic", "Car", model);
+
+            var result = await this.carService.GetAllCarsPeriod(model);
+            if (result == null)
+            {
+                return View();
+            }
+
+            return View(result);
         }
     }
 }

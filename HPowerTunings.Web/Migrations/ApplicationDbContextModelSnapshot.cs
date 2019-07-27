@@ -36,7 +36,7 @@ namespace HPowerTunings.Web.Migrations
 
                     b.Property<DateTime?>("DesiredDate");
 
-                    b.Property<bool>("IsAppointmentApproved");
+                    b.Property<bool?>("IsAppointmentPending");
 
                     b.Property<bool>("IsDeleted");
 
@@ -48,7 +48,7 @@ namespace HPowerTunings.Web.Migrations
 
                     b.HasIndex("DayId");
 
-                    b.ToTable("Appointment");
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("HPowerTunings.Data.Models.Car", b =>

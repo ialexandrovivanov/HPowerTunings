@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HPowerTunings.Web.Migrations
 {
-    public partial class initial : Migration
+    public partial class initial12 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -265,7 +265,7 @@ namespace HPowerTunings.Web.Migrations
                         column: x => x.CarBrandId,
                         principalTable: "CarBrands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -289,11 +289,11 @@ namespace HPowerTunings.Web.Migrations
                         column: x => x.CarForPartsId,
                         principalTable: "CarsForParts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Appointment",
+                name: "Appointments",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -303,17 +303,25 @@ namespace HPowerTunings.Web.Migrations
                     DesiredDate = table.Column<DateTime>(nullable: true),
                     AppointmentDate = table.Column<DateTime>(nullable: true),
                     ProblemDescription = table.Column<string>(nullable: true),
-                    DayId = table.Column<string>(nullable: true)
+                    IsAppointmentPending = table.Column<bool>(nullable: true),
+                    DayId = table.Column<string>(nullable: true),
+                    ClientId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Appointment", x => x.Id);
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointment_Days_DayId",
+                        name: "FK_Appointments_AspNetUsers_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Days_DayId",
                         column: x => x.DayId,
                         principalTable: "Days",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -339,19 +347,19 @@ namespace HPowerTunings.Web.Migrations
                         column: x => x.CarBrandId,
                         principalTable: "CarBrands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Cars_CarModels_CarModelId",
                         column: x => x.CarModelId,
                         principalTable: "CarModels",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Cars_AspNetUsers_ClientId",
                         column: x => x.ClientId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -376,7 +384,7 @@ namespace HPowerTunings.Web.Migrations
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -436,7 +444,8 @@ namespace HPowerTunings.Web.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    PartName = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Brand = table.Column<string>(nullable: true),
                     OrderedOn = table.Column<DateTime>(nullable: true),
                     ReceivedOn = table.Column<DateTime>(nullable: true),
                     SupplierId = table.Column<string>(nullable: true),
@@ -450,18 +459,23 @@ namespace HPowerTunings.Web.Migrations
                         column: x => x.RepairId,
                         principalTable: "Repairs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Parts_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointment_DayId",
-                table: "Appointment",
+                name: "IX_Appointments_ClientId",
+                table: "Appointments",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_DayId",
+                table: "Appointments",
                 column: "DayId");
 
             migrationBuilder.CreateIndex(
@@ -511,16 +525,12 @@ namespace HPowerTunings.Web.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_CarBrandId",
                 table: "Cars",
-                column: "CarBrandId",
-                unique: true,
-                filter: "[CarBrandId] IS NOT NULL");
+                column: "CarBrandId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_CarModelId",
                 table: "Cars",
-                column: "CarModelId",
-                unique: true,
-                filter: "[CarModelId] IS NOT NULL");
+                column: "CarModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_ClientId",
@@ -561,7 +571,7 @@ namespace HPowerTunings.Web.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Appointment");
+                name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

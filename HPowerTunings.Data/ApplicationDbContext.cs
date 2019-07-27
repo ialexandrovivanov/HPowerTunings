@@ -10,7 +10,6 @@ namespace HPowerTunings.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         { }
-
         public DbSet<Car> Cars { get; set; }
         public DbSet<Day> Days { get; set; }
         public DbSet<Part> Parts { get; set; }
@@ -22,6 +21,7 @@ namespace HPowerTunings.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<DayRepair> DaysRepairs { get; set; }
         public DbSet<CarForParts> CarsForParts { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
         public DbSet<PartFromCar> PartsFromCars { get; set; }
         public DbSet<EmployeeRepair> EmployeesRepairs { get; set; }
 

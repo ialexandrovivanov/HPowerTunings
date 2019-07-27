@@ -19,14 +19,18 @@ namespace HPowerTunings.Services.Appointment
         }
         public bool CreateAppointment(CreateAppointmetModel model)
         {
-            var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var user = this.context.Users.FirstOrDefault(u => u.Id == userId);
+            var clientId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var client = this.context.Users.FirstOrDefault(u => u.Id == clientId);
             var day = this.context.Days.FirstOrDefault(d => d.DayDateTime.Value.Date == DateTime.Now.Date);
             day.Appointments.Add(new Data.Models.Appointment
             {
                 DesiredDate = model.DesiredDate,
-                Description = model.ProblemDescription,
-                Client = user,
+                Description = model.Description,
+                ClientId = clientId,
+                Client = client,
+                DayId = day.Id,
+                IsAppointmentPending = true,
+                AppointmentDate = null
             });
             var result = this.context.SaveChangesAsync().GetAwaiter().GetResult();
             return result == 1 ? true : false;

@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HPowerTunings.Common\HPowerTunings.Common.csproj" />
     <ProjectReference Include="..\HPowerTunings.Data\HPowerTunings.Data.csproj" />
     <ProjectReference Include="..\HPowerTunings.ViewModels\HPowerTunings.ViewModels.csproj" />
   </ItemGroup>

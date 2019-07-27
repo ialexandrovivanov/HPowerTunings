@@ -7,8 +7,11 @@ namespace HPowerTunings.ViewModels.RepairModels
 {
     public class CreateRepairOutputModel
     {
+        private const string regNumberError = "Use capital letters, numbers and correct length";
+
         [Required]
         [IsRegNumberExists]
+        [RegularExpression("^[ABCEHKLMNOPTXY]{1,2}[0-9]{4,6}[ABCEHKLMNOPTXY]{1,2}$", ErrorMessage = regNumberError)]
         public string CarRegNumber { get; set; }
         public string Description { get; set; }
         public string RepairName { get; set; }

@@ -9,11 +9,13 @@
   <ItemGroup>
     <Content Remove="Views\Appointment\SuccessCreate.cshtml" />
     <Content Remove="Views\CarsForParts\Index.cshtml" />
+    <Content Remove="Views\Car\AdminRegisterCar.cshtml" />
     <Content Remove="Views\Car\CarStatistic.cshtml" />
     <Content Remove="Views\Car\DeleteYourCar.cshtml" />
     <Content Remove="Views\Car\Details.cshtml" />
     <Content Remove="Views\Car\SuccessCreate.cshtml" />
     <Content Remove="Views\Car\SuccessDelete.cshtml" />
+    <Content Remove="Views\Client\AdminCreateClient.cshtml" />
     <Content Remove="Views\Client\Index.cshtml" />
     <Content Remove="Views\Company\Index.cshtml" />
     <Content Remove="Views\Employee\Index.cshtml" />
@@ -55,11 +57,13 @@
   <ItemGroup>
     <None Include="Views\Appointment\SuccessCreate.cshtml" />
     <None Include="Views\CarsForParts\Index.cshtml" />
+    <None Include="Views\Car\AdminRegisterCar.cshtml" />
     <None Include="Views\Car\CarStatistic.cshtml" />
     <None Include="Views\Car\DeleteYourCar.cshtml" />
     <None Include="Views\Car\Details.cshtml" />
     <None Include="Views\Car\SuccessCreate.cshtml" />
     <None Include="Views\Car\SuccessDelete.cshtml" />
+    <None Include="Views\Client\AdminCreateClient.cshtml" />
     <None Include="Views\Client\Index.cshtml" />
     <None Include="Views\Company\Index.cshtml" />
     <None Include="Views\Employee\Index.cshtml" />

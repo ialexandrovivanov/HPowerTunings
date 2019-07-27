@@ -6,7 +6,7 @@ namespace HPowerTunings.Web.Core
 {
     public interface IDatabaseSeeder
     {
-        Task SeedCarModels();
+        Task SeedDatabase();
         Task InsertRecords(CarBrand carBrand, List<string> models);
     }
 }
