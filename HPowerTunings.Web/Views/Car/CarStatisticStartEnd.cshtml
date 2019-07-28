@@ -1,5 +1,11 @@
 ﻿@using HPowerTunings.ViewModels.CarModels
-@model ICollection<CarStatisticViewModel>
+@model List<CarStatisticViewModel>
+
+    <style>
+        body {
+            background-color: rgb(240, 240, 240)
+        }
+    </style>
 
 @{
     ViewData["Title"] = "CarStatisticStartEnd";
@@ -8,18 +14,20 @@
     <div class="container-fluid justify-content-center text-center w-50">
         <h4 class="mt-5">Cars registered in the period</h4>
         <hr />
-        @foreach (var item in Model)
+        @for (int i = 0; i <= Model.Count - 1; i++)
         {
-            <p>Registered on: <strong>@item.RegisteredOn</strong></p>
-            <p>Registration number: <strong>@item.RegistrationNumber</strong></p>
-            <p>Car brand: <strong>@item.CarBrandName</strong></p>
-            <p>Car model: <strong>@item.CarModelName</strong></p>
-            <p>Traveled distance: <strong>@item.TraveledDistance</strong></p>
-            <p>Rame number: <strong>@item.Rama</strong></p>
-            <p>Owner's email: <strong>@item.ClientEmail</strong></p>
-            <p>Owner's username: <strong>@item.ClientUserName</strong></p>
+            <div style="background-color:honeydew; border-radius:8px"><h4>Car N<strong>@(i+1)</strong></h4></div>
+            <h5>Registered on: <strong>@Model[i].RegisteredOn</strong></h5>
+            <p>Registration number: <strong>@Model[i].RegistrationNumber</strong></p>
+            <p>Car brand: <strong>@Model[i].CarBrandName</strong></p>
+            <p>Car model: <strong>@Model[i].CarModelName</strong></p>
+            <p>Traveled distance: <strong>@Model[i].TraveledDistance</strong></p>
+            <p>Rame number: <strong>@Model[i].Rama</strong></p>
+            <p>Owner's email: <strong>@Model[i].ClientEmail</strong></p>
+            <p>Owner's username: <strong>@Model[i].ClientUserName</strong></p>
             <div class="mb-5"></div>
             <hr />
         }
+      
     </div>
 

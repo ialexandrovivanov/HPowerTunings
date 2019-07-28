@@ -14,6 +14,7 @@ namespace HPowerTunings.ViewModels.RepairModels
         public DateTime? CreatedOn { get; set; }
         public DateTime? FinishedOn { get; set; }
         public CarViewModel Car { get; set; }
+        public bool IsRepairPending { get; set; } = true;
         public ICollection<PartViewModel> Parts { get; set; } = new List<PartViewModel>();
         public ICollection<EmployeeViewModel> Employees { get; set; } = new List<EmployeeViewModel>();
         public decimal TotalOutgoings { get; set; }

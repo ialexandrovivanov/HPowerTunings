@@ -21,9 +21,60 @@ namespace HPowerTunings.Services.Repair
         public async Task<bool> CreateRepair(CreateRepairOutputModel model)
         {
             var car = this.context.Cars.FirstOrDefault(c => c.RegistrationNumber == model.CarRegNumber);
-            var result = await this.context.AddAsync(new Data.Models.Repair() { RepairName = model.RepairName, Car = car });
-            await this.context.SaveChangesAsync();
-            return result == null ? false : true;                              
+
+            this.context.Repairs.Add(new Data.Models.Repair() { RepairName = model.RepairName, Car = car, CarId = car.Id });
+            this.context.SaveChanges();
+            var repair = this.context
+                             .Repairs
+                             .Where(r => r.Car.RegistrationNumber == model.CarRegNumber)
+                             .OrderByDescending(r => r.CreatedOn)
+                             .FirstOrDefault();
+
+            car.Repairs.Add(repair);
+
+            var mechanic1 = this.context.Employees.SingleOrDefault(e => e.FullName == model.Mechanic1FullName);
+            var mechanic2 = this.context.Employees.SingleOrDefault(e => e.FullName == model.Mechanic2FullName);
+
+            if (mechanic1 != null)
+            {
+                var emplRep = (new Data.Models.EmployeeRepair
+                               {
+                                   Employee = mechanic1,
+                                   EmployeeId = mechanic1.Id,
+                                   Repair = repair,
+                                   RepairId = repair.Id
+                               });
+
+                var mechanic = this.context.Employees.FirstOrDefault(e => e.Id == mechanic1.Id);
+
+                var employeeRepair = this.context.EmployeesRepairs.Add(emplRep);
+
+                mechanic.EmployeesRepairs.Add(emplRep);
+                repair.EmployeesRepairs.Add(emplRep);
+                await this.context.SaveChangesAsync();
+            }
+
+            if (mechanic2 != null)
+            {
+
+                var emplRep = (new Data.Models.EmployeeRepair
+                {
+                    Employee = mechanic2,
+                    EmployeeId = mechanic2.Id,
+                    Repair = repair,
+                    RepairId = repair.Id
+                });
+
+                var mechanic = this.context.Employees.FirstOrDefault(e => e.Id == mechanic1.Id);
+
+                var employeeRepair = this.context.EmployeesRepairs.Add(emplRep);
+
+                mechanic.EmployeesRepairs.Add(emplRep);
+                repair.EmployeesRepairs.Add(emplRep);
+                await this.context.SaveChangesAsync();
+            }
+              
+            return repair == null ? false : true;                              
         }
 
         public ICollection<string> GetAllMechanicNames()
@@ -45,12 +96,14 @@ namespace HPowerTunings.Services.Repair
                               .Select(r => r)
                               .ToList();
 
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Data.Models.Repair, AdminRepairViewModel>();
-                cfg.CreateMap<Data.Models.Part, PartViewModel>();
-                cfg.CreateMap<Data.Models.Car, CarViewModel>();
-                cfg.CreateMap<Data.Models.Employee, EmployeeViewModel>();
-            });
+            var config = new MapperConfiguration(c => 
+                         {
+                         c.CreateMap<Data.Models.Repair, AdminRepairViewModel>();
+                         c.CreateMap<Data.Models.Part, PartViewModel>();
+                         c.CreateMap<Data.Models.Car, CarViewModel>();
+                         c.CreateMap<Data.Models.Employee, EmployeeViewModel>();
+                         });
+
             var mapper = config.CreateMapper();
 
             foreach (var repair in repairs)

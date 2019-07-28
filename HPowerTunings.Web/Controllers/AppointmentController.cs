@@ -2,6 +2,7 @@
 using HPowerTunings.ViewModels.Appointment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HPowerTunings.Web.Controllers
 {
@@ -24,11 +25,11 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Index(CreateAppointmetModel model)
+        public async Task<IActionResult> Index(CreateAppointmetModel model)
         {
             if (ModelState.IsValid)
             {
-                if (appointmentService.CreateAppointment(model))
+                if (await appointmentService.CreateAppointment(model))
                 {
                     return Redirect("/Appointment/SuccessCreate");
                 }

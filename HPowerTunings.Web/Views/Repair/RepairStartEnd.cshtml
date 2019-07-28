@@ -18,6 +18,7 @@
             </div>
             <br />
             <div class="text-center">
+                @if (Model[i].IsRepairPending) { <h5 style="background-color:darksalmon; border-radius:8px"><strong>Repair Is Pending</strong></h5> }
                 <p>Car brand: <strong>@Model[i].Car.CarBrand</strong> / Car model: <strong>@Model[i].Car.CarModel</strong></p>
                 <p>Car registrational number: <strong>@Model[i].Car.RegistrationNumber</strong></p>
                 <p>Car VIN number: <strong>@Model[i].Car.Rama</strong></p>

@@ -1,9 +1,10 @@
 ﻿using HPowerTunings.ViewModels.Appointment;
+using System.Threading.Tasks;
 
 namespace HPowerTunings.Services.Appointment
 {
     public interface IAppointmentService
     {
-        bool CreateAppointment(CreateAppointmetModel model);
+        Task<bool> CreateAppointment(CreateAppointmetModel model);
     }
 }

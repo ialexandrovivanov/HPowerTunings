@@ -9,16 +9,16 @@
     <title></title>
     <style>
         body {
-            background-color: rgb(255, 249, 227)
+            background-color: rgb(254, 244, 227)
         }
     </style>
 </head>
 <body>
-    <form action="/repair/repairStartEnd" method="post" class="w-25">
+    <form action="/repair/repairStartEnd" method="post" class="w-32">
         <div class="text-center mt-5">
             <h3>Select period of time for repairs statistics</h3>
             <hr />
-        </div>
+        </div>  
         <div class="text-center mt-5">
             <label>Start date (including)</label>
             <input type="date" asp-for=@Model.StartDate class="form-control" />

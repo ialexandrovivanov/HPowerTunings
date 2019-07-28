@@ -1,13 +1,24 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "SuccessCreate";
+    Layout = "~/Views/Shared/_LayoutBoss.cshtml";
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <style>
+        body {
+            background-color: rgb(240, 250, 220)
+        }
+    </style>
 </head>
 <body>
-        <div class="container-fluid justify-content-center w-50 text-center pt-5 mt-5">
-            <h3>Repair is created successfully</h3>
-            <a href="https://localhost:44366/Repair/Index">Return to account page</a>
-        </div>
+    <div class="container-fluid justify-content-center w-50 text-center pt-5">
+        <h3>Repair is created successfully</h3>
+        <a href="https://localhost:44366/Repair/Index">Return to repair main page</a>
+    </div>
 </body>
 </html>

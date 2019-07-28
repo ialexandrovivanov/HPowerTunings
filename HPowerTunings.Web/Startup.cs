@@ -20,6 +20,7 @@ using HPowerTunings.Common.Mapping;
 using HPowerTunings.Services.Repair;
 using HPowerTunings.Services.Appointment;
 using HPowerTunings.Services.Client;
+using HPowerTunings.Services.Company;
 
 namespace HPowerTunings.Web
 {
@@ -94,6 +95,7 @@ namespace HPowerTunings.Web
             services.AddSingleton<IDayCreator, DayCreator>();
             services.AddSingleton<IAppointmentService, AppointmentService>();
             services.AddSingleton<ICustomClientService, CustomClientService>();
+            services.AddSingleton<ICompanyService, CompanyService>();
 
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

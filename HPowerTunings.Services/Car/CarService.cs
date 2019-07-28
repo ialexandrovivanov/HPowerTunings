@@ -188,7 +188,7 @@ namespace HPowerTunings.Services.Car
 
             var mapper = config.CreateMapper();
 
-            foreach (var car in cars)
+            foreach (var car in cars.OrderBy(c => c.CreatedOn))
             {
                 var modelForCollection = mapper.Map<Data.Models.Car, CarStatisticViewModel>(car);
                 modelForCollection.ClientEmail = car.Client.Email;

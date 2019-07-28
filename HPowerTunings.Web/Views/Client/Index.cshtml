@@ -9,14 +9,14 @@
     <title></title>
     <style>
         body {
-            background-color: rgb(255, 249, 227)
+            background-color: rgb(240, 238, 224)
         }
     </style>
 </head>
 <body>
     <form action="/repair/repairStartEnd" method="post" class="w-25">
         <div class="text-center mt-5">
-            <h3>Select period of time for repairs statistics</h3>
+            <h3>Select period of time for clients statistics</h3>
             <hr />
         </div>
         <div class="text-center mt-5">
@@ -30,7 +30,7 @@
             <span asp-validation-for=@Model.EndDate class="text-danger"></span>
         </div>
         <div class="text-center mt-5">
-            <button type="submit" class="btn btn-outline-primary">Select repairs</button>
+            <button type="submit" class="btn btn-outline-primary">Select period</button>
         </div>
     </form>
     <div class="text-center mt-5">

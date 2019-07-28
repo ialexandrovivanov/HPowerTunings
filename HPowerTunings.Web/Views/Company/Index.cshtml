@@ -1,4 +1,6 @@
-﻿@{ Layout = "_LayoutBoss";}
+﻿@using HPowerTunings.ViewModels.Appointment
+@using HPowerTunings.ViewModels.RepairModels
+@{ Layout = "_LayoutBoss";}
 
 <!DOCTYPE html>
 <html>
@@ -7,19 +9,61 @@
     <title></title>
     <style>
         body {
-            background-color:rgb(240, 240, 232)
+            background-color: rgb(240, 238, 224)
         }
     </style>
 </head>
 
 <body>
-    <div class="container-boss text-center mt-5">
+    <div class="container-boss text-center mt-4">
         <h3 class="boss mb-3 ml-5 mr-5" style="font-family:Calibri">&nbsp;Welcome Boss!&nbsp;</h3>
+    </div>
+    <div class="text-center mt-1 mb-3">
+        <h5>Choose from the menu what would you like to see</h5>
         <hr />
     </div>
-    <div class="text-center mt-2">
-       <h5>Choose from the menu what would you like to see</h5>
-        <hr />
+    <div cass="d-flex flex-row">
+        <div class="container-fluid justify-content-center">
+            @{ var appointments = ViewData["PendingAppoinments"] as List<PendingAppointmentsViewModel>; }
+            @foreach (var item in appointments)
+            {
+                <div style="background-color:honeydew; border-radius:8px">
+                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>New Appointment</strong>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                </div>
+                <p>From client with email : <strong>@item.ClientEmail</strong></p>
+                <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
+                <p><h5>Desired date: </h5><h5><strong>@item.DesiredDate</strong></h5></p>
+                <p>Problem description: @item.ProblemDescription</p>
+                <a class="text-center" href="/Appointment/ProceedAppointment?id=@item.AppointmentId">
+                     <h5><strong>Proceed appointment</strong></h5>
+                </a>
+                <div class="mb-3"></div>
+            }
+        </div>
+        <div class="container-fluid justify-content-center">
+            @{ var collection = ViewData["PendingRepairs"] as List<PendingRepairViewModel>; }
+            @foreach (var item in collection)
+            {
+                <div style="background-color:honeydew; border-radius:8px">
+                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Pending Repair</strong>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                </div>
+                <p>Repair Started on: <strong>@item.StartDate</strong></p>
+                <p>Car with reg.number: <strong>@item.RegNumber</strong></p>
+                <p>Car brand: @item.CarBrand</p>
+                <p>Car model: @item.CarModel</p>
+                <p>Client's email: <strong>@item.ClientEmail</strong></p>
+                <p>Client's phone: <strong>@item.ClientPhoneNumber</strong></p>
+                <p>Client's username: @item.ClientUserName</p>
+                <p>Repair name: @item.RepairName</p>
+                <p>Repair description: @item.RepairDescription</p>
+                <a class="text-center"  href="/Repair/ProceedRepair?id=@item.RepairId">
+                    <h5><strong>Proceed appointment</strong></h5>
+                </a>
+                <div class="mb-3"></div>
+            }
+        </div>
+        <div class="mt-5 pt-5"></div>
+
     </div>
 </body>
 </html>

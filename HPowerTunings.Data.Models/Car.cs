@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HPowerTunings.Data.Models
 {
@@ -19,5 +20,7 @@ namespace HPowerTunings.Data.Models
         [ForeignKey("CarModel")]
         public string CarModelId { get; set; }
         public virtual CarModel CarModel { get; set; }
+
+        public virtual ICollection<Repair> Repairs { get; set; } = new HashSet<Repair>();
     }
 }

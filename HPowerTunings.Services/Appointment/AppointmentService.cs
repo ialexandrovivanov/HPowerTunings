@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace HPowerTunings.Services.Appointment
 {
@@ -17,7 +18,7 @@ namespace HPowerTunings.Services.Appointment
             this.httpContextAccessor = httpContextAccessor;
             this.context = context;
         }
-        public bool CreateAppointment(CreateAppointmetModel model)
+        public async Task<bool> CreateAppointment(CreateAppointmetModel model)
         {
             var clientId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var client = this.context.Users.FirstOrDefault(u => u.Id == clientId);
@@ -32,7 +33,7 @@ namespace HPowerTunings.Services.Appointment
                 IsAppointmentPending = true,
                 AppointmentDate = null
             });
-            var result = this.context.SaveChangesAsync().GetAwaiter().GetResult();
+            var result = await this.context.SaveChangesAsync();
             return result == 1 ? true : false;
         }
     }
