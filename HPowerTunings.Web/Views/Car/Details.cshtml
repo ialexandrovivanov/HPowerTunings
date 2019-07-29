@@ -22,19 +22,19 @@
 
                 @foreach (var item in Model.Repairs)
                 {
-                    <div class="container-fluid" style="background-color:lightblue">
+                    <div class="container-fluid service-history-top" style="background-color:lightblue" >
                         <br />
-                        <h4>@item.Description</h4>
+                        <h4>@item.RepairName</h4>
                         <br />
                     </div>
-                    <div class="container-fluid" style="background-color:lightyellow">
-                        <p>This service has started on : @item.CreatedOn</p>
-                        <p>This service has finished on : @item.FinishedOn</p>
+                    <div class="container-fluid service-history-bottom"  style="background-color:lightyellow">
+                        <p>This service has started on : <strong>@item.CreatedOn</strong></p>
+                        <p>This service has finished on :  <strong>@item.FinishedOn</strong></p>
                         <br />
-                        <h4>Mechanics operated</h4>
+                        <h4>Mechanics operated:</h4>
                         @foreach (var mechanic in item.Mechanics)
                         {
-                            <p>@mechanic.FullName</p>
+                            <h5 style="color:indigo"><strong>@mechanic.FullName</strong></h5>
                         }
                         <br>
                         <h4>Parts used for this service</h4>
@@ -43,14 +43,14 @@
                             <p>Part name: @part.Name / Part brand: @part.Brand</p>
                         }
                         <br />
-                        <p>How much I paid: $@item.RepairPrice</p>
+                        <p>How much I paid: <strong>$@item.RepairPrice</strong></p>
                     </div>
                 }
 
                 <div class="container-fluid w-50">
                     <hr />
                     <div class="mt-5 mb-3 text-center"><h4 style="color:brown">I would like to delete this car and this service history</h4></div>
-                    <form action="/Car/DeleteYourCar?carid=@Model.CarId" method="post" >
+                    <form action="/car/deleteyourcar/@Model.CarId" method="get" >
                         <div  class="conteiner-fluid button-holder mt-4 d-flex justify-content-center pt-3">
                             <input type="submit" class="btn btn-outline-primary" value="Delete this car">
                         </div>

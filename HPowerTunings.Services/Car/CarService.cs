@@ -89,6 +89,7 @@ namespace HPowerTunings.Services.Car
                 repairViewModel.CreatedOn = repair.CreatedOn;
                 repairViewModel.FinishedOn = repair.FinishedOn;
                 repairViewModel.RepairPrice = repair.RepairPrice;
+                repairViewModel.RepairName = repair.RepairName;
 
                 var employeesIds = repair.EmployeesRepairs.Select(er => er.EmployeeId);
 
@@ -199,6 +200,20 @@ namespace HPowerTunings.Services.Car
 
             await Task.Delay(0);
             return result;
+        }
+
+        public async Task<DeleteYourCarModel> GetDeleteYourCar(string id)
+        {
+            var car = this.context.Cars.FirstOrDefault(c => c.Id == id);
+            var model = new DeleteYourCarModel()
+            {
+                CarBrand = car.CarBrand.Name,
+                CarModel = car.CarModel.Name,
+                CarId = car.Id
+            };
+
+            await Task.Delay(0);
+            return model;
         }
     }
 }

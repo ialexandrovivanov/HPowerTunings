@@ -16,8 +16,6 @@ textarea, input, select {
     border-color:black
 }
 
-
-
  li {
      list-style: none outside;
  }
@@ -150,4 +148,12 @@ form {
     height: 100%;
 }
 
+.service-history-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
 
+.service-history-bottom {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}

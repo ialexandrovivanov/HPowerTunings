@@ -74,17 +74,19 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DeleteYourCar(string carId)
+        public async Task<IActionResult> DeleteYourCar(string id)
         {
-            var carViewModel = await this.carService.GetCarDetailsAsync(carId);
-            var deleteYourCarModel = new DeleteYourCarModel()
-                                     {
-                                          CarModel = carViewModel.CarModel,
-                                          CarBrand = carViewModel.CarBrand,
-                                          CarId = carViewModel.CarId
-                                     };
+            if(id != null)
+            {
+                var carViewModel = await this.carService.GetCarDetailsAsync(id);
 
-            return View(deleteYourCarModel);
+                ViewData["CarBrand"] = carViewModel.CarBrand;
+                ViewData["CarModel"] = carViewModel.CarModel;
+                var model = await this.carService.GetDeleteYourCar(id);
+                return View(model);
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -98,6 +100,9 @@ namespace HPowerTunings.Web.Controllers
                     return Redirect("SuccessDelete");
                 }
             }
+
+            ViewData["CarBrand"] = model.CarBrand;
+            ViewData["CarModel"] = model.CarModel;
 
             return View(model);
         }

@@ -8,6 +8,7 @@ namespace HPowerTunings.ViewModels.CarModels
         private const string regNumberError = "Use capital letters, numbers and correct length";
         private const string ramaErrorMessage = "Use capital letters and numbers only";
         private const string distancePassedErrorMessage = "Use numbers only";
+        private const string regNumberRegisteredErrorMessage = "Use numbers only";
 
         public string CarBrand { get; set; }
 
@@ -15,11 +16,11 @@ namespace HPowerTunings.ViewModels.CarModels
         public string CarModel { get; set; }
 
         [Required(ErrorMessage = "Reg. number is required")]
-        [IsRegNumberRegistered(ErrorMessage ="A car with the same reg. number is already registered")]
+        [IsRegNumberRegistered(ErrorMessage = regNumberRegisteredErrorMessage)]
         [RegularExpression("^[ABCEHKLMNOPTXY]{1,2}[0-9]{4,6}[ABCEHKLMNOPTXY]{1,2}$", ErrorMessage = regNumberError)]
         public string RegistrationNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="(VIN) field is required")]
         [Display(Name = "Vehicle identification number (VIN)")]
         [RegularExpression("^[a-zA-Z0-9]{2,60}$", ErrorMessage = ramaErrorMessage)]
         public string Rama { get; set; }
