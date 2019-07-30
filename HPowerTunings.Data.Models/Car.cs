@@ -5,7 +5,7 @@ namespace HPowerTunings.Data.Models
 {
     public class Car : BaseModel
     {
-        public string RegistrationNumber { get; set; }
+        public string RegNumber { get; set; }
         public string Rama { get; set; }
         public int TraveledDistance { get; set; }
 

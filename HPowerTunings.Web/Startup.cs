@@ -84,7 +84,7 @@ namespace HPowerTunings.Web
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
             services.AddTransient<UserManager<Client>, UserManager<Client>>();
             services.AddTransient<SignInManager<Client>, SignInManager<Client>>();
@@ -92,10 +92,10 @@ namespace HPowerTunings.Web
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<IRepairService, RepairService>();
-            services.AddSingleton<IDayCreator, DayCreator>();
-            services.AddSingleton<IAppointmentService, AppointmentService>();
-            services.AddSingleton<ICustomClientService, CustomClientService>();
-            services.AddSingleton<ICompanyService, CompanyService>();
+            services.AddTransient<IDayCreator, DayCreator>();
+            services.AddTransient<IAppointmentService, AppointmentService>();
+            services.AddTransient<ICustomClientService, CustomClientService>();
+            services.AddTransient<ICompanyService, CompanyService>();
 
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -109,7 +109,8 @@ namespace HPowerTunings.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ViewModels.ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(ViewModels.ErrorViewModel).GetTypeInfo().Assembly,
+                                              typeof(Data.Models.Appointment).GetTypeInfo().Assembly);
 
             if (env.IsDevelopment() || env.IsEnvironment("QA"))
             {

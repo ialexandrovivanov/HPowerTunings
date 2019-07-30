@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HPowerTunings.Data;
+using HPowerTunings.ViewModels.AdminModels;
 using HPowerTunings.ViewModels.CarModels;
 using HPowerTunings.ViewModels.EmployeeModels;
 using HPowerTunings.ViewModels.PartModels;
@@ -73,49 +74,50 @@ namespace HPowerTunings.Services.Car
                               .Where(r => r.CarId == carId && r.IsDeleted == false)
                               .Select(r => r);
 
-            if (repairs.Count() == 0) return null;
-          
             var getRepairsViewModel = new CarRepairsViewModel();
 
-            getRepairsViewModel.CarModel = repairs.First().Car.CarModel.Name;
-            getRepairsViewModel.CarBrand = repairs.First().Car.CarBrand.Name;
+            getRepairsViewModel.CarModel = this.context.Cars.FirstOrDefault(c => c.Id == carId).CarModel.Name;
+            getRepairsViewModel.CarBrand = this.context.Cars.FirstOrDefault(c => c.Id == carId).CarBrand.Name;
             getRepairsViewModel.CarId = carId;
 
-            foreach (var repair in repairs)
+            if (repairs != null)
             {
-                var repairViewModel = new RepairViewModel();
+                foreach (var repair in repairs)
+                {
+                    var repairViewModel = new RepairViewModel();
 
-                repairViewModel.Description = repair.Description;
-                repairViewModel.CreatedOn = repair.CreatedOn;
-                repairViewModel.FinishedOn = repair.FinishedOn;
-                repairViewModel.RepairPrice = repair.RepairPrice;
-                repairViewModel.RepairName = repair.RepairName;
+                    repairViewModel.Description = repair.Description;
+                    repairViewModel.CreatedOn = repair.CreatedOn;
+                    repairViewModel.FinishedOn = repair.FinishedOn;
+                    repairViewModel.RepairPrice = repair.RepairPrice;
+                    repairViewModel.RepairName = repair.RepairName;
 
-                var employeesIds = repair.EmployeesRepairs.Select(er => er.EmployeeId);
+                    var employeesIds = repair.EmployeesRepairs.Select(er => er.EmployeeId);
 
-                repairViewModel.Mechanics = this.context
-                                                .Employees
-                                                .Where(e => employeesIds.Contains(e.Id))
-                                                .Select(e => new EmployeeViewModel()
-                                                {
-                                                    FullName = e.FullName,
-                                                    Id = e.Id
-                                                })
-                                                .ToList();
+                    repairViewModel.Mechanics = this.context
+                                                    .Employees
+                                                    .Where(e => employeesIds.Contains(e.Id))
+                                                    .Select(e => new EmployeeViewModel()
+                                                    {
+                                                        FullName = e.FullName,
+                                                        Id = e.Id
+                                                    })
+                                                    .ToList();
 
-                repairViewModel.Parts = repair.Parts
-                                              .Select(p => new PartViewModel()
-                                              {
-                                                  Brand = p.Brand,
-                                                  Id = p.Id,
-                                                  Name = p.Name,
-                                                  Price = p.Price
-                                              })
-                                              .ToList();
+                    repairViewModel.Parts = repair.Parts
+                                                  .Select(p => new PartViewModel()
+                                                  {
+                                                      Brand = p.Brand,
+                                                      Id = p.Id,
+                                                      Name = p.Name,
+                                                      Price = p.Price
+                                                  })
+                                                  .ToList();
 
-                getRepairsViewModel.Repairs.Add(repairViewModel);
+                    getRepairsViewModel.Repairs.Add(repairViewModel);
+                }
             }
-
+           
             await Task.Delay(0);
             return getRepairsViewModel;
         }
@@ -129,7 +131,7 @@ namespace HPowerTunings.Services.Car
 
             var car = new Data.Models.Car
             {
-                RegistrationNumber = model.RegistrationNumber,
+                RegNumber = model.RegistrationNumber,
                 Rama = model.Rama,
                 TraveledDistance = int.Parse(model.DistancePassed),
                 ClientId = currentUser.Id,
@@ -148,16 +150,16 @@ namespace HPowerTunings.Services.Car
             return this.context.CarBrands.Select(c => c.Name).ToList();
         }
 
-        public async Task<bool> AdminRegisterCar(AdminRegisterCarOutputModel model)
+        public async Task<bool> AdminRegisterCar(AdminRegisterCarModel model)
         {
-            var carBrand = this.context.CarBrands.SingleOrDefault(b => b.Name.ToLower() == model.CarBrand.ToLower());
-            var carModel = this.context.CarModels.SingleOrDefault(m => m.Name.ToLower() == model.CarModel.ToLower());
-            var client = this.context.Users.SingleOrDefault(c => c.Email == model.Email);
+            var carBrand = this.context.CarBrands.FirstOrDefault(b => b.Name == model.CarBrand);
+            var carModel = this.context.CarModels.FirstOrDefault(m => m.Name == model.CarModel);
+            var client = this.context.Users.FirstOrDefault(c => c.Email == model.Email);
 
 
             var carForDb = new Data.Models.Car()
                            {
-                               RegistrationNumber = model.RegNumber,
+                               RegNumber = model.RegNumber,
                                CarBrand = carBrand,
                                CarModel = carModel,
                                CarBrandId = carBrand.Id,

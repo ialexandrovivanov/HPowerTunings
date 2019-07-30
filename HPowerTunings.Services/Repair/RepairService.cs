@@ -20,13 +20,13 @@ namespace HPowerTunings.Services.Repair
 
         public async Task<bool> CreateRepair(CreateRepairOutputModel model)
         {
-            var car = this.context.Cars.FirstOrDefault(c => c.RegistrationNumber == model.CarRegNumber);
+            var car = this.context.Cars.FirstOrDefault(c => c.RegNumber == model.CarRegNumber);
 
             this.context.Repairs.Add(new Data.Models.Repair() { RepairName = model.RepairName, Car = car, CarId = car.Id });
             this.context.SaveChanges();
             var repair = this.context
                              .Repairs
-                             .Where(r => r.Car.RegistrationNumber == model.CarRegNumber)
+                             .Where(r => r.Car.RegNumber == model.CarRegNumber)
                              .OrderByDescending(r => r.CreatedOn)
                              .FirstOrDefault();
 
@@ -71,7 +71,7 @@ namespace HPowerTunings.Services.Repair
 
                 mechanic.EmployeesRepairs.Add(emplRep);
                 repair.EmployeesRepairs.Add(emplRep);
-                await this.context.SaveChangesAsync();
+                this.context.SaveChanges();
             }
               
             return repair == null ? false : true;                              
@@ -84,7 +84,7 @@ namespace HPowerTunings.Services.Repair
 
         public ICollection<string> GetAllRegNumbers()
         {
-            return this.context.Cars.Select(c => c.RegistrationNumber).OrderByDescending(a => a).ToList();
+            return this.context.Cars.Select(c => c.RegNumber).OrderByDescending(a => a).ToList();
         }
 
         public ICollection<AdminRepairViewModel> GetAllRepairsPeriod(RepairStartEndDateViewModel model)
@@ -112,12 +112,14 @@ namespace HPowerTunings.Services.Repair
                 var employees = this.context.Employees.Where(e => employeesIds.Contains(e.Id)).Select(e => e).ToList();
 
                 var repairModel = mapper.Map<Data.Models.Repair, AdminRepairViewModel>(repair);
-
                 repairModel.Car = mapper.Map<Data.Models.Car, CarViewModel>(repair.Car);
 
-                repairModel.Car.CarBrand = repair.Car.CarBrand.Name;
-                repairModel.Car.CarModel = repair.Car.CarModel.Name;
-                repairModel.TotalIncomes = repairs.Sum(r => r.RepairPrice);
+                if (repairModel.Car != null)
+                {
+                    repairModel.Car.CarBrand = repair.Car.CarBrand.Name;
+                    repairModel.Car.CarModel = repair.Car.CarModel.Name;
+                    repairModel.TotalIncomes = repairs.Sum(r => r.RepairPrice);
+                }
 
                 foreach (var part in repair.Parts)
                     repairModel.TotalOutgoings += part.Price;

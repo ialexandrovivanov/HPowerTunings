@@ -8,7 +8,7 @@ namespace HPowerTunings.Data.Models
         public DateTime? DesiredDate { get; set; }
         public DateTime? AppointmentDate { get; set; }
         public string ProblemDescription { get; set; }
-        public bool? IsAppointmentPending { get; set; }
+        public bool? IsAppointmentPending { get; set; } = true;
 
         [ForeignKey("Day")]
         public string DayId { get; set; }

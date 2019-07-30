@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <form action="/repair/repairStartEnd" method="post">
+    <form action="/client/clientstartend" method="post">
         <div class="text-center mt-5 pt-5">
             <h3>Select period of time for clients statistics</h3>
             <hr />
@@ -22,25 +22,19 @@
         <div class="text-center mt-5">
             <label>Start date (including)</label>
             <input type="date" asp-for=@Model.StartDate class="form-control" />
-            <span asp-validation-for=@Model.StartDate class="text-danger"></span>
         </div>
         <div class="text-center mt-5">
             <label>End date (including)</label>
             <input type="date" asp-for=@Model.EndDate class="form-control" />
-            <span asp-validation-for=@Model.EndDate class="text-danger"></span>
         </div>
         <div class="text-center mt-5">
             <button type="submit" class="btn btn-outline-primary">Select period</button>
         </div>
     </form>
-    <div class="text-center mt-5">
+    <div class="container-fluid justify-content-center text-center mt-5 pt-5">
         <form action="/client/adminCreateClient" method="get">
             <button class="btn btn-outline-primary">Create client</button>
         </form>
     </div>
 </body>
 </html>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

@@ -23,6 +23,7 @@ namespace HPowerTunings.Services.Appointment
             var clientId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var client = this.context.Users.FirstOrDefault(u => u.Id == clientId);
             var day = this.context.Days.FirstOrDefault(d => d.DayDateTime.Value.Date == DateTime.Now.Date);
+
             day.Appointments.Add(new Data.Models.Appointment
             {
                 DesiredDate = model.DesiredDate,
@@ -33,8 +34,39 @@ namespace HPowerTunings.Services.Appointment
                 IsAppointmentPending = true,
                 AppointmentDate = null
             });
+
             var result = await this.context.SaveChangesAsync();
+
             return result == 1 ? true : false;
+        }
+
+        public async Task<ProceedAppointmentModel> GetAppoinmentDetails(string id)
+        {
+            var appointment = this.context.Appointments.FirstOrDefault(a => a.Id == id);
+
+            var result = new ProceedAppointmentModel();
+
+            result.In.ClientEmail = appointment.Client.Email;
+            result.In.Id = id;
+            result.In.DesiredDate = appointment.DesiredDate.Value.ToString("yyyy/MM/dd");
+            result.In.ProblemDescription = appointment.ProblemDescription;
+            result.In.ClientPhone = appointment.Client.PhoneNumber;
+            result.In.ClientUsername = appointment.Client.UserName;
+
+            await Task.Delay(0);
+            return result;
+        }
+
+        public async Task<bool> AdminCreateAppointment(ProceedAppointmentModel model)
+        {
+            var appointment = this.context.Appointments.FirstOrDefault(a => a.Id == model.In.Id);
+
+            appointment.AppointmentDate = model.AppointmentDate;
+            appointment.IsAppointmentPending = false;
+
+            var result = await this.context.SaveChangesAsync();
+
+            return result == 0 ? false : true;
         }
     }
 }

@@ -70,7 +70,7 @@ namespace HPowerTunings.Web.Migrations
 
                     b.Property<string>("Rama");
 
-                    b.Property<string>("RegistrationNumber");
+                    b.Property<string>("RegNumber");
 
                     b.Property<int>("TraveledDistance");
 

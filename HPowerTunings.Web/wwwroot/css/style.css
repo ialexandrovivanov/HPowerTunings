@@ -5,6 +5,7 @@
 @import url('navigation.css');
 @import url('carousel.css');
 @import url('gallery.css');
+@import url('home-page.css');
 
  body {
     height: 100%;
@@ -15,6 +16,7 @@ textarea, input, select {
     background-color: aliceblue !important;
     border-color:black
 }
+
 
  li {
      list-style: none outside;
@@ -48,7 +50,7 @@ textarea, input, select {
     font-family: "Orbitron";
     position: absolute;
     z-index: 10;
-    top: 10%;
+    top: 12vh;
     left: 50%;
     transform: translateX(-50%);
     font-size: 3rem;
@@ -148,12 +150,4 @@ form {
     height: 100%;
 }
 
-.service-history-top {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
 
-.service-history-bottom {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}

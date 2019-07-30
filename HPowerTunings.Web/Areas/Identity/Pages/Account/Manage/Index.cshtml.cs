@@ -47,7 +47,7 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account.Manage
 
             public string Email { get; set; }
 
-            [Phone]
+            [Phone(ErrorMessage = "Insert correct phone number")]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
         }

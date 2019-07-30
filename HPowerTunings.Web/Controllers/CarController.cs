@@ -1,4 +1,5 @@
 ﻿using HPowerTunings.Services.Car;
+using HPowerTunings.ViewModels.AdminModels;
 using HPowerTunings.ViewModels.CarModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -64,11 +65,11 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(string carId)
+        public async Task<IActionResult> Details(string id)
         {
-            var model = await this.carService.GetCarRepairs(carId);
-
-            if (model == null) return View();
+            var model = await this.carService.GetCarRepairs(id);
+            
+            if (model.Repairs == null) return View(model);
            
             return this.View(model);
         }
@@ -124,8 +125,10 @@ namespace HPowerTunings.Web.Controllers
                 return Redirect($"/Car/AdminRegisterCar?carBrand={model.CarBrand}&regNumber={model.RegNumber}");
             }
 
+            var result = await Task.Run(() => this.carService.GetAllCarBrands());
+            model.CarBrands = result;
             await Task.Delay(0);
-            return View(model);
+            return  View(model);
         }
 
         [HttpGet]
@@ -135,13 +138,14 @@ namespace HPowerTunings.Web.Controllers
             ViewData["CarBrand"] = carBrand;
             ViewData["RegNumber"] = regNumber;
             ViewData["CarModels"] = await this.carService.GetAllCarModels(carBrand);
+
             await Task.Delay(0);
             return View();
         }
 
-        [HttpPost]
+        [HttpPost]  
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AdminRegisterCar(AdminRegisterCarOutputModel model)
+        public async Task<IActionResult> AdminRegisterCar(AdminRegisterCarModel model)
         {
             if (ModelState.IsValid)
             {
@@ -155,7 +159,7 @@ namespace HPowerTunings.Web.Controllers
             ViewData["RegNumber"] = model.RegNumber;
             ViewData["CarModels"] = await this.carService.GetAllCarModels(model.CarBrand);
 
-            return View();
+            return View(model);
         }
 
         [HttpGet]

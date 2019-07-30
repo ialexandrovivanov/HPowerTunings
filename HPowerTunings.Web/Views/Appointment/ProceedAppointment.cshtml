@@ -1,0 +1,41 @@
+﻿@using HPowerTunings.ViewModels.Appointment
+@model ProceedAppointmentModel
+
+@{
+    ViewData["Title"] = "ProceedAppointment";
+    Layout = "~/Views/Shared/_LayoutBoss.cshtml";
+}
+    <style>
+        body {
+            background-color: rgb(240, 240, 240)
+        }
+    </style>
+
+    <body>
+        <form class="container-fluid justify-content-center w-50 mt-5 pt-5 text-center" id="Car" method="post">
+            <div class="container-fluid justify-content-center w-50">
+                <div class="form-group">
+                    <label>Actual appointment date</label>
+                    <input type="datetime-local" asp-for="@Model.AppointmentDate" class="form-control" />
+                    <input type="hidden" asp-for="@Model.In.Id" class="form-control disabled" placeholder="@Model.In.Id" />
+                    <span asp-validation-for="@Model.AppointmentDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="button-holder mt-5 d-flex justify-content-center">
+                <button type="submit" class="btn btn-outline-primary">Finalize this appointment</button>
+            </div>
+        <div class="container-fluid justify-content-center w-50 mt-5 text-center">
+            <p>Client username: <strong>@Model.In.ClientUsername</strong></p>
+            <p>Client phone number: <strong>@Model.In.ClientPhone</strong></p>
+            <p>Client email: <strong>@Model.In.ClientEmail</strong></p>
+            <p>Desired date for appoinment: <strong>@Model.In.DesiredDate</strong></p>
+            <p>Problem description: <strong>@Model.In.ProblemDescription</strong></p>
+        </div>
+
+        </form>
+    </body>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

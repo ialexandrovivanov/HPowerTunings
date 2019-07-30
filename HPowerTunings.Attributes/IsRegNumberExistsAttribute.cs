@@ -11,7 +11,7 @@ namespace HPowerTunings.Attributes
             var context = (ApplicationDbContext)validationContext
                         .GetService(typeof(ApplicationDbContext));
 
-            if (!context.Cars.Any(u => u.RegistrationNumber == value.ToString()))
+            if (!context.Cars.Any(u => u.RegNumber == value.ToString()))
             {
                 return new ValidationResult("A car with this reg. number is not registered");
             }

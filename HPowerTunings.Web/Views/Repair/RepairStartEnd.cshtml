@@ -1,4 +1,4 @@
-﻿    @using HPowerTunings.ViewModels.RepairModels
+﻿@using HPowerTunings.ViewModels.RepairModels
 @model List<AdminRepairViewModel>
 @{ Layout = "_LayoutBoss";}
 <style>
@@ -18,15 +18,19 @@
             </div>
             <br />
             <div class="text-center">
-                @if (Model[i].IsRepairPending) { <h5 style="background-color:darksalmon; border-radius:8px"><strong>Repair Is Pending</strong></h5> }
-                <p>Car brand: <strong>@Model[i].Car.CarBrand</strong> / Car model: <strong>@Model[i].Car.CarModel</strong></p>
-                <p>Car registrational number: <strong>@Model[i].Car.RegistrationNumber</strong></p>
-                <p>Car VIN number: <strong>@Model[i].Car.Rama</strong></p>
+                @if (Model[i].IsRepairPending)
+                {<h5 style="background-color:darksalmon; border-radius:8px"><strong>Repair Is Pending</strong></h5>}
+                @if (Model[i].Car != null)
+                {
+                    <p>Car brand: <strong>@Model[i].Car.CarBrand</strong> / Car model: <strong>@Model[i].Car.CarModel</strong></p>
+                    <p>Car registrational number: <strong>@Model[i].Car.RegNumber</strong></p>
+                    <p>Car VIN number: <strong>@Model[i].Car.Rama</strong></p>
+                }
                 <p>Repair started on: <strong>@Model[i].CreatedOn</strong></p>
                 <p>Repair finished on:  <strong>@Model[i].FinishedOn</strong></p>
                 <p>Repair price was: <strong>@Model[i].RepairPrice</strong></p>
             </div>
-            <div style="background-color:beige; border-radius:8px" ><h5 class="mt-2 mb-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Mechanics operated in this repair:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5></div>
+            <div style="background-color:beige; border-radius:8px"><h5 class="mt-2 mb-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Mechanics operated in this repair:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5></div>
             <br />
             <div>
                 @foreach (var empl in Model[i].Employees)
@@ -57,11 +61,13 @@
             <br />
         </div>
         <div class="pt-5 mt-5"></div>
-     }
-     else
-     {
-         <div class="text-center pt-5"><h4>No repairs for this period</h4></div>
-     }
+    }
+    else
+    {
+        <div class="text-center pt-5 mt-5"><h4>No repairs for this period</h4></div>
+        <p></p>
+        <a href="/repair/repairStartEnd"><h5>Return</h5></a>
+    }
 
 </body>
 

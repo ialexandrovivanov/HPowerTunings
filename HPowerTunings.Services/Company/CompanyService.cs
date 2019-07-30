@@ -38,7 +38,7 @@ namespace HPowerTunings.Services.Company
                               .Where(r => r.IsReairPanding == true)
                               .Select(r => new PendingRepairViewModel()
                               { CarBrand = r.Car.CarBrand.Name, CarModel = r.Car.CarModel.Name,
-                                RepairId = r.Id, RegNumber = r.Car.RegistrationNumber, ClientEmail = r.Car.Client.Email,
+                                RepairId = r.Id, RegNumber = r.Car.RegNumber, ClientEmail = r.Car.Client.Email,
                                 ClientPhoneNumber = r.Car.Client.PhoneNumber, ClientUserName = r.Car.Client.UserName,
                                 RepairDescription = r.Description, RepairName = r.RepairName,
                                 StartDate = r.CreatedOn.Value.ToString("yyyy/MM/dd  -  HH:mm:ss") })

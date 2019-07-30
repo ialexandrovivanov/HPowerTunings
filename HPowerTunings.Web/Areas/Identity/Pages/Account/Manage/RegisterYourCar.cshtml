@@ -32,7 +32,7 @@
 <div class="text-center">
     @foreach (var item in Model.Input.ClientCars)
     {
-    <p><a href="/Car/Details?carId=@item.Id"><h4>@item.CarBrand &nbsp;-&nbsp; @item.CarModel</h4></a></p>
+    <p><a href="/Car/Details/@item.Id"><h4>@item.CarBrand &nbsp;-&nbsp; @item.CarModel</h4></a></p>
     }
 </div>
 

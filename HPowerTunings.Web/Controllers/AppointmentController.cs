@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace HPowerTunings.Web.Controllers
 {
-    
     public class AppointmentController : Controller
     {
         private IAppointmentService appointmentService;
@@ -45,6 +44,32 @@ namespace HPowerTunings.Web.Controllers
         public IActionResult SuccessCreate()
         {
             return this.View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> ProceedAppointment(string id)
+        {
+            var result = await this.appointmentService.GetAppoinmentDetails(id);
+            return this.View(result);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> ProceedAppointment(ProceedAppointmentModel model)
+        {
+            if (await this.appointmentService.AdminCreateAppointment(model))
+                return Redirect($"/Appointment/SuccessCreateAppointment/{model.In.Id}");
+
+            else return View("Cannot proceed your appointent");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> SuccessCreateAppointment(string id)
+        {
+            var result = await this.appointmentService.GetAppoinmentDetails(id);
+            return this.View(result);
         }
     }
 }

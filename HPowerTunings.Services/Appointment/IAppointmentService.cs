@@ -6,5 +6,7 @@ namespace HPowerTunings.Services.Appointment
     public interface IAppointmentService
     {
         Task<bool> CreateAppointment(CreateAppointmetModel model);
+        Task<ProceedAppointmentModel> GetAppoinmentDetails(string id);
+        Task<bool> AdminCreateAppointment(ProceedAppointmentModel model);
     }
 }

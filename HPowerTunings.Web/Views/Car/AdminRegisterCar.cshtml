@@ -1,5 +1,5 @@
-﻿@using  HPowerTunings.ViewModels.CarModels
-@model AdminRegisterCarOutputModel
+﻿@using HPowerTunings.ViewModels.AdminModels
+@model AdminRegisterCarModel
 @{
     ViewData["Title"] = "AdminCreateCar";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
@@ -17,18 +17,18 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid justify-content-center w-50 pt-5">
+
+    <div class="container-fluid justify-content-center w-50 pt-5 mt-5">
         <h4 class="text-center">Register new car</h4>
-        <br />
+        <hr class="w-50" />
         <form id="Car" method="post" class="text-center">
             <div class="container-fluid justify-content-center w-50">
                 <div class="form-group">
                     <label>Car brand</label>
-                    <input asp-for="CarBrand" class="form-control" disabled="disabled" value="@ViewData["CarBrand"]" />
-                    <span asp-validation-for="CarBrand" class="text-danger"></span>
+                    <input asp-for="@Model.CarBrand" class="form-control" disabled="disabled" value="@ViewData["CarBrand"]" />
                 </div>
                 <label>Choose car model</label>
-                <select class="custom-select" id="CarModel" asp-for="CarModel">
+                <select class="custom-select" id="CarModel" asp-for="@Model.CarModel">
                     <option selected disabled>-- Choose Model --</option>
                     @foreach (var item in ViewData["CarModels"] as List<string>)
                     {
@@ -37,25 +37,25 @@
                 </select>
                 <div class="form-group">
                     <label>Reg.number</label>
-                    <input asp-for="RegNumber" class="form-control w-100" placeholder="Reg.Number" disabled="disabled">
-                    <span asp-validation-for="RegNumber" class="text-danger"></span>
+                    <input asp-for="@Model.RegNumber" class="form-control" disabled="disabled" value="@ViewData["RegNumber"]" />
                 </div>
                 <div class="form-group">
                     <label>VIN number</label>
-                    <input asp-for="Rama" class="form-control w-100" placeholder="VIN Number" />
-                    <span asp-validation-for="Rama" class="text-danger"></span>
+                    <input asp-for="@Model.Rama" class="form-control w-100" placeholder="VIN Number" />
+                    <span asp-validation-for="@Model.Rama" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Distance passed</label>
-                    <input asp-for="DistancePassed" class="form-control w-100" placeholder="Passed distance /km" />
-                    <span asp-validation-for="DistancePassed" class="text-danger"></span>
+                    <input asp-for="@Model.DistancePassed" class="form-control w-100" placeholder="Passed distance /km" />
+                    <span asp-validation-for="@Model.DistancePassed" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Client's email</label>
-                    <input asp-for="Email" class="form-control w-100" placeholder="Client's email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <input asp-for="@Model.Email" class="form-control w-100" placeholder="Client's email" />
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
                 </div>
             </div>
+
             <div class="button-holder mt-5 d-flex justify-content-center">
                 <button type="submit" class="btn btn-outline-primary">Register Car</button>
             </div>
@@ -64,7 +64,6 @@
     </div>
 </body>
 </html>
-
 
 
 @section Scripts {

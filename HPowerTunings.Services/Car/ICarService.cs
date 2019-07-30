@@ -1,6 +1,6 @@
-﻿using HPowerTunings.ViewModels.CarModels;
+﻿using HPowerTunings.ViewModels.AdminModels;
+using HPowerTunings.ViewModels.CarModels;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Services.Car
@@ -13,7 +13,7 @@ namespace HPowerTunings.Services.Car
         Task<bool> DeleteYourCar(DeleteYourCarModel model);
         Task<CarViewModel> GetCarDetailsAsync(string carId);
         ICollection<string> GetAllCarBrands();
-        Task<bool> AdminRegisterCar(AdminRegisterCarOutputModel model);
+        Task<bool> AdminRegisterCar(AdminRegisterCarModel model);
         Task<ICollection<CarStatisticViewModel>> GetAllCarsPeriod(CarStartEndDateViewModel model);
         Task<DeleteYourCarModel> GetDeleteYourCar(string id);
     }
