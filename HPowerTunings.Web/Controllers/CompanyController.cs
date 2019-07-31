@@ -15,7 +15,7 @@ namespace HPowerTunings.Web.Controllers
             this.companyService = companyService;
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             ViewData["PendingRepairs"] = await this.companyService.GetPendingRepairs();

@@ -1,33 +1,43 @@
 ﻿@using HPowerTunings.ViewModels.CarModels
 @model List<CarStatisticViewModel>
 
-    <style>
-        body {
-            background-color: rgb(240, 240, 240)
-        }
-    </style>
+<style>
+    body {
+        background-color: rgb(240, 240, 240)
+    }
+</style>
 
 @{
     ViewData["Title"] = "CarStatisticStartEnd";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
 }
-    <div class="container-fluid justify-content-center text-center w-50">
-        <h3 class="mt-5 pt-5">Cars registered in the period</h3>
-        <hr  class="w-50"/>
-        @for (int i = 0; i <= Model.Count - 1; i++)
-        {
-            <div class="container-fluid justify-content-center w-50 mt-3" style="background-color:honeydew; border-radius:8px"><h4>Car N<strong>@(i+1)</strong></h4></div>
-            <h5>Registered on: <strong>@Model[i].RegisteredOn</strong></h5>
-            <p>Registration number: <strong>@Model[i].RegNumber</strong></p>
-            <p>Car brand: <strong>@Model[i].CarBrandName</strong></p>
-            <p>Car model: <strong>@Model[i].CarModelName</strong></p>
-            <p>Traveled distance: <strong>@Model[i].TraveledDistance</strong></p>
-            <p>Rame number: <strong>@Model[i].Rama</strong></p>
-            <p>Owner's email: <strong>@Model[i].ClientEmail</strong></p>
-            <p>Owner's username: <strong>@Model[i].ClientUserName</strong></p>
-            <div class="mb-3"></div>
-            <hr class="w-50"/>
-        }
-      
-    </div>
+<div class="container-fluid justify-content-center w-50">
+    <h3 class="mt-4 pt-5  text-center">Cars registered in the period</h3>
+    <hr />
+    @foreach (var item in Model)
+    {
+        <div class="container-fluid justify-content-center mt-3 w-50" style="background-color:honeydew; border-radius:8px">
+            <br />
+            <h4>Car with reg.number: <strong>@item.RegNumber</strong></h4>
+            <br />
+        </div>
+        <br />
+        <div class="container-fluid justify-content-center w-50">
+            <h5>Registered on: <strong>@item.RegisteredOn</strong></h5>
+            <p>Car brand: <strong>@item.CarBrandName</strong></p>
+            <p>Car model: <strong>@item.CarModelName</strong></p>
+            <p>Traveled distance: <strong>@item.TraveledDistance</strong></p>
+            <p>Rame number: <strong>@item.Rama</strong></p>
+            <p>Owner's email: <strong>@item.ClientEmail</strong></p>
+            <p>Owner's username: <strong>@item.ClientUserName</strong></p>
+            <p></p>
+        </div>
+        <hr />
+    }
+</div>
+<br />
+<p>Count of the cars registered in the selected period: <strong>@Model.Count</strong></p>
+<br />
+<br />
+<br />
 

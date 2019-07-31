@@ -23,8 +23,12 @@ namespace HPowerTunings.Services.Company
                              .Appointments
                              .Where(a => a.IsAppointmentPending == true)
                              .Select(a => new PendingAppointmentsViewModel()
-                             { AppointmentId = a.Id, ClientEmail = a.Client.Email, ClientPhoneNumber = a.Client.PhoneNumber,
-                               DesiredDate = a.DesiredDate.Value.ToString("yyyy/MM/dd"), ProblemDescription = a.ProblemDescription })
+                             {
+                                 AppointmentId = a.Id, ClientEmail = a.Client.Email,
+                                 ClientPhoneNumber = a.Client.PhoneNumber,
+                                 DesiredDate = a.DesiredDate.Value.ToString("yyyy/MM/dd"),
+                                 ProblemDescription = a.ProblemDescription
+                             })
                              .ToList();
 
             return result;
@@ -32,18 +36,21 @@ namespace HPowerTunings.Services.Company
 
         public async Task<List<PendingRepairViewModel>> GetPendingRepairs()
         {
-            await Task.Delay(0);
             var result =  this.context
                               .Repairs
-                              .Where(r => r.IsReairPanding == true)
+                              .Where(r => r.IsRepairPanding == true)
                               .Select(r => new PendingRepairViewModel()
-                              { CarBrand = r.Car.CarBrand.Name, CarModel = r.Car.CarModel.Name,
-                                RepairId = r.Id, RegNumber = r.Car.RegNumber, ClientEmail = r.Car.Client.Email,
-                                ClientPhoneNumber = r.Car.Client.PhoneNumber, ClientUserName = r.Car.Client.UserName,
-                                RepairDescription = r.Description, RepairName = r.RepairName,
-                                StartDate = r.CreatedOn.Value.ToString("yyyy/MM/dd  -  HH:mm:ss") })
+                              {
+                                  CarBrand = r.Car.CarBrand.Name, CarModel = r.Car.CarModel.Name,
+                                  RepairId = r.Id, RegNumber = r.Car.RegNumber, ClientEmail = r.Car.Client.Email,
+                                  ClientPhoneNumber = r.Car.Client.PhoneNumber, ClientUserName = r.Car.Client.UserName,
+                                  RepairDescription = r.Description, RepairName = r.RepairName,
+                                  StartDate = r.CreatedOn.Value.ToString("yyyy/MM/dd  -  HH:mm:ss"),
+                                  Mechanics = r.EmployeesRepairs.Select(e => e.Employee.FullName).ToList()
+                              })
                               .ToList();
 
+            await Task.Delay(0);
             return result;
         }
     }

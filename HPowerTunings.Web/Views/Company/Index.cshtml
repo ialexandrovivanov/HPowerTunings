@@ -47,11 +47,12 @@
             @{ var collection = ViewData["PendingRepairs"] as List<PendingRepairViewModel>; }
             @foreach (var item in collection)
             {
-            <div style="background-color:rosybrown; border-radius:8px" class="mb-3">
-                <br />
-                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Pending Repair</strong>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-                <br />
-            </div>
+                <div class="text-center" style="background-color:rosybrown; border-radius:8px" class="mb-3">
+                    <br />
+                    <h3><strong>Pending Repair</strong></h3>
+                    <br />
+                </div>
+                <p></p>
                 <p>Repair Started on: <strong>@item.StartDate</strong></p>
                 <p>Car with reg.number: <strong>@item.RegNumber</strong></p>
                 <p>Car brand: @item.CarBrand</p>
@@ -60,9 +61,16 @@
                 <p>Client's phone: <strong>@item.ClientPhoneNumber</strong></p>
                 <p>Client's username: <strong>@item.ClientUserName</strong></p>
                 <p>Repair name: <strong>@item.RepairName</strong></p>
-                <p>Repair description: @item.RepairDescription</p>
-                <a class="text-center"  href="/Repair/ProceedRepair?id=@item.RepairId">
-                    <h5><strong>Proceed Repair</strong></h5>
+                <p>
+                    Mechanics operated:
+                    @foreach (var mechanic in item.Mechanics)
+                    {
+                    <strong>@mechanic&nbsp;&nbsp;</strong>
+                    }
+                </p>
+                <p>Repair description: <strong>@item.RepairDescription</strong></p>
+                <a class="text-center" href="/Repair/ProceedRepair?id=@item.RepairId">
+                    <h5><strong>  Proceed Repair  </strong></h5>
                     <hr />
                 </a>
                 <div class="mb-5"></div>

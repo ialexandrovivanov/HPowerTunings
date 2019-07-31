@@ -181,7 +181,8 @@ namespace HPowerTunings.Services.Car
             ICollection<CarStatisticViewModel> result = new List<CarStatisticViewModel>();
             var cars = this.context
                               .Cars
-                              .Where(r => r.CreatedOn >= model.StartDate && r.CreatedOn <= model.EndDate)
+                              .Where(r => r.CreatedOn.Value.Date >= model.StartDate.Date &&
+                              r.CreatedOn.Value.Date <= model.EndDate.Date)
                               .Select(r => r);
 
             var config = new MapperConfiguration(c =>

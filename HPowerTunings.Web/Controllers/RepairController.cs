@@ -87,5 +87,13 @@ namespace HPowerTunings.Web.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult ProceedRepair(string id)
+        {
+            this.repairService.ProceedRepair(id);
+            return View();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace HPowerTunings.Data.Models
         public decimal RepairPrice { get; set; }
         public DateTime? StartedOn { get; set; } = DateTime.Now;
         public DateTime? FinishedOn { get; set; }
-        public bool IsReairPanding { get; set; } = true;
+        public bool IsRepairPanding { get; set; } = true;
 
         [ForeignKey("Car")]
         public string CarId { get; set; }

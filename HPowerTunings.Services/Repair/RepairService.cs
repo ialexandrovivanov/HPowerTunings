@@ -22,8 +22,11 @@ namespace HPowerTunings.Services.Repair
         {
             var car = this.context.Cars.FirstOrDefault(c => c.RegNumber == model.CarRegNumber);
 
-            this.context.Repairs.Add(new Data.Models.Repair() { RepairName = model.RepairName, Car = car, CarId = car.Id });
+            this.context.Repairs.Add(new Data.Models.Repair()
+            { RepairName = model.RepairName, Car = car, CarId = car.Id, Description = model.Description });
+
             this.context.SaveChanges();
+
             var repair = this.context
                              .Repairs
                              .Where(r => r.Car.RegNumber == model.CarRegNumber)
@@ -34,44 +37,54 @@ namespace HPowerTunings.Services.Repair
 
             var mechanic1 = this.context.Employees.SingleOrDefault(e => e.FullName == model.Mechanic1FullName);
             var mechanic2 = this.context.Employees.SingleOrDefault(e => e.FullName == model.Mechanic2FullName);
+            var emplRep = new Data.Models.EmployeeRepair();
 
-            if (mechanic1 != null)
+            if (mechanic1 == mechanic2 && mechanic1 != null)
             {
-                var emplRep = (new Data.Models.EmployeeRepair
-                               {
-                                   Employee = mechanic1,
-                                   EmployeeId = mechanic1.Id,
-                                   Repair = repair,
-                                   RepairId = repair.Id
-                               });
-
-                var mechanic = this.context.Employees.FirstOrDefault(e => e.Id == mechanic1.Id);
+                emplRep.Employee = mechanic1;
+                emplRep.EmployeeId = mechanic1.Id;
+                emplRep.Repair = repair;
+                emplRep.RepairId = repair.Id;
 
                 var employeeRepair = this.context.EmployeesRepairs.Add(emplRep);
 
-                mechanic.EmployeesRepairs.Add(emplRep);
+                mechanic1.EmployeesRepairs.Add(emplRep);
                 repair.EmployeesRepairs.Add(emplRep);
+
                 await this.context.SaveChangesAsync();
             }
 
-            if (mechanic2 != null)
+            else
             {
-
-                var emplRep = (new Data.Models.EmployeeRepair
+                if (mechanic1 != null)
                 {
-                    Employee = mechanic2,
-                    EmployeeId = mechanic2.Id,
-                    Repair = repair,
-                    RepairId = repair.Id
-                });
+                    emplRep.Employee = mechanic1;
+                    emplRep.EmployeeId = mechanic1.Id;
+                    emplRep.Repair = repair;
+                    emplRep.RepairId = repair.Id;
 
-                var mechanic = this.context.Employees.FirstOrDefault(e => e.Id == mechanic1.Id);
+                    var employeeRepair = this.context.EmployeesRepairs.Add(emplRep);
 
-                var employeeRepair = this.context.EmployeesRepairs.Add(emplRep);
+                    mechanic1.EmployeesRepairs.Add(emplRep);
+                    repair.EmployeesRepairs.Add(emplRep);
 
-                mechanic.EmployeesRepairs.Add(emplRep);
-                repair.EmployeesRepairs.Add(emplRep);
-                this.context.SaveChanges();
+                    await this.context.SaveChangesAsync();
+                }
+
+                if (mechanic2 != null)
+                {
+                    emplRep.Employee = mechanic2;
+                    emplRep.EmployeeId = mechanic2.Id;
+                    emplRep.Repair = repair;
+                    emplRep.RepairId = repair.Id;
+
+                    var employeeRepair = this.context.EmployeesRepairs.Add(emplRep);
+
+                    mechanic2.EmployeesRepairs.Add(emplRep);
+                    repair.EmployeesRepairs.Add(emplRep);
+
+                    this.context.SaveChanges();
+                }
             }
               
             return repair == null ? false : true;                              
@@ -131,6 +144,11 @@ namespace HPowerTunings.Services.Repair
             }
 
             return result;
+        }
+
+        public Task<ProceedRepairModel> ProceedRepair(string id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

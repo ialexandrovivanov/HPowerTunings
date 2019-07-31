@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace HPowerTunings.ViewModels.CarModels
+namespace HPowerTunings.ViewModels.ClientModels
 {
-    public class CarStartEndDateViewModel
+    public class ClientStartEndModel
     {
         public DateTime StartDate { get; set; }
 
