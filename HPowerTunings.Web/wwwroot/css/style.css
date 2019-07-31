@@ -17,6 +17,33 @@ textarea, input, select {
     border-color:black
 }
 
+.staticbtn {
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translateX(-50%);
+
+}
+.adminregcar {
+    position: fixed;
+    top: 86%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.admincreaterepair {
+    position: fixed;
+    top: 84%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.admincreateclient {
+    position: fixed;
+    top: 74%;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
  li {
      list-style: none outside;

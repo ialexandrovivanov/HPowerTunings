@@ -1,4 +1,7 @@
-﻿using System.Text.Encodings.Web;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.ClientModels;
@@ -14,7 +17,7 @@ namespace HPowerTunings.Services.Client
         private readonly IEmailSender emailSender;
         private string callbackUrl;
 
-        public CustomClientService(ApplicationDbContext contex, 
+        public CustomClientService(ApplicationDbContext context, 
                                    UserManager<Data.Models.Client> userManager,
                                    IEmailSender emailSender)
         {
@@ -31,15 +34,46 @@ namespace HPowerTunings.Services.Client
             if (result.Succeeded)
             {
                 var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-
+                var callbackUrl = "https://localhost:44366/Account/ConfirmEmail";
                 await emailSender.SendEmailAsync(model.Email, "Confirm your email address",
-                    $"Please confirm the existence of your email by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicking here</a>");
+                    $"Please confirm the existence of your email address by " +
+                    $"<a href='{ HtmlEncoder.Default.Encode(callbackUrl) }'>Clicking here</a>");
 
                 return true;
             }
 
             await Task.Delay(0);
             return false;
+        }
+
+        public async Task<ICollection<ClientViewModel>> GetAllClientsPeriodAsync(ClientStartEndOutputModel model)
+        {
+            var clients = this.context
+                              .Clients
+                              .Where(c => c.CreatedOn.Value.Date >= model.StartDate &&
+                                     c.CreatedOn.Value.Date <= model.EndDate);
+
+            var result = new List<ClientViewModel>();
+            foreach (var client in clients)
+            {
+                var res = new ClientViewModel();
+                res.UserName = client.UserName;
+                res.Email = client.Email;
+                res.PhoneNumber = client.PhoneNumber;
+                res.TotalMoneyPaid = this.context
+                                         .Repairs
+                                         .Where(r => r.Car.Client.Email == client.Email)
+                                         .SelectMany(r => r.Car.Repairs)
+                                         .Sum(x => x.RepairPrice);
+                res.TotalRepairs = this.context
+                                         .Repairs
+                                         .Where(r => r.Car.Client.Email == client.Email)
+                                         .Count();
+
+                result.Add(res);
+            }
+            await Task.Delay(0);
+            return result;
         }
     }
 }

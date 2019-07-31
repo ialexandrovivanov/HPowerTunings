@@ -13,7 +13,7 @@
 }
 <div class="container-fluid justify-content-center w-50">
     <h3 class="mt-4 pt-5  text-center">Cars registered in the period</h3>
-    <hr />
+    <hr class="w-50"/>
     @foreach (var item in Model)
     {
         <div class="container-fluid justify-content-center mt-3 w-50" style="background-color:honeydew; border-radius:8px">
@@ -32,11 +32,15 @@
             <p>Owner's username: <strong>@item.ClientUserName</strong></p>
             <p></p>
         </div>
-        <hr />
+        <hr class="w-50" />
     }
 </div>
 <br />
-<p>Count of the cars registered in the selected period: <strong>@Model.Count</strong></p>
+<div class="container-fluid justify-content-center text-center w-25" style="background-color:aliceblue; border-radius: 8px;">
+    <br />
+    <p>Count of the cars registered in selected period: <strong>@Model.Count</strong></p>
+    <br />
+</div>
 <br />
 <br />
 <br />

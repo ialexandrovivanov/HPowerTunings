@@ -7,6 +7,6 @@ namespace HPowerTunings.Services.Client
     public interface ICustomClientService
     {
         Task<bool> CreateClientAsync(AdminRegisterClientOutputModel model);
-        Task<ICollection<ClientViewModel> GetAllClientsPeriodAsync(ClientStartEndOutputModel model);
+        Task<ICollection<ClientViewModel>> GetAllClientsPeriodAsync(ClientStartEndOutputModel model);
     }
 }

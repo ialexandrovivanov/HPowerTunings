@@ -42,9 +42,17 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Index(ClientStartEndOutputModel model)
+        public async Task<IActionResult> ClientStartEndStatistics(ClientStartEndOutputModel model)
         {
-            var result = this.customClientService.GetAllClientsPeriodAsync(model);
+            var result = await this.customClientService.GetAllClientsPeriodAsync(model);
+
+            return View(result);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult SuccessCreate()
+        {
             return View();
         }
     }

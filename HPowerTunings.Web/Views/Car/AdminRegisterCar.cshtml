@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    <div class="container-fluid justify-content-center w-50 pt-5 mt-5">
+    <div class="container-fluid justify-content-center w-50 pt-5 mt-4">
         <h4 class="text-center">Register new car</h4>
         <hr class="w-50" />
         <form id="Car" method="post" class="text-center">
@@ -41,8 +41,8 @@
                 </div>
                 <div class="form-group">
                     <label>VIN number</label>
-                    <input asp-for="@Model.Rama" class="form-control w-100" placeholder="VIN Number" />
-                    <span asp-validation-for="@Model.Rama" class="text-danger"></span>
+                    <input asp-for="@Model.Rama" class="form-control w-100" placeholder="VIN Number" /> 
+                    <span asp-validation-for="@Model.Rama" class=" text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label>Distance passed</label>
@@ -57,7 +57,7 @@
             </div>
 
             <div class="button-holder mt-5 d-flex justify-content-center">
-                <button type="submit" class="btn btn-outline-primary">Register Car</button>
+                <button type="submit" class="adminregcar btn btn-outline-primary">Register Car</button>
             </div>
         </form>
         <br />

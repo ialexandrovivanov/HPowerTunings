@@ -121,7 +121,8 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
                                                protocol: Request.Scheme);
                     
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email address",
-                        $"Please confirm the existence of your email by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicking here</a>");
+                        $"Please confirm the existence of your email by " +
+                        $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicking here</a>");
 
                     return RedirectToPage("./CheckEmail");
                 }

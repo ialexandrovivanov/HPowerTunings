@@ -9,7 +9,7 @@ namespace HPowerTunings.ViewModels.ClientModels
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         ICollection<ClientCarDetailsViewModel> Cars { get; set; }
-
+        public int TotalRepairs { get; set; }
         public decimal TotalMoneyPaid { get; set; }
     }
 }

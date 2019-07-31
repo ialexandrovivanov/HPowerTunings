@@ -1,5 +1,7 @@
 ﻿@using HPowerTunings.ViewModels.ClientModels
 @model AdminRegisterClientOutputModel
+@{ Layout = "_LayoutBoss";}
+
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,7 @@
 <body>
     <div class="container-fluid justify-content-center text-center mt-5 pt-5">
         <h3>Create client</h3>
-        <hr class="w-25"/>
+        <hr class="w-25" />
         <form id="AdminCreateClient" action="/Client/AdminCreateClient" method="post"
               class="form-group mt-3 container-fluid justify-content-center text-center w-25">
             <div class="mt-4"></div>
@@ -30,7 +32,7 @@
             <input asp-for="@Model.FullName" class="form-control" placeholder="Full name">
             <span asp-validation-for="@Model.FullName" class="text-danger"></span>
             <div class="button-holder mt-5 pt-3">
-                <button type="submit" class="btn btn-outline-primary">Create client</button>
+                <button type="submit" class="admincreateclient btn btn-outline-primary">Create client</button>
             </div>
         </form>
     </div>

@@ -1,0 +1,43 @@
+﻿@using HPowerTunings.ViewModels.ClientModels
+@model ICollection<ClientViewModel>
+
+@{
+    ViewData["Title"] = "ClientStartEnd";
+    Layout = "~/Views/Shared/_LayoutBoss.cshtml";
+}
+
+<style>
+    body {
+        background-color: rgb(240, 240, 240)
+    }
+</style>
+
+<div class="container-fluid justify-content-center w-50 mt-5 pt-5">
+    <h4 class="text-center">Clients for selected period</h4>
+    <hr class="w-50" />
+    @foreach (var item in Model)
+    {
+        <div class="container-fluid text-center w-50" style="background-color:beige; border-radius: 8px">
+            <br />
+            <h5>Client with email</h5>
+            <h5><strong>@item.Email</strong></h5>
+            <br />
+        </div>
+        <div class="container-fluid justify-content-center w-50">
+            <p>Client's username: <strong>@item.UserName</strong></p>
+            <p>Client's phone number: <strong>@item.PhoneNumber</strong></p>
+            <p>Total money paid: <strong>$@item.TotalMoneyPaid</strong></p>
+            <p>Total repairs count: <strong>@item.TotalRepairs</strong></p>
+        </div>
+        <hr class="w-50" />
+    }
+</div>
+<br />
+<div class="container-fluid justify-content-center w-25 text-center" style="background-color:aliceblue">
+    <br />
+    <p>Total count of selected clients: <strong>@Model.Count</strong></p>
+    <br />
+</div>
+<br />
+<br />
+<br />
