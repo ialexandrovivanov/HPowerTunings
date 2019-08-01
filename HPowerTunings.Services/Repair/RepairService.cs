@@ -146,9 +146,13 @@ namespace HPowerTunings.Services.Repair
             return result;
         }
 
-        public Task<ProceedRepairModel> ProceedRepair(string id)
+        public async Task<ProceedRepairModel> ProceedRepair(string id)
         {
-            throw new System.NotImplementedException();
+            var repair = this.context.Repairs.FirstOrDefault(r => r.Id == id);
+            repair.IsRepairPanding = false;
+            var model = new ProceedRepairModel();
+            await Task.Delay(0);
+            return null;
         }
     }
 }

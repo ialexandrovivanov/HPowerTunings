@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using HPowerTunings.Data;
@@ -15,7 +14,6 @@ namespace HPowerTunings.Services.Client
         private readonly ApplicationDbContext context;
         private readonly UserManager<Data.Models.Client> userManager;
         private readonly IEmailSender emailSender;
-        private string callbackUrl;
 
         public CustomClientService(ApplicationDbContext context, 
                                    UserManager<Data.Models.Client> userManager,
@@ -29,15 +27,18 @@ namespace HPowerTunings.Services.Client
         public async Task<bool> CreateClientAsync(AdminRegisterClientOutputModel model)
         {
             var user = new Data.Models.Client { UserName = model.UserName, Email = model.Email };
-            var result = await this.userManager.CreateAsync(user, "hpowertunings");
+            var result = await this.userManager.CreateAsync(user, "123456789");
+            var userFromDb = await this.userManager.FindByEmailAsync(model.Email);
 
             if (result.Succeeded)
             {
-                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = "https://localhost:44366/Account/ConfirmEmail";
+                var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = "https://localhost:44366/Identity/Account/ConfirmEmail" + 
+                                  $"?userId={userFromDb.Id}&code={code}";
+
                 await emailSender.SendEmailAsync(model.Email, "Confirm your email address",
                     $"Please confirm the existence of your email address by " +
-                    $"<a href='{ HtmlEncoder.Default.Encode(callbackUrl) }'>Clicking here</a>");
+                    $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicking here</a>");
 
                 return true;
             }

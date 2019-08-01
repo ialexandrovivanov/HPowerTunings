@@ -16,7 +16,9 @@ textarea, input, select {
     background-color: aliceblue !important;
     border-color:black
 }
-
+p {
+    margin-bottom:0.5rem !important;
+}
 .staticbtn {
     position:fixed;
     top:50%;
@@ -140,6 +142,77 @@ form {
     color: #000;
     border: 0;
 }
+
+.btnRegister {
+    position: fixed;
+    top: 72%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnProfile {
+    position: fixed;
+    top: 86%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnClientRegisterCar {
+    position: fixed;
+    top: 84%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnAdminCreateRepair {
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnRepairStatistics {
+    position: fixed;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnChangePassword {
+    position: fixed;
+    top: 86%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnCarStatistics {
+    position: fixed;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnAdminCreateCar {
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnClientStatistics {
+    position: fixed;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnAdminCreateClient {
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 
 .repair {
     border-radius: 18px;

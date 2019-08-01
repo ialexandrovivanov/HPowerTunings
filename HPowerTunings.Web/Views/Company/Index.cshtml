@@ -13,6 +13,17 @@
         }
     </style>
 </head>
+@{ 
+    string greetings;
+    if (DateTime.Now.Hour >= 12)
+    {
+        greetings = "Good morning";
+    }
+    else if (DateTime.Now.Hour >= 12)
+    {
+
+    }
+}
 
 <body>
     <div class="container-boss text-center mt-4 pt-5">
@@ -70,7 +81,7 @@
                 </p>
                 <p>Repair description: <strong>@item.RepairDescription</strong></p>
                 <a class="text-center" href="/Repair/ProceedRepair?id=@item.RepairId">
-                    <h5><strong>  Proceed Repair  </strong></h5>
+                    <h5 class="mt-3"><strong> Proceed Repair </strong></h5>
                     <hr />
                 </a>
                 <div class="mb-5"></div>

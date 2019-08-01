@@ -20,6 +20,7 @@ namespace HPowerTunings.ViewModels.RepairModels
         public decimal TotalOutgoings { get; set; }
         public decimal TotalIncomes { get; set; }
         public double AverageAmountRepairs { get; set; }
+        public string RepairName { get; set; }
 
     }
 }

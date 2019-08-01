@@ -90,9 +90,9 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult ProceedRepair(string id)
+        public async Task<IActionResult> ProceedRepair(string id)
         {
-            this.repairService.ProceedRepair(id);
+            var result = await this.repairService.ProceedRepair(id);
             return View();
         }
     }

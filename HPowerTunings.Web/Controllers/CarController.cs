@@ -3,6 +3,7 @@ using HPowerTunings.ViewModels.AdminModels;
 using HPowerTunings.ViewModels.CarModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Web.Controllers
@@ -175,10 +176,19 @@ namespace HPowerTunings.Web.Controllers
         public async Task<IActionResult> CarStatisticStartEnd(CarStartEndDateViewModel model)
         {
             if (model.StartDate > model.EndDate)
+            {
                 ModelState.AddModelError(string.Empty, "Insert correct period of time");
-
-            if (!ModelState.IsValid)
                 return RedirectToAction("CarStatistic", "Car", model);
+            }
+
+            if (model.StartDate == default(DateTime) || model.EndDate == default(DateTime))
+            {
+                ModelState.AddModelError(string.Empty, "Insert correct date and time");
+                return RedirectToAction("CarStatistic", "Car", model);
+            }
+                
+            //if (!ModelState.IsValid)
+            //    return RedirectToAction("CarStatistic", "Car", model);
 
             var result = await this.carService.GetAllCarsPeriod(model);
             if (result == null)

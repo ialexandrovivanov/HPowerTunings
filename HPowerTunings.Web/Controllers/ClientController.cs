@@ -44,6 +44,10 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ClientStartEndStatistics(ClientStartEndOutputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             var result = await this.customClientService.GetAllClientsPeriodAsync(model);
 
             return View(result);

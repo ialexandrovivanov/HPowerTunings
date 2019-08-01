@@ -16,7 +16,7 @@ namespace HPowerTunings.Web.Core
         }
         public async Task CreateDay()
         {
-            var currentDay = this.context.Days.FirstOrDefault(d => d.DayDateTime == DateTime.Now.Date);
+            var currentDay = this.context.Days.FirstOrDefault(d => d.DayDateTime.Value.Date == DateTime.Now.Date);
             if (currentDay == null)
             {
                 this.context
@@ -27,6 +27,7 @@ namespace HPowerTunings.Web.Core
                         Description = "Created by dayCreator",
                         DaylyExpenses = 0,
                     });
+
                 context.SaveChangesAsync().GetAwaiter().GetResult();
             }
             while (true)

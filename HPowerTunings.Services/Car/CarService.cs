@@ -195,8 +195,8 @@ namespace HPowerTunings.Services.Car
             foreach (var car in cars.OrderBy(c => c.CreatedOn))
             {
                 var modelForCollection = mapper.Map<Data.Models.Car, CarStatisticViewModel>(car);
-                modelForCollection.ClientEmail = car.Client.Email;
-                modelForCollection.ClientUserName = car.Client.UserName;
+                modelForCollection.ClientEmail = car.Client?.Email;
+                modelForCollection.ClientUserName = car.Client?.UserName;
                 modelForCollection.RegisteredOn = car.CreatedOn.Value.ToString("MM/dd/yyyy HH:mm");
                 result.Add(modelForCollection);
             }
