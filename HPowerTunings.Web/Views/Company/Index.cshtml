@@ -15,19 +15,24 @@
 </head>
 @{ 
     string greetings;
-    if (DateTime.Now.Hour >= 12)
-    {
-        greetings = "Good morning";
-    }
-    else if (DateTime.Now.Hour >= 12)
-    {
 
+    if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+    {
+        greetings = "Good afternoon";
+    }
+    else if (DateTime.Now.Hour > 18 && DateTime.Now.Hour < 24 )
+    {
+        greetings = "Good evening";
+    }
+    else 
+    {
+        greetings = "Good Morning";
     }
 }
 
 <body>
     <div class="container-boss text-center mt-4 pt-5">
-        <h3 class="boss mb-3 ml-5 mr-5" style="font-family:Calibri">&nbsp;Welcome Boss!&nbsp;</h3>
+        <h3 class="boss mb-3 ml-5 mr-5" style="font-family:Calibri">&nbsp;@greetings Boss!&nbsp;</h3>
     </div>
     <div class="text-center mt-1 mb-3">
         <h5>Choose from the menu what would you like to see</h5>

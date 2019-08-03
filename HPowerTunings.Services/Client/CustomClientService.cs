@@ -6,6 +6,7 @@ using HPowerTunings.Data;
 using HPowerTunings.ViewModels.ClientModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HPowerTunings.Services.Client
 {
@@ -24,7 +25,7 @@ namespace HPowerTunings.Services.Client
             this.emailSender = emailSender;
         }
 
-        public async Task<bool> CreateClientAsync(AdminRegisterClientOutputModel model)
+        public async Task<bool> CreateClientAsync(AdminRegisterClientOutputModel model, IUrlHelper urlHelper, string requestScheme)
         {
             var user = new Data.Models.Client { UserName = model.UserName, Email = model.Email };
             var result = await this.userManager.CreateAsync(user, "123456789");
@@ -33,8 +34,10 @@ namespace HPowerTunings.Services.Client
             if (result.Succeeded)
             {
                 var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = "https://localhost:44366/Identity/Account/ConfirmEmail" + 
-                                  $"?userId={userFromDb.Id}&code={code}";
+                var callbackUrl = urlHelper.Page("/Account/ConfirmEmail",
+                                               pageHandler: null,
+                                               values: new { area = "Identity", userId = user.Id, code = code },
+                                               protocol: requestScheme);
 
                 await emailSender.SendEmailAsync(model.Email, "Confirm your email address",
                     $"Please confirm the existence of your email address by " +

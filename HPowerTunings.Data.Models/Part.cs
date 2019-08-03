@@ -8,7 +8,8 @@ namespace HPowerTunings.Data.Models
         public decimal Price { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
-        public DateTime? OrderedOn { get; set; } = DateTime.Now;
+        public int ClientRating { get; set; }
+        public DateTime? OrderedOn { get; set; }
         public DateTime? ReceivedOn { get; set; }
 
         [ForeignKey("Supplier")]

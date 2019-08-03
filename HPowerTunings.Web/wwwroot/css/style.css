@@ -213,6 +213,12 @@ form {
     transform: translateX(-50%);
 }
 
+.btnProceedRepair {
+    position: fixed;
+    top: 84%;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 .repair {
     border-radius: 18px;
@@ -250,4 +256,18 @@ form {
     height: 100%;
 }
 
+.motivation.blue {
+    background-color: aliceblue;
+}
+
+.motivation.yellow {
+    background-color: cornsilk;
+}
+
+.between {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    height: 500px;
+}
 

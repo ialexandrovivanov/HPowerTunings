@@ -1,11 +1,82 @@
 ﻿@using HPowerTunings.ViewModels.CarModels
 @model UserRegisterCarModel
+    <head>
+        <style>
+            body {
+                background-color: rgb(240, 240, 230)
+            }
+            .center-div {
+                width: 300px;
+                height: 300px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -150px;
+                margin-top: -150px;
+            }
 
-<style>
-    body {
-        background-color: rgb(240, 240, 230)
-    }
-</style>
+            .spinner {
+                position: fixed;
+                z-index: 999;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background-color: Black;
+                filter: alpha(opacity=60);
+                opacity: 0.6;
+            }
+
+            .loader {
+                margin: auto;
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #15a0ec;
+                border-bottom: 16px solid #15a0ec;
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 2s linear infinite;
+                animation: spin 2s linear infinite;
+            }
+
+            .inner-div {
+                background-color: white;
+                border-radius: 15px;
+                margin: auto;
+                padding: 2%;
+                width: 150px;
+            }
+
+            @@-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @@keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#btnSubmit').click(function () {
+                    $('.spinner').css('display', 'block');
+                });
+            });
+        </script>
+    </head>
+
 
 <div class="container-fluid justify-content-center w-50 pt-5 mt-5">
     <h4 class="text-center">Register your car</h4>
@@ -40,12 +111,18 @@
             </div>
         </div>
         <div class="button-holder mt-5 d-flex justify-content-center">
-            <button type="submit" class="btnClientRegisterCar btn btn-outline-primary">Save Car</button>
+            <button id="btnSubmit" type="submit" class="btnClientRegisterCar btn btn-outline-primary">Save Car</button>
+            <div class="spinner" style="display:none">
+                <div class="center-div">
+                    <div class="inner-div">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
     <br />
 </div>
-
 
 
 @section Scripts {

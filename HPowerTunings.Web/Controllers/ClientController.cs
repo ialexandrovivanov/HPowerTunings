@@ -34,7 +34,7 @@ namespace HPowerTunings.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                await this.customClientService.CreateClientAsync(model);
+                await this.customClientService.CreateClientAsync(model, this.Url, this.Request.Scheme);
                 return Redirect("/Client/SuccessCreate");
             }
             return View(model);

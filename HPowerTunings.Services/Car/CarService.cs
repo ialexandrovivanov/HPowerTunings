@@ -47,6 +47,7 @@ namespace HPowerTunings.Services.Car
             if (car != null)
             {
                 car.IsDeleted = true;
+                car.RegNumber = "Deleted";
                 await this.context.SaveChangesAsync();
                 return true;
             }

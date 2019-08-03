@@ -146,13 +146,24 @@ namespace HPowerTunings.Services.Repair
             return result;
         }
 
+        public async Task<ICollection<string>> GetSuppliers()
+        {
+            await Task.Delay(0);
+            return this.context.Suppliers.Select(s => s.CompanyName).ToList();
+        }
+
         public async Task<ProceedRepairModel> ProceedRepair(string id)
         {
             var repair = this.context.Repairs.FirstOrDefault(r => r.Id == id);
-            repair.IsRepairPanding = false;
             var model = new ProceedRepairModel();
+            model.In.CarBrand = repair.Car.CarBrand.Name;
+            model.In.CarModel = repair.Car.CarModel.Name;
+            model.In.RegNumber = repair.Car.RegNumber;
+            model.In.RepairName = repair.RepairName;
+            model.In.Suppliers = this.context.Suppliers.Select(s => s.CompanyName).ToList();
+            model.In.VinNumber = repair.Car.Rama;
             await Task.Delay(0);
-            return null;
+            return model;
         }
     }
 }

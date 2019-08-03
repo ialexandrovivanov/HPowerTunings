@@ -92,8 +92,22 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ProceedRepair(string id)
         {
-            var result = await this.repairService.ProceedRepair(id);
-            return View();
+            var model = await this.repairService.ProceedRepair(id);
+            return View(model);
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ProceedRepair(ProceedRepairModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                return RedirectToAction("SuccessCreatePart", "Part", model);
+            }
+
+            model.In.Suppliers = await this.repairService.GetSuppliers();
+            return View(model);
+        } 
     }
 }
