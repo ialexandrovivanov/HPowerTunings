@@ -22,6 +22,7 @@ using HPowerTunings.Services.Appointment;
 using HPowerTunings.Services.Client;
 using HPowerTunings.Services.Company;
 using HPowerTunings.Services.Part;
+using HPowerTunings.Services.Supplier;
 
 namespace HPowerTunings.Web
 {
@@ -98,6 +99,7 @@ namespace HPowerTunings.Web
             services.AddTransient<ICustomClientService, CustomClientService>();
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<IPartService, PartService>();
+            services.AddTransient<ISupplierService, SupplierService>();
 
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

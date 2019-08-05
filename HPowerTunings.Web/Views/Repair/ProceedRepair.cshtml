@@ -11,15 +11,58 @@
     }
 </style>
 
-<div class="pt-5 mt-5 ">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-contact">
-        Add contact
+<div class="pt-5 mt-5">
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#add-part">
+        Add new part
+    </button>
+</div>
+<div class="mt-5">
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#add-supplier">
+        Add supplier
     </button>
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="add-contact" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+<div class="d-flex justify-content-center">
+    <div class="container-fluid text-center mt-5">
+        <div class="mb-3" style="background-color:darkkhaki; border-radius: 8px; padding-right:100px; padding-left:100px; padding-top:5px; padding-bottom:5px">
+            <h4><strong>Repair</strong></h4>
+            <h5>Repair with name: <strong>@Model.In.RepairName</strong></h5>
+            <h5>On car with reg.Number: <strong>@Model.In.RegNumber</strong></h5>
+            <h5>Car VIN: <strong>@Model.In.VinNumber</strong></h5>
+            <h4><strong>Parts used:</strong></h4>
+        </div>
+
+        @foreach (var item in Model.In.Parts.OrderByDescending(p => p.StartedOn))
+        {
+            <div class="mb-3" style="background-color:lightblue; border-radius: 8px; padding-right:20px; padding-left:20px; padding-top:5px; padding-bottom:5px">
+                <h5>Part name: <strong>@item.Name</strong></h5>
+                <h5>Part brand: <strong>@item.Brand</strong></h5>
+                <h5>Part price: <strong>@item.Price</strong></h5>
+                <h5>Part rating: <strong>@item.ClientRating</strong></h5>
+            </div>
+
+        }
+        <br />
+        <div class="total" style="background-color:darksalmon; border-radius: 8px">
+            <h5><strong>Count of parts: </strong>@Model.In.CountParts</h5>
+            <h5><strong>Sum parts prices: </strong>@Model.In.SumPartsPrices</h5>
+        </div>
+        <div class="mt-5">
+            <button type="button" data-toggle="modal" data-target="#finalize-repair" class="btn btn-outline-success">
+                Finalize repair
+            </button>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+</div>
+
+
+
+<!-- Modal Part -->
+<div class="modal fade" id="add-part" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,9 +72,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="text-center" id="proceedRepair" action="/Repair/ProceedRepair" method="post">
+                <form class="text-center" id="proceedRepair" action="/part/addpart" method="post">
                     <div>
-                        <label style="font-family:Arial; font-size: 20px";>Part name</label>
+                        <label style="font-family:Arial; font-size: 20px" ;>Part name</label>
                         <input asp-for="@Model.Out.PartName" class="form-control" placeholder="Name of the part">
                         <span asp-validation-for="@Model.Out.PartName" class="text-danger"></span>
                     </div>
@@ -61,11 +104,101 @@
                         <input asp-for="@Model.Out.RateThisDelivery" class="form-control" placeholder="Rate delivery speed">
                         <span asp-validation-for="@Model.Out.RateThisDelivery" class="text-danger"></span>
                     </div>
+                    <input asp-for="@Model.In.RepairId" type="hidden">
                     <input asp-for="@Model.In.CarBrand" type="hidden">
                     <input asp-for="@Model.In.CarModel" type="hidden">
                     <input asp-for="@Model.In.RegNumber" type="hidden">
                     <input asp-for="@Model.In.VinNumber" type="hidden">
                     <input asp-for="@Model.In.RepairName" type="hidden">
+                    <input asp-for="@Model.In.SumPartsPrices" type="hidden">
+                    <input asp-for="@Model.In.CountParts" type="hidden">
+
+                    <div class="button-holder mt-5">
+                        <button type="submit" class="btn btn-outline-primary"> Add </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Supplier -->
+<div class="modal fade" id="add-supplier" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addContactLabel"> Add supplier </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="text-center" id="addSupplier" action="/Supplier/CreateSupplier" method="post">
+                    <div>
+                        <label style="font-family:Arial; font-size: 20px" ;>Supplier name</label>
+                        <input asp-for="@Model.Out.SupplierName" class="form-control">
+                        <span asp-validation-for="@Model.Out.SupplierName" class="text-danger"></span>
+                    </div>
+                    <div class="mt-3">
+                        <label style="font-family:Arial; font-size: 20px" ;>Supplier phone number</label>
+                        <input asp-for="@Model.Out.SupplierPhone" class="form-control">
+                        <span asp-validation-for="@Model.Out.SupplierPhone" class="text-danger"></span>
+                    </div>
+                    <div class="mt-3">
+                        <label style="font-family:Arial; font-size: 20px">Supplier email</label>
+                        <input asp-for="@Model.Out.SupplierEmail" class="form-control">
+                        <span asp-validation-for="@Model.Out.SupplierEmail" class="text-danger"></span>
+                    </div>
+                    <div class="mt-3">
+                        <label style="font-family:Arial; font-size: 20px">Supplier url</label>
+                        <input asp-for="@Model.Out.SupplierUrl" class="form-control">
+                        <span asp-validation-for="@Model.Out.SupplierUrl" class="text-danger"></span>
+                    </div>
+
+                    <input asp-for="@Model.In.RepairId" type="hidden">
+                    <input asp-for="@Model.In.CarBrand" type="hidden">
+                    <input asp-for="@Model.In.CarModel" type="hidden">
+                    <input asp-for="@Model.In.RegNumber" type="hidden">
+                    <input asp-for="@Model.In.VinNumber" type="hidden">
+                    <input asp-for="@Model.In.RepairName" type="hidden">
+                    <input asp-for="@Model.In.SumPartsPrices" type="hidden">
+                    <input asp-for="@Model.In.CountParts" type="hidden">
+
+                    <div class="button-holder mt-5">
+                        <button type="submit" class="btn btn-outline-primary"> Add supplier </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Finalize -->
+<div class="modal fade" id="finalize-repair" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addContactLabel">Finalize repair</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="text-center" id="finalizeRepair" action="/repair/finalizeRepair" method="post">
+                    <div>
+                        <label style="font-family:Arial; font-size: 20px" ;>Repair price</label>
+                        <input asp-for="@Model.Out.RepairPrice" class="form-control" placeholder="Sum for the client to pay">
+                    </div>
+
+                    <input asp-for="@Model.In.RepairId" type="hidden">
+                    <input asp-for="@Model.In.CarBrand" type="hidden">
+                    <input asp-for="@Model.In.CarModel" type="hidden">
+                    <input asp-for="@Model.In.RegNumber" type="hidden">
+                    <input asp-for="@Model.In.VinNumber" type="hidden">
+                    <input asp-for="@Model.In.RepairName" type="hidden">
+                    <input asp-for="@Model.In.SumPartsPrices" type="hidden">
+                    <input asp-for="@Model.In.CountParts" type="hidden">
+
                     <div class="button-holder mt-5">
                         <button type="submit" class="btn btn-outline-primary"> Add </button>
                     </div>
@@ -76,7 +209,6 @@
 </div>
 
 
-
-    @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-    }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

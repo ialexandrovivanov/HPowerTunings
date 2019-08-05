@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -90,6 +91,22 @@ namespace HPowerTunings.Services.Repair
             return repair == null ? false : true;                              
         }
 
+        public async Task<bool> FinalizeRepair(ProceedRepairModel model)
+        {
+            var repair = await this.context.Repairs.FindAsync(model.In.RepairId);
+            repair.RepairPrice = model.Out.RepairPrice;
+            repair.IsRepairPanding = false;
+            repair.FinishedOn = DateTime.Now;
+
+            var result = await this.context.SaveChangesAsync();
+            if (result == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public ICollection<string> GetAllMechanicNames()
         {
             return this.context.Employees.Where(e => e.Possition == "Mechanic").Select(e => e.FullName).ToList();
@@ -154,15 +171,29 @@ namespace HPowerTunings.Services.Repair
 
         public async Task<ProceedRepairModel> ProceedRepair(string id)
         {
-            var repair = this.context.Repairs.FirstOrDefault(r => r.Id == id);
+            var repair = await this.context.Repairs.FindAsync(id);
+
             var model = new ProceedRepairModel();
+
+            model.In.RepairId = repair.Id;
             model.In.CarBrand = repair.Car.CarBrand.Name;
             model.In.CarModel = repair.Car.CarModel.Name;
             model.In.RegNumber = repair.Car.RegNumber;
             model.In.RepairName = repair.RepairName;
             model.In.Suppliers = this.context.Suppliers.Select(s => s.CompanyName).ToList();
             model.In.VinNumber = repair.Car.Rama;
-            await Task.Delay(0);
+            model.In.CountParts = repair.Parts.Count;
+            model.In.SumPartsPrices = repair.Parts.Sum(p => p.Price).ToString("F2"); 
+            model.In.Parts = repair.Parts.Select(p => new PartStatisticsViewModel()
+                                                      {
+                                                          Name = p.Name,
+                                                          Brand = p.Brand,
+                                                          Price = p.Price,
+                                                          ClientRating = p.ClientRating,
+                                                          StartedOn = p.CreatedOn
+                                                      })
+                                                      .ToList();
+
             return model;
         }
     }

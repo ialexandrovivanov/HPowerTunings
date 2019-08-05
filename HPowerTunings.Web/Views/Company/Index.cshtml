@@ -13,18 +13,18 @@
         }
     </style>
 </head>
-@{ 
+@{
     string greetings;
 
     if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
     {
         greetings = "Good afternoon";
     }
-    else if (DateTime.Now.Hour > 18 && DateTime.Now.Hour < 24 )
+    else if (DateTime.Now.Hour >= 18 && DateTime.Now.Hour < 24)
     {
         greetings = "Good evening";
     }
-    else 
+    else
     {
         greetings = "Good Morning";
     }
@@ -32,36 +32,51 @@
 
 <body>
     <div class="container-boss text-center mt-4 pt-5">
-        <h3 class="boss mb-3 ml-5 mr-5" style="font-family:Calibri">&nbsp;@greetings Boss!&nbsp;</h3>
+        <h3 class="boss p-3" style="font-family:Calibri">@greetings Boss!</h3>
     </div>
     <div class="text-center mt-1 mb-3">
         <h5>Choose from the menu what would you like to see</h5>
         <hr />
     </div>
-    <div cass="d-flex flex-row">
-        <div class="container-fluid justify-content-center">
-            @{ var appointments = ViewData["PendingAppoinments"] as List<PendingAppointmentsViewModel>; }
-            @foreach (var item in appointments)
+    <div class="d-flex">
+        <div class="container-fluid justify-content-center" style="width:400px">
+            @foreach (var item in ViewData["PendingAppoinments"] as List<PendingAppointmentsViewModel>)
             {
-                <div style="background-color:honeydew; border-radius:8px"  class="mb-3">
-                    <br />
-                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>New Appointment</strong>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-                    <br />
-                </div>
-                <p>From client with email : <strong>@item.ClientEmail</strong></p>
-                <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
-                <p><h5>Desired date: </h5><h5><strong>@item.DesiredDate</strong></h5></p>
-                <p>Problem description: @item.ProblemDescription</p>
-                <a class="text-center" href="/Appointment/ProceedAppointment?id=@item.AppointmentId">
-                    <h5><strong>Proceed appointment</strong></h5>
+                if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd"))
+                {
+                    <div style="background-color:steelblue; border-radius:8px" class="mb-3">
+                        <br />
+                        <h3 class="text-center"><strong>This Day Appointment</strong></h3>
+                        <br />
+                    </div>
+                    <p>From client with email : <strong>@item.ClientEmail</strong></p>
+                    <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
+                    <p><h5>Appointment date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
+                    <p>Problem description: @item.ProblemDescription</p>
                     <hr />
-                </a>
-                <div class="mb-5"></div>
+                    <div class="mb-5"></div>
+                }
+                else
+                {
+                    <div style="background-color:honeydew; border-radius:8px" class="mb-3">
+                        <br />
+                        <h3 class="text-center"><strong>New Appointment</strong></h3>
+                        <br />
+                    </div>
+                    <p>From client with email : <strong>@item.ClientEmail</strong></p>
+                    <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
+                    <p><h5>Desired date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
+                    <p>Problem description: @item.ProblemDescription</p>
+                    <a class="text-center" href="/Appointment/ProceedAppointment?id=@item.AppointmentId">
+                        <h5><strong>Proceed appointment</strong></h5>
+                        <hr />
+                    </a>
+                    <div class="mb-5"></div>
+                }
             }
         </div>
-        <div class="container-fluid justify-content-center">
-            @{ var collection = ViewData["PendingRepairs"] as List<PendingRepairViewModel>; }
-            @foreach (var item in collection)
+        <div class="container-fluid justify-content-center" style="width:400px">
+            @foreach (var item in ViewData["PendingRepairs"] as List<PendingRepairViewModel>)
             {
                 <div class="text-center mb-3" style="background-color:rosybrown; border-radius:8px">
                     <br />
@@ -81,19 +96,18 @@
                     Mechanics operated:
                     @foreach (var mechanic in item.Mechanics)
                     {
-                    <strong>@mechanic&nbsp;&nbsp;</strong>
+                        <strong>@mechanic&nbsp;&nbsp;&nbsp;</strong>
                     }
                 </p>
                 <p>Repair description: <strong>@item.RepairDescription</strong></p>
                 <a class="text-center" href="/Repair/ProceedRepair?id=@item.RepairId">
-                    <h5 class="mt-3"><strong> Proceed Repair </strong></h5>
+                    <h5 class="mt-3"><strong>Proceed repair</strong></h5>
                     <hr />
                 </a>
                 <div class="mb-5"></div>
             }
         </div>
         <div class="mt-5 pt-5"></div>
-
     </div>
 </body>
 </html>

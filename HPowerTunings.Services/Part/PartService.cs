@@ -1,5 +1,6 @@
 ﻿using HPowerTunings.Data;
 using HPowerTunings.ViewModels.RepairModels;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Services.Part
@@ -13,19 +14,25 @@ namespace HPowerTunings.Services.Part
             this.context = context;
         }
 
-        public async Task<bool> CreatePart(ProceedRepairModel model)
+        public async Task<bool> AddPart(ProceedRepairModel model)
         {
+            var supplier = this.context.Suppliers.FirstOrDefault(s => s.CompanyName == model.Out.PartSupplier);
+            var repair = this.context.Repairs.FirstOrDefault(r => r.Id == model.In.RepairId);
             var part = new Data.Models.Part()
             {
-                Brand = model.Out.PartSupplier,
-                Name = model.Out.PartSupplier,
+                Name = model.Out.PartName,
+                Brand = model.Out.PartManufacturer,
                 Price = model.Out.PartPrice,
-                
+                Supplier = supplier,
+                SupplierId = supplier.Id,
+                Repair = repair,
+                RepairId = repair.Id,
             };
 
-            var result = await this.context.Parts.AddAsync(part);
+            await this.context.Parts.AddAsync(part);
+            var result = this.context.SaveChanges();
 
-            if (result != null)
+            if (result == 1)
             {
                 return true;
             }

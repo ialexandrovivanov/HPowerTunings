@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HPowerTunings.Data;
@@ -16,19 +17,23 @@ namespace HPowerTunings.Services.Company
             this.context = context;
         }
 
+        public DateTime DateTie { get; private set; }
+
         public async Task<List<PendingAppointmentsViewModel>> GetPendingAppointments()
         {
             await Task.Delay(0);
             var result = this.context
                              .Appointments
-                             .Where(a => a.IsAppointmentPending == true)
+                             .Where(a => a.IsAppointmentPending == true ||
+                                    a.AppointmentDate.Date == DateTime.Now.Date)
                              .Select(a => new PendingAppointmentsViewModel()
-                             {
-                                 AppointmentId = a.Id, ClientEmail = a.Client.Email,
-                                 ClientPhoneNumber = a.Client.PhoneNumber,
-                                 DesiredDate = a.DesiredDate.Value.ToString("yyyy/MM/dd"),
-                                 ProblemDescription = a.ProblemDescription
-                             })
+                              {
+                                  AppointmentId = a.Id,
+                                  ClientEmail = a.Client.Email,
+                                  ClientPhoneNumber = a.Client.PhoneNumber,
+                                  ProblemDescription = a.ProblemDescription,
+                                  AppoinmentDate = a.AppointmentDate.ToString("yyyy/MM/dd"),
+                              })
                              .ToList();
 
             return result;

@@ -12,5 +12,6 @@ namespace HPowerTunings.Services.Repair
         ICollection<string> GetAllMechanicNames();
         Task<ProceedRepairModel> ProceedRepair(string id);
         Task <ICollection<string>> GetSuppliers();
+        Task<bool> FinalizeRepair(ProceedRepairModel model);
     }
 }

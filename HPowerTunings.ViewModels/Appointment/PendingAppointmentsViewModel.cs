@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HPowerTunings.ViewModels.Appointment
+﻿namespace HPowerTunings.ViewModels.Appointment
 {
     public class PendingAppointmentsViewModel
     {
@@ -8,6 +6,6 @@ namespace HPowerTunings.ViewModels.Appointment
         public string ClientEmail { get; set; }
         public string ClientPhoneNumber { get; set; }
         public string ProblemDescription { get; set; }
-        public string DesiredDate { get; set; }
+        public string AppoinmentDate { get; set; }
     }
 }

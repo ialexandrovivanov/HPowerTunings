@@ -5,8 +5,7 @@ namespace HPowerTunings.Data.Models
 {
     public class Appointment : BaseModel
     {
-        public DateTime? DesiredDate { get; set; }
-        public DateTime? AppointmentDate { get; set; }
+        public DateTime AppointmentDate { get; set; }
         public string ProblemDescription { get; set; }
         public bool? IsAppointmentPending { get; set; } = true;
 

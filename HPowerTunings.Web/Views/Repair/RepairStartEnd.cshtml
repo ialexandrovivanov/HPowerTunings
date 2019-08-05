@@ -67,18 +67,18 @@
                 }
                 <hr style="width: 30%;" />
             }
-    <div class="text-center">
-        <div class="d-inline-block text-center" style="background-color:azure; border-radius:8px; padding: 0.1em 0.3em;">
-            <h5>Total incomes for period: <strong>$@Model.FirstOrDefault()?.TotalIncomes</strong></h5>
-            <h5>Total outgoings for periods: <strong>$@Model.Sum(r => r.TotalOutgoings)</strong></h5>
-            @{
-                var incomes = Model.FirstOrDefault()?.TotalIncomes;
-                var outgoings = Model.Sum(r => r.TotalOutgoings);
-                var result = incomes - outgoings;
-                <h5>Total (incomes - outgoings) for period:&nbsp;&nbsp; <strong>$@result</strong></h5>
-            }
-        </div>
-    </div>
+            <div class="text-center">
+                <div class="d-inline-block text-center" style="background-color:azure; border-radius:8px; padding: 0.1em 0.3em;">
+                    <h5>Total incomes for period: <strong>$@Model.FirstOrDefault()?.TotalIncomes</strong></h5>
+                    <h5>Total outgoings for periods: <strong>$@Model.Sum(r => r.TotalOutgoings)</strong></h5>
+                    @{
+                        var incomes = Model.FirstOrDefault()?.TotalIncomes;
+                        var outgoings = Model.Sum(r => r.TotalOutgoings);
+                        var result = incomes - outgoings;
+                        <h5>Total (incomes - outgoings) for period: <strong>$@result</strong></h5>
+                    }
+                </div>
+            </div>
             <div class="pt-5 mt-5"></div>
         }
         else

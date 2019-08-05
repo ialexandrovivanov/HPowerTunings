@@ -12,8 +12,7 @@ namespace HPowerTunings.ViewModels.Appointment
 
         [IsValidAppointmentDate]
         [Required(ErrorMessage = CorrectDateTimeMessage)]
-        public DateTime? DesiredDate { get; set; }
-        public DateTime? AppointmentDate { get; set; }
+        public DateTime AppointmentDate { get; set; }
         [Required(ErrorMessage = RequiredErrorMessage)]
         public string Description { get; set; }
         public bool IsAppointmentPending { get; set; }

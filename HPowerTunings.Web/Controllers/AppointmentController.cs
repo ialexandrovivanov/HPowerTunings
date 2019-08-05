@@ -58,6 +58,10 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> ProceedAppointment(ProceedAppointmentModel model)
         {
+            if (model.AppointmentDate == null)
+            {
+                return Redirect($"/Appointment/ProceedAppointment/{model.In.Id}");
+            }
             if (await this.appointmentService.AdminCreateAppointment(model))
                 return Redirect($"/Appointment/SuccessCreateAppointment/{model.In.Id}");
 

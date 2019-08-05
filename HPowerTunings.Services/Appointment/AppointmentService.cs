@@ -22,22 +22,21 @@ namespace HPowerTunings.Services.Appointment
         {
             var clientId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var client = this.context.Users.FirstOrDefault(u => u.Id == clientId);
-            var day = this.context.Days.FirstOrDefault(d => d.DayDateTime.Value.Date == DateTime.Now.Date);
+            var day = new Data.Models.Day() { DayDateTime = model.AppointmentDate.Date, Description = "Created by appoinment" };
 
             day.Appointments.Add(new Data.Models.Appointment
-            {
-                DesiredDate = model.DesiredDate,
-                Description = model.Description,
-                ClientId = clientId,
-                Client = client,
-                DayId = day.Id,
-                IsAppointmentPending = true,
-                AppointmentDate = null
-            });
-
+                                 {
+                                     Description = model.Description,
+                                     ClientId = clientId,
+                                     Client = client,
+                                     DayId = day.Id,
+                                     IsAppointmentPending = true,
+                                     AppointmentDate = model.AppointmentDate
+                                 });
+            await this.context.Days.AddAsync(day);
             var result = await this.context.SaveChangesAsync();
 
-            return result == 1 ? true : false;
+            return result > 0 ? true : false;
         }
 
         public async Task<ProceedAppointmentModel> GetAppoinmentDetails(string id)
@@ -45,10 +44,10 @@ namespace HPowerTunings.Services.Appointment
             var appointment = this.context.Appointments.FirstOrDefault(a => a.Id == id);
 
             var result = new ProceedAppointmentModel();
-
+            result.AppointmentDate = appointment.AppointmentDate;
             result.In.ClientEmail = appointment.Client.Email;
             result.In.Id = id;
-            result.In.DesiredDate = appointment.DesiredDate.Value.ToString("yyyy/MM/dd");
+            result.In.AppoinemtnDate = appointment.AppointmentDate.Date.ToString("yyyy/MM/dd");
             result.In.ProblemDescription = appointment.ProblemDescription;
             result.In.ClientPhone = appointment.Client.PhoneNumber;
             result.In.ClientUsername = appointment.Client.UserName;

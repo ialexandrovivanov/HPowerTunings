@@ -1,4 +1,5 @@
-﻿using HPowerTunings.Services.Repair;
+﻿using HPowerTunings.Services.Part;
+using HPowerTunings.Services.Repair;
 using HPowerTunings.ViewModels.RepairModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,11 @@ namespace HPowerTunings.Web.Controllers
     
     public class RepairController : Controller
     {
-        IRepairService repairService;
-        public RepairController(IRepairService repairService)
+        private readonly IRepairService repairService;
+        private readonly IPartService partService;
+        public RepairController(IRepairService repairService, IPartService partService)
         {
+            this.partService = partService;
             this.repairService = repairService;
         }
 
@@ -98,16 +101,22 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ProceedRepair(ProceedRepairModel model)
+        public async Task<IActionResult> FinalizeRepair(ProceedRepairModel model)
         {
-            if (ModelState.IsValid)
+            if (model.Out.RepairPrice <= 0)
             {
-                
-                return RedirectToAction("SuccessCreatePart", "Part", model);
+                return RedirectToAction("ProceedReair", "Repair", model.In.RepairId);
             }
+            else
+            {
+                var result = await this.repairService.FinalizeRepair(model);
+                if (result)
+                {
+                    return Redirect("/Repair/SuccessFinalize");
+                }
 
-            model.In.Suppliers = await this.repairService.GetSuppliers();
-            return View(model);
-        } 
+                return RedirectToAction("ProceedReair","Repair", model.In.RepairId);
+            }
+        }
     }
 }

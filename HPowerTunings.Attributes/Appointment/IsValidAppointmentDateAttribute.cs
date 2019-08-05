@@ -7,7 +7,7 @@ namespace HPowerTunings.Attributes.Appointment
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if ((DateTime)value <= DateTime.Now.Date)
+            if ((DateTime)value < DateTime.Now.Date)
             {
                 return new ValidationResult("Set future date for appoinment");
             }

@@ -1,10 +1,11 @@
-﻿using HPowerTunings.ViewModels.RepairModels;
+﻿using HPowerTunings.ViewModels.PartModels;
+using HPowerTunings.ViewModels.RepairModels;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Services.Part
 {
     public interface IPartService
     {
-        Task<bool> CreatePart(ProceedRepairModel model);
+        Task<bool> AddPart(ProceedRepairModel model);
     }
 }

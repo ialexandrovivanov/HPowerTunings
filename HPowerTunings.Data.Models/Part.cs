@@ -9,8 +9,7 @@ namespace HPowerTunings.Data.Models
         public string Name { get; set; }
         public string Brand { get; set; }
         public int ClientRating { get; set; }
-        public DateTime? OrderedOn { get; set; }
-        public DateTime? ReceivedOn { get; set; }
+      
 
         [ForeignKey("Supplier")]
         public string SupplierId { get; set; }

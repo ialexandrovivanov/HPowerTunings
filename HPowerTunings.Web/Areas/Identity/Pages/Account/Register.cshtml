@@ -1,115 +1,120 @@
 ﻿@page
 @model RegisterModel
 
-    <head>
-        <style>
-            .center-div {
-                width: 300px;
-                height: 300px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin-left: -150px;
-                margin-top: -150px;
+<head>
+    <style>
+        .center-div {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+        }
+
+        .spinner {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+        }
+
+        .loader {
+            margin: auto;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #15a0ec;
+            border-bottom: 16px solid #15a0ec;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        .inner-div {
+            background-color: white;
+            border-radius: 15px;
+            margin: auto;
+            padding: 2%;
+            width: 150px;
+        }
+
+        @@-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
             }
 
-            .spinner {
-                position: fixed;
-                z-index: 999;
-                height: 100%;
-                width: 100%;
-                top: 0;
-                left: 0;
-                background-color: Black;
-                filter: alpha(opacity=60);
-                opacity: 0.6;
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
             }
 
-            .loader {
-                margin: auto;
-                border: 16px solid #f3f3f3;
-                border-radius: 50%;
-                border-top: 16px solid #15a0ec;
-                border-bottom: 16px solid #15a0ec;
-                width: 120px;
-                height: 120px;
-                -webkit-animation: spin 2s linear infinite;
-                animation: spin 2s linear infinite;
+            100% {
+                transform: rotate(360deg);
             }
-
-            .inner-div {
-                background-color: white;
-                border-radius: 15px;
-                margin: auto;
-                padding: 2%;
-                width: 150px;
-            }
-
-            @@-webkit-keyframes spin {
-                0% {
-                    -webkit-transform: rotate(0deg);
-                }
-
-                100% {
-                    -webkit-transform: rotate(360deg);
-                }
-            }
-
-            @@keyframes spin {
-                0% {
-                    transform: rotate(0deg);
-                }
-
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-        </style>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#btnSubmit').click(function () {
-                    $('.spinner').css('display', 'block');
-                });
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnSubmit').click(function () {
+                $('.spinner').css('display', 'block');
             });
-        </script>
-    </head>
+        });
+    </script>
+</head>
+
 
 <section class="container-register pt-5">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="container-fluid justify-content-center w-25 mt-5">
-            <h3 class="text-center">Register</h3>
-            <hr />
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.UserName"></label>
-                <input asp-for="Input.UserName" class="form-control" />
-                <span asp-validation-for="Input.UserName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="button-holder mt-5 d-flex justify-content-center">
-                <button id="btnSubmit" type="submit" class="btnRegister btn btn-outline-primary">Register</button>
-                <div class="spinner" style="display:none">
-                    <div class="center-div">
-                        <div class="inner-div">
-                            <div class="loader"></div>
+    <div class="d-flex flex-row">
+        <div class="container-fluid justify-content-center text-center mt-5" style="width:400px">
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <h3 class="text-center">Register</h3>
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="Input.Email"></label>
+                        <input asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.UserName"></label>
+                        <input asp-for="Input.UserName" class="form-control" />
+                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.ConfirmPassword"></label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="button-holder mt-5 d-flex justify-content-center">
+                        <button id="btnSubmit" type="submit" class="btnRegister btn btn-outline-primary">Register</button>
+                        <div class="spinner" style="display:none">
+                            <div class="center-div">
+                                <div class="inner-div">
+                                    <div class="loader"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
 </section>
 
 @section Scripts {
