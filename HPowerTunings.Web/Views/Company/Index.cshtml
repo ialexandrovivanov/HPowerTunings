@@ -42,7 +42,7 @@
         <div class="container-fluid justify-content-center" style="width:400px">
             @foreach (var item in ViewData["PendingAppoinments"] as List<PendingAppointmentsViewModel>)
             {
-                if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd"))
+                if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd") && item.IsAppointmentPending == false)
                 {
                     <div style="background-color:steelblue; border-radius:8px" class="mb-3">
                         <br />
@@ -56,13 +56,31 @@
                     <hr />
                     <div class="mb-5"></div>
                 }
-                else
+                else if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd") && item.IsAppointmentPending == true)
                 {
-                    <div style="background-color:honeydew; border-radius:8px" class="mb-3">
+                    <div style="background-color:azure; border-radius:8px" class="mb-3">
                         <br />
-                        <h3 class="text-center"><strong>New Appointment</strong></h3>
+                        <h3 class="text-center"><strong>This Day Appointment</strong></h3>
                         <br />
                     </div>
+                    <p>From client with email : <strong>@item.ClientEmail</strong></p>
+                    <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
+                    <p><h5>Appointment date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
+                    <p>Problem description: @item.ProblemDescription</p>
+                    <hr />
+                    <div class="mb-5"></div>
+                    <a class="text-center" href="/Appointment/ProceedAppointment?id=@item.AppointmentId">
+                        <h5><strong>Proceed appointment</strong></h5>
+                        <hr />
+                    </a>
+                }
+                else
+                {
+                    <div style = "background-color:honeydew; border-radius:8px" class="mb-3">
+                    <br />
+                    <h3 class="text-center"><strong>New Appointment</strong></h3>
+                    <br />
+                </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
                     <p><h5>Desired date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>

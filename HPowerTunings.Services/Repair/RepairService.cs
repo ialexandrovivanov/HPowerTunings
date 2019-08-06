@@ -99,7 +99,7 @@ namespace HPowerTunings.Services.Repair
             repair.FinishedOn = DateTime.Now;
 
             var result = await this.context.SaveChangesAsync();
-            if (result == 0)
+            if (result == 1)
             {
                 return true;
             }

@@ -118,5 +118,13 @@ namespace HPowerTunings.Web.Controllers
                 return RedirectToAction("ProceedReair","Repair", model.In.RepairId);
             }
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> SuccessFinalize()
+        {
+            await Task.Delay(0);
+            return View();
+        }
     }
 }
