@@ -14,25 +14,28 @@
     </style>
 </head>
 <body>
-    <form action="/repair/repairStartEnd" method="post" class="w-32">
-        <div class="text-center mt-5 pt-5">
-            <h3>Select period of time for repairs statistics</h3>
-            <hr />
-        </div>  
-        <div class="text-center mt-5">
-            <label>Start date (including)</label>
-            <input type="date" asp-for=@Model.StartDate class="form-control" />
-            <span asp-validation-for=@Model.StartDate class="text-danger"></span>
-        </div>
-        <div class="text-center mt-5">
-            <label>End date (including)</label>
-            <input type="date" asp-for=@Model.EndDate class="form-control" />
-            <span asp-validation-for=@Model.EndDate class="text-danger"></span>
-        </div>
-        <div class="text-center mt-5">
+    <div class="container-fluid justify-content-center text-center" style="width:400px">
+        <form action="/repair/repairStartEnd" method="post">
+            <div class="text-center mt-5 pt-5">
+                <h3>Select period of time for repairs statistics</h3>
+                <hr />
+            </div>
+            <div class="text-center mt-5">
+                <label>Start date (including)</label>
+                <input type="date" asp-for=@Model.StartDate class="form-control" />
+                <span asp-validation-for=@Model.StartDate class="text-danger"></span>
+            </div>
+            <div class="text-center mt-5">
+                <label>End date (including)</label>
+                <input type="date" asp-for=@Model.EndDate class="form-control" />
+                <span asp-validation-for=@Model.EndDate class="text-danger"></span>
+            </div>
+            <div class="text-center mt-5">
                 <button type="submit" class="btnRepairStatistics btn btn-outline-primary">Select repairs</button>
-        </div>
-    </form>
+            </div>
+        </form>
+    </div> 
+    
     <div class="container-fluid justify-content-center text-center mt-5 pt-5 mt-5">
         <form action="/repair/createrepair" method="get">
             <button class="btnAdminCreateRepair btn btn-outline-primary">Create repair</button>

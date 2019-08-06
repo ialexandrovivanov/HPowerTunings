@@ -7,5 +7,6 @@
         public string ClientPhoneNumber { get; set; }
         public string ProblemDescription { get; set; }
         public string AppoinmentDate { get; set; }
+        public bool? IsAppointmentPending { get; set; }
     }
 }

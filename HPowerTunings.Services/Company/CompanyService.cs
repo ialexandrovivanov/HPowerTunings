@@ -33,6 +33,7 @@ namespace HPowerTunings.Services.Company
                                   ClientPhoneNumber = a.Client.PhoneNumber,
                                   ProblemDescription = a.ProblemDescription,
                                   AppoinmentDate = a.AppointmentDate.ToString("yyyy/MM/dd"),
+                                  IsAppointmentPending = a.IsAppointmentPending,
                               })
                              .ToList();
 

@@ -140,6 +140,13 @@ form {
     transform: translateX(-50%);
 }
 
+.deleteSubmit {
+    position: fixed;
+    top: 46%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .btnProfile {
     position: fixed;
     top: 86%;
