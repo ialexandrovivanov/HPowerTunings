@@ -10,9 +10,9 @@
 <div class="text-center mt-3">
     <div class="container-fluid justify-content-center"></div>
     <h4><strong>Register your car</strong></h4>
-    <hr class="w-50"/>
+    <hr class="w-25"/>
 </div>
-<div class="container-fluid justify-content-center w-50">
+<div class="container-fluid justify-content-center" style="width:400px">
     <form id="register-car-form" method="post">
         <select class="custom-select" id="CarBrand" name="carBrand">
             <option selected disabled>-- Choose Car Brand --</option>
@@ -28,8 +28,7 @@
 </div>
 <br />
 <h4 class="text-center">View my car(s)</h4>
-<hr class="w-50" />
-<br />
+<hr class="w-25" />
 <div class="text-center">
     @foreach (var item in Model.Input.ClientCars)
     {

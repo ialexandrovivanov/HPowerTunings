@@ -13,33 +13,34 @@
 
             <h2 class="mt-4 pt-5 text-center">Repairs for Period</h2>
             <hr style="width: 30%;" />
-
-            @for (var i = 0; i < @Model.Count; i++)
+            var i = 0; 
+            @foreach (var item in Model.OrderByDescending(m => m.CreatedOn).ThenByDescending(m => m.FinishedOn))
             {
+                i++; 
                 <div class="text-center">
                     <h3 class="d-inline-block mb-2 mt-2" style="background-color:honeydew; border-radius:8px; padding: 0.5em 5em;">
-                        <strong>Repair @(i + 1)</strong>
+                        <strong>Repair @i</strong>
                     </h3>
                 </div>
                 <br />
                 <div class="container-fluid text-center">
-                    @if (Model[i].IsRepairPending)
+                    @if (@item.IsRepairPending)
                     {
                         <h5 style="background-color:darksalmon; border-radius:8px; display: inline-block; padding: 0.1em 5.4em;">
                             <strong>Repair Is Pending</strong>
                         </h5>
                     }
-                    @if (Model[i].Car != null)
+                    @if (@item.Car != null)
                     {
-                        <p>Repair name: <strong>@Model[i].RepairName</strong></p>
-                        <p>Repair description: <strong>@Model[i].Description</strong></p>
-                        <p>Car brand: <strong>@Model[i].Car.CarBrand</strong> / Car model: <strong>@Model[i].Car.CarModel</strong></p>
-                        <p>Car registrational number: <strong>@Model[i].Car.RegNumber</strong></p>
-                        <p>Car VIN number: <strong>@Model[i].Car.Rama</strong></p>
+                        <p>Repair name: <strong>@item.RepairName</strong></p>
+                        <p>Repair description: <strong>@item.Description</strong></p>
+                        <p>Car brand: <strong>@item.Car.CarBrand</strong> / Car model: <strong>@item.Car.CarModel</strong></p>
+                        <p>Car registrational number: <strong>@item.Car.RegNumber</strong></p>
+                        <p>Car VIN number: <strong>@item.Car.Rama</strong></p>
                     }
-                    <p>Repair started on: <strong>@Model[i].CreatedOn</strong></p>
-                    <p>Repair finished on:  <strong>@Model[i].FinishedOn</strong></p>
-                    <p>Repair price was: <strong>@Model[i].RepairPrice</strong></p>
+                    <p>Repair started on: <strong>@item.CreatedOn</strong></p>
+                    <p>Repair finished on:  <strong>@item.FinishedOn</strong></p>
+                    <p>Repair price was: <strong>@item.RepairPrice</strong></p>
                 </div>
                 <div class="text-center">
                     <h5 class="mt-2 mb-2 text-center" style="background-color:beige; display: inline-block; border-radius:8px;   padding: 0.1em 1.5em;">
@@ -47,7 +48,7 @@
                     </h5>
                 </div>
                 <div class="text-center">
-                    @foreach (var empl in Model[i].Employees)
+                    @foreach (var empl in @item.Employees)
                     {
                         <h5 class="mt-2 mb-2 text-center">
                             @empl.FullName
@@ -59,7 +60,7 @@
                         <strong>Parts used in this repair:</strong>
                     </h5>
                 </div>
-                @foreach (var part in Model[i].Parts)
+                @foreach (var part in @item.Parts)
                 {
                     <p class="mt-2 mb-2 text-center">
                         Part name: <strong>@part.Name</strong> / Part price: <strong>@part.Price</strong>
@@ -68,14 +69,14 @@
                 <hr style="width: 30%;" />
             }
             <div class="text-center">
-                <div class="d-inline-block text-center" style="background-color:azure; border-radius:8px; padding: 0.1em 0.3em;">
-                    <h5>Total incomes for period: <strong>$@Model.FirstOrDefault()?.TotalIncomes</strong></h5>
-                    <h5>Total outgoings for periods: <strong>$@Model.Sum(r => r.TotalOutgoings)</strong></h5>
+                <div class="d-inline-block text-center" style="background-color:azure; border-radius:8px; padding: 0.8em 4.0em;">
+                    <h5>Incomes for period: <strong>$@Model.FirstOrDefault()?.TotalIncomes</strong></h5>
+                    <h5>Outgoings for periods: <strong>$@Model.Sum(r => r.TotalOutgoings)</strong></h5>
                     @{
                         var incomes = Model.FirstOrDefault()?.TotalIncomes;
                         var outgoings = Model.Sum(r => r.TotalOutgoings);
                         var result = incomes - outgoings;
-                        <h5>Total (incomes - outgoings) for period: <strong>$@result</strong></h5>
+                        <h5>Total for period: <strong>$@result</strong></h5>
                     }
                 </div>
             </div>
