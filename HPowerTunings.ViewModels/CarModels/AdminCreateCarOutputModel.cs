@@ -14,5 +14,13 @@ namespace HPowerTunings.ViewModels.CarModels
         public string RegNumber { get; set; }
 
         public ICollection<string> CarBrands { get; set; } = new List<string>();
+        public ICollection<string> CarModelsBmw { get; set; } = new List<string>();
+        public ICollection<string> CarModelsMini { get; set; } = new List<string>();
+        public ICollection<string> CarModelsRange { get; set; } = new List<string>();
+
+        public string CarModel { get; set; }
+        public string Rama { get; set; }
+        public int DistancePassed { get; set; }
+        public string ClientEmail { get; set; }
     }
 }

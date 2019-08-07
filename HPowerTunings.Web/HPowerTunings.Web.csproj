@@ -19,7 +19,7 @@
     <Content Remove="Views\Client\Index.cshtml" />
     <Content Remove="Views\Company\Index.cshtml" />
     <Content Remove="Views\Employee\Index.cshtml" />
-    <Content Remove="Views\Mail\Index.cshtml" />
+    <Content Remove="Views\Email\Index.cshtml" />
     <Content Remove="Views\Repair\CreateRepair.cshtml" />
     <Content Remove="Views\Repair\Index.cshtml" />
     <Content Remove="Views\Repair\RepairStartEnd.cshtml" />
@@ -36,6 +36,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Sendgrid" Version="9.11.0" />
   </ItemGroup>
 
 
@@ -68,7 +69,7 @@
     <None Include="Views\Company\Index.cshtml" />
     <None Include="Views\Employee\Index.cshtml" />
     <None Include="Views\Home\Gallery.cshtml" />
-    <None Include="Views\Mail\Index.cshtml" />
+    <None Include="Views\Email\Index.cshtml" />
     <None Include="Views\Repair\CreateRepair.cshtml" />
     <None Include="Views\Repair\RepairStartEnd.cshtml" />
     <None Include="Views\Repair\Index.cshtml" />

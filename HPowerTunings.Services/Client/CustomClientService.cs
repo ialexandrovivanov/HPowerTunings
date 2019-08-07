@@ -28,7 +28,7 @@ namespace HPowerTunings.Services.Client
         public async Task<bool> CreateClientAsync(AdminRegisterClientOutputModel model, IUrlHelper urlHelper, string requestScheme)
         {
             var user = new Data.Models.Client { UserName = model.UserName, Email = model.Email };
-            var result = await this.userManager.CreateAsync(user, "123456789");
+            var result = await this.userManager.CreateAsync(user, "123");
             var userFromDb = await this.userManager.FindByEmailAsync(model.Email);
 
             if (result.Succeeded)

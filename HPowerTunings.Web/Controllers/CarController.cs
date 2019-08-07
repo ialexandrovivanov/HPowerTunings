@@ -113,8 +113,9 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AdminCreateCar()
         {
-            var result = await Task.Run(() => this.carService.GetAllCarBrands());
-            return this.View(new AdminCreateCarOutputModel() { CarBrands = result });
+            var brands = await Task.Run(() => this.carService.GetAllCarBrands());
+          
+            return this.View(new AdminCreateCarOutputModel() { CarBrands = brands });
         }
 
         [HttpPost]
@@ -140,7 +141,6 @@ namespace HPowerTunings.Web.Controllers
             ViewData["RegNumber"] = regNumber;
             ViewData["CarModels"] = await this.carService.GetAllCarModels(carBrand);
 
-            await Task.Delay(0);
             return View();
         }
 

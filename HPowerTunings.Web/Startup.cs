@@ -8,10 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using HPowerTunings.Data;
-using HPowerTunings.Web.Core;
 using HPowerTunings.Services.Car;
 using HPowerTunings.Data.Models;
 using System.Threading.Tasks;
@@ -23,6 +21,9 @@ using HPowerTunings.Services.Client;
 using HPowerTunings.Services.Company;
 using HPowerTunings.Services.Part;
 using HPowerTunings.Services.Supplier;
+using HPowerTunings.Services.Email;
+using HPowerTunings.Common.Email;
+using HPowerTunings.Web.Core;
 
 namespace HPowerTunings.Web
 {
@@ -91,7 +92,7 @@ namespace HPowerTunings.Web
             services.AddTransient<UserManager<Client>, UserManager<Client>>();
             services.AddTransient<SignInManager<Client>, SignInManager<Client>>();
             services.AddTransient<RoleManager<IdentityRole>, RoleManager<IdentityRole>>();
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ICustomEmailSender, EmailSender>();
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<IRepairService, RepairService>();
             services.AddTransient<IDayCreator, DayCreator>();
@@ -100,6 +101,7 @@ namespace HPowerTunings.Web
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<IPartService, PartService>();
             services.AddTransient<ISupplierService, SupplierService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

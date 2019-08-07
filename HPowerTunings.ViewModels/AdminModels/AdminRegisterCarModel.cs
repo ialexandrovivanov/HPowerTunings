@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HPowerTunings.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace HPowerTunings.ViewModels.AdminModels
 {
@@ -10,6 +11,7 @@ namespace HPowerTunings.ViewModels.AdminModels
 
         [Required]
         [DataType(DataType.EmailAddress, ErrorMessage = "Insert valid email address")]
+        [IsEmailExists]
         public string Email { get; set; }
         [RegularExpression("^[ABCEHKLMNOPTXY]{1,2}[0-9]{4,6}[ABCEHKLMNOPTXY]{1,2}$", ErrorMessage = regNumberError)]
         public string RegNumber { get; set; }

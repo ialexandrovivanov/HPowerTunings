@@ -219,5 +219,26 @@ namespace HPowerTunings.Services.Car
             await Task.Delay(0);
             return model;
         }
+
+        public async Task<List<string>> GetAllBmwModels()
+        {
+            var models = this.context.CarModels.Where(m => m.CarBrand.Name == "BMW").Select(m => m.Name).ToList();
+            await Task.Delay(0);
+            return models;
+        }
+
+        public async Task<List<string>> GetAllMiniModels()
+        {
+            var models = this.context.CarModels.Where(m => m.CarBrand.Name == "Mini Cooper").Select(m => m.Name).ToList();
+            await Task.Delay(0);
+            return models;
+        }
+
+        public async Task<List<string>> GetAllRangeModels()
+        {
+            var models = this.context.CarModels.Where(m => m.CarBrand.Name == "Range Rover").Select(m => m.Name).ToList();
+            await Task.Delay(0);
+            return models;
+        }
     }
 }

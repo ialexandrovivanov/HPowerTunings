@@ -16,5 +16,8 @@ namespace HPowerTunings.Services.Car
         Task<bool> AdminRegisterCar(AdminRegisterCarModel model);
         Task<ICollection<CarStatisticViewModel>> GetAllCarsPeriod(CarStartEndDateViewModel model);
         Task<DeleteYourCarModel> GetDeleteYourCar(string id);
+        Task<List<string>> GetAllBmwModels();
+        Task<List<string>> GetAllMiniModels();
+        Task<List<string>> GetAllRangeModels();
     }
 }

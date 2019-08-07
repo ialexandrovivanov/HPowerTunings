@@ -5,7 +5,8 @@ namespace HPowerTunings.ViewModels.ClientModels
 {
     public class ClientViewModel
     {
-        public string UserName { get; set; }
+        public string FullName { get; set; }
+        public string UserName { get; set; }    
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         ICollection<ClientCarDetailsViewModel> Cars { get; set; }
