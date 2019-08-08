@@ -20,12 +20,12 @@ namespace HPowerTunings.ViewModels.CarModels
         [RegularExpression("^[ABCEHKLMNOPTXY]{1,2}[0-9]{4,6}[ABCEHKLMNOPTXY]{1,2}$", ErrorMessage = regNumberError)]
         public string RegistrationNumber { get; set; }
 
-        [Required(ErrorMessage ="(VIN) field is required")]
+        [Required(ErrorMessage ="VIN is required")]
         [Display(Name = "Vehicle identification number (VIN)")]
         [RegularExpression("^[a-zA-Z0-9]{2,60}$", ErrorMessage = ramaErrorMessage)]
         public string Rama { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Distance is required")]
         [RegularExpression("^[0-9]{1,6}$", ErrorMessage = distancePassedErrorMessage)]
         public string DistancePassed { get; set; }
     }

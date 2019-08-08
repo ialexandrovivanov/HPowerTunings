@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace HPowerTunings.Web.Core
 {
-    public interface ICustomEmailSender1 : IEmailSender
+    public interface ICustomEmailSender : IEmailSender
     {
         Task SendEmailsAsync(string content, string subject, string imagePath, string htmlMessage);
     }

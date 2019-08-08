@@ -35,7 +35,7 @@ p {
 
 .admincreaterepair {
     position: fixed;
-    top: 84%;
+    top: 86%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -142,7 +142,14 @@ form {
 
 .deleteSubmit {
     position: fixed;
-    top: 48%;
+    top: 54%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnDeleteAccount {
+    position: fixed;
+    top: 78%;
     left: 50%;
     transform: translateX(-50%);
 }

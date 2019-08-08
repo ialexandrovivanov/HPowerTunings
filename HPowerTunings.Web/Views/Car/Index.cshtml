@@ -41,7 +41,7 @@
 
             .inner-div {
                 background-color: white;
-                border-radius: 15px;
+                border-radius: 12px;
                 margin: auto;
                 padding: 2%;
                 width: 150px;
@@ -66,11 +66,11 @@
                     transform: rotate(360deg);
                 }
             }
-        </style>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        </style>    
+        <script src="~/js/jquery-3.4.1.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('#btnSubmit').click(function () {
+                $('#').click(function () {
                     $('.spinner').css('display', 'block');
                 });
             });
@@ -78,17 +78,17 @@
     </head>
 
 
-<div class="container-fluid justify-content-center w-50 pt-5 mt-5">
+<div class="container-fluid justify-content-center pt-5 mt-5" style="width:400px">
     <h4 class="text-center">Register your car</h4>
     <br />
     <form id="Car" method="post" class="text-center">
-        <div class="container-fluid justify-content-center w-50">
+        <div class="container-fluid justify-content-center">
             <div class="form-group">
-                <label asp-for="CarBrand"></label>
+                <label>Car brand</label>
                 <input asp-for="CarBrand" class="form-control" disabled="disabled" value="@ViewData["CarBrand"]" />
                 <span asp-validation-for="CarBrand" class="text-danger"></span>
             </div>
-            <label asp-for="CarModel"></label>
+            <label>Car model</label>
             <select class="custom-select" id="CarModel" asp-for="CarModel">
                 <option selected disabled>-- Choose Model --</option>
                 @foreach (var item in ViewData["CarModels"] as List<string>)
@@ -97,20 +97,23 @@
                 }
             </select>
             <span asp-validation-for="CarModel" class="text-danger"></span>
-            <div class="form-group mt-5">
-                <input asp-for="RegistrationNumber" class="form-control w-100" placeholder="RegNumber">
+            <div class="form-group mt-3">
+                <label>Reg. number</label>
+                <input asp-for="RegistrationNumber" class="form-control w-100" placeholder="Registration number">
                 <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
             </div>
-            <div class="form-group mt-5">
-                <input asp-for="Rama" class="form-control w-100" placeholder="VIN Number" />
+            <div class="form-group mt-3">
+                <label>VIN number</label>
+                <input asp-for="Rama" class="form-control w-100" placeholder="VIN number" />
                 <span asp-validation-for="Rama" class="text-danger"></span>
             </div>
-            <div class="form-group mt-5">
+            <div class="form-group mt-3">
+                <label>Distance passed</label>
                 <input asp-for="DistancePassed" class="form-control w-100" placeholder="Passed distance /km" />
                 <span asp-validation-for="DistancePassed" class="text-danger"></span>
             </div>
         </div>
-        <div class="button-holder mt-5 d-flex justify-content-center">
+        <div class="button-holder mt-3 d-flex justify-content-center">
             <button id="btnSubmit" type="submit" class="btnClientRegisterCar btn btn-outline-primary">Save Car</button>
             <div class="spinner" style="display:none">
                 <div class="center-div">

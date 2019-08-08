@@ -14,6 +14,8 @@ namespace HPowerTunings.ViewModels.RepairModels
         [RegularExpression("^[ABCEHKLMNOPTXY]{1,2}[0-9]{4,6}[ABCEHKLMNOPTXY]{1,2}$", ErrorMessage = regNumberError)]
         public string CarRegNumber { get; set; }
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Repair name is required")]
         public string RepairName { get; set; }
         public decimal RepairPrice { get; set; }
         public DateTime? StartedOn { get; set; } = DateTime.Now;

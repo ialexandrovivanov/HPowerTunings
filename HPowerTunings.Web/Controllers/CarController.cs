@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace HPowerTunings.Web.Controllers
 {
-    [Authorize]
     public class CarController : Controller
     {
         private ICarService carService;
@@ -19,6 +18,7 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult>Index(string carBrand)
         {
             ViewData["CarBrand"] = carBrand;
@@ -28,6 +28,7 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> SuccessCreate()
         {
             await Task.Delay(0);
@@ -35,6 +36,7 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Index(UserRegisterCarModel model)
         {
             if (ModelState.IsValid)
@@ -53,6 +55,7 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> SuccessDelete()
         {
             await Task.Delay(0);
@@ -60,12 +63,14 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult CarStatistic()
         {
             return this.View();
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Details(string id)
         {
             var model = await this.carService.GetCarRepairs(id);
@@ -76,6 +81,7 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> DeleteYourCar(string id)
         {
             if(id != null)
@@ -92,6 +98,7 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteYourCar(DeleteYourCarModel model)
         {
             if (ModelState.IsValid)
@@ -110,6 +117,7 @@ namespace HPowerTunings.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AdminCreateCar()
         {

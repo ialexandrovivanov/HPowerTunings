@@ -77,8 +77,8 @@ namespace HPowerTunings.Web
                         options.Password.RequireNonAlphanumeric = false;
                         options.User.RequireUniqueEmail = true;
                         options.SignIn.RequireConfirmedEmail = true;
-                        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                        options.Lockout.MaxFailedAccessAttempts = 5;
+                        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
+                        options.Lockout.MaxFailedAccessAttempts = 6;
                         options.Lockout.AllowedForNewUsers = true;
                     })
                     .AddRoles<IdentityRole>()
@@ -92,7 +92,7 @@ namespace HPowerTunings.Web
             services.AddTransient<UserManager<Client>, UserManager<Client>>();
             services.AddTransient<SignInManager<Client>, SignInManager<Client>>();
             services.AddTransient<RoleManager<IdentityRole>, RoleManager<IdentityRole>>();
-            services.AddTransient<ICustomEmailSender, EmailSender>();
+            services.AddTransient<Common.Email.ICustomEmailSender, EmailSender>();
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<IRepairService, RepairService>();
             services.AddTransient<IDayCreator, DayCreator>();

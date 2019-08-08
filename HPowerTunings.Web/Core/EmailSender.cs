@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HPowerTunings.Web.Core
 {
-    public class EmailSender1 : ICustomEmailSender1
+    public class EmailSender1 : ICustomEmailSender
     {
         private IConfiguration configuration;
         public EmailSender1(IConfiguration configuration)
@@ -65,25 +65,9 @@ namespace HPowerTunings.Web.Core
             return Task.CompletedTask;
         }
 
-        public Task SendEmailsAsync(string content,
-                                    string subject, 
-                                    string imagePath, 
-                                    string htmlMessage)
+        public Task SendEmailsAsync(string content, string subject, string imagePath, string htmlMessage)
         {
-            var from = new EmailAddress("support@hpower.net", "HPowerTunings support team");
-            var subj = subject;
-            var to = new EmailAddress(content, "Dear Client");
-            var body = content;
-            SendGridMessage msg = MailHelper.CreateSingleEmail(from, to, subject, body, htmlMessage);
-            var bytes = File.ReadAllBytes(imagePath);
-            var file = Convert.ToBase64String(bytes);
-            msg.AddAttachment("picture.img", file);
-
-            var key = this.configuration["SendGridApiKey:Key"];
-            var client = new SendGridClient(key);
-            client.SendEmailAsync(msg);
-
-            return Task.CompletedTask;
+            throw new NotImplementedException();
         }
     }
 }

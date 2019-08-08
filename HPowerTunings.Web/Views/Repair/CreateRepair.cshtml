@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <h3 class="pt-5 mt-3">Create repair</h3>
+    <h3 class="pt-5 mt-5">Create repair</h3>
     <form id="Car" action="/Repair/CreateRepair" method="post"
           class="form-group mt-2 container-fluid justify-content-center text-center" style="width:400px">
         <label>Select car</label>
@@ -25,6 +25,7 @@
         <p></p>
         <label>Repair name</label>
         <input asp-for="@Model.RepairName" class="form-control" placeholder="Repair name">
+        <span asp-validation-for="@Model.RepairName" class="text-danger"></span>
         <p></p>
         <label>Description</label>
         <textarea rows="5" cols="60" asp-for="@Model.Description"

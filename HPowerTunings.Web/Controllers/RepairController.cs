@@ -105,7 +105,7 @@ namespace HPowerTunings.Web.Controllers
         {
             if (model.Out.RepairPrice <= 0)
             {
-                return RedirectToAction("ProceedReair", "Repair", model.In.RepairId);
+                return RedirectToAction("ProceedRepair", "Repair", new { id = model.In.RepairId });
             }
             else
             {
@@ -115,7 +115,7 @@ namespace HPowerTunings.Web.Controllers
                     return Redirect("/Repair/SuccessFinalize");
                 }
 
-                return RedirectToAction("ProceedReair","Repair", model.In.RepairId);
+                return RedirectToAction("ProceedReair","Repair", new { id = model.In.RepairId });
             }
         }
 
