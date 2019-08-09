@@ -9,6 +9,7 @@ namespace HPowerTunings.ViewModels.RepairModels
     public class AdminRepairViewModel
     {
         public string Id { get; set; }
+        public string RepairName { get; set; }
         public decimal RepairPrice { get; set; }
         public string Description { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -20,7 +21,6 @@ namespace HPowerTunings.ViewModels.RepairModels
         public decimal TotalOutgoings { get; set; }
         public decimal TotalIncomes { get; set; }
         public double AverageAmountRepairs { get; set; }
-        public string RepairName { get; set; }
 
     }
 }

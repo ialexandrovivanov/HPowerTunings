@@ -140,6 +140,13 @@ form {
     transform: translateX(-50%);
 }
 
+.proceedAppointmentbtn {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .deleteSubmit {
     position: fixed;
     top: 54%;

@@ -1,4 +1,6 @@
-﻿@{ Layout = "_LayoutBoss";}
+﻿@using HPowerTunings.ViewModels.EmployeeModels
+@model EmployeeStartEndStatisticsViewModel
+@{ Layout = "_LayoutBoss";}
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +16,69 @@
 <body>
     <div class="text-center mt-5 pt-5">
         <h4>Employee management page</h4>
+        <div class="pt-5 mt-5">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#hire-employee">
+                Hire Employee
+            </button>
+        </div>
+        <div class="mt-5">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#fire employee">
+                Fire Employee
+            </button>
+        </div>
     </div>
+
+    <!-- Modal Hire -->
+    <div class="modal fade" id="hire-employee" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="addContactLabel">Register Employee</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="text-center" id="createEmployee" action="/employee/createEmployee" method="post">
+                        <div>
+                            <label style=" font-size: 20px" ;>Full name</label>
+                            <input asp-for="@Model.RegisterEmployee.FullName" class="form-control" placeholder="Full name">
+                            <span asp-validation-for="@Model.RegisterEmployee.FullName" class="text-danger"></span>
+                        </div>
+                        <div class="mt-3">
+                            <label style="font-family:Arial; font-size: 20px" ;>Email</label>
+                            <input asp-for="@Model.RegisterEmployee.Email" class="form-control" placeholder="Email">
+                            <span asp-validation-for="@Model.RegisterEmployee.Email" class="text-danger"></span>
+                        </div>
+                        <div class="mt-3">
+                            <label style="font-family:Arial; font-size: 20px">Address</label>
+                            <input asp-for="@Model.RegisterEmployee.Address" class="form-control" placeholder="Address">
+                            <span asp-validation-for="@Model.RegisterEmployee.Address" class="text-danger"></span>
+                        </div>
+                        <div class="mt-3">
+                            <label style="font-family:Arial; font-size: 20px">Phone number</label>
+                            <input asp-for="@Model.RegisterEmployee.PhoneNumber" class="form-control" placeholder="Phone">
+                            <span asp-validation-for="@Model.RegisterEmployee.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="mt-3">
+                            <label style="font-family:Arial; font-size: 20px">Possition</label>
+                            <input asp-for="@Model.RegisterEmployee.Possition" class="form-control" placeholder="Possition">
+                            <span asp-validation-for="@Model.RegisterEmployee.Possition" class="text-danger"></span>
+                        </div>
+                        <input asp-for="@Model.StartDate" type="hidden">
+                        <input asp-for="@Model.EndDate" type="hidden">
+                        <div class="button-holder mt-5">
+                            <button type="submit" class="btn btn-outline-primary"> Register </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

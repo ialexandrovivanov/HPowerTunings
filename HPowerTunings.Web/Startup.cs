@@ -24,6 +24,7 @@ using HPowerTunings.Services.Supplier;
 using HPowerTunings.Services.Email;
 using HPowerTunings.Common.Email;
 using HPowerTunings.Web.Core;
+using HPowerTunings.Services.Employee;
 
 namespace HPowerTunings.Web
 {
@@ -102,6 +103,7 @@ namespace HPowerTunings.Web
             services.AddTransient<IPartService, PartService>();
             services.AddTransient<ISupplierService, SupplierService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
 
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
