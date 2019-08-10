@@ -16,7 +16,6 @@ namespace HPowerTunings.Services.Company
         {
             this.context = context;
         }
-
         public DateTime DateTie { get; private set; }
 
         public async Task<List<PendingAppointmentsViewModel>> GetPendingAppointments()
@@ -34,6 +33,8 @@ namespace HPowerTunings.Services.Company
                                   ProblemDescription = a.ProblemDescription,
                                   AppoinmentDate = a.AppointmentDate.ToString("yyyy/MM/dd"),
                                   IsAppointmentPending = a.IsAppointmentPending,
+                                  IsAppointmentStarted = a.IsAppointmentStarted,
+                                  UserName = a.Client.UserName 
                               })
                              .ToList();
 

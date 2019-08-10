@@ -1,5 +1,6 @@
 ﻿@using HPowerTunings.ViewModels.Appointment
 @using HPowerTunings.ViewModels.RepairModels
+
 @{ Layout = "_LayoutBoss";}
 
 <!DOCTYPE html>
@@ -42,53 +43,60 @@
         <div class="container-fluid justify-content-center" style="width:400px">
             @foreach (var item in ViewData["PendingAppoinments"] as List<PendingAppointmentsViewModel>)
             {
-                if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd") && item.IsAppointmentPending == false)
+                if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd")
+                    && item.IsAppointmentPending == false && item.IsAppointmentStarted == false)
                 {
                     <div style="background-color:steelblue; border-radius:8px" class="mb-3">
                         <br />
-                        <h3 class="text-center"><strong>This Day Appointment</strong></h3>
+                        <h3 class="text-center"><strong>This day appointment</strong></h3>
                         <br />
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
+                    <p>Client's username: <strong>@item.UserName</strong></p>
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
                     <p><h5>Appointment date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
                     <p>Problem description: @item.ProblemDescription</p>
+                    <button onclick="window.location.href='/Repair/StartRepair?id=@item.AppointmentId';">
+                        Start repair
+                    </button>
                     <hr />
                     <div class="mb-5"></div>
                 }
-                else if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd") && item.IsAppointmentPending == true)
+                else if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd")
+                         && item.IsAppointmentPending == true && item.IsAppointmentStarted == false)
                 {
                     <div style="background-color:azure; border-radius:8px" class="mb-3">
                         <br />
-                        <h3 class="text-center"><strong>This Day Appointment</strong></h3>
+                        <h3 class="text-center"><strong>New appointment for today</strong></h3>
                         <br />
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
+                    <p>Client's username: <strong>@item.UserName</strong></p>
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
                     <p><h5>Appointment date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
                     <p>Problem description: @item.ProblemDescription</p>
+                    <button onclick="window.location.href='/Appointment/ProceedAppointment?id=@item.AppointmentId';">
+                        Proceed appointment
+                    </button>
                     <hr />
                     <div class="mb-5"></div>
-                    <a class="text-center" href="/Appointment/ProceedAppointment?id=@item.AppointmentId">
-                        <h5><strong>Proceed appointment</strong></h5>
-                        <hr />
-                    </a>
                 }
                 else
                 {
-                    <div style = "background-color:honeydew; border-radius:8px" class="mb-3">
-                    <br />
-                    <h3 class="text-center"><strong>New Appointment</strong></h3>
-                    <br />
-                </div>
+                    <div style="background-color:honeydew; border-radius:8px" class="mb-3">
+                        <br />
+                        <h3 class="text-center"><strong>New appointment</strong></h3>
+                        <br />
+                    </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
+                    <p>Client username is : <strong>@item.UserName</strong></p>
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
                     <p><h5>Desired date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
                     <p>Problem description: @item.ProblemDescription</p>
-                    <a class="text-center" href="/Appointment/ProceedAppointment?id=@item.AppointmentId">
-                        <h5><strong>Proceed appointment</strong></h5>
-                        <hr />
-                    </a>
+                    <button onclick="window.location.href='/Appointment/ProceedAppointment?id=@item.AppointmentId';">
+                        Proceed appointment
+                    </button>
+                    <hr />
                     <div class="mb-5"></div>
                 }
             }
@@ -98,7 +106,7 @@
             {
                 <div class="text-center mb-3" style="background-color:rosybrown; border-radius:8px">
                     <br />
-                    <h3><strong>Pending Repair</strong></h3>
+                    <h3><strong>Pending repair</strong></h3>
                     <br />
                 </div>
                 <p></p>
@@ -118,10 +126,10 @@
                     }
                 </p>
                 <p>Repair description: <strong>@item.RepairDescription</strong></p>
-                <a class="text-center" href="/Repair/ProceedRepair?id=@item.RepairId">
-                    <h5 class="mt-3"><strong>Proceed repair</strong></h5>
-                    <hr />
-                </a>
+                <button onclick="window.location.href='/Repair/ProceedRepair?id=@item.RepairId';">
+                    Proceed repair
+                </button>
+                <hr />
                 <div class="mb-5"></div>
             }
         </div>

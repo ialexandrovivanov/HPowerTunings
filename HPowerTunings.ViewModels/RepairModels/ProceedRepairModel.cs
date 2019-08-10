@@ -46,11 +46,13 @@ namespace HPowerTunings.ViewModels.RepairModels
         [Range(typeof(decimal), "0.01", "999999", ErrorMessage = "Insert valid amount")]
         public decimal PartPrice { get; set; }
 
-        [Range(1, 10, ErrorMessage = "Insert valid rate 1 - 10")]
+        [Range(0, 10, ErrorMessage = "Insert valid rate 0 - 10")]
         public int RateThisDelivery { get; set; }
 
-        
+        [Range(typeof(Decimal), "0", "9999999")]
         public decimal RepairPrice { get; set; }
+
+        [RegularExpression(@"^[a-zA-Zа-яА-Я 0-9]+")]
         public string SupplierName { get; set; }
 
         [Phone]

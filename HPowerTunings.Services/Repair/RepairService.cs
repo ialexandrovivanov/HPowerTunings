@@ -196,5 +196,16 @@ namespace HPowerTunings.Services.Repair
 
             return model;
         }
+
+        public async Task<bool> StartRepair(string id)
+        {
+            var appointment = await this.context.Appointments.FindAsync(id);
+            appointment.IsAppointmentStarted = true;
+            var result = await this.context.SaveChangesAsync();
+
+            if (result > 0) return true;
+
+            return false;
+        }
     }
 }

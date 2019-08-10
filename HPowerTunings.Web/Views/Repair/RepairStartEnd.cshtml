@@ -14,7 +14,7 @@
             <h2 class="mt-4 pt-5 text-center">Repairs for Period</h2>
             <hr style="width: 30%;" />
             var i = 0; 
-            @foreach (var item in Model.OrderByDescending(m => m.CreatedOn).ThenByDescending(m => m.FinishedOn))
+            @foreach (var item in Model.OrderByDescending(m => m.FinishedOn))
             {
                 i++; 
                 <div class="text-center">

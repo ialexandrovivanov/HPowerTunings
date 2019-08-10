@@ -22,5 +22,4 @@ namespace HPowerTunings.ViewModels.Appointment
         public string AppoinemtnDate { get; set; }
         public string ProblemDescription { get; set; }
     }
-
 }

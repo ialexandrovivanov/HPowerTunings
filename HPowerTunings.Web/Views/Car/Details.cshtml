@@ -33,7 +33,7 @@
             </div>
             <div class="container-fluid justify-content-center text-center" style="width:600px">
 
-                @foreach (var item in Model.Repairs)
+                @foreach (var item in Model.Repairs.OrderByDescending(r => r.FinishedOn))
                 {
                     <div class="container-fluid service-history-top" style="background-color:lightblue; border-top-right-radius:8px; border-top-left-radius:8px;">
                         <br />

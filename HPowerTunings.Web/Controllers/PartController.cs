@@ -27,7 +27,7 @@ namespace HPowerTunings.Web.Controllers
                 }
             }
 
-            return View(model);
+            return Redirect($"/Repair/ProceedRepair?id = {model.In.RepairId}");
         }
     }
 }

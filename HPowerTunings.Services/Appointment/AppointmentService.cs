@@ -1,7 +1,6 @@
 ﻿using HPowerTunings.Data;
 using HPowerTunings.ViewModels.Appointment;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -31,8 +30,10 @@ namespace HPowerTunings.Services.Appointment
                                      Client = client,
                                      DayId = day.Id,
                                      IsAppointmentPending = true,
-                                     AppointmentDate = model.AppointmentDate
+                                     AppointmentDate = model.AppointmentDate,
+                                     ProblemDescription = model.Description
                                  });
+
             await this.context.Days.AddAsync(day);
             var result = await this.context.SaveChangesAsync();
 
@@ -51,6 +52,7 @@ namespace HPowerTunings.Services.Appointment
             result.In.ProblemDescription = appointment.ProblemDescription;
             result.In.ClientPhone = appointment.Client.PhoneNumber;
             result.In.ClientUsername = appointment.Client.UserName;
+            result.In.ProblemDescription = appointment.ProblemDescription;
 
             await Task.Delay(0);
             return result;
@@ -58,14 +60,17 @@ namespace HPowerTunings.Services.Appointment
 
         public async Task<bool> AdminCreateAppointment(ProceedAppointmentModel model)
         {
-            var appointment = this.context.Appointments.FirstOrDefault(a => a.Id == model.In.Id);
-
+            var appointment = await this.context.Appointments.FindAsync(model.In.Id);
+            if (appointment == null)
+            {
+                return false;
+            }
             appointment.AppointmentDate = model.AppointmentDate;
             appointment.IsAppointmentPending = false;
-
+            appointment.IsAppointmentStarted = false;
             var result = await this.context.SaveChangesAsync();
 
-            return result == 0 ? false : true;
+            return result > 0 ? true : false;
         }
     }
 }

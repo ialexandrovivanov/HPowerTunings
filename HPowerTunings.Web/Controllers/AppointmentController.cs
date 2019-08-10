@@ -33,7 +33,7 @@ namespace HPowerTunings.Web.Controllers
                     return Redirect("/Appointment/SuccessCreate");
                 }
 
-                return View("Unable to create an appointment. Please use another way to contact to us!");
+                return View();
             }
 
             return View();
@@ -59,13 +59,12 @@ namespace HPowerTunings.Web.Controllers
         public async Task<ActionResult> ProceedAppointment(ProceedAppointmentModel model)
         {
             if (model.AppointmentDate == null)
-            {
                 return Redirect($"/Appointment/ProceedAppointment/{model.In.Id}");
-            }
+
             if (await this.appointmentService.AdminCreateAppointment(model))
                 return Redirect($"/Appointment/SuccessCreateAppointment/{model.In.Id}");
 
-            else return View("Cannot proceed your appointent");
+            else return Redirect("/company/index");
         }
 
         [HttpGet]

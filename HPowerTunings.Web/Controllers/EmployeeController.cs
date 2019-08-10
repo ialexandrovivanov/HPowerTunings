@@ -48,5 +48,24 @@ namespace HPowerTunings.Web.Controllers
             await Task.Delay(0);
             return View();
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteEmployee(EmployeeStartEndStatisticsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            if (await this.employeeService.CreateEmployee(model.RegisterEmployee))
+            {
+                return Redirect("SuccessRegisterEmployee");
+            }
+
+            ModelState.AddModelError("", "Unable to register employee");
+            return View();
+        }
+
     }
 }
