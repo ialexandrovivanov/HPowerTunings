@@ -7,6 +7,7 @@ namespace HPowerTunings.Data.Models
     {
         public DateTime AppointmentDate { get; set; }
         public string ProblemDescription { get; set; }
+        public string RegNumber { get; set; }
         public bool? IsAppointmentPending { get; set; } = true;
         public bool? IsAppointmentStarted { get; set; } = false;
 

@@ -13,7 +13,7 @@ namespace HPowerTunings.Attributes
 
             if (!context.Cars.Any(u => u.RegNumber == value.ToString()))
             {
-                return new ValidationResult("A car with this reg. number is not registered");
+                return new ValidationResult("A car with this number is not registered");
             }
             return ValidationResult.Success;
         }

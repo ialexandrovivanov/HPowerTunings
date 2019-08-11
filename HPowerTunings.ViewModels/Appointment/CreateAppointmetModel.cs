@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using HPowerTunings.Attributes;
 using HPowerTunings.Attributes.Appointment;
 
 namespace HPowerTunings.ViewModels.Appointment
@@ -15,6 +16,9 @@ namespace HPowerTunings.ViewModels.Appointment
         public DateTime AppointmentDate { get; set; }
         [Required(ErrorMessage = RequiredErrorMessage)]
         public string Description { get; set; }
+
+        [IsRegNumberExists]
+        public string RegNumber { get; set; }
         public bool IsAppointmentPending { get; set; }
         public bool IsAppointmentApproved { get; set; }
     }

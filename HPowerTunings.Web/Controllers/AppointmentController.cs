@@ -17,8 +17,9 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewData["MyAppointments"] = await this.appointmentService.GetMyAppointments(); 
             return View();
         }
 
@@ -33,9 +34,11 @@ namespace HPowerTunings.Web.Controllers
                     return Redirect("/Appointment/SuccessCreate");
                 }
 
+                ViewData["MyAppointments"] = await this.appointmentService.GetMyAppointments();
                 return View();
             }
 
+            ViewData["MyAppointments"] = await this.appointmentService.GetMyAppointments();
             return View();
         }
 

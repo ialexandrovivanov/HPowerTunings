@@ -1,6 +1,8 @@
 ﻿using HPowerTunings.Data;
 using HPowerTunings.ViewModels.Appointment;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -53,6 +55,9 @@ namespace HPowerTunings.Services.Appointment
             result.In.ClientPhone = appointment.Client.PhoneNumber;
             result.In.ClientUsername = appointment.Client.UserName;
             result.In.ProblemDescription = appointment.ProblemDescription;
+            result.In.CarModel = this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarModel.Name;
+            result.In.CarModel = this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarBrand.Name;
+            result.In.RegNumber = appointment.RegNumber;
 
             await Task.Delay(0);
             return result;
@@ -71,6 +76,25 @@ namespace HPowerTunings.Services.Appointment
             var result = await this.context.SaveChangesAsync();
 
             return result > 0 ? true : false;
+        }
+
+        public async Task<ICollection<MyAppointmentsViewModel>> GetMyAppointments()
+        {
+            var clientId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var client = this.context.Users.FirstOrDefault(u => u.Id == clientId);
+
+            var appointments = this.context
+                                   .Appointments
+                                   .Where(a => a.AppointmentDate.Date >= DateTime.Now.Date && a.Client == client)
+                                   .Select(a => new MyAppointmentsViewModel()
+                                   {
+                                       AppointmentDate = a.AppointmentDate,
+                                       ProblemDescription = a.ProblemDescription
+                                   })
+                                   .ToList();
+
+            await Task.Delay(0);
+            return appointments;
         }
     }
 }

@@ -21,5 +21,8 @@ namespace HPowerTunings.ViewModels.Appointment
         public string ClientPhone { get; set; }
         public string AppoinemtnDate { get; set; }
         public string ProblemDescription { get; set; }
+        public string CarModel { get; set; }
+        public string CarBrand { get; set; }
+        public string RegNumber { get; set; }
     }
 }
