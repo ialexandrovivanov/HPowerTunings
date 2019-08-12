@@ -23,8 +23,8 @@ namespace HPowerTunings.Services.Company
             await Task.Delay(0);
             var result = this.context
                              .Appointments
-                             .Where(a => a.IsAppointmentPending == true ||
-                                    a.AppointmentDate.Date == DateTime.Now.Date)
+                             .Where(a => (a.IsAppointmentPending == true ||
+                                    a.AppointmentDate.Date == DateTime.Now.Date) && a.IsAppointmentStarted == false)
                              .Select(a => new PendingAppointmentsViewModel()
                               {
                                   AppointmentId = a.Id,
@@ -34,8 +34,11 @@ namespace HPowerTunings.Services.Company
                                   AppoinmentDate = a.AppointmentDate.ToString("yyyy/MM/dd"),
                                   IsAppointmentPending = a.IsAppointmentPending,
                                   IsAppointmentStarted = a.IsAppointmentStarted,
-                                  UserName = a.Client.UserName 
-                              })
+                                  UserName = a.Client.UserName,
+                                  RegNumber = a.RegNumber,
+                                  CarBrand = this.context.Cars.FirstOrDefault(c => c.RegNumber == a.RegNumber).CarBrand.Name,
+                                  CarModel = this.context.Cars.FirstOrDefault(c => c.RegNumber == a.RegNumber).CarModel.Name
+                             })
                              .ToList();
 
             return result;

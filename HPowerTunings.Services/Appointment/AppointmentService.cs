@@ -33,7 +33,8 @@ namespace HPowerTunings.Services.Appointment
                                      DayId = day.Id,
                                      IsAppointmentPending = true,
                                      AppointmentDate = model.AppointmentDate,
-                                     ProblemDescription = model.Description
+                                     ProblemDescription = model.Description,
+                                     RegNumber = model.RegNumber
                                  });
 
             await this.context.Days.AddAsync(day);
@@ -85,11 +86,12 @@ namespace HPowerTunings.Services.Appointment
 
             var appointments = this.context
                                    .Appointments
-                                   .Where(a => a.AppointmentDate.Date >= DateTime.Now.Date && a.Client == client)
+                                   .Where(a => a.AppointmentDate.Date >= DateTime.Now.Date 
+                                          && a.Client == client && a.IsAppointmentPending == false)
                                    .Select(a => new MyAppointmentsViewModel()
                                    {
                                        AppointmentDate = a.AppointmentDate,
-                                       ProblemDescription = a.ProblemDescription
+                                       ProblemDescription = a.ProblemDescription,
                                    })
                                    .ToList();
 

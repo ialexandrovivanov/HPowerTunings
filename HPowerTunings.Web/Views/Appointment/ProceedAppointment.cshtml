@@ -13,10 +13,11 @@
 
 <body>
     <div class="container-fluid justify-content-center mt-5 pt-5" style="width:400px">
+        <h4 class="text-center">Set final date/time for this appointment</h4>
+        <hr />
         <form id="Car" method="post">
-
-            <div class="form-group">
-                <label class="container-fluid justify-content-center text-center">Actual appointment date</label>
+            <div class="form-group mt-4">
+                <label class="container-fluid justify-content-center text-center">Set appointment date</label>
                 <input type="datetime-local" asp-for="@Model.AppointmentDate" class="form-control" />
                 <input type="hidden" asp-for="@Model.In.Id" class="form-control disabled" placeholder="@Model.In.Id" />
                 <span asp-validation-for="@Model.AppointmentDate" class="text-danger"></span>
@@ -30,7 +31,7 @@
                 <p>Problem description: <strong>@Model.In.ProblemDescription</strong></p>
             </div>
             <div class="button-holder mt-5 d-flex justify-content-center">
-                <button type="submit" class="btn btn-success">Finalize this appointment</button>
+                <button type="submit" class="btn btn-outline-success">Finalize</button>
             </div>
         </form>
     </div>

@@ -5,6 +5,9 @@
         public string AppointmentId { get; set; }
         public string ClientEmail { get; set; }
         public string UserName { get; set; }
+        public string RegNumber { get; set; }
+        public string CarBrand { get; set; }
+        public string CarModel { get; set; }        
         public string ClientPhoneNumber { get; set; }
         public string ProblemDescription { get; set; }
         public string AppoinmentDate { get; set; }
