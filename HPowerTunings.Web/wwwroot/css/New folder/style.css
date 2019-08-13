@@ -149,11 +149,11 @@ form {
 }
 
 .service-history-top {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 .service-history-bottom {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
 }

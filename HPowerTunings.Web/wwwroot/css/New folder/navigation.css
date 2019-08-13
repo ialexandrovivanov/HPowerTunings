@@ -63,14 +63,6 @@
       transform: translate(-50%, -50%);
   }
 
-  /*.home a::before {
-      display: inline-block;
-      content: '';
-      width: 118px;
-  }*/
-
-/* Mobile nav logic */
-
 .nav-toggle {
     opacity: 0;
     pointer-events: none;

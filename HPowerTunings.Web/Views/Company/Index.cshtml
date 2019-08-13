@@ -46,7 +46,7 @@
                 if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd")
                     && item.IsAppointmentPending == false && item.IsAppointmentStarted == false)
                 {
-                    <div style="background-color:steelblue; border-radius:8px" class="mb-3">
+                    <div style="background-color:steelblue; border-radius:6px" class="mb-3">
                         <br />
                         <h3 class="text-center"><strong style="color:white">This day appointment</strong></h3>
                         <br />
@@ -68,7 +68,7 @@
                 else if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd")
                          && item.IsAppointmentPending == true && item.IsAppointmentStarted == false)
                 {
-                    <div style="background-color:azure; border-radius:8px" class="mb-3">
+                    <div style="background-color:azure; border-radius:6px" class="mb-3">
                         <br />
                         <h3 class="text-center"><strong>New appointment for today</strong></h3>
                         <br />
@@ -89,7 +89,7 @@
                 }
                 else
                 {
-                    <div style="background-color:honeydew; border-radius:8px" class="mb-3">
+                    <div style="background-color:honeydew; border-radius:6px" class="mb-3">
                         <br />
                         <h3 class="text-center"><strong>New appointment</strong></h3>
                         <br />
@@ -113,7 +113,7 @@
         <div class="container-fluid justify-content-center" style="width:400px">
             @foreach (var item in ViewData["PendingRepairs"] as List<PendingRepairViewModel>)
             {
-                <div class="text-center mb-3" style="background-color:rosybrown; border-radius:8px">
+                <div class="text-center mb-3" style="background-color:rosybrown; border-radius:6px">
                     <br />
                     <h3><strong style="color:white">Pending repair</strong></h3>
                     <br />

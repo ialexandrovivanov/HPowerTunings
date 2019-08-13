@@ -35,12 +35,12 @@
 
                 @foreach (var item in Model.Repairs.OrderByDescending(r => r.FinishedOn))
                 {
-                    <div class="container-fluid service-history-top" style="background-color:lightblue; border-top-right-radius:8px; border-top-left-radius:8px;">
+                    <div class="container-fluid service-history-top" style="background-color:lightblue; border-top-right-radius:6px; border-top-left-radius:6px;">
                         <br />
                         <h4><strong>@item.RepairName</strong></h4>
                         <br />
                     </div>
-                    <div class="container-fluid service-history-bottom" style="background-color:lightyellow; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+                    <div class="container-fluid service-history-bottom" style="background-color:lightyellow; border-bottom-left-radius:6px; border-bottom-right-radius:6px;">
                         <p>This service has started on : <strong>@item.CreatedOn</strong></p>
                         <p>This service has finished on :  <strong>@item.FinishedOn</strong></p>
                         <br />
