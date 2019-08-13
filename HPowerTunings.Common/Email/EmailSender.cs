@@ -3,6 +3,8 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.IO;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Common.Email
@@ -17,7 +19,26 @@ namespace HPowerTunings.Common.Email
 
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            throw new System.NotImplementedException();
+            using (var message = new MailMessage())
+            {
+                message.To.Add(new MailAddress(email, "Dear Client"));
+                message.From = new MailAddress("support@hpower.net", "HPowerTunings support team");
+                message.Subject = subject;
+                message.Body = htmlMessage;
+                message.IsBodyHtml = true;
+
+                var key = this.configuration["SendGridApiKey:Key"];
+
+                using (var client = new SmtpClient("smtp.sendgrid.net"))
+                {
+                    client.Port = 587;
+                    client.EnableSsl = false;
+                    client.Credentials = new NetworkCredential("apikey", key);
+                    client.Send(message);
+                }
+            }
+
+            return Task.CompletedTask;
         }
 
         public async Task SendEmailsAsync(string email,

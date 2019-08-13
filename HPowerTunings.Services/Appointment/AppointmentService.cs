@@ -23,21 +23,26 @@ namespace HPowerTunings.Services.Appointment
         {
             var clientId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var client = this.context.Users.FirstOrDefault(u => u.Id == clientId);
-            var day = new Data.Models.Day() { DayDateTime = model.AppointmentDate.Date, Description = "Created by appoinment" };
+            var day = this.context.Days.FirstOrDefault(d => d.DayDateTime.Value.Date == DateTime.Now.Date);
+            var car = this.context.Cars.FirstOrDefault(c => c.RegNumber == model.RegNumber);
 
-            day.Appointments.Add(new Data.Models.Appointment
-                                 {
-                                     Description = model.Description,
-                                     ClientId = clientId,
-                                     Client = client,
-                                     DayId = day.Id,
-                                     IsAppointmentPending = true,
-                                     AppointmentDate = model.AppointmentDate,
-                                     ProblemDescription = model.Description,
-                                     RegNumber = model.RegNumber
-                                 });
+            if (!client.Cars.Contains(car)) return false;
+            
+            var appointment = new Data.Models.Appointment
+            {
+                Description = model.Description,
+                ClientId = clientId,
+                Client = client,
+                DayId = day.Id,
+                IsAppointmentPending = true,
+                AppointmentDate = model.AppointmentDate,
+                ProblemDescription = model.Description,
+                RegNumber = model.RegNumber
+            };
 
-            await this.context.Days.AddAsync(day);
+            await this.context.Appointments.AddAsync(appointment);
+            day.Appointments.Add(appointment);
+            client.Appointments.Add(appointment);
             var result = await this.context.SaveChangesAsync();
 
             return result > 0 ? true : false;
@@ -56,8 +61,8 @@ namespace HPowerTunings.Services.Appointment
             result.In.ClientPhone = appointment.Client.PhoneNumber;
             result.In.ClientUsername = appointment.Client.UserName;
             result.In.ProblemDescription = appointment.ProblemDescription;
+            result.In.CarBrand = this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarBrand.Name;
             result.In.CarModel = this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarModel.Name;
-            result.In.CarModel = this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarBrand.Name;
             result.In.RegNumber = appointment.RegNumber;
 
             await Task.Delay(0);

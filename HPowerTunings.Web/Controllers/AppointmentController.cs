@@ -33,7 +33,7 @@ namespace HPowerTunings.Web.Controllers
                 {
                     return Redirect("/Appointment/SuccessCreate");
                 }
-
+                ModelState.AddModelError("", "You don't have car with this number");
                 ViewData["MyAppointments"] = await this.appointmentService.GetMyAppointments();
                 return View();
             }

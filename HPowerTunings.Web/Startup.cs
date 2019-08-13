@@ -94,6 +94,7 @@ namespace HPowerTunings.Web
             services.AddTransient<SignInManager<Client>, SignInManager<Client>>();
             services.AddTransient<RoleManager<IdentityRole>, RoleManager<IdentityRole>>();
             services.AddTransient<Common.Email.ICustomEmailSender, EmailSender>();
+            services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<IRepairService, RepairService>();
             services.AddTransient<IDayCreator, DayCreator>();

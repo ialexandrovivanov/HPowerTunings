@@ -58,9 +58,9 @@ namespace HPowerTunings.Web.Controllers
         public async Task<IActionResult> StartRepair(string id)
         {
             var result = await this.repairService.StartRepair(id);
-            if (result)
+            if (result != null)
             {
-                return Redirect("/Repair/CreateRepair");
+                return Redirect($"/Repair/CreateRepair?regNumber={result.RegNumber}");
             }
 
             return View();
@@ -68,10 +68,10 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult CreateRepair()
+        public IActionResult CreateRepair(string regNumber = null)
         {
             ViewData["AllNames"] = this.repairService.GetAllMechanicNames().ToList();
-
+            ViewData["RegNumber"] = regNumber;
             return View();
         }
 

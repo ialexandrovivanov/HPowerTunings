@@ -13,6 +13,6 @@ namespace HPowerTunings.Services.Repair
         Task<ProceedRepairModel> ProceedRepair(string id);
         Task <ICollection<string>> GetSuppliers();
         Task<bool> FinalizeRepair(ProceedRepairModel model);
-        Task<bool> StartRepair(string id);
+        Task<Data.Models.Appointment> StartRepair(string id);
     }
 }

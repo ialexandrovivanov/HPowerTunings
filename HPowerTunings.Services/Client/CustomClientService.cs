@@ -14,12 +14,15 @@ namespace HPowerTunings.Services.Client
     {
         private readonly ApplicationDbContext context;
         private readonly UserManager<Data.Models.Client> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEmailSender emailSender;
 
         public CustomClientService(ApplicationDbContext context, 
                                    UserManager<Data.Models.Client> userManager,
+                                   RoleManager<IdentityRole> roleManager,
                                    IEmailSender emailSender)
         {
+            this.roleManager = roleManager;
             this.userManager = userManager;
             this.context = context;
             this.emailSender = emailSender;
@@ -29,9 +32,9 @@ namespace HPowerTunings.Services.Client
         {
             var user = new Data.Models.Client { UserName = model.UserName, Email = model.Email };
             var result = await this.userManager.CreateAsync(user, "123");
-            var userFromDb = await this.userManager.FindByEmailAsync(model.Email);
+            var roleResult = await userManager.AddToRoleAsync(user, "User");
 
-            if (result.Succeeded)
+            if (result.Succeeded && roleResult.Succeeded)
             {
                 var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = urlHelper.Page("/Account/ConfirmEmail",

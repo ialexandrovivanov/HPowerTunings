@@ -48,13 +48,13 @@
                 {
                     <div style="background-color:steelblue; border-radius:8px" class="mb-3">
                         <br />
-                        <h3 class="text-center"><strong>This day appointment</strong></h3>
+                        <h3 class="text-center"><strong style="color:white">This day appointment</strong></h3>
                         <br />
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
                     <p>On car with reg.number : <strong>@item.RegNumber</strong></p>
-                     <p>Car brand: @item.CarBrand</p>
-                     <p>Car model: @item.CarModel</p>
+                    <p>Car brand: <strong>@item.CarBrand</strong></p>
+                    <p>Car model: <strong>@item.CarModel</strong></p>
                     <p>Client's username: <strong>@item.UserName</strong></p>
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
                     <p><h5>Appointment date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
@@ -75,13 +75,13 @@
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
                     <p>On car with reg.number : <strong>@item.RegNumber</strong></p>
-                    <p>Car brand: @item.CarBrand</p>
-                    <p>Car model: @item.CarModel</p>
+                    <p>Car brand: <strong>@item.CarBrand</strong></p>
+                    <p>Car model: <strong>@item.CarModel</strong></p>
                     <p>Client's username: <strong>@item.UserName</strong></p>
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
                     <p><h5>Appointment date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
-                    <p>Problem description: @item.ProblemDescription</p>
-                    <button onclick="window.location.href='/Appointment/ProceedAppointment?id=@item.AppointmentId';">
+                    <p>Problem description: <strong>@item.ProblemDescription</strong></p>
+                    <button class="mt-2" onclick="window.location.href='/Appointment/ProceedAppointment?id=@item.AppointmentId';">
                         Proceed appointment
                     </button>
                     <hr />
@@ -96,8 +96,8 @@
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
                     <p>For car with reg.number: <strong>@item.RegNumber</strong></p>
-                    <p>Car brand: @item.CarBrand</p>
-                    <p>Car model: @item.CarModel</p>
+                    <p>Car brand: <strong>@item.CarBrand</strong></p>
+                    <p>Car model: <strong>@item.CarModel</strong></p>
                     <p>Client username is : <strong>@item.UserName</strong></p>
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
                     <p><h5>Desired date: </h5><h5><strong>@item.AppoinmentDate</strong></h5></p>
@@ -115,7 +115,7 @@
             {
                 <div class="text-center mb-3" style="background-color:rosybrown; border-radius:8px">
                     <br />
-                    <h3><strong>Pending repair</strong></h3>
+                    <h3><strong style="color:white">Pending repair</strong></h3>
                     <br />
                 </div>
                 <p>Repair Started on: <strong>@item.StartDate</strong></p>
