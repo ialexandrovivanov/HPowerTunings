@@ -1,29 +1,48 @@
 ﻿@using HPowerTunings.Data.Models
 
-    <div class="d-flex container-fluid justify-content-center" style="width:440px">
-        <ul class="manage-nav nav nav-pills flex-column mt-3 container-fluid justify-content-center mt-3">
-            <li class="nav-item">
-                <a class=" nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
-                    <h5>Profile</h5>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)"
-                   id="change-password" asp-page="./ChangePassword">
-                    <h5>Change password</h5>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)"
-                   id="personal-data" asp-page="./PersonalData">
-                    <h5>Personal data</h5>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link @ManageNavPages.RegisterYourCarNavClass(ViewContext)"
-                   id="register-car" asp-page="./RegisterYourCar">
-                    <h5>View or register your car</h5>
-                </a>
-            </li>
-        </ul>
+<head>
+    <script src="~/css/js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#register-car, change-password').click(function () {
+                $('.spinner').css('display', 'block');
+            });
+        });
+    </script>
+</head>
+
+<div class="d-flex container-fluid justify-content-center">
+    <ul class="manage-nav nav nav-pills flex-column mt-3 container-fluid justify-content-center mt-3" style="max-width:400px">
+        <li class="nav-item">
+            <a class=" nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+                <h5>Profile</h5>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)"
+               id="change-password" asp-page="./ChangePassword">
+                <h5>Change password</h5>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)"
+               id="personal-data" asp-page="./PersonalData">
+                <h5>Personal data</h5>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.RegisterYourCarNavClass(ViewContext)"
+               id="register-car" asp-page="./RegisterYourCar">
+                <h5>View or register your car</h5>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="spinner" style="display:none">
+    <div class="center-div">
+        <div class="inner-div">
+            <div class="loader"></div>
+        </div>
     </div>
+</div>

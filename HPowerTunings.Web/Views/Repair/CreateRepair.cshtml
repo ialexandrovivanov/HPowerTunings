@@ -16,11 +16,11 @@
 </head>
 
 <body>
-    <h3 class="pt-5 mt-5">Create repair</h3>
+    <h3 class="pt-5 mt-5">Create new repair</h3>
     <form id="Car" action="/Repair/CreateRepair" method="post"
           class="form-group mt-2 container-fluid justify-content-center text-center" style="width:400px">
-        <label>Select car</label>
-        <input asp-for="@Model.CarRegNumber" class="form-control" placeholder="Reg.number" value=@ViewData["RegNumber"]>
+        <label>On car with reg. number</label>
+        <input asp-for="@Model.CarRegNumber" class="form-control" placeholder="Reg.number" value=@ViewData[""]>
         <span asp-validation-for="@Model.CarRegNumber" class="text-danger"></span>
         <p></p>
         <label>Repair name</label>

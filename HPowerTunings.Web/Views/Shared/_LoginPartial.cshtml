@@ -65,15 +65,83 @@
                 }
             }
         </style>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="~/css/js/jquery-3.4.1.min.js"></script>
         <script>
         $(document).ready(function () {
-            $('#Go').click(function () {
+            $('#go').click(function () {
                 $('.spinner').css('display', 'block');
             });
         });
         </script>
     </head>
+
+    <ul class="navbar-nav">
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
+        {
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="Identity" asp-page="/Account/Manage/Job" title="MyJob">My Possition</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+            </li>
+        }
+
+        else if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+        {
+
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" href="/appointment/index">Appointments</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </li>
+        }
+
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" href="/company/index">My Company</a>
+                
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+            </li>
+        }
+
+        else
+        {
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link logout nav-link-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a id="go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </li>
+        }
+    </ul>
 
     <div class="spinner" style="display:none">
         <div class="center-div">
@@ -82,72 +150,3 @@
             </div>
         </div>
     </div>
-
-    <ul class="navbar-nav">
-        @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
-        {
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="Identity" asp-page="/Account/Manage/Job" title="MyJob">My Possition</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
-            </li>
-        }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("User"))
-        {
-
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" href="/appointment/index">Appointment</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </li>
-
-
-
-
-        }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-        {
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" href="/company/index">My Company</a>
-                
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
-            </li>
-        }
-        else
-        {
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link logout nav-link-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a id="Go" class="nav-link nav-link-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </li>
-        }
-    </ul>

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using HPowerTunings.Data;
+using HPowerTunings.ViewModels.CarModels;
 using HPowerTunings.ViewModels.ClientModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -76,6 +77,15 @@ namespace HPowerTunings.Services.Client
                                          .Repairs
                                          .Where(r => r.Car.Client.Email == client.Email)
                                          .Count();
+
+                var cars = client.Cars.Select(c => new ClientCarDetailsViewModel()
+                                                   {
+                                                       CarBrand = c.CarBrand.Name,
+                                                       CarModel = c.CarModel.Name,
+                                                       RegNumber = c.RegNumber
+                                                   })
+                                                   .ToList();
+                res.Cars = cars;
 
                 result.Add(res);
             }

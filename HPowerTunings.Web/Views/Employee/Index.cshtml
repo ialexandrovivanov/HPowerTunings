@@ -16,6 +16,7 @@
 <body>
     <div class="text-center mt-5 pt-5">
         <h4>Employee management page</h4>
+        <hr />
         <div class="pt-5 mt-5">
             <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#hire-employee">
                 Hire Employee
@@ -41,7 +42,7 @@
                 <div class="modal-body">
                     <form class="text-center" id="createEmployee" action="/employee/createEmployee" method="post">
                         <div>
-                            <label style=" font-size: 20px" ;>Full name</label>
+                            <label style=" font-size: 20px">Full name</label>
                             <input asp-for="@Model.RegisterEmployee.FullName" class="form-control" placeholder="Full name">
                             <span asp-validation-for="@Model.RegisterEmployee.FullName" class="text-danger"></span>
                         </div>
