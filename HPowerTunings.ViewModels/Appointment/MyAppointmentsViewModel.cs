@@ -6,5 +6,6 @@ namespace HPowerTunings.ViewModels.Appointment
     {
         public DateTime AppointmentDate { get; set; }
         public string ProblemDescription { get; set; }
+        public bool? IsAppointmentPending { get; set; }
     }
 }

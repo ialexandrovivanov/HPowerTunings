@@ -91,12 +91,12 @@ namespace HPowerTunings.Services.Appointment
 
             var appointments = this.context
                                    .Appointments
-                                   .Where(a => a.AppointmentDate.Date >= DateTime.Now.Date 
-                                          && a.Client == client && a.IsAppointmentPending == false)
+                                   .Where(a => a.AppointmentDate.Date >= DateTime.Now.Date && a.Client == client)
                                    .Select(a => new MyAppointmentsViewModel()
                                    {
                                        AppointmentDate = a.AppointmentDate,
                                        ProblemDescription = a.ProblemDescription,
+                                       IsAppointmentPending = a.IsAppointmentPending
                                    })
                                    .ToList();
 
