@@ -9,5 +9,8 @@ namespace HPowerTunings.Services.Employee
         Task<bool> CreateEmployee(EmployeeRegisterViewModel model);
         Task<ICollection<EmployeeStartEndViewModel>> EmployeeStartEndStatistics
                                                      (EmployeeStartEndStatisticsViewModel model);
+        Task<bool> IsEmployeeExists(EmployeeDeleteViewModel deleteEmployee);
+        Task<bool> IsPasswordValid(string password);
+        Task<bool> DeleteEmployee(EmployeeDeleteViewModel deleteEmployee);
     }
 }

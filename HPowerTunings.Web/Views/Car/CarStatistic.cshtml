@@ -30,12 +30,13 @@
             <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
         </div>
         <div class="text-center mt-5">
-            <button type="submit" class="btnCarStatistics btn btn-outline-primary">Select period</button>
+            <button type="submit" class="btn btn-outline-primary">Select period</button>
         </div>
     </form>
-    <div class="container-fluid justify-content-center text-center mt-5 pt-5">
+    <div class="container-fluid justify-content-center text-center mt-3" style="width:400px">
         <form action="/car/AdminCreateCar" method="get">
-            <button class="btnAdminCreateCar btn btn-outline-primary">Create &nbsp;a&nbsp; car</button>
+            <hr />
+            <button class="btn btn-outline-primary mt-3">Create &nbsp;a&nbsp; car</button>
         </form>
     </div>
 </body>

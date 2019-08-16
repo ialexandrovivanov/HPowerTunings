@@ -17,17 +17,42 @@
     <div class="text-center mt-5 pt-5">
         <h4>Employee management page</h4>
         <hr />
-        <div class="pt-5 mt-5">
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#hire-employee">
+        @foreach (var item in ViewData["Errors"] as List<string>)
+        {
+            <div class="text-center">
+                <p style="color:mediumvioletred">@item</p>
+            </div>
+        }
+        <div class="d-flex">
+             <div class="pt-4">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#hire-employee" style="margin-right:100px">
                 Hire Employee
             </button>
         </div>
-        <div class="mt-5">
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#fire employee">
+        <div class="pt-4">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#fire-employee">
                 Fire Employee
             </button>
         </div>
+        </div>
+        <br />
+       <hr />
     </div>
+    <form class="container-fluid justify-content-center" style="width:400px; padding-bottom:100px" action="/Employee/EmployeeStatistics" method="post">
+        <div class="text-center mt-3">
+            <label>Start date (including)</label>
+            <input type="date" asp-for=@Model.StartDate class="form-control" />
+            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+        </div>
+        <div class="text-center mt-5">
+            <label>End date (including)</label>
+            <input type="date" asp-for=@Model.EndDate class="form-control" />
+            <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+        </div>
+        <div class="text-center mt-5">
+            <button type="submit" class=" btn btn-outline-primary">Select period</button>
+        </div>
+    </form>
 
     <!-- Modal Hire -->
     <div class="modal fade" id="hire-employee" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
@@ -93,8 +118,9 @@
                             <label style=" font-size: 20px" ;>Full name</label>
                             <input asp-for="@Model.DeleteEmployee.EmployeeFullName" class="form-control" placeholder="Full name">
                             <span asp-validation-for="@Model.DeleteEmployee.EmployeeFullName" class="text-danger"></span>
-                            <label style=" font-size: 20px" ;>Password</label>
-                            <input asp-for="@Model.DeleteEmployee.Password" class="form-control" placeholder="Full name">
+                            <p></p>
+                            <label style="font-size: 20px" ;>Password</label>
+                            <input asp-for="@Model.DeleteEmployee.Password" class="form-control" placeholder="Admin password">
                             <span asp-validation-for="@Model.DeleteEmployee.Password" class="text-danger"></span>
                         </div>
                         <div class="button-holder mt-5">

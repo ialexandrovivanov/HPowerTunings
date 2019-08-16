@@ -1,40 +1,57 @@
 ﻿.description {
     background-color: rgba(240, 240, 230, 0.6);
     text-align: center;
-    padding: 6rem 2rem; 
+    padding: 6rem 2rem;
 }
 
-.description h1 {
-    color: rgb(17,49,107);
-    font-weight: bold;
-    padding: 1em 0 0.5em 0;
-    border-bottom: 1px solid rgb(17,49,107);
-    display: inline-block;
-}
+    .description h2 {
+        font-size: 48px;
+        color: rgb(17,49,107);
+        font-weight: bold;
+        padding: 1em 0 0.5em 0;
+        border-bottom: 1px solid rgb(17,49,107);
+        display: inline-block;
+    }
 
-.description p {
-    width: 70%;
-    margin: 1.5em auto;
-}
+    .description p {
+        width: 70%;
+        margin: 1.5em auto;
+    }
 
 .motivation {
     display: flex;
 }
 
-.motivation .img-container {
-    flex-basis: 50%;
-}
+    .motivation .img-container {
+        flex-basis: 50%;
+    }
 
-.motivation div {
-     flex-basis: 50%;   
-     align-self: center;
-     text-align: center; 
-}
+    .motivation div {
+        flex-basis: 50%;
+        align-self: center;
+        text-align: center;
+    }
 
-.motivation p {
-     max-width: 600px;
-     width: 100%;
-     margin: 0 auto;
+    .motivation p {
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .motivation.blue {
+        background-color: aliceblue;
+    }
+
+    .motivation.yellow {
+        background-color: cornsilk;
+    }
+
+.between {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    text-align: center;
 }
 
 .img-container img {
@@ -49,22 +66,63 @@
 }
 
 .services li {
-    flex: 0 0 24%;
     margin-right: 1em;
     background: rgb(239,239,239);
 }
 
-.services li a,
-.services li img {
-    display: block;
+    .services li a,
+    .services li img {
+        display: block;
+    }
+
+    .services li img {
+        width: 100%;
+    }
+
+    .services li p {
+        margin: 1em auto;
+        text-align: center;
+        color: rgb(17,49,107);
+    }
+
+@media screen and (min-width:960px) {
+    .description p,
+    .motivation p,
+    .between p,
+    .services p {
+        font-size: 18px;
+    }
 }
 
-.services li img {
-    width: 100%;
+@media screen and (max-width: 760px) {
+    .services ul {
+        flex-wrap: wrap;
+    }
+
+    .services li {
+        flex: 1 0 47%;
+        margin-bottom: 20px;
+    }
 }
 
-.services li p {
-    margin: 1em auto;
-    text-align: center;
-    color: rgb(17,49,107);
+@media screen and (max-width: 560px) {
+
+    .description h2 {
+        font-size: 34px;
+    }
+
+    .description p,
+    .motivation p,
+    .between p,
+    .services p {
+        font-size: 14px;
+    }
+
+    .motivation {
+        flex-direction: column-reverse;
+    }
+
+        .motivation p {
+            padding: 100px 50px;
+        }
 }

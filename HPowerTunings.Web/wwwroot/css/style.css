@@ -267,21 +267,6 @@ form {
     height: 100%;
 }
 
-.motivation.blue {
-    background-color: aliceblue;
-}
-
-.motivation.yellow {
-    background-color: cornsilk;
-}
-
-.between {
-    display:flex;
-    align-items: center;
-    justify-content:center;
-    height: 500px;
-}
-
 .center-div {
     width: 300px;
     height: 300px;
@@ -344,3 +329,15 @@ form {
     }
 }
 
+@media screen and (max-width:800px) {
+    .adminHome {
+        flex-direction:column;
+    }
+}
+
+@media screen and (max-width:560px) {
+    .site-title {
+        font-size:35px;
+
+    }
+}
