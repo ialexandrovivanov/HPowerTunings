@@ -2,7 +2,9 @@
 using HPowerTunings.ViewModels.EmployeeModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Web.Controllers
@@ -31,12 +33,12 @@ namespace HPowerTunings.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return Redirect($"/Employee/Index");
             }
 
             if (await this.employeeService.CreateEmployee(model.RegisterEmployee))
             {
-                return Redirect("SuccessRegisterEmployee");
+                return Redirect("/Employee/SuccessRegisterEmployee");
             }
 
             ModelState.AddModelError("", "Unable to register employee");
@@ -62,7 +64,7 @@ namespace HPowerTunings.Web.Controllers
                 return Redirect($"/Employee/Index?error={error}");
             }
 
-            if (await this.employeeService.IsPasswordValid(model.DeleteEmployee.Password))
+            if (!await this.employeeService.IsPasswordValid(model.DeleteEmployee.Password))
             {
                 error = "Invalid password provided";
                 return Redirect($"/Employee/Index?error={error}");
@@ -90,14 +92,20 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EmployeeStatistics(EmployeeStartEndStatisticsViewModel model)
         {
-            if (true)
+            await Task.Delay(0);
+            if (model.StartDate > model.EndDate)
             {
-
+                return Redirect("/Employee/Index");
             }
 
-           
-            ModelState.AddModelError("", "Unable to register employee");
-            return View();
+            if (model.StartDate == null || model.EndDate == null)
+            {
+                ModelState.AddModelError(string.Empty, "Insert correct date and time");
+                return Redirect("/Employee/Index");
+            }
+
+            var result = await this.employeeService.EmployeeStartEndStatistics(model);
+            return View(result);
         }
 
     }

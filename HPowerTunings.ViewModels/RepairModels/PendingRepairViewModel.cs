@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HPowerTunings.ViewModels.RepairModels
 {
@@ -14,6 +15,7 @@ namespace HPowerTunings.ViewModels.RepairModels
         public string RepairName { get; set; }
         public string RepairDescription { get; set; }
         public string StartDate { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public ICollection<string> Mechanics { get; set; }
     }
 }

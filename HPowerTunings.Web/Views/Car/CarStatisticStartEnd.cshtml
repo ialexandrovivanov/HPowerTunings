@@ -11,9 +11,9 @@
     ViewData["Title"] = "CarStatisticStartEnd";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
 }
-<div class="d-flex flex-column align-content-center">
+<div class="container-fluid justify-content-center" style="max-width:650px">
     <h3 class="mt-4 pt-5 text-center">Cars registered in the period</h3>
-    <hr class="w-100"/>
+    <hr class="w-100" />
     @foreach (var item in Model)
     {
         <div class="container-fluid justify-content-center mt-3" style="background-color:honeydew; border-radius:8px">
@@ -36,9 +36,14 @@
     }
 </div>
 <br />
-<div class="d-inline-block text-center pr-4 pl-4" style="background-color:aliceblue; border-radius: 8px;">
+<div class="container-fluid justify-content-center pr-4 pl-4" style="max-width:650px; background-color:chocolate; border-radius: 8px;">
     <br />
-    <p>Count of the cars registered in selected period: <strong>@Model.Count</strong></p>
+    <p>
+        <h5 style="color:antiquewhite">
+            Count of the cars registered in selected period:
+            <strong style="color:indigo">@Model.Count</strong>
+        </h5>
+    </p>
     <br />
 </div>
 <br />

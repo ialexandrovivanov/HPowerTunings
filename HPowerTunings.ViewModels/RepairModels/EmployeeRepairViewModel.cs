@@ -8,7 +8,7 @@ namespace HPowerTunings.ViewModels.RepairModels
         public string RepairName { get; set; }
         public decimal RepairPrice { get; set; }
         public string Description { get; set; }
-        public DateTime? CreatedOn { get; set; }
+        public DateTime? StartedOn { get; set; }
         public DateTime? FinishedOn { get; set; }
         public string CarNumber { get; set; }
         public bool IsRepairPending { get; set; } = true;

@@ -330,8 +330,9 @@ form {
 }
 
 @media screen and (max-width:800px) {
-    .adminHome {
-        flex-direction:column;
+    .adminHome,
+    .appoinmentResponsive {
+        flex-direction: column;
     }
 }
 

@@ -21,7 +21,8 @@
             <label>Choose group by car model</label>
             <select class="custom-select" id="CarModel" asp-for="@Model.CarModel">
                 <option selected disabled>-- Choose Model --</option>
-                @foreach (var item in ViewData["CarModels"] as List<string>)
+                @{ var result = ViewData["CarModels"] as List<string>; result = result.OrderBy(m => m).ToList(); }
+                @foreach (var item in result)
                 {
                     <option>@item</option>
                 }

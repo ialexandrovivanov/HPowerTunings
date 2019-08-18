@@ -58,9 +58,10 @@ namespace HPowerTunings.Web.Controllers
         public async Task<IActionResult> StartRepair(string id)
         {
             var result = await this.repairService.StartRepair(id);
+            var regNumber = result?.RegNumber;
             if (result != null)
             {
-                return Redirect($"/Repair/CreateRepair?regNumber={result.RegNumber}");
+                return Redirect($"/Repair/CreateRepair?regNumber={regNumber}");
             }
 
             return View();

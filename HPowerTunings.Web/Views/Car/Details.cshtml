@@ -31,7 +31,7 @@
                     <h3  style="color:indigo"><strong>@Model.CarBrand - @Model.CarModel</strong></h3>
                 </p>
             </div>
-            <div class="container-fluid mt-4 justify-content-center text-center" style="max-width:600px">
+            <div class="container-fluid mt-4 justify-content-center text-center" style="max-width:640px">
 
                 @foreach (var item in Model.Repairs.OrderByDescending(r => r.FinishedOn))
                 {

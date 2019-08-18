@@ -185,7 +185,6 @@ namespace HPowerTunings.Web.Controllers
         {
             if (model.StartDate > model.EndDate)
             {
-                ModelState.AddModelError(string.Empty, "Insert correct period of time");
                 return RedirectToAction("CarStatistic", "Car", model);
             }
 
@@ -195,9 +194,6 @@ namespace HPowerTunings.Web.Controllers
                 return RedirectToAction("CarStatistic", "Car", model);
             }
                 
-            //if (!ModelState.IsValid)
-            //    return RedirectToAction("CarStatistic", "Car", model);
-
             var result = await this.carService.GetAllCarsPeriod(model);
             if (result == null)
             {

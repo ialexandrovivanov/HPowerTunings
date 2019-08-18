@@ -4,13 +4,8 @@ namespace HPowerTunings.ViewModels.Appointment
 {
     public class ProceedAppointmentModel
     {
-        public In In { get; set; }
+        public In In { get; set; } = new In();
         public DateTime AppointmentDate { get; set; }
-
-        public ProceedAppointmentModel()
-        {
-            this.In = new In();
-        }
     }
 
     public class In

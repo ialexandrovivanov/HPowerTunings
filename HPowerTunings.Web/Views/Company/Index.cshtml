@@ -41,10 +41,15 @@
     </div>
     <div class="adminHome d-flex">
         <div class="container-fluid justify-content-center" style="width:390px">
-            @foreach (var item in ViewData["PendingAppoinments"] as List<PendingAppointmentsViewModel>)
+            @{
+                var result = ViewData["PendingAppoinments"] as List<PendingAppointmentsViewModel>;
+                result = result.OrderByDescending(a => a.CreatedOn).ToList();
+            }
+            @foreach (var item in result)
             {
-                if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd")
-                    && item.IsAppointmentPending == false && item.IsAppointmentStarted == false)
+                if (item.AppoinmentDate.Value.Date == DateTime.Now.Date
+                    && item.IsAppointmentPending == false 
+                    && item.IsAppointmentStarted == false)
                 {
                     <div style="background-color:steelblue; border-radius:6px" class="mb-3">
                         <br />
@@ -64,12 +69,13 @@
                     </button>
                     <div class="mb-5"></div>
                 }
-                else if (item.AppoinmentDate == DateTime.Now.Date.ToString("yyyy/MM/dd")
-                         && item.IsAppointmentPending == true && item.IsAppointmentStarted == false)
+                else if (item.AppoinmentDate.Value.Date == DateTime.Now.Date
+                         && item.IsAppointmentPending == true 
+                         && item.IsAppointmentStarted == false)
                 {
                     <div style="background-color:azure; border-radius:6px" class="mb-3">
                         <br />
-                        <h3 class="text-center"><strong style="color:indigo">New appointment for today</strong></h3>
+                        <h3 class="text-center"><strong style="color:indigo">Pending appointment for today</strong></h3>
                         <br />
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
@@ -89,7 +95,7 @@
                 {
                     <div style="background-color:honeydew; border-radius:6px" class="mb-3">
                         <br />
-                        <h3 class="text-center"><strong style="color:indigo">New appointment</strong></h3>
+                        <h3 class="text-center"><strong style="color:indigo">Panding appointment</strong></h3>
                         <br />
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
@@ -108,7 +114,11 @@
             }
         </div>
         <div class="container-fluid justify-content-center" style="width:390px">
-            @foreach (var item in ViewData["PendingRepairs"] as List<PendingRepairViewModel>)
+            @{
+                var result1 = ViewData["PendingRepairs"] as List<PendingRepairViewModel>;
+                result1 = result1.OrderByDescending(a => a.CreatedOn).ToList();
+            }
+            @foreach (var item in result1)
             {
                 <div class="text-center mb-3" style="background-color:rosybrown; border-radius:6px">
                     <br />
@@ -139,5 +149,6 @@
         </div>
         <div class="mt-5 pt-5"></div>
     </div>
+    <div style="height:40px"></div>
 </body>
 </html>

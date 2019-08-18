@@ -31,11 +31,12 @@ namespace HPowerTunings.Services.Company
                                   ClientEmail = a.Client.Email,
                                   ClientPhoneNumber = a.Client.PhoneNumber,
                                   ProblemDescription = a.ProblemDescription,
-                                  AppoinmentDate = a.AppointmentDate.ToString("yyyy/MM/dd"),
+                                  AppoinmentDate = a.AppointmentDate,
                                   IsAppointmentPending = a.IsAppointmentPending,
                                   IsAppointmentStarted = a.IsAppointmentStarted,
                                   UserName = a.Client.UserName,
                                   RegNumber = a.RegNumber,
+                                  CreatedOn = a.CreatedOn,
                                   CarBrand = this.context.Cars.FirstOrDefault(c => c.RegNumber == a.RegNumber).CarBrand.Name,
                                   CarModel = this.context.Cars.FirstOrDefault(c => c.RegNumber == a.RegNumber).CarModel.Name
                              })
@@ -56,7 +57,8 @@ namespace HPowerTunings.Services.Company
                                   ClientPhoneNumber = r.Car.Client.PhoneNumber, ClientUserName = r.Car.Client.UserName,
                                   RepairDescription = r.Description, RepairName = r.RepairName,
                                   StartDate = r.CreatedOn.Value.ToString("yyyy/MM/dd  -  HH:mm:ss"),
-                                  Mechanics = r.EmployeesRepairs.Select(e => e.Employee.FullName).ToList()
+                                  Mechanics = r.EmployeesRepairs.Select(e => e.Employee.FullName).ToList(),
+                                  CreatedOn = r.CreatedOn
                               })
                               .ToList();
 

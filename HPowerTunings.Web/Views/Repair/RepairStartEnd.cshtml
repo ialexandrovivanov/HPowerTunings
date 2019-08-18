@@ -10,14 +10,14 @@
     @if (Model.FirstOrDefault() != null)
     {
 
-        <h2 class="mt-4 pt-5 conteiner-fluid justify-content-center text-center">Finilized repairs for Period</h2>
+        <h2 class="mt-4 pt-5 conteiner-fluid justify-content-center text-center">   Finilized repairs for Period</h2>
         <hr style="width: 25%;" />
-        <div class="conteiner-fluid justify-content-center text-center" style="width:400px;">
+        <div class="conteiner-fluid justify-content-center text-center" style="max-width:640px;">
             @foreach (var item in Model.OrderByDescending(m => m.FinishedOn))
             {
                 <div style="border:1px solid #000; border-radius:6px; padding-bottom:15px">
                     <div class="conteiner-fluid justify-content-center mb-2"
-                         style="background-color:honeydew; border-radius:6px; padding-top:5px; padding-top:15px; padding-bottom:10px">
+                         style="background-color:honeydew; border-radius:6px;padding-left:10px; padding-right:10px; padding-top:5px; padding-top:15px; padding-bottom:10px">
                         <h4>
                             Repair on car with Reg. numer: <strong>@item.Car.RegNumber</strong>
                         </h4>
@@ -74,14 +74,14 @@
                 <br />
             }
             <div class="text-center">
-                <div class="d-inline-block text-center" style="background-color:darksalmon; border-radius:6px; width:400px; padding-top:5px">
-                    <h5>Incomes for period: <strong>$@Model.FirstOrDefault()?.TotalIncomes</strong></h5>
-                    <h5>Outgoings for period: <strong>$@Model.Sum(r => r.TotalOutgoings)</strong></h5>
+                <div class="d-inline-block text-center" style="background-color:chocolate; border-radius:6px; width:640px; padding-top:5px">
+                    <h5 style="color:antiquewhite">Incomes for period: <strong style="color:indigo">$@Model.FirstOrDefault()?.TotalIncomes</strong></h5>
+                    <h5 style="color:antiquewhite">Outgoings for period: <strong style="color:indigo">$@Model.Sum(r => r.TotalOutgoings)</strong></h5>
                     @{
                         var incomes = Model.FirstOrDefault()?.TotalIncomes;
                         var outgoings = Model.Sum(r => r.TotalOutgoings);
                         var result = incomes - outgoings;
-                        <h5><strong>Total</strong> for period: <strong>$@result</strong></h5>
+                        <h5 style="color:antiquewhite"><strong>Total</strong> for period: <strong style="color:indigo">$@result</strong></h5>
                     }
                 </div>
             </div>

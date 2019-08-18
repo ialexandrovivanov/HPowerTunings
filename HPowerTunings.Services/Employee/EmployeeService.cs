@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using HPowerTunings.Common.Mappper;
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.EmployeeModels;
 using HPowerTunings.ViewModels.RepairModels;
@@ -14,33 +16,31 @@ namespace HPowerTunings.Services.Employee
         private readonly ApplicationDbContext context;
         private readonly UserManager<Data.Models.Client> userManager;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IMappper mappper;
+        private readonly IMapper mapper;
+
 
         public EmployeeService(ApplicationDbContext context,
                                UserManager<Data.Models.Client> userManager,
-                               IHttpContextAccessor httpContextAccessor)
+                               IHttpContextAccessor httpContextAccessor,
+                               IMappper mappper)
         {
             this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
             this.context = context;
+            this.mappper = mappper;
+            this.mapper = this.mappper.Mappp().GetAwaiter().GetResult();
+
         }
 
         public async Task<bool> CreateEmployee(EmployeeRegisterViewModel model)
         {
-            var employee = new Data.Models.Employee()
-                           {
-                               Email = model.Email,
-                               Address = model.Address,
-                               FullName = model.FullName,
-                               PhoneNumber = model.PhoneNumber,
-                               Possition = model.Possition,
-                           };
+            var employee = mapper.Map<EmployeeRegisterViewModel, Data.Models.Employee>(model);
 
             await this.context.Employees.AddAsync(employee);
             var result = await context.SaveChangesAsync();
-            if (result > 0)
-            {
-                return true;
-            }
+
+            if (result > 0) return true;
 
             return false;
         }
@@ -48,13 +48,12 @@ namespace HPowerTunings.Services.Employee
         public async Task<bool> DeleteEmployee(EmployeeDeleteViewModel deleteEmployee)
         {
             var employee = this.context.Employees.FirstOrDefault(e => e.FullName == deleteEmployee.EmployeeFullName);
+
             var result = this.context.Employees.Remove(employee);
             await this.context.SaveChangesAsync();
-            if (result != null)
-            {
-                return true;
-            }
 
+            if (result != null) return true;
+        
             return false;
         }
 
@@ -63,13 +62,7 @@ namespace HPowerTunings.Services.Employee
         {
             var result = this.context
                              .Employees
-                             .Select(e => new EmployeeStartEndViewModel()
-                             {
-                                 Id = e.Id,
-                                 Email = e.Email,
-                                 FullName = e.FullName,
-                                 Possition = e.Possition,
-                             })
+                             .Select(e => mapper.Map<Data.Models.Employee, EmployeeStartEndViewModel>(e))
                              .ToList();
 
             foreach (var mod in result)
@@ -86,15 +79,15 @@ namespace HPowerTunings.Services.Employee
                                          r.StartedOn >= model.StartDate &&
                                          r.StartedOn <= model.EndDate)
                                   .Select(r => new EmployeeRepairViewModel()
-                                  {
-                                      CarNumber = r.Car.RegNumber,
-                                      Description = r.Description,
-                                      CreatedOn = r.StartedOn,
-                                      FinishedOn = r.FinishedOn,
-                                      IsRepairPending = r.IsRepairPanding,
-                                      CountOfMechanics = r.EmployeesRepairs.Count
-                                  })
-                                  .ToList();
+                                               {
+                                                   CarNumber = r.Car.RegNumber,
+                                                   Description = r.Description,
+                                                   StartedOn = r.StartedOn,
+                                                   FinishedOn = r.FinishedOn,
+                                                   IsRepairPending = r.IsRepairPanding,
+                                                   CountOfMechanics = r.EmployeesRepairs.Count
+                                               })
+                                               .ToList();
 
                 mod.Repairs = repairs;
             }
@@ -116,15 +109,14 @@ namespace HPowerTunings.Services.Employee
 
         public async Task<bool> IsPasswordValid(string password)
         {
+            if (password == null) return false;
+
             var user = await userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
             var result = await userManager.CheckPasswordAsync(user, (string)password);
 
-            if (result)
-            {
-                return false;
-            }
+            if (result) return true;
 
-            return true;
+            return false;
         }
     }
 }
