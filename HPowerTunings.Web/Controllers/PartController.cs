@@ -23,11 +23,11 @@ namespace HPowerTunings.Web.Controllers
             {
                 if (await this.partService.AddPart(model))
                 {
-                    return Redirect($"/Repair/ProceedRepair/?id={model.In.RepairId}");
+                    return Redirect($"/Repair/ProceedRepair/?id={model.In.Id}");
                 }
             }
 
-            return Redirect($"/Repair/ProceedRepair?id = {model.In.RepairId}");
+            return Redirect($"/Repair/ProceedRepair?id = {model.In.Id}");
         }
     }
 }

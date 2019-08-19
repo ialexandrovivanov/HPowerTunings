@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using AutoMapper;
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.CarModels;
 using HPowerTunings.ViewModels.ClientModels;
@@ -13,17 +14,17 @@ namespace HPowerTunings.Services.Client
 {
     public class CustomClientService : ICustomClientService
     {
+        private readonly IMapper mapper;
         private readonly ApplicationDbContext context;
         private readonly UserManager<Data.Models.Client> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEmailSender emailSender;
 
         public CustomClientService(ApplicationDbContext context, 
                                    UserManager<Data.Models.Client> userManager,
-                                   RoleManager<IdentityRole> roleManager,
-                                   IEmailSender emailSender)
+                                   IEmailSender emailSender,
+                                   IMapper mapper)
         {
-            this.roleManager = roleManager;
+            this.mapper = mapper;
             this.userManager = userManager;
             this.context = context;
             this.emailSender = emailSender;
@@ -73,18 +74,16 @@ namespace HPowerTunings.Services.Client
                                          .Where(r => r.Car.Client.Email == client.Email)
                                          .SelectMany(r => r.Car.Repairs)
                                          .Sum(x => x.RepairPrice);
-                res.TotalRepairs = this.context
-                                         .Repairs
-                                         .Where(r => r.Car.Client.Email == client.Email)
-                                         .Count();
 
-                var cars = client.Cars.Select(c => new ClientCarDetailsViewModel()
-                                                   {
-                                                       CarBrand = c.CarBrand.Name,
-                                                       CarModel = c.CarModel.Name,
-                                                       RegNumber = c.RegNumber
-                                                   })
-                                                   .ToList();
+                res.TotalRepairs = this.context
+                                       .Repairs
+                                       .Where(r => r.Car.Client.Email == client.Email)
+                                       .Count();
+
+                var cars = client.Cars
+                                 .Select(c => mapper.Map<Data.Models.Car, ClientCarDetailsViewModel>(c))
+                                 .ToList();
+
                 res.Cars = cars;
 
                 result.Add(res);

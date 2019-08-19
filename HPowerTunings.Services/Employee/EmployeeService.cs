@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using HPowerTunings.Common.Mappper;
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.EmployeeModels;
 using HPowerTunings.ViewModels.RepairModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HPowerTunings.Services.Employee
 {
@@ -16,20 +16,18 @@ namespace HPowerTunings.Services.Employee
         private readonly ApplicationDbContext context;
         private readonly UserManager<Data.Models.Client> userManager;
         private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IMappper mappper;
         private readonly IMapper mapper;
 
 
         public EmployeeService(ApplicationDbContext context,
                                UserManager<Data.Models.Client> userManager,
                                IHttpContextAccessor httpContextAccessor,
-                               IMappper mappper)
+                               IMapper mapper)
         {
             this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
             this.context = context;
-            this.mappper = mappper;
-            this.mapper = this.mappper.Mappp().GetAwaiter().GetResult();
+            this.mapper = mapper;
 
         }
 
@@ -67,27 +65,20 @@ namespace HPowerTunings.Services.Employee
 
             foreach (var mod in result)
             {
-                var repairsIds = this.context
+                var repairIds = this.context
                                      .EmployeesRepairs
                                      .Where(er => er.EmployeeId == mod.Id)
                                      .Select(er => er.RepairId)
                                      .ToList();
-
+                
                 var repairs = this.context
                                   .Repairs
-                                  .Where(r => repairsIds.Contains(r.Id) &&
+                                  .Include(r => r.Car)
+                                  .Where(r => repairIds.Contains(r.Id) &&
                                          r.StartedOn >= model.StartDate &&
                                          r.StartedOn <= model.EndDate)
-                                  .Select(r => new EmployeeRepairViewModel()
-                                               {
-                                                   CarNumber = r.Car.RegNumber,
-                                                   Description = r.Description,
-                                                   StartedOn = r.StartedOn,
-                                                   FinishedOn = r.FinishedOn,
-                                                   IsRepairPending = r.IsRepairPanding,
-                                                   CountOfMechanics = r.EmployeesRepairs.Count
-                                               })
-                                               .ToList();
+                                  .Select(r => mapper.Map<Data.Models.Repair, EmployeeRepairViewModel>(r))
+                                  .ToList();
 
                 mod.Repairs = repairs;
             }

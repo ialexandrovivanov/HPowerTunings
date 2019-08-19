@@ -13,8 +13,6 @@ using HPowerTunings.Data;
 using HPowerTunings.Services.Car;
 using HPowerTunings.Data.Models;
 using System.Threading.Tasks;
-using System.Reflection;
-using HPowerTunings.Common.Mapping;
 using HPowerTunings.Services.Repair;
 using HPowerTunings.Services.Appointment;
 using HPowerTunings.Services.Client;
@@ -25,8 +23,9 @@ using HPowerTunings.Services.Email;
 using HPowerTunings.Common.Email;
 using HPowerTunings.Web.Core;
 using HPowerTunings.Services.Employee;
-using HPowerTunings.Common.Mappper;
 using AutoMapper;
+using HPowerTunings.Common.Mapping;
+using System.Reflection;
 
 namespace HPowerTunings.Web
 {
@@ -107,7 +106,13 @@ namespace HPowerTunings.Web
             services.AddTransient<ISupplierService, SupplierService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
-            services.AddTransient<IMappper, Mappper>();
+            services.AddTransient<IMapper, Mapper>();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            { mc.AddProfile(new MappingProfile()); });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -129,7 +134,7 @@ namespace HPowerTunings.Web
                 var seeder = new DatabaseSeeder(app.ApplicationServices.GetService<ApplicationDbContext>());
                 seeder.SeedDatabase().GetAwaiter().GetResult();
                 var dayCreator = new DayCreator(app.ApplicationServices.GetService<ApplicationDbContext>());
-                Task.Run(() => dayCreator.CreateDay());
+                _ = Task.Run(() => dayCreator.CreateDay());
 
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();

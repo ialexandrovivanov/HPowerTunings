@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.Appointment;
 using HPowerTunings.ViewModels.RepairModels;
@@ -10,10 +11,12 @@ namespace HPowerTunings.Services.Company
 {
     public class CompanyService : ICompanyService
     {
+        private readonly IMapper mapper;
         private readonly ApplicationDbContext context;
 
-        public CompanyService(ApplicationDbContext context)
+        public CompanyService(ApplicationDbContext context, IMapper mapper)
         {
+            this.mapper = mapper;
             this.context = context;
         }
         public DateTime DateTie { get; private set; }
@@ -25,21 +28,7 @@ namespace HPowerTunings.Services.Company
                              .Appointments
                              .Where(a => (a.IsAppointmentPending == true ||
                                     a.AppointmentDate.Date == DateTime.Now.Date) && a.IsAppointmentStarted == false)
-                             .Select(a => new PendingAppointmentsViewModel()
-                              {
-                                  AppointmentId = a.Id,
-                                  ClientEmail = a.Client.Email,
-                                  ClientPhoneNumber = a.Client.PhoneNumber,
-                                  ProblemDescription = a.ProblemDescription,
-                                  AppoinmentDate = a.AppointmentDate,
-                                  IsAppointmentPending = a.IsAppointmentPending,
-                                  IsAppointmentStarted = a.IsAppointmentStarted,
-                                  UserName = a.Client.UserName,
-                                  RegNumber = a.RegNumber,
-                                  CreatedOn = a.CreatedOn,
-                                  CarBrand = this.context.Cars.FirstOrDefault(c => c.RegNumber == a.RegNumber).CarBrand.Name,
-                                  CarModel = this.context.Cars.FirstOrDefault(c => c.RegNumber == a.RegNumber).CarModel.Name
-                             })
+                             .Select(a => mapper.Map<Data.Models.Appointment, PendingAppointmentsViewModel>(a))
                              .ToList();
 
             return result;

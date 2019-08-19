@@ -22,15 +22,15 @@ namespace HPowerTunings.Web.Controllers
         {
             if (string.IsNullOrEmpty(model.Out.SupplierName))
             {
-                return Redirect($"/Repair/ProceedRepair/?id={model.In.RepairId}");
+                return Redirect($"/Repair/ProceedRepair/?id={model.In.Id}");
             }
 
             if (await this.supplierService.CreateSupplier(model))
             {
-                return Redirect($"/Repair/ProceedRepair/?id={model.In.RepairId}");
+                return Redirect($"/Repair/ProceedRepair/?id={model.In.Id}");
             }
 
-            return Redirect($"/Repair/ProceedRepair/?id={model.In.RepairId}");
+            return Redirect($"/Repair/ProceedRepair/?id={model.In.Id}");
         }
     }
 }

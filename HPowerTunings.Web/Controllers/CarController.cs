@@ -88,8 +88,8 @@ namespace HPowerTunings.Web.Controllers
             {
                 var carViewModel = await this.carService.GetCarDetailsAsync(id);
 
-                ViewData["CarBrand"] = carViewModel.CarBrand;
-                ViewData["CarModel"] = carViewModel.CarModel;
+                ViewData["CarBrand"] = carViewModel.CarBrandName;
+                ViewData["CarModel"] = carViewModel.CarModelName;
                 var model = await this.carService.GetDeleteYourCar(id);
                 return View(model);
             }

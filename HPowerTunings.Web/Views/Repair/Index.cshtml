@@ -15,12 +15,16 @@
 
 </head>
 <body>
-    <div class="container-fluid justify-content-center text-center" style="width:400px">
+    <div class="container-fluid justify-content-center text-center mt-5 pt-5" style="max-width:400px">
+            <h3>Select period of time for repairs statistics</h3>
+            <hr />
+        <div class="container-fluid justify-content-center text-center mt-4">
+            <form action="/repair/createrepair" method="get" style="padding-bottom:20px">
+                <button class="btn btn-outline-primary mt-3">Create repair</button>
+            </form>
+            <hr />
+        </div>
         <form action="/repair/repairStartEnd" method="post">
-            <div class="text-center mt-5 pt-5">
-                <h3>Select period of time for repairs statistics</h3>
-                <hr />
-            </div>
             <div class="text-center mt-5">
                 <label>Start date (including)</label>
                 <input type="date" asp-for=@Model.StartDate class="form-control" />
@@ -37,12 +41,7 @@
         </form>
     </div> 
     
-    <div class="container-fluid justify-content-center text-center mt-3" style="width:400px">
-        <form action="/repair/createrepair" method="get">
-            <hr />
-            <button class="btn btn-outline-primary mt-3">Create repair</button>
-        </form>
-    </div>
+   
 </body>
 </html>
 

@@ -36,8 +36,8 @@
         <div class="mb-3" style="background-color:lightblue; border-radius: 6px; padding-top:15px; padding-bottom:5px">
             <h4><strong style="color:indigo">Repair</strong></h4>
             <h5>Repair with name: <strong>@Model.In.RepairName</strong></h5>
-            <h5>On car with reg.Number: <strong>@Model.In.RegNumber</strong></h5>
-            <h5>Car VIN: <strong>@Model.In.VinNumber</strong></h5>
+            <h5>On car with reg.Number: <strong>@Model.In.CarRegNumber</strong></h5>
+            <h5>Car VIN: <strong>@Model.In.CarRama</strong></h5>
             <h4><strong style="color:indigo">Parts used:</strong></h4>
         </div>
 
@@ -108,11 +108,11 @@
                         <input asp-for="@Model.Out.RateThisDelivery" class="form-control" placeholder="Rate delivery speed">
                         <span asp-validation-for="@Model.Out.RateThisDelivery" class="text-danger"></span>
                     </div>
-                    <input asp-for="@Model.In.RepairId" type="hidden">
-                    <input asp-for="@Model.In.CarBrand" type="hidden">
-                    <input asp-for="@Model.In.CarModel" type="hidden">
-                    <input asp-for="@Model.In.RegNumber" type="hidden">
-                    <input asp-for="@Model.In.VinNumber" type="hidden">
+                    <input asp-for="@Model.In.Id" type="hidden">
+                    <input asp-for="@Model.In.CarBrandName" type="hidden">
+                    <input asp-for="@Model.In.CarModelName" type="hidden">
+                    <input asp-for="@Model.In.CarRegNumber" type="hidden">
+                    <input asp-for="@Model.In.CarRama" type="hidden">
                     <input asp-for="@Model.In.RepairName" type="hidden">
                     <input asp-for="@Model.In.SumPartsPrices" type="hidden">
                     <input asp-for="@Model.In.CountParts" type="hidden">
@@ -145,25 +145,25 @@
                     </div>
                     <div class="mt-3">
                         <label style="font-family:Arial; font-size: 20px" ;>Supplier phone number</label>
-                        <input asp-for="@Model.Out.SupplierPhone" class="form-control">
-                        <span asp-validation-for="@Model.Out.SupplierPhone" class="text-danger"></span>
+                        <input asp-for="@Model.Out.PhoneNumber" class="form-control">
+                        <span asp-validation-for="@Model.Out.PhoneNumber" class="text-danger"></span>
                     </div>
                     <div class="mt-3">
                         <label style="font-family:Arial; font-size: 20px">Supplier email</label>
-                        <input asp-for="@Model.Out.SupplierEmail" class="form-control">
-                        <span asp-validation-for="@Model.Out.SupplierEmail" class="text-danger"></span>
+                        <input asp-for="@Model.Out.Email" class="form-control">
+                        <span asp-validation-for="@Model.Out.Email" class="text-danger"></span>
                     </div>
                     <div class="mt-3">
                         <label style="font-family:Arial; font-size: 20px">Supplier url</label>
-                        <input asp-for="@Model.Out.SupplierUrl" class="form-control">
-                        <span asp-validation-for="@Model.Out.SupplierUrl" class="text-danger"></span>
+                        <input asp-for="@Model.Out.Url" class="form-control">
+                        <span asp-validation-for="@Model.Out.Url" class="text-danger"></span>
                     </div>
 
-                    <input asp-for="@Model.In.RepairId" type="hidden">
-                    <input asp-for="@Model.In.CarBrand" type="hidden">
-                    <input asp-for="@Model.In.CarModel" type="hidden">
-                    <input asp-for="@Model.In.RegNumber" type="hidden">
-                    <input asp-for="@Model.In.VinNumber" type="hidden">
+                    <input asp-for="@Model.In.Id" type="hidden">
+                    <input asp-for="@Model.In.CarBrandName" type="hidden">
+                    <input asp-for="@Model.In.CarModelName" type="hidden">
+                    <input asp-for="@Model.In.CarRegNumber" type="hidden">
+                    <input asp-for="@Model.In.CarRama" type="hidden">
                     <input asp-for="@Model.In.RepairName" type="hidden">
                     <input asp-for="@Model.In.SumPartsPrices" type="hidden">
                     <input asp-for="@Model.In.CountParts" type="hidden">
@@ -194,11 +194,11 @@
                         <input asp-for="@Model.Out.RepairPrice" class="form-control" placeholder="Sum for the client to pay">
                     </div>
 
-                    <input asp-for="@Model.In.RepairId" type="hidden">
-                    <input asp-for="@Model.In.CarBrand" type="hidden">
-                    <input asp-for="@Model.In.CarModel" type="hidden">
-                    <input asp-for="@Model.In.RegNumber" type="hidden">
-                    <input asp-for="@Model.In.VinNumber" type="hidden">
+                    <input asp-for="@Model.In.Id" type="hidden">
+                    <input asp-for="@Model.In.CarBrandName" type="hidden">
+                    <input asp-for="@Model.In.CarModelName" type="hidden">
+                    <input asp-for="@Model.In.CarRegNumber" type="hidden">
+                    <input asp-for="@Model.In.CarRama" type="hidden">
                     <input asp-for="@Model.In.RepairName" type="hidden">
                     <input asp-for="@Model.In.SumPartsPrices" type="hidden">
                     <input asp-for="@Model.In.CountParts" type="hidden">

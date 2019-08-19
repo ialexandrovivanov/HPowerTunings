@@ -50,7 +50,7 @@ namespace HPowerTunings.Web.Core
                 {
                     var supplier = new Supplier()
                     {
-                        CompanyName = $"company N{i}",
+                        SupplierName = $"company N{i}",
                         Email = $"company N{i}@company N{i}.com",
                         PhoneNumber = "0" + (i + 10000000),
                         Description = $"This description refers to supplier with number {i}",

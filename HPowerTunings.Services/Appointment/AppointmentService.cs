@@ -1,4 +1,5 @@
-﻿using HPowerTunings.Data;
+﻿using AutoMapper;
+using HPowerTunings.Data;
 using HPowerTunings.ViewModels.Appointment;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -11,13 +12,17 @@ namespace HPowerTunings.Services.Appointment
 {
     public class AppointmentService : IAppointmentService
     {
+        private readonly IMapper mapper;
         private ApplicationDbContext context;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AppointmentService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        public AppointmentService(ApplicationDbContext context, 
+                                  IHttpContextAccessor httpContextAccessor,
+                                  IMapper mapper)
         {
             this.httpContextAccessor = httpContextAccessor;
             this.context = context;
+            this.mapper = mapper;
         }
         public async Task<bool> CreateAppointment(CreateAppointmetModel model)
         {
@@ -92,12 +97,7 @@ namespace HPowerTunings.Services.Appointment
             var appointments = this.context
                                    .Appointments
                                    .Where(a => a.AppointmentDate.Date >= DateTime.Now.Date && a.Client == client)
-                                   .Select(a => new MyAppointmentsViewModel()
-                                   {
-                                       AppointmentDate = a.AppointmentDate,
-                                       ProblemDescription = a.ProblemDescription,
-                                       IsAppointmentPending = a.IsAppointmentPending
-                                   })
+                                   .Select(a => mapper.Map<Data.Models.Appointment, MyAppointmentsViewModel>(a))
                                    .ToList();
 
             await Task.Delay(0);

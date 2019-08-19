@@ -20,37 +20,33 @@
             <h3>My appointments</h3>
         </div>
 
-        @foreach (var item in ViewData["MyAppointments"] as List<MyAppointmentsViewModel>
-           )
+        @foreach (var item in ViewData["MyAppointments"] as List<MyAppointmentsViewModel>)
         {
-    <div class="container-fluid justify-content-center text-center mt-5" style="max-width:400px;
-                 background-color:powderblue; padding-bottom:86px;padding-left:10px;
+            <div class="container-fluid justify-content-center text-center mt-5" style="max-width:400px;
+                 background-color:powderblue; padding-bottom:90px;padding-left:10px;
                   padding-right:10px;padding-top:10px;border-radius:6px">
-        @if (item.IsAppointmentPending == true)
-        {
-            <p class="mt-5">
-                You have a
-                <div style="background-color:chocolate; padding-bottom:2px; padding-left:2px;
+                @if (item.IsAppointmentPending == true)
+                {
+                    <p class="mt-5">
+                        You have a
+                        <div style="background-color:chocolate; padding-bottom:2px; padding-left:2px;
                              padding-right:2px;padding-top:8px; border-radius:4px">
-                    <h5>
-                        <strong style="color:indigo">still pending</strong>
-                    </h5>
-                </div> appointment for car service with <strong>desired</strong> date:
-                <h5><strong style="color:indigo">@item.AppointmentDate</strong></h5>
-                <h5><strong style="color:indigo">@item.AppointmentDate.Date.DayOfWeek</strong></h5>
-            </p>
-        }
-        else
-        {
-            <p class="mt-5">You have an <strong>appointment</strong> for car service on: </p>
-            <h5><strong style="color:indigo">@item.AppointmentDate</strong></h5>
-            <p><h5><strong style="color:indigo">@item.AppointmentDate.Date.DayOfWeek</strong></h5></p>
-            <p>With problem description  : <strong>@item.ProblemDescription</strong></p>
-        }
-
-
-
-    </div>
+                            <h5>
+                                <strong style="color:indigo">still pending</strong>
+                            </h5>
+                        </div> appointment for car service with <strong>desired</strong> date:
+                        <h5><strong style="color:indigo">@item.AppointmentDate</strong></h5>
+                        <h5><strong style="color:indigo">@item.AppointmentDate.Date.DayOfWeek</strong></h5>
+                    </p>
+                }
+                else
+                {
+                    <p class="mt-5">You have an <strong>appointment</strong> for car service on: </p>
+                    <h5><strong style="color:indigo">@item.AppointmentDate</strong></h5>
+                    <p><h5><strong style="color:indigo">@item.AppointmentDate.Date.DayOfWeek</strong></h5></p>
+                    <p>With problem description: <strong>@item.ProblemDescription</strong></p>
+                }
+            </div>
         }
     </div>
     <div class="container-fluid justify-content-center text-center mt-5 pt-5" style="max-width:400px">
@@ -64,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label>Problem description</label>
-                <textarea rows="9" cols="30" asp-for="@Model.Description" class="form-control"></textarea>
+                <textarea rows="6" cols="30" asp-for="@Model.Description" class="form-control"></textarea>
                 <span asp-validation-for="@Model.Description" class="text-danger"></span>
                 <div>
                     <label>Choose desired date</label>

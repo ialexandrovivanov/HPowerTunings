@@ -7,23 +7,23 @@ namespace HPowerTunings.ViewModels.RepairModels
 {
     public class ProceedRepairModel
     {
-        public In In { get; set; }
-        public Out Out { get; set; }
+        public ProceedRepairModelIn In { get; set; }
+        public ProceedRepairModelOut Out { get; set; }
 
         public ProceedRepairModel()
         {
-            this.In = new In();
-            this.Out = new Out();
+            this.In = new ProceedRepairModelIn();
+            this.Out = new ProceedRepairModelOut();
         }
     }
 
-    public class In
+    public class ProceedRepairModelIn
     {
-        public string RepairId { get; set; }
-        public string CarBrand { get; set; }
-        public string CarModel { get; set; }
-        public string RegNumber { get; set; }
-        public string VinNumber { get; set; }
+        public string Id { get; set; }
+        public string CarBrandName { get; set; }
+        public string CarModelName { get; set; }
+        public string CarRegNumber { get; set; }
+        public string CarRama { get; set; }
         public string RepairName { get; set; }
         public DateTime? StartedOn { get; set; }
         public int CountParts { get; set; }
@@ -31,7 +31,7 @@ namespace HPowerTunings.ViewModels.RepairModels
         public ICollection<string> Suppliers { get; set; } = new List<string>();
         public ICollection<PartStatisticsViewModel> Parts { get; set; } = new List<PartStatisticsViewModel>();
     }
-    public class Out
+    public class ProceedRepairModelOut
     {
         [Required(ErrorMessage = "Required")]
         public string PartName { get; set; }
@@ -56,12 +56,12 @@ namespace HPowerTunings.ViewModels.RepairModels
         public string SupplierName { get; set; }
 
         [Phone]
-        public string SupplierPhone { get; set; }
+        public string PhoneNumber { get; set; }
 
         [EmailAddress]
-        public string SupplierEmail { get; set; }
+        public string Email { get; set; }
 
         [Url]
-        public string SupplierUrl { get; set; }
+        public string Url { get; set; }
     }
 }

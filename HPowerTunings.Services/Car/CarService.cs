@@ -7,6 +7,7 @@ using HPowerTunings.ViewModels.PartModels;
 using HPowerTunings.ViewModels.RepairModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,13 +16,16 @@ namespace HPowerTunings.Services.Car
 {
     public class CarService : ICarService
     {
-        private ApplicationDbContext context;
-        private IHttpContextAccessor httpContext;
-        private UserManager<Data.Models.Client> userManager;
+        private readonly IMapper mapper;
+        private readonly ApplicationDbContext context;
+        private readonly IHttpContextAccessor httpContext;
+        private readonly UserManager<Data.Models.Client> userManager;
         public CarService(ApplicationDbContext context,
                           IHttpContextAccessor httpContext,
-                          UserManager<Data.Models.Client> userManager)
+                          UserManager<Data.Models.Client> userManager,
+                          IMapper mapper)
         {
+            this.mapper = mapper;
             this.context = context;
             this.userManager = userManager;
             this.httpContext = httpContext;
@@ -29,14 +33,14 @@ namespace HPowerTunings.Services.Car
 
         public async Task<CarViewModel> GetCarDetailsAsync(string carId)
         {
-            var car = await this.context.Cars.FindAsync(carId);
-            var model = new CarViewModel()
-            {
-                CarBrand = car.CarBrand.Name,
-                CarModel = car.CarModel.Name,
-                CarId = carId
-            };
+            var car = await this.context
+                                .Cars
+                                .Include(c => c.CarBrand)
+                                .Include(c => c.CarModel)
+                                .FirstOrDefaultAsync(c => c.Id == carId);
 
+            var model = mapper.Map<Data.Models.Car, CarViewModel>(car);
+            ;
             return model;
         }
 

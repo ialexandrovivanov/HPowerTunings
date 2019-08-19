@@ -21,7 +21,7 @@
                         <h4>
                             Repair on car with Reg. numer: <strong>@item.Car.RegNumber</strong>
                         </h4>
-                        <p><h4><strong>@item.Car.CarBrand - @item.Car.CarModel</strong></h4></p>
+                        <p><h4><strong>@item.Car.CarBrandName - @item.Car.CarModelName</strong></h4></p>
                     </div>
                     <div class="container-fluid text-center">
                         @{ bool check = @item.IsRepairPending != null ? @item.IsRepairPending.Value : false; }
@@ -36,7 +36,7 @@
                             <div class="conteiner-fluid justify-content-center text-center">
                                 <p>Repair name: <strong>@item.RepairName</strong></p>
                                 <p>Repair description: <strong>@item.Description</strong></p>
-                                <p>Car brand: <strong>@item.Car.CarBrand</strong> / Car model: <strong>@item.Car.CarModel</strong></p>
+                                <p>Car brand: <strong>@item.Car.CarBrandName</strong> / Car model: <strong>@item.Car.CarModelName</strong></p>
                                 <p>Car registrational number: <strong>@item.Car.RegNumber</strong></p>
                                 <p>Car VIN number: <strong>@item.Car.Rama</strong></p>
                             </div>

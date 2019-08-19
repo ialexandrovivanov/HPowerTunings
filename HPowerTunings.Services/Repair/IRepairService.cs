@@ -11,7 +11,7 @@ namespace HPowerTunings.Services.Repair
         Task<bool> CreateRepair(CreateRepairOutputModel model);
         ICollection<string> GetAllMechanicNames();
         Task<ProceedRepairModel> ProceedRepair(string id);
-        Task <ICollection<string>> GetSuppliers();
+        Task<ICollection<string>> GetSuppliers();
         Task<bool> FinalizeRepair(ProceedRepairModel model);
         Task<Data.Models.Appointment> StartRepair(string id);
     }

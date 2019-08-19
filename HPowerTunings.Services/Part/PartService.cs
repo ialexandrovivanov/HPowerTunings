@@ -16,8 +16,8 @@ namespace HPowerTunings.Services.Part
 
         public async Task<bool> AddPart(ProceedRepairModel model)
         {
-            var supplier = this.context.Suppliers.FirstOrDefault(s => s.CompanyName == model.Out.PartSupplier);
-            var repair = this.context.Repairs.FirstOrDefault(r => r.Id == model.In.RepairId);
+            var supplier = this.context.Suppliers.FirstOrDefault(s => s.SupplierName == model.Out.PartSupplier);
+            var repair = this.context.Repairs.FirstOrDefault(r => r.Id == model.In.Id);
             var part = new Data.Models.Part()
             {
                 Name = model.Out.PartName,

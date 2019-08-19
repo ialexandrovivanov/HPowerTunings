@@ -14,29 +14,32 @@
     </style>
 </head>
 <body>
-    <form class="container-fluid justify-content-center" style="width:400px" action="/client/clientstartendstatistics" method="post">
-        <div class="text-center mt-5 pt-5">
-            <h3>Select period of time for clients statistics</h3>
-            <hr />
+    <div class="container-fluid justify-content-center text-center mt-5 pt-5" style="max-width:400px">
+        <h3>Select period of time for clients statistics</h3>
+        <hr style="max-width:360px" />
+
+        <div class="mt-4">
+            <form action="/client/admincreateclient" method="get" style="padding-bottom:20px">
+                <button class="btn btn-outline-primary mt-3">Create client</button>
+            </form>
+            <hr style="max-width:360px" />
         </div>
-        <div class="text-center mt-5">
-            <label>Start date (including)</label>
-            <input type="date" asp-for=@Model.StartDate class="form-control" />
-            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
-        </div>
-        <div class="text-center mt-5">
-            <label>End date (including)</label>
-            <input type="date" asp-for=@Model.EndDate class="form-control" />
-            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
-        </div>
-        <div class="text-center mt-5">
-            <button type="submit" class="btn btn-outline-primary">Select period</button>
-        </div>
-    </form>
-    <div class="container-fluid justify-content-center text-center mt-3" style="width:400px">
-        <form action="/client/admincreateclient" method="get">
-            <hr />
-            <button class="btn btn-outline-primary mt-3">Create client</button>
+
+        <form  action="/client/clientstartendstatistics" method="post">
+
+            <div class="text-center mt-5">
+                <label>Start date (including)</label>
+                <input type="date" asp-for=@Model.StartDate class="form-control" />
+                <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+            </div>
+            <div class="text-center mt-5">
+                <label>End date (including)</label>
+                <input type="date" asp-for=@Model.EndDate class="form-control" />
+                <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+            </div>
+            <div class="text-center mt-5">
+                <button type="submit" class="btn btn-outline-primary">Select period</button>
+            </div>
         </form>
     </div>
 </body>

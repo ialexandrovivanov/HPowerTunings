@@ -13,9 +13,11 @@ namespace HPowerTunings.Services.Repair
 {
     public class RepairService : IRepairService
     {
-        ApplicationDbContext context;
-        public RepairService(ApplicationDbContext context)
+        private readonly ApplicationDbContext context;
+        private readonly IMapper mapper;
+        public RepairService(ApplicationDbContext context, IMapper mapper)
         {
+            this.mapper = mapper;
             this.context = context;
         }
 
@@ -93,7 +95,7 @@ namespace HPowerTunings.Services.Repair
 
         public async Task<bool> FinalizeRepair(ProceedRepairModel model)
         {
-            var repair = await this.context.Repairs.FindAsync(model.In.RepairId);
+            var repair = await this.context.Repairs.FindAsync(model.In.Id);
             repair.RepairPrice = model.Out.RepairPrice;
             repair.IsRepairPanding = false;
             repair.FinishedOn = DateTime.Now;
@@ -119,22 +121,12 @@ namespace HPowerTunings.Services.Repair
 
         public ICollection<AdminRepairViewModel> GetAllRepairsPeriod(RepairStartEndDateViewModel model)
         {
-            ICollection<AdminRepairViewModel> result = new List<AdminRepairViewModel>();
+            var result = new List<AdminRepairViewModel>();
             var repairs = this.context
                               .Repairs
                               .Where(r => r.StartedOn >= model.StartDate && r.StartedOn <= model.EndDate)
                               .Select(r => r)
                               .ToList();
-
-            var config = new MapperConfiguration(c => 
-                         {
-                         c.CreateMap<Data.Models.Repair, AdminRepairViewModel>();
-                         c.CreateMap<Data.Models.Part, PartViewModel>();
-                         c.CreateMap<Data.Models.Car, CarViewModel>();
-                         c.CreateMap<Data.Models.Employee, EmployeeViewModel>();
-                         });
-
-            var mapper = config.CreateMapper();
 
             foreach (var repair in repairs)
             {
@@ -146,8 +138,8 @@ namespace HPowerTunings.Services.Repair
 
                 if (repairModel.Car != null)
                 {
-                    repairModel.Car.CarBrand = repair.Car.CarBrand.Name;
-                    repairModel.Car.CarModel = repair.Car.CarModel.Name;
+                    repairModel.Car.CarBrandName = repair.Car.CarBrand.Name;
+                    repairModel.Car.CarModelName = repair.Car.CarModel.Name;
                     repairModel.TotalIncomes = repairs.Sum(r => r.RepairPrice);
                 }
 
@@ -166,7 +158,7 @@ namespace HPowerTunings.Services.Repair
         public async Task<ICollection<string>> GetSuppliers()
         {
             await Task.Delay(0);
-            return this.context.Suppliers.Select(s => s.CompanyName).ToList();
+            return this.context.Suppliers.Select(s => s.SupplierName).ToList();
         }
 
         public async Task<ProceedRepairModel> ProceedRepair(string id)
@@ -174,25 +166,14 @@ namespace HPowerTunings.Services.Repair
             var repair = await this.context.Repairs.FindAsync(id);
 
             var model = new ProceedRepairModel();
+            model.In = mapper.Map<Data.Models.Repair, ProceedRepairModelIn>(repair);
 
-            model.In.RepairId = repair.Id;
-            model.In.CarBrand = repair.Car.CarBrand.Name;
-            model.In.CarModel = repair.Car.CarModel.Name;
-            model.In.RegNumber = repair.Car.RegNumber;
-            model.In.RepairName = repair.RepairName;
-            model.In.Suppliers = this.context.Suppliers.Select(s => s.CompanyName).ToList();
-            model.In.VinNumber = repair.Car.Rama;
+            model.In.Suppliers = this.context.Suppliers.Select(s => s.SupplierName).ToList();
             model.In.CountParts = repair.Parts.Count;
             model.In.SumPartsPrices = repair.Parts.Sum(p => p.Price).ToString("F2"); 
-            model.In.Parts = repair.Parts.Select(p => new PartStatisticsViewModel()
-                                                      {
-                                                          Name = p.Name,
-                                                          Brand = p.Brand,
-                                                          Price = p.Price,
-                                                          ClientRating = p.ClientRating,
-                                                          StartedOn = p.CreatedOn
-                                                      })
-                                                      .ToList();
+            model.In.Parts = repair.Parts
+                                   .Select(p => mapper.Map<Data.Models.Part, PartStatisticsViewModel>(p))
+                                   .ToList();
 
             return model;
         }
@@ -201,6 +182,7 @@ namespace HPowerTunings.Services.Repair
         {
             var appointment = await this.context.Appointments.FindAsync(id);
             appointment.IsAppointmentStarted = true;
+
             var result = await this.context.SaveChangesAsync();
 
             if (result > 0) return appointment;
