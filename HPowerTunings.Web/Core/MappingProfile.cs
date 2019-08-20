@@ -25,6 +25,8 @@ namespace HPowerTunings.Web.Core
             CreateMap<Data.Models.Employee, EmployeeViewModel>();
             CreateMap<Data.Models.Part, PartStatisticsViewModel>();
             CreateMap<Data.Models.Repair, ProceedRepairModelIn>();
+            CreateMap<Data.Models.Appointment, PendingAppointmentsViewModel>();
+            CreateMap<Data.Models.Appointment, ProceedAppointmentModelIn>();
         }
     }
 }

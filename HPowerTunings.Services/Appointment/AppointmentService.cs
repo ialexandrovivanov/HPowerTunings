@@ -50,27 +50,23 @@ namespace HPowerTunings.Services.Appointment
             client.Appointments.Add(appointment);
             var result = await this.context.SaveChangesAsync();
 
-            return result > 0 ? true : false;
+            return result > 0;
         }
 
         public async Task<ProceedAppointmentModel> GetAppoinmentDetails(string id)
         {
-            var appointment = this.context.Appointments.FirstOrDefault(a => a.Id == id);
+            var appointment = await this.context.Appointments.FindAsync(id);
 
-            var result = new ProceedAppointmentModel();
-            result.AppointmentDate = appointment.AppointmentDate;
-            result.In.ClientEmail = appointment.Client.Email;
-            result.In.Id = id;
-            result.In.AppoinemtnDate = appointment.AppointmentDate.Date.ToString("yyyy/MM/dd");
-            result.In.ProblemDescription = appointment.ProblemDescription;
-            result.In.ClientPhone = appointment.Client.PhoneNumber;
-            result.In.ClientUsername = appointment.Client.UserName;
-            result.In.ProblemDescription = appointment.ProblemDescription;
-            result.In.CarBrand = this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarBrand.Name;
-            result.In.CarModel = this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarModel.Name;
-            result.In.RegNumber = appointment.RegNumber;
+            var result = new ProceedAppointmentModel() { AppointmentDate = appointment.AppointmentDate };
 
-            await Task.Delay(0);
+            result.In = mapper.Map<Data.Models.Appointment, ProceedAppointmentModelIn>(appointment);
+
+            result.In.CarBrandName = 
+                this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarBrand.Name;
+            result.In.CarModelName = 
+                this.context.Cars.FirstOrDefault(c => c.RegNumber == appointment.RegNumber).CarModel.Name;
+            result.In.AppointmentDate = appointment.AppointmentDate.ToString("MM/dd/yyyy");
+            
             return result;
         }
 
@@ -86,7 +82,7 @@ namespace HPowerTunings.Services.Appointment
             appointment.IsAppointmentStarted = false;
             var result = await this.context.SaveChangesAsync();
 
-            return result > 0 ? true : false;
+            return result > 0;
         }
 
         public async Task<ICollection<MyAppointmentsViewModel>> GetMyAppointments()

@@ -6,6 +6,7 @@ using AutoMapper;
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.Appointment;
 using HPowerTunings.ViewModels.RepairModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace HPowerTunings.Services.Company
 {
@@ -19,17 +20,37 @@ namespace HPowerTunings.Services.Company
             this.mapper = mapper;
             this.context = context;
         }
-        public DateTime DateTie { get; private set; }
+        public DateTime DateTime { get; private set; }
 
         public async Task<List<PendingAppointmentsViewModel>> GetPendingAppointments()
         {
-            await Task.Delay(0);
-            var result = this.context
-                             .Appointments
-                             .Where(a => (a.IsAppointmentPending == true ||
-                                    a.AppointmentDate.Date == DateTime.Now.Date) && a.IsAppointmentStarted == false)
-                             .Select(a => mapper.Map<Data.Models.Appointment, PendingAppointmentsViewModel>(a))
-                             .ToList();
+            var result = new List<PendingAppointmentsViewModel>();
+            await this.context
+                      .Appointments
+                      .Include(a => a.Client)
+                      .Where(a => (a.IsAppointmentPending == true ||
+                             a.AppointmentDate.Date == DateTime.Now.Date) && a.IsAppointmentStarted == false)
+                      .ForEachAsync(a =>
+                       {
+                           var model = mapper.Map<Data.Models.Appointment, PendingAppointmentsViewModel>(a);
+                           model.CarCarBrandName = this.context
+                                                       .Cars
+                                                       .FirstOrDefaultAsync(c => c.RegNumber == model.RegNumber)
+                                                       .GetAwaiter()
+                                                       .GetResult()
+                                                       .CarBrand
+                                                       .Name;
+                           model.CarCarModelName = this.context
+                                                       .Cars
+                                                       .FirstOrDefaultAsync(c => c.RegNumber == model.RegNumber)
+                                                       .GetAwaiter()
+                                                       .GetResult()
+                                                       .CarModel
+                                                       .Name;
+
+                           result.Add(model);
+                       });
+                            
 
             return result;
         }

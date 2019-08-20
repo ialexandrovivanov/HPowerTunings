@@ -12,8 +12,8 @@
 </style>
 
 <body>
-    <div class="container-fluid justify-content-center mt-5 pt-5" style="max-width:400px">
-        <h4 class="text-center">Set final date/time for this appointment</h4>
+    <div class="container-fluid justify-content-center mt-5 pt-5" style="max-width:480px">
+        <h4 class="text-center">Set final <strong>date/time</strong> for this appointment</h4>
         <hr />
         <form id="finalize" method="post">
             <div class="form-group mt-4">
@@ -24,12 +24,12 @@
             </div>
 
             <div>
-                <p class="mt-5">Client username: <strong>@Model.In.ClientUsername</strong></p>
-                <p>Client phone number: <strong>@Model.In.ClientPhone</strong></p>
+                <p class="mt-5">Client username: <strong>@Model.In.ClientUserName</strong></p>
+                <p>Client phone number: <strong>@Model.In.ClientPhoneNumber</strong></p>
                 <p>Client email: <strong>@Model.In.ClientEmail</strong></p>
-                <p>Desired date for appoinment: <strong>@Model.In.AppoinemtnDate</strong></p>
-                <p>Car brand: <strong>@Model.In.CarBrand</strong></p>
-                <p>Car model: <strong>@Model.In.CarModel</strong></p>
+                <p>Desired date for appoinment: <strong>@Model.In.AppointmentDate</strong></p>
+                <p>Car brand: <strong>@Model.In.CarBrandName</strong></p>
+                <p>Car model: <strong>@Model.In.CarModelName</strong></p>
                 <p>Problem description: <strong>@Model.In.ProblemDescription</strong></p>
             </div>
             <div class="button-holder mt-5 d-flex justify-content-center">
@@ -37,6 +37,7 @@
             </div>
         </form>
     </div>
+    <div style="height:80px"></div>
 </body>
 
 

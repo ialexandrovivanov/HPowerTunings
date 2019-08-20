@@ -10,11 +10,14 @@ namespace HPowerTunings.ViewModels.Appointment
 
         private const string CorrectDateTimeMessage = "Insert correct date and time";
         private const string RequiredErrorMessage = "Description is required";
+        private const string DescriptionErrorMessage = "Use letters numbers .,:-_!?\"\' only";
 
         [IsValidAppointmentDate]
         [Required(ErrorMessage = CorrectDateTimeMessage)]
         public DateTime AppointmentDate { get; set; }
+
         [Required(ErrorMessage = RequiredErrorMessage)]
+        [RegularExpression("^[a-zA-zа-яА-Я0-9 ,.;:_()?!\"\'-]+$", ErrorMessage = DescriptionErrorMessage)]
         public string Description { get; set; }
 
         [IsRegNumberExists]
