@@ -1,17 +1,72 @@
 ﻿@using HPowerTunings.ViewModels.CarModels
 @model CarRepairsViewModel
 
-    <style>
-        body {
-            background-color: rgb(240, 240, 232)
-        }
-    </style>
+<style>
+    body {
+        background-color: rgb(240, 240, 232)
+    }
+</style>
 
-    <body>
-        @if (Model == null)
-        {
-            <div class=" mt-5 pt-5 mb-3 text-center"><h3>No service history yet</h3></div>
-            <div class="container-fluid w-50">
+<body>
+    @if (Model == null)
+    {
+        <div class=" mt-5 pt-5 mb-3 text-center"><h3>No service history yet</h3></div>
+        <div class="container-fluid w-50">
+            <hr />
+            <div class="mt-5 mb-3 text-center"><h4 style="color:brown">I would like to delete this car and this service history</h4></div>
+            <form action="/car/deleteyourcar/@Model.CarId" method="get">
+                <div class="conteiner-fluid button-holder mt-4 d-flex justify-content-center pt-3">
+                    <input type="submit" class="btn btn-outline-primary" value="Delete this car">
+                </div>
+            </form>
+        </div>
+        <div class="pt-5 pb-5 mb-5">
+        </div>
+    }
+    else
+    {
+        <div class="container-fluid w-50 mt-5 text-center pt-5">
+            <h3>Service history of my</h3>
+            <p>
+                <h3 style="color:indigo"><strong>@Model.CarBrand - @Model.CarModel</strong></h3>
+            </p>
+        </div>
+        <div class="container-fluid mt-4 justify-content-center text-center" style="max-width:640px">
+
+            @foreach (var item in Model.Repairs.OrderByDescending(r => r.FinishedOn))
+            {
+                <div class="container-fluid service-history-top" style="background-color:lightblue; border-top-right-radius:6px; border-top-left-radius:6px;">
+                    <br />
+                    <h4><strong>@item.RepairName</strong></h4>
+                    <br />
+                </div>
+                <div class="container-fluid service-history-bottom" style="background-color:lightyellow; border-bottom-left-radius:6px; border-bottom-right-radius:6px;">
+                    <p>This service has started on : <strong>@item.CreatedOn</strong></p>
+                    <p>This service has finished on :  <strong>@item.FinishedOn</strong></p>
+                    <br />
+                    <h4>Mechanics operated:</h4>
+                    @foreach (var mechanic in item.Mechanics)
+                    {
+                        <h5 style="color:indigo"><strong>@mechanic.FullName</strong></h5>
+                    }
+                    <br>
+                    <h4>Parts used for this service</h4>
+                    @foreach (var part in item.Parts)
+                    {
+                        <div style="border:1px solid #000000; border-radius:6px; padding-top:5px; 
+                             padding-bottom:5px">
+                            <p>Part name: @part.Name / Part brand: @part.Brand</p>
+                            <button>Rate this part</button>
+                        </div>
+                        <p></p>
+
+                    }
+                    <br />
+                    <p>How much I paid: <strong>$@item.RepairPrice</strong></p>
+                </div>
+            }
+
+            <div class="container-fluid">
                 <hr />
                 <div class="mt-5 mb-3 text-center"><h4 style="color:brown">I would like to delete this car and this service history</h4></div>
                 <form action="/car/deleteyourcar/@Model.CarId" method="get">
@@ -22,57 +77,8 @@
             </div>
             <div class="pt-5 pb-5 mb-5">
             </div>
-        }
-        else
-        {
-            <div class="container-fluid w-50 mt-5 text-center pt-5">
-                <h3>Service history of my</h3>
-                <p>
-                    <h3 style="color:indigo"><strong>@Model.CarBrand - @Model.CarModel</strong></h3>
-                </p>
-            </div>
-            <div class="container-fluid mt-4 justify-content-center text-center" style="max-width:640px">
-
-                @foreach (var item in Model.Repairs.OrderByDescending(r => r.FinishedOn))
-                {
-                    <div class="container-fluid service-history-top" style="background-color:lightblue; border-top-right-radius:6px; border-top-left-radius:6px;">
-                        <br />
-                        <h4><strong>@item.RepairName</strong></h4>
-                        <br />
-                    </div>
-                    <div class="container-fluid service-history-bottom" style="background-color:lightyellow; border-bottom-left-radius:6px; border-bottom-right-radius:6px;">
-                        <p>This service has started on : <strong>@item.CreatedOn</strong></p>
-                        <p>This service has finished on :  <strong>@item.FinishedOn</strong></p>
-                        <br />
-                        <h4>Mechanics operated:</h4>
-                        @foreach (var mechanic in item.Mechanics)
-                        {
-                            <h5 style="color:indigo"><strong>@mechanic.FullName</strong></h5>
-                        }
-                        <br>
-                        <h4>Parts used for this service</h4>
-                        @foreach (var part in item.Parts)
-                        {
-                            <p>Part name: @part.Name / Part brand: @part.Brand</p>
-                        }
-                        <br />
-                        <p>How much I paid: <strong>$@item.RepairPrice</strong></p>
-                    </div>
-                }
-
-                <div class="container-fluid">
-                    <hr />
-                    <div class="mt-5 mb-3 text-center"><h4 style="color:brown">I would like to delete this car and this service history</h4></div>
-                    <form action="/car/deleteyourcar/@Model.CarId" method="get">
-                        <div class="conteiner-fluid button-holder mt-4 d-flex justify-content-center pt-3">
-                            <input type="submit" class="btn btn-outline-primary" value="Delete this car">
-                        </div>
-                    </form>
-                </div>
-                <div class="pt-5 pb-5 mb-5">
-                </div>
-            </div>
-        }
+        </div>
+    }
 
 
-    </body>
+</body>

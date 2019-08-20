@@ -1,50 +1,45 @@
-﻿.description {
-    background-color: rgba(240, 240, 230, 0.6);
-    text-align: center;
-    padding: 6rem 2rem;
+﻿a:hover {
+    text-decoration: none;
 }
 
-    .description h2 {
-        font-size: 48px;
-        color: rgb(17,49,107);
-        font-weight: bold;
-        padding: 1em 0 0.5em 0;
-        border-bottom: 1px solid rgb(17,49,107);
-        display: inline-block;
-    }
+.description {
+    text-align: center;
+    padding: 8rem 2rem; 
+}
 
-    .description p {
-        width: 70%;
-        margin: 1.5em auto;
-    }
+.description h2 {
+    font-size: 48px;
+    color: rgb(17,49,107);
+    font-weight: bold;
+    padding: 1em 0 0.5em 0;
+    border-bottom: 1px solid rgb(17,49,107);
+    display: inline-block;
+}
+
+.description p {
+    width: 70%;
+    margin: 1.5em auto;
+}
 
 .motivation {
     display: flex;
 }
 
-    .motivation .img-container {
-        flex-basis: 50%;
-    }
+.motivation .img-container {
+    flex-basis: 50%;
+}
 
-    .motivation div {
-        flex-basis: 50%;
-        align-self: center;
-        text-align: center;
-    }
+.motivation div {
+     flex-basis: 50%;   
+     align-self: center;
+     text-align: center; 
+}
 
-    .motivation p {
-        max-width: 600px;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .motivation.blue {
-        background-color: aliceblue;
-    }
-
-    .motivation.yellow {
-        background-color: cornsilk;
-    }
+.motivation p {
+     max-width: 600px;
+     width: 100%;
+     margin: 0 auto;
+}
 
 .between {
     display: flex;
@@ -59,10 +54,15 @@
     width: 100%;
 }
 
+.services {
+    padding: 50px 0;    
+}
+
 .services ul {
     display: flex;
-    padding-top: 2em;
+    padding: 2em 0;
     padding-left: 1em;
+    margin-bottom: 0;
 }
 
 .services li {
@@ -70,20 +70,20 @@
     background: rgb(239,239,239);
 }
 
-    .services li a,
-    .services li img {
-        display: block;
-    }
+.services li a,
+.services li img {
+    display: block;
+}
 
-    .services li img {
-        width: 100%;
-    }
+.services li img {
+    width: 100%;
+}
 
-    .services li p {
-        margin: 1em auto;
-        text-align: center;
-        color: rgb(17,49,107);
-    }
+.services li p {
+    margin: 1em auto;
+    text-align: center;
+    color: rgb(17,49,107);
+}
 
 @media screen and (min-width:960px) {
     .description p,
@@ -98,7 +98,6 @@
     .services ul {
         flex-wrap: wrap;
     }
-
     .services li {
         flex: 1 0 47%;
         margin-bottom: 20px;
@@ -108,7 +107,7 @@
 @media screen and (max-width: 560px) {
 
     .description h2 {
-        font-size: 34px;
+        font-size:34px;
     }
 
     .description p,
@@ -119,10 +118,10 @@
     }
 
     .motivation {
-        flex-direction: column-reverse;
+        flex-direction: column-reverse  ;
     }
 
-        .motivation p {
-            padding: 100px 50px;
-        }
+    .motivation p {
+        padding: 100px 50px;
+    }
 }
