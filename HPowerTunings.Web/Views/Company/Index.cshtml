@@ -138,13 +138,11 @@
                 <p>Client's phone: <strong>@item.ClientPhoneNumber</strong></p>
                 <p>Client's username: <strong>@item.ClientUserName</strong></p>
                 <p>Repair name: <strong>@item.RepairName</strong></p>
-                <p>
-                    Mechanics operated:
+                <p>Mechanics operated:</p> 
                     @foreach (var mechanic in item.Mechanics)
                     {
                     <p><strong>@mechanic</strong></p>
-                }
-                    </p>
+                    }
                     <p>Repair description: <strong>@item.RepairDescription</strong></p>
                     <button onclick="window.location.href='/Repair/ProceedRepair?id=@item.RepairId';">
                         Proceed repair

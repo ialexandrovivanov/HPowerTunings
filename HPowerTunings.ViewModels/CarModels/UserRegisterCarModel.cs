@@ -10,10 +10,10 @@ namespace HPowerTunings.ViewModels.CarModels
         private const string distancePassedErrorMessage = "Use numbers only";
         private const string regNumberRegisteredErrorMessage = "Use numbers only";
 
-        public string CarBrand { get; set; }
+        public string CarBrandName { get; set; }
 
         [Required(ErrorMessage = "Car model is required")]
-        public string CarModel { get; set; }
+        public string CarModelName { get; set; }
 
         [Required(ErrorMessage = "Reg. number is required")]
         [IsRegNumberRegistered(ErrorMessage = regNumberRegisteredErrorMessage)]
