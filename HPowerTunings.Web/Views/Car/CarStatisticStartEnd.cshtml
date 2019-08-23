@@ -11,14 +11,31 @@
     ViewData["Title"] = "CarStatisticStartEnd";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
 }
-<div class="container-fluid justify-content-center" style="max-width:650px">
-    <h3 class="mt-4 pt-5 text-center">Cars registered in the period</h3>
+
+@{
+    var Cars = new Dictionary<string, int>();
+    foreach (var item in Model)
+    {
+        if (Cars.ContainsKey(item.CarBrandName + "/" + item.CarModelName))
+        {
+            Cars[item.CarBrandName + " - " + item.CarModelName] += 1;
+        }
+        else
+        {
+            Cars.Add(item.CarBrandName + " - " + item.CarModelName, 1);
+        }
+    }
+
+}
+
+<div class="container-fluid justify-content-center" style="max-width:600px">
+    <h3 class="mt-5 pt-5 text-center">Cars registered in the period</h3>
     <hr class="w-100" />
     @foreach (var item in Model)
     {
-        <div class="container-fluid justify-content-center mt-3 text-center" style="background-color:honeydew; border-radius:8px">
+        <div class="mt-3 text-center" style="background-color:cornsilk; border-radius:8px">
             <br />
-            <h4>Car with reg.number: <strong>@item.RegNumber</strong></h4>
+            <h5>Car with reg.number: <strong>@item.RegNumber</strong></h5>
             <br />
         </div>
         <br />
@@ -32,11 +49,10 @@
             <p>Owner's username: <strong>@item.ClientUserName</strong></p>
             <p></p>
         </div>
-        <hr class="w-100" />
     }
 </div>
 <br />
-<div class="container-fluid justify-content-center pr-4 pl-4" style="max-width:650px; background-color:chocolate; border-radius: 8px;">
+<div class="container-fluid justify-content-center pr-4 pl-4" style="max-width:600px; background-color:chocolate; border-radius: 8px;">
     <br />
     <p>
         <h5 class="text-center" style="color:antiquewhite">
@@ -44,9 +60,17 @@
             <strong style="color:indigo">@Model.Count</strong>
         </h5>
     </p>
+    <hr />
+    @foreach (var item in Cars)
+    {
+
+        <div class="text-center">
+            <p><strong>@item.Key : </strong><strong style="color:indigo; font-size:16px;">@item.Value</strong></p>
+            <hr />
+        </div>
+
+    }
     <br />
 </div>
-<br />
-<br />
-<br />
+<div style="height:80px;"></div>
 

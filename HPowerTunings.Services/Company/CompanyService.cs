@@ -40,6 +40,7 @@ namespace HPowerTunings.Services.Company
                                                        .GetResult()
                                                        .CarBrand
                                                        .Name;
+
                            model.CarCarModelName = this.context
                                                        .Cars
                                                        .FirstOrDefaultAsync(c => c.RegNumber == model.RegNumber)
@@ -59,7 +60,7 @@ namespace HPowerTunings.Services.Company
         {
             var result =  this.context
                               .Repairs
-                              .Where(r => r.IsRepairPanding == true)
+                              .Where(r => r.IsRepairPending == true)
                               .Select(r => new PendingRepairViewModel()
                               {
                                   CarBrand = r.Car.CarBrand.Name, CarModel = r.Car.CarModel.Name,

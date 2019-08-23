@@ -13,15 +13,15 @@
 </style>
 
 <div class="d-flex">
-    <div class="container-fluid justify-content-center mt-5 pt-5">
+    <div class="container-fluid justify-content-center mt-5 pt-5" style="max-width:640px;">
         <div class="text-center">
-            <h4>Clients for selected period</h4>
+            <h3>Clients for selected period</h3>
         </div>
-        <hr />
-        @foreach (var item in Model)
+        <hr style="max-width:580px"/>
+        @foreach (var item in Model.OrderByDescending(m => m.TotalMoneyPaid))
         {
             <div class="container-fluid justify-content-center">
-                <div class="text-center pl-5 pr-5" style="background-color:beige; border-radius: 8px">
+                <div class="text-center pl-5 pr-5" style="background-color:cornsilk; border-radius: 8px">
                     <br />
                     <h5>Client with email</h5>
                     <h5><strong>@item.Email</strong></h5>
@@ -39,7 +39,6 @@
                     <p>Total repairs count: <strong>@item.TotalRepairs</strong></p>
 
                 </div>
-                <hr />
             </div>
         }
         <br />

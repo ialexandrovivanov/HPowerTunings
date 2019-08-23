@@ -58,32 +58,38 @@ namespace HPowerTunings.Services.Employee
         public async Task<ICollection<EmployeeStartEndViewModel>> EmployeeStartEndStatistics
                                                                   (EmployeeStartEndStatisticsViewModel model)
         {
-            var result = this.context
+            var emplModels = this.context
                              .Employees
                              .Select(e => mapper.Map<Data.Models.Employee, EmployeeStartEndViewModel>(e))
                              .ToList();
 
-            foreach (var mod in result)
+            foreach (var mod in emplModels)
             {
                 var repairIds = this.context
-                                     .EmployeesRepairs
-                                     .Where(er => er.EmployeeId == mod.Id)
-                                     .Select(er => er.RepairId)
-                                     .ToList();
-                
+                                    .EmployeesRepairs
+                                    .Where(er => er.EmployeeId == mod.Id)
+                                    .Select(er => er.RepairId)
+                                    .ToList();
+
                 var repairs = this.context
                                   .Repairs
                                   .Include(r => r.Car)
                                   .Where(r => repairIds.Contains(r.Id) &&
-                                         r.StartedOn >= model.StartDate &&
-                                         r.StartedOn <= model.EndDate)
+                                         r.StartedOn.Value.Date >= model.StartDate.Value.Date &&
+                                         r.StartedOn.Value.Date <= model.EndDate.Value.Date)
                                   .Select(r => mapper.Map<Data.Models.Repair, EmployeeRepairViewModel>(r))
                                   .ToList();
+                                 
+                foreach (var rep in repairs)
+                {
+                    var repair = await this.context.Repairs.FirstOrDefaultAsync(r => r.Id == rep.Id);
+                    rep.NumberOfMechanics = repair.EmployeesRepairs.Count;
+                }
 
                 mod.Repairs = repairs;
             }
-            await Task.Delay(0);
-            return result;
+
+            return emplModels;
         }
 
         public async Task<bool> IsEmployeeExists(EmployeeDeleteViewModel deleteEmployee)

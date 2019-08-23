@@ -97,7 +97,7 @@ namespace HPowerTunings.Services.Repair
         {
             var repair = await this.context.Repairs.FindAsync(model.In.Id);
             repair.RepairPrice = model.Out.RepairPrice;
-            repair.IsRepairPanding = false;
+            repair.IsRepairPending = false;
             repair.FinishedOn = DateTime.Now;
 
             var result = await this.context.SaveChangesAsync();

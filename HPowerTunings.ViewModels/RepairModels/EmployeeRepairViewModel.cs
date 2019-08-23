@@ -11,7 +11,8 @@ namespace HPowerTunings.ViewModels.RepairModels
         public DateTime? StartedOn { get; set; }
         public DateTime? FinishedOn { get; set; }
         public string CarRegNumber { get; set; }
-        public bool IsRepairPanding { get; set; }
+        public bool IsRepairPending { get; set; }
         public int CountOfMechanics { get; set; }
+        public int NumberOfMechanics { get; set; }
     }
 }
