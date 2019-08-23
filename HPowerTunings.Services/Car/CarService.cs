@@ -114,19 +114,19 @@ namespace HPowerTunings.Services.Car
         {
             var claimsPrincipal = this.httpContext.HttpContext.User;
             var currentUser = await this.userManager.GetUserAsync(claimsPrincipal);
+            var carBrand = this.context.CarBrands.FirstOrDefault(c => c.Name == model.CarBrand);
+            var carModel = carBrand.Models.FirstOrDefault(m => m.Name == model.CarModel);
 
-            var car = mapper.Map<UserRegisterCarModel, Data.Models.Car>(model);
+            var car = new Data.Models.Car
+            {
+                RegNumber = model.RegNumber,
+                Rama = model.Rama,
+                TraveledDistance = int.Parse(model.DistancePassed),
+                ClientId = currentUser.Id,
+                CarModelId = carModel.Id,
+                CarBrandId = carBrand.Id
+            };
 
-            var carBrand = this.context.CarBrands.FirstOrDefault(c => c.Name == model.CarBrandName);
-            var carModel = carBrand.Models.FirstOrDefault(m => m.Name == model.CarModelName);
-
-            car.CarBrand = carBrand;
-            car.CarModel = carModel;
-            car.CarModelId = carModel.Id;
-            car.CarBrandId = carBrand.Id;
-            car.Client = currentUser;
-            car.ClientId = currentUser.Id;
-          
             await this.context.Cars.AddAsync(car);
             await this.context.SaveChangesAsync();
 

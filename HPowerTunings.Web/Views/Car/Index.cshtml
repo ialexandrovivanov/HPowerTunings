@@ -85,17 +85,18 @@
         <div class="container-fluid justify-content-center">
             <div class="form-group">
                 <label>Car brand</label>
-                <input asp-for="CarBrandName" class="form-control" readonly="readonly" value="@ViewData["CarBrand"]" />
+                <input asp-for="CarBrand" class="form-control" disabled="disabled" value="@ViewData["CarBrand"]" />
+                <span asp-validation-for="CarBrand" class="text-danger"></span>
             </div>
             <label>Car model</label>
-            <select class="custom-select" id="CarModel" asp-for="CarModelName">
+            <select class="custom-select" id="CarModel" asp-for="CarModel">
                 <option selected disabled>-- Choose Model --</option>
                 @foreach (var item in ViewData["CarModels"] as List<string>)
                 {
                     <option>@item</option>
                 }
             </select>
-            <span asp-validation-for="CarModelName" class="text-danger"></span>
+            <span asp-validation-for="CarModel" class="text-danger"></span>
             <div class="form-group mt-3">
                 <label>Reg. number</label>
                 <input asp-for="RegNumber" class="form-control w-100" placeholder="Registration number">

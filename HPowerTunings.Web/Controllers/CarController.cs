@@ -48,8 +48,8 @@ namespace HPowerTunings.Web.Controllers
                 }
             }
 
-            ViewData["CarBrand"] = model.CarBrandName;
-            ViewData["CarModels"] = await this.carService.GetAllCarModels(model.CarBrandName);
+            ViewData["CarBrand"] = model.CarBrand;
+            ViewData["CarModels"] = await this.carService.GetAllCarModels(model.CarBrand);
 
             return View(model);
         }
