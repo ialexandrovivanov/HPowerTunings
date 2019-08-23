@@ -17,38 +17,55 @@
 <h3>Employee Statistics</h3>
 <div class="container-fluid justify-content-center text-center" style="max-width:600px;">
     <hr style="max-width:600px" />
-    @foreach (var item in Model)
+    @foreach (var mechanic in Model)
     {
         <div style="background-color:cornsilk; padding-top:10px; padding-right:10px; padding-left:10px;
              padding-bottom:10px; border-top-left-radius:6px; border-top-right-radius:6px">
-            <h5 style="color:indigo"><strong>@item.FullName</strong></h5>
+            <h5 style="color:indigo"><strong>@mechanic.FullName</strong></h5>
         </div>
         <div style="background-color:darkseagreen;  padding-top:10px;
              padding-bottom:10px; padding-left:10px; padding-right:10px; border-bottom-left-radius:6px;
              border-bottom-right-radius:6px;">
-            <p>@item.Possition</p>
-            <p>@item.Email</p>
-            <p>@item.PhoneNumber</p>
+            <p>@mechanic.Possition</p>
+            <p>@mechanic.Email</p>
+            <p>@mechanic.PhoneNumber</p>
             <h5 style="color:indigo"><strong>Repairs:</strong></h5>
-            @foreach (var repair in item.Repairs)
+            @foreach (var repair in mechanic.Repairs)
             {
-                <p>Repair name: <strong>@repair.RepairName</strong></p>
+                if (repair.IsRepairPending)
+                {
+                    <p>Repair name: <strong>@repair.RepairName</strong>
+                        <span style="color:mediumvioletred"><strong> - active now</strong></span>
+                    </p>
+                }
+                else
+                {
+                    <p>Repair name: <strong>@repair.RepairName</strong></p>
+                }
             }
-            <p>Count of finalized repairs:
+            <p>
+                Count of finalized repairs:
                 @{
-                    var result = 0.0d;
-                    var allRepairs = item.Repairs.Where(r => r.IsRepairPending == false).Count();
-                    var allMechanics = item.Repairs.Where(r => r.IsRepairPending == false).Sum(r => r.NumberOfMechanics);
-                    if (allMechanics != 0) { result = allRepairs / allMechanics; }
+                    decimal result;
+                    var allRepairs = mechanic.Repairs.Where(r => r.IsRepairPending == false).Count();
+                    var allMechanics = mechanic.Repairs.Where(r => r.IsRepairPending == false).Sum(r => r.NumberOfMechanics);
+                    if (allMechanics != 0) { result = ((decimal)allRepairs / (decimal)allMechanics); }
                     else { result = allRepairs; }
                 }
                 <strong>@result</strong>
             </p>
-            <p>Sum of finalized repairs:
-                <strong>@item.Repairs.Where(r => r.IsRepairPending == false).Sum(r => r.RepairPrice)</strong>
-            </p>
-            <p>Pending repairs: 
-               <strong>@item.Repairs.FirstOrDefault(r => r.IsRepairPending == true)?.RepairName</strong>
+            <p>
+                Sum of finalized repairs:
+                @{ decimal money;}
+                @if (result != 0)
+                {
+                    money = mechanic.Repairs.Where(r => r.IsRepairPending == false).Sum(r => r.RepairPrice) * result;
+                }
+                else
+                {
+                    money = mechanic.Repairs.Where(r => r.IsRepairPending == false).Sum(r => r.RepairPrice);
+                }
+                <strong>$@money.ToString("F2")</strong>
             </p>
         </div>
 
