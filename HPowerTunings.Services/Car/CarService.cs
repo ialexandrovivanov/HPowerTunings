@@ -46,7 +46,7 @@ namespace HPowerTunings.Services.Car
 
         public async Task<bool> DeleteYourCar(DeleteYourCarModel model)
         {
-            var car = await this.context.Cars.FindAsync(model.CarId);
+            var car = await this.context.Cars.FindAsync(model.Id);
 
             if (car != null)
             {
@@ -167,18 +167,11 @@ namespace HPowerTunings.Services.Car
         public async Task<ICollection<CarStatisticViewModel>> GetAllCarsPeriod(CarStartEndDateViewModel model)
         {
             ICollection<CarStatisticViewModel> result = new List<CarStatisticViewModel>();
-            var cars = this.context
-                              .Cars
-                              .Where(r => r.CreatedOn.Value.Date >= model.StartDate.Date &&
-                              r.CreatedOn.Value.Date <= model.EndDate.Date)
-                              .Select(r => r);
-
-            var config = new MapperConfiguration(c =>
-            {
-                c.CreateMap<Data.Models.Car, CarStatisticViewModel>();
-            });
-
-            var mapper = config.CreateMapper();
+            var cars = await this.context
+                           .Cars
+                           .Where(r => r.CreatedOn.Value.Date >= model.StartDate.Date &&
+                                  r.CreatedOn.Value.Date <= model.EndDate.Date)
+                           .Select(r => r).ToListAsync();
 
             foreach (var car in cars.OrderBy(c => c.CreatedOn))
             {
@@ -189,42 +182,46 @@ namespace HPowerTunings.Services.Car
                 result.Add(modelForCollection);
             }
 
-            await Task.Delay(0);
             return result;
         }
 
         public async Task<DeleteYourCarModel> GetDeleteYourCar(string id)
         {
-            var car = this.context.Cars.FirstOrDefault(c => c.Id == id);
-            var model = new DeleteYourCarModel()
-            {
-                CarBrand = car.CarBrand.Name,
-                CarModel = car.CarModel.Name,
-                CarId = car.Id
-            };
+            var car = await this.context.Cars.FindAsync(id);
+            var model = mapper.Map<Data.Models.Car, DeleteYourCarModel>(car);
 
-            await Task.Delay(0);
             return model;
         }
 
         public async Task<List<string>> GetAllBmwModels()
         {
-            var models = this.context.CarModels.Where(m => m.CarBrand.Name == "BMW").Select(m => m.Name).ToList();
-            await Task.Delay(0);
+            var models = await this.context
+                                   .CarModels
+                                   .Where(m => m.CarBrand.Name == "BMW")
+                                   .Select(m => m.Name)
+                                   .ToListAsync();
             return models;
         }
 
         public async Task<List<string>> GetAllMiniModels()
         {
-            var models = this.context.CarModels.Where(m => m.CarBrand.Name == "Mini Cooper").Select(m => m.Name).ToList();
-            await Task.Delay(0);
+            var models = await this.context
+                                   .CarModels
+                                   .Where(m => m.CarBrand.Name == "Mini Cooper")
+                                   .Select(m => m.Name)
+                                   .ToListAsync();
+
             return models;
         }
 
         public async Task<List<string>> GetAllRangeModels()
         {
-            var models = this.context.CarModels.Where(m => m.CarBrand.Name == "Range Rover").Select(m => m.Name).ToList();
-            await Task.Delay(0);
+            var models = await this.context
+                                   .CarModels
+                                   .Where(m => m.CarBrand.Name == "Range Rover")
+                                   .Select(m => m.Name)
+                                   .ToListAsync();
+
             return models;
         }
     }

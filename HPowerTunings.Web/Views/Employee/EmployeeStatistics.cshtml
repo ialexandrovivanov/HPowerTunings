@@ -49,7 +49,7 @@
                     decimal result;
                     var allRepairs = mechanic.Repairs.Where(r => r.IsRepairPending == false).Count();
                     var allMechanics = mechanic.Repairs.Where(r => r.IsRepairPending == false).Sum(r => r.NumberOfMechanics);
-                    if (allMechanics != 0) { result = ((decimal)allRepairs / (decimal)allMechanics); }
+                    if (allMechanics != 0) { result = Math.Round((decimal)allRepairs / (decimal)allMechanics, 2); }
                     else { result = allRepairs; }
                 }
                 <strong>@result</strong>

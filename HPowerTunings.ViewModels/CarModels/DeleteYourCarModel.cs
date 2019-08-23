@@ -10,10 +10,10 @@ namespace HPowerTunings.ViewModels.CarModels
         [IsCurrentPassword]
         public string Password { get; set; }
         [HiddenInput]
-        public string CarBrand { get; set; }
+        public string CarBrandName { get; set; }
         [HiddenInput]
-        public string CarModel { get; set; }
+        public string CarModelName { get; set; }
         [HiddenInput]
-        public string CarId { get; set; }
+        public string Id { get; set; }
     }
 }

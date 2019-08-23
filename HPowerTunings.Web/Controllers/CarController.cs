@@ -110,8 +110,8 @@ namespace HPowerTunings.Web.Controllers
                 }
             }
 
-            ViewData["CarBrand"] = model.CarBrand;
-            ViewData["CarModel"] = model.CarModel;
+            ViewData["CarBrand"] = model.CarBrandName;
+            ViewData["CarModel"] = model.CarModelName;
 
             return View(model);
         }

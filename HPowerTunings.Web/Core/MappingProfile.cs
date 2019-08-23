@@ -33,6 +33,8 @@ namespace HPowerTunings.Web.Core
             CreateMap<Data.Models.Employee, EmployeeViewModel>();
             CreateMap<Data.Models.Part, PartViewModel>();
             CreateMap<UserRegisterCarModel, Data.Models.Car>();
+            CreateMap<Data.Models.Car, CarStatisticViewModel>();
+            CreateMap<Data.Models.Car, DeleteYourCarModel>();
         }
     }
 }
