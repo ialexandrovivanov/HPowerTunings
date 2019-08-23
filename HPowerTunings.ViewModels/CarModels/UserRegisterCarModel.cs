@@ -18,7 +18,7 @@ namespace HPowerTunings.ViewModels.CarModels
         [Required(ErrorMessage = "Reg. number is required")]
         [IsRegNumberRegistered(ErrorMessage = regNumberRegisteredErrorMessage)]
         [RegularExpression("^[ABCEHKLMNOPTXY]{1,2}[0-9]{4,6}[ABCEHKLMNOPTXY]{1,2}$", ErrorMessage = regNumberError)]
-        public string RegistrationNumber { get; set; }
+        public string RegNumber { get; set; }
 
         [Required(ErrorMessage ="VIN is required")]
         [Display(Name = "Vehicle identification number (VIN)")]

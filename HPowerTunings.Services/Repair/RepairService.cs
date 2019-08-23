@@ -111,7 +111,18 @@ namespace HPowerTunings.Services.Repair
 
         public ICollection<string> GetAllMechanicNames()
         {
-            return this.context.Employees.Where(e => e.Possition == "Mechanic").Select(e => e.FullName).ToList();
+            var busyMechanicIds = this.context
+                                      .Repairs
+                                      .Where(r => r.IsRepairPending == true)
+                                      .SelectMany(r => r.EmployeesRepairs)
+                                      .ToList()
+                                      .Select(r => r.EmployeeId);
+
+            return this.context
+                       .Employees
+                       .Where(e => e.Possition == "Mechanic" && !busyMechanicIds.Contains(e.Id))
+                       .Select(e => e.FullName)
+                       .ToList();
         }
 
         public ICollection<string> GetAllRegNumbers()

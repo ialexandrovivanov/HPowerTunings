@@ -3,7 +3,8 @@
     public class ClientCarsViewModel
     {
         public string Id { get; set; }
-        public string CarBrand { get; set; }
-        public string CarModel { get; set; }
+        public string CarBrandName { get; set; }
+        public string CarModelName { get; set; }
+        public string RegNumber { get; set; }
     }
 }

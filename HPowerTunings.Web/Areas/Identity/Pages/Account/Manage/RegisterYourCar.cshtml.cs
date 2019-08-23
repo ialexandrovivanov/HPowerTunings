@@ -1,3 +1,4 @@
+using AutoMapper;
 using HPowerTunings.Data;
 using HPowerTunings.Data.Models;
 using HPowerTunings.ViewModels.CarModels;
@@ -17,11 +18,15 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account.Manage
     {
         public InputModel Input { get; set; }
         public string  CarBrand;
-        private ApplicationDbContext context;
-        private  UserManager<Client> userManager;
+        private readonly ApplicationDbContext context;
+        private readonly UserManager<Client> userManager;
+        private readonly IMapper mapper;
 
-        public RegCarModel(ApplicationDbContext context, UserManager<Client> userManager)
+        public RegCarModel(ApplicationDbContext context, 
+                           UserManager<Client> userManager,
+                           IMapper mapper)
         {
+            this.mapper = mapper;
             this.context = context;
             this.userManager = userManager;
         }
@@ -31,12 +36,7 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account.Manage
             var client = await this.userManager.GetUserAsync(User);
             var clientCars = client.Cars
                                    .Where(c => c.IsDeleted == false)
-                                   .Select(c => new ClientCarsViewModel()
-                                   {
-                                       Id = c.Id,
-                                       CarBrand = c.CarBrand.Name,
-                                       CarModel = c.CarModel.Name
-                                   })
+                                   .Select(c => mapper.Map<Car, ClientCarsViewModel>(c))
                                    .ToList();
 
             Input = new InputModel()

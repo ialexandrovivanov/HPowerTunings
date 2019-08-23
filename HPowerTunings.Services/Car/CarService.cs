@@ -77,53 +77,36 @@ namespace HPowerTunings.Services.Car
             var repairs = this.context
                               .Repairs
                               .Where(r => r.CarId == carId && r.IsDeleted == false)
-                              .Select(r => r);
+                              .Select(r => r)
+                              .ToList();
 
-            var getRepairsViewModel = new CarRepairsViewModel();
+            var car = await this.context.Cars.FindAsync(carId);
 
-            getRepairsViewModel.CarModel = this.context.Cars.FirstOrDefault(c => c.Id == carId).CarModel.Name;
-            getRepairsViewModel.CarBrand = this.context.Cars.FirstOrDefault(c => c.Id == carId).CarBrand.Name;
-            getRepairsViewModel.CarId = carId;
+            var getRepairsViewModel = mapper.Map<Data.Models.Car, CarRepairsViewModel>(car);
 
             if (repairs != null)
             {
                 foreach (var repair in repairs)
                 {
-                    var repairViewModel = new RepairViewModel();
-
-                    repairViewModel.Description = repair.Description;
-                    repairViewModel.CreatedOn = repair.CreatedOn;
-                    repairViewModel.FinishedOn = repair.FinishedOn;
-                    repairViewModel.RepairPrice = repair.RepairPrice;
-                    repairViewModel.RepairName = repair.RepairName;
+                    var repairViewModel = mapper.Map<Data.Models.Repair, RepairViewModel>(repair);
 
                     var employeesIds = repair.EmployeesRepairs.Select(er => er.EmployeeId);
 
-                    repairViewModel.Mechanics = this.context
-                                                    .Employees
-                                                    .Where(e => employeesIds.Contains(e.Id))
-                                                    .Select(e => new EmployeeViewModel()
-                                                    {
-                                                        FullName = e.FullName,
-                                                        Id = e.Id
-                                                    })
-                                                    .ToList();
+                    foreach (var rep in getRepairsViewModel.Repairs)
+                    {
+                        rep.Mechanics = this.context
+                                            .Employees
+                                            .Where(e => employeesIds.Contains(e.Id))
+                                            .Select(e => mapper.Map<Data.Models.Employee, EmployeeViewModel>(e))
+                                            .ToList();
 
-                    repairViewModel.Parts = repair.Parts
-                                                  .Select(p => new PartViewModel()
-                                                  {
-                                                      Brand = p.Brand,
-                                                      Id = p.Id,
-                                                      Name = p.Name,
-                                                      Price = p.Price
-                                                  })
-                                                  .ToList();
-
-                    getRepairsViewModel.Repairs.Add(repairViewModel);
+                        rep.Parts = repair.Parts
+                                          .Select(p => mapper.Map<Data.Models.Part, PartViewModel>(p))
+                                          .ToList();
+                    }
                 }
             }
            
-            await Task.Delay(0);
             return getRepairsViewModel;
         }
 
@@ -136,7 +119,7 @@ namespace HPowerTunings.Services.Car
 
             var car = new Data.Models.Car
             {
-                RegNumber = model.RegistrationNumber,
+                RegNumber = model.RegNumber,
                 Rama = model.Rama,
                 TraveledDistance = int.Parse(model.DistancePassed),
                 ClientId = currentUser.Id,
