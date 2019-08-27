@@ -2,6 +2,11 @@
 using HPowerTunings.ViewModels.ClientModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Web.Controllers
@@ -21,6 +26,7 @@ namespace HPowerTunings.Web.Controllers
             return View();
         }
 
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult AdminCreateClient()
@@ -37,7 +43,8 @@ namespace HPowerTunings.Web.Controllers
                 await this.customClientService.CreateClientAsync(model, this.Url, this.Request.Scheme);
                 return Redirect("/Client/SuccessCreate");
             }
-            return View(model);
+           
+            return View();
         }
 
         [HttpPost]

@@ -51,7 +51,6 @@ namespace HPowerTunings.Services.Client
                 return true;
             }
 
-            await Task.Delay(0);
             return false;
         }
 

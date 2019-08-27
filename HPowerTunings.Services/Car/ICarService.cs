@@ -9,7 +9,7 @@ namespace HPowerTunings.Services.Car
     {
         Task<ICollection<string>> GetAllCarModels(string brand);
         Task<bool> UserCreateCar(UserRegisterCarModel model);
-        Task<CarRepairsViewModel> GetCarRepairs(string carId);
+        Task<CarRepairsViewModel> GetCarRepairsAsync(string carId);
         Task<bool> DeleteYourCar(DeleteYourCarModel model);
         Task<CarViewModel> GetCarDetailsAsync(string carId);
         ICollection<string> GetAllCarBrands();
@@ -19,5 +19,6 @@ namespace HPowerTunings.Services.Car
         Task<List<string>> GetAllBmwModels();
         Task<List<string>> GetAllMiniModels();
         Task<List<string>> GetAllRangeModels();
+        Task<bool> RatePartAsync(string pId, CarRepairsViewModel model);
     }
 }

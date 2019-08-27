@@ -13,7 +13,7 @@ namespace HPowerTunings.ViewModels.RepairModels
         public string Description { get; set; }
         public DateTime? CreatedOn { get; set; }
         public DateTime? FinishedOn { get; set; }
-        public ICollection<EmployeeViewModel> Mechanics { get; set; } = new List<EmployeeViewModel>();
+        public ICollection<string> Mechanics { get; set; } = new List<string>();
         public ICollection<PartViewModel> Parts { get; set; } = new List<PartViewModel>();
     }
 }

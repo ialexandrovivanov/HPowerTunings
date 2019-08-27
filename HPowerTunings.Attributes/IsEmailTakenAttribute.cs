@@ -9,6 +9,11 @@ namespace HPowerTunings.Attributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            if (value == null)
+            {
+                return new ValidationResult("Value is null");
+            }
+
             var userManager = (UserManager<Client>)validationContext
                         .GetService(typeof(UserManager<Client>));
 

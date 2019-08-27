@@ -11,6 +11,11 @@ namespace HPowerTunings.Attributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            if (value == null)
+            {
+                return new ValidationResult("Value is null");
+            }
+
             var httpContextAccessor = (IHttpContextAccessor)validationContext
                         .GetService(typeof(IHttpContextAccessor));
 
@@ -23,6 +28,7 @@ namespace HPowerTunings.Attributes
             {
                 return ValidationResult.Success;
             }
+
             if (userManager.Users.Any(u => u.UserName == value.ToString()))
             {
                 return new ValidationResult("Username is already taken");

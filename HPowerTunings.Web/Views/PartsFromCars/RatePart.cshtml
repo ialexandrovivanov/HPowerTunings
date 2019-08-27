@@ -1,0 +1,51 @@
+﻿@using HPowerTunings.ViewModels.PartModels
+@model RatePartViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#rate-part').modal('show');
+    });
+</script>
+
+<div class="container-fluid justify-content-center text-center" style="padding-top:200px">
+    <p style="font-size:38px; color:indigo; margin-bottom:10px"><strong>Rate  this part</strong></p>
+    <p></p>
+</div>
+<div class="container-fluid justify-content-center text-center">
+    <div class="container-fluid" style="padding:20px; border:solid #000 1px; max-width:500px; 
+         border-radius:6px; background-color:darkturquoise">
+        <p style="font-size:24px">Part name: <strong>@Model.Name</strong></p>
+        <p style="font-size:24px">Part brand: <strong>@Model.Brand</strong></p>
+    </div>
+</div>
+<div class="container-fluid justify-content-center text-center"style="margin-top:20px">
+    <button class="btn btn-outline-primary" onClick="javascript:history.go(-1)"> &nbsp; Return &nbsp;</button>
+</div>
+<div class="modal fade" id="rate-part" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addContactLabel">Rate this part 1 - 10</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="text-center" id="RatePart" action="/PartsFromCars/RatePart" method="post">
+                    <div class="d-flex">
+                        <label style=" font-size: 20px">Rate me &nbsp; &nbsp;</label>
+                        <input asp-for="@Model.Rate" class="form-control" style="max-width:100px">&nbsp; &nbsp; &nbsp;
+                        <input asp-for="@Model.Name" class="form-control" type="hidden" value="@Model.Name" />
+                        <input asp-for="@Model.Brand" class="form-control" type="hidden" value="@Model.Brand" />
+                        <input asp-for="@Model.Id" class="form-control" type="hidden" value="@Model.Id" />
+                        <input asp-for="@Model.RepairId" class="form-control" type="hidden" value="@Model.RepairId" />
+                        <button type="submit" class="btn btn-outline-primary" value="Submit"> &nbsp;Submit &nbsp;</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

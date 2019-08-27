@@ -45,19 +45,19 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Required")]
             [EmailAddress]
             [IsEmailTaken]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Required")]
             [StringLength(60)]
             [IsUsernameTaken]
             [IsUsernameCorrect]
             public string UserName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Required")]
             [StringLength(60, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]

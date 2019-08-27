@@ -73,11 +73,27 @@ namespace HPowerTunings.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Details(string id)
         {
-            var model = await this.carService.GetCarRepairs(id);
+            var model = await this.carService.GetCarRepairsAsync(id);
             
             if (model.Repairs == null) return View(model);
            
             return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Details(string id, string pId, CarRepairsViewModel model)
+        {
+            bool result = await this.carService.RatePartAsync(pId, model);
+
+            if (ModelState.IsValid && result)
+            {
+                return Redirect($"/PartsFromCars/SuccessRate/{id}");
+            }
+
+            model = await this.carService.GetCarRepairsAsync(model.Id);
+
+            return View(model);
         }
 
         [HttpGet]

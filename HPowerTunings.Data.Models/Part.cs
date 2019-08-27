@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HPowerTunings.Data.Models
 {
@@ -9,7 +8,6 @@ namespace HPowerTunings.Data.Models
         public string Name { get; set; }
         public string Brand { get; set; }
         public int ClientRating { get; set; }
-        public int CountRaters { get; set; }
 
 
         [ForeignKey("Supplier")]

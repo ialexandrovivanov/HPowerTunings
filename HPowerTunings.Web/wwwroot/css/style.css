@@ -17,7 +17,7 @@ textarea, input, select {
     border-color:black
 }
 p {
-    margin-bottom:0.5rem !important;
+    margin-bottom:8px !important;
 }
 .staticbtn {
     position:fixed;
@@ -69,14 +69,14 @@ p {
     font-family: "Orbitron";
     position: absolute;
     z-index: 10;
-    top: 12vh;
+    top: 10vh;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 3rem;
+    font-size: 55px;
     text-shadow: 2px 2px 2px rgba(255,255,255,0.6);
     background: rgba(240, 240, 230, 0.6);
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
-    padding: 0 1em;
+    padding: 5px 16px;
     line-height: 1;
     border-radius: 8px;
 }
@@ -90,7 +90,7 @@ p {
 }
 
 .site-footer > p {
-    font-size: 0.8rem;
+    font-size: 14px;
 }
 
 .nav-pills .nav-link.active {
@@ -100,7 +100,7 @@ p {
     padding: 0 15px;
 }
 .manage-nav a.nav-link {
-    font-size: 1.1em;
+    font-size: 17px;
 }
 
 .btn-outline-primary:hover,
@@ -124,7 +124,7 @@ form {
 }
 
 .boss {
-    font-size: 3.2rem;
+    font-size: 60px;
 }
 
 .delete-personal-data {

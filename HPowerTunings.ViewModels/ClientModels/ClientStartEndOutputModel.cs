@@ -12,5 +12,7 @@ namespace HPowerTunings.ViewModels.ClientModels
 
         [Required(ErrorMessage = RequiredErrorMessage)]
         public DateTime EndDate { get; set; }
+
+        public AdminRegisterClientOutputModel RegisterClient { get; set; } = new AdminRegisterClientOutputModel();
     }
 }

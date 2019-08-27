@@ -8,11 +8,18 @@ namespace HPowerTunings.Attributes
         private const string regex = "^[a-zA-Z 0-9]{1,30}$";
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            if (value == null)
+            {
+                return new ValidationResult("Value is null");
+            }
+
             var result = Regex.IsMatch((string)value, regex);
+
             if (!result)
             {
                 return new ValidationResult("Use letters spaces and numbers only");
             }
+
             return ValidationResult.Success;
         }
     }

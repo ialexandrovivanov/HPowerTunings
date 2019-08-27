@@ -33,7 +33,7 @@ namespace HPowerTunings.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Redirect($"/Employee/Index");
+                return Redirect("/Employee/Index");
             }
 
             if (await this.employeeService.CreateEmployee(model.RegisterEmployee))
@@ -42,7 +42,7 @@ namespace HPowerTunings.Web.Controllers
             }
 
             ModelState.AddModelError("", "Unable to register employee");
-            return View();
+            return Redirect("/Employee/Index");
         }
 
         [HttpGet]

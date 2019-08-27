@@ -61,7 +61,7 @@ namespace HPowerTunings.Services.Car
 
         public async Task<ICollection<string>> GetAllCarModels(string brand)
         {
-            var result = this.context   
+            var result = this.context
                              .CarModels
                              .Where(cm => cm.CarBrand.Name == brand)
                              .Select(cm => cm.Name)
@@ -72,42 +72,46 @@ namespace HPowerTunings.Services.Car
             return result;
         }
 
-        public async Task<CarRepairsViewModel> GetCarRepairs(string carId)
+        public async Task<CarRepairsViewModel> GetCarRepairsAsync(string carId)
         {
-            var repairs = this.context
-                              .Repairs
-                              .Where(r => r.CarId == carId && r.IsDeleted == false)
-                              .Select(r => r)
-                              .ToList();
-
             var car = await this.context.Cars.FindAsync(carId);
 
-            var getRepairsViewModel = mapper.Map<Data.Models.Car, CarRepairsViewModel>(car);
+            var mainModel = mapper.Map<Data.Models.Car, CarRepairsViewModel>(car);
 
-            if (repairs != null)
+            if (car.Repairs != null)
             {
-                foreach (var repair in repairs)
+                mainModel.Repairs = car.Repairs.Select(r => mapper.Map<Data.Models.Repair, RepairViewModel>(r)).ToList();
+            }
+
+            foreach (var repair in mainModel.Repairs)
+            {
+                var r = await this.context.Repairs.FindAsync(repair.Id);
+                var employeeIds = r.EmployeesRepairs.Select(er => er.EmployeeId).ToList();
+
+                repair.Mechanics = this.context
+                                       .Employees
+                                       .Where(e => employeeIds.Contains(e.Id))
+                                       .Select(e => e.FullName)
+                                       .ToList();
+
+                foreach (var p in repair.Parts)
                 {
-                    var repairViewModel = mapper.Map<Data.Models.Repair, RepairViewModel>(repair);
+                    var rating = this.context
+                                     .Parts
+                                     .Where(x => x.Name == p.Name)
+                                     .Select(x => x.ClientRating)
+                                     .Sum();
 
-                    var employeesIds = repair.EmployeesRepairs.Select(er => er.EmployeeId);
+                    var allParts = this.context
+                                       .Parts
+                                       .Where(part => part.Name == p.Name)
+                                       .Count();
 
-                    foreach (var rep in getRepairsViewModel.Repairs)
-                    {
-                        rep.Mechanics = this.context
-                                            .Employees
-                                            .Where(e => employeesIds.Contains(e.Id))
-                                            .Select(e => mapper.Map<Data.Models.Employee, EmployeeViewModel>(e))
-                                            .ToList();
-
-                        rep.Parts = repair.Parts
-                                          .Select(p => mapper.Map<Data.Models.Part, PartViewModel>(p))
-                                          .ToList();
-                    }
+                    p.Rating = (double)rating / (double)allParts;
                 }
             }
-           
-            return getRepairsViewModel;
+
+            return mainModel;
         }
 
         public async Task<bool> UserCreateCar(UserRegisterCarModel model)
@@ -140,28 +144,28 @@ namespace HPowerTunings.Services.Car
 
         public async Task<bool> AdminRegisterCar(AdminRegisterCarModel model)
         {
-            var carBrand = this.context.CarBrands.FirstOrDefault(b => b.Name == model.CarBrand);
-            var carModel = this.context.CarModels.FirstOrDefault(m => m.Name == model.CarModel);
-            var client = this.context.Users.FirstOrDefault(c => c.Email == model.Email);
+            var carBrand = await this.context.CarBrands.FirstOrDefaultAsync(b => b.Name == model.CarBrand);
+            var carModel = await this.context.CarModels.FirstOrDefaultAsync(m => m.Name == model.CarModel);
+            var client = await this.context.Users.FirstOrDefaultAsync(c => c.Email == model.Email);
 
 
             var carForDb = new Data.Models.Car()
-                           {
-                               RegNumber = model.RegNumber,
-                               CarBrand = carBrand,
-                               CarModel = carModel,
-                               CarBrandId = carBrand.Id,
-                               CarModelId = carModel.Id,
-                               Client = client,
-                               ClientId = client.Id,
-                               Rama = model.Rama,
-                               IsDeleted = false,
-                               TraveledDistance = model.DistancePassed,
-                           };
+            {
+                RegNumber = model.RegNumber,
+                CarBrand = carBrand,
+                CarModel = carModel,
+                CarBrandId = carBrand.Id,
+                CarModelId = carModel.Id,
+                Client = client,
+                ClientId = client.Id,
+                Rama = model.Rama,
+                IsDeleted = false,
+                TraveledDistance = model.DistancePassed,
+            };
 
             var result = await this.context.Cars.AddAsync(carForDb);
             await this.context.SaveChangesAsync();
-            return result == null ? false : true;
+            return result != null;
         }
 
         public async Task<ICollection<CarStatisticViewModel>> GetAllCarsPeriod(CarStartEndDateViewModel model)
@@ -223,6 +227,15 @@ namespace HPowerTunings.Services.Car
                                    .ToListAsync();
 
             return models;
+        }
+
+        public async Task<bool> RatePartAsync(string pId, CarRepairsViewModel model)
+        {
+            var part = await this.context.Parts.FindAsync(pId);
+            if (part == null) return false;
+            part.ClientRating = model.Rate;
+            await this.context.SaveChangesAsync();
+            return true;
         }
     }
 }
