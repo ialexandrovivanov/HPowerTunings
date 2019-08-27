@@ -35,11 +35,21 @@ namespace HPowerTunings.Web.Controllers
         [Authorize]
         public async Task<IActionResult> RatePart(RatePartViewModel model)
         {
-            bool result = await this.partsFromCarsService.RatePartAsync(model);
+           
 
-            if (ModelState.IsValid && result)
+            if (ModelState.IsValid)
             {
-                return Redirect($"/Car/Details/{model.RepairId}");
+                bool result = await this.partsFromCarsService.RatePartAsync(model);
+                if  (result)
+                {
+                    return Redirect($"/Car/Details/{model.RepairId}");
+                }
+
+                else
+                {
+                    return Redirect($"/PartsFromCars/RatePart?id={model.RepairId}&pId={model.Id}");
+                }
+                
             }
 
             return Redirect($"/PartsFromCars/RatePart?id={model.RepairId}&pId={model.Id}");

@@ -31,7 +31,7 @@
                 <h3 style="color:indigo"><strong>@Model.CarBrandName / @Model.CarModelName - @Model.RegNumber</strong></h3>
             </p>
         </div>
-        <div class="container-fluid mt-4 justify-content-center text-center" style="max-width:640px">
+        <div class="container-fluid mt-4 justify-content-center text-center" style="max-width:640px;">
 
             @foreach (var repair in Model.Repairs.OrderByDescending(r => r.FinishedOn))
             {
@@ -42,7 +42,7 @@
                     <br />
                 </div>
                 <div class="container-fluid service-history-bottom" style="background-color:lightyellow;
-                     border-bottom-left-radius:6px; border-bottom-right-radius:6px;">
+                     border-bottom-left-radius:6px; border-bottom-right-radius:6px; padding-bottom:10px">
                     <p>This service has started on: <strong>@repair.CreatedOn</strong></p>
                     <p>This service has finished on: <strong>@repair.FinishedOn</strong></p>
                     <br />
@@ -73,7 +73,7 @@
                         <p></p>
                     }
                     <br />
-                    <p style="margin-bottom:10px">How much I paid: <strong>$@repair.RepairPrice</strong></p>
+                    <p>How much I paid: <strong style="color:indigo">$@repair.RepairPrice</strong></p>
                 </div>
             }
 

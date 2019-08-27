@@ -62,7 +62,8 @@
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
                     <p><h5>Appointment date: </h5><h5><strong>@item.AppointmentDate</strong></h5></p>
                     <div>Problem description: <strong>@item.ProblemDescription</strong></div>
-                    <button onclick="window.location.href='/Repair/StartRepair?id=@item.Id';">
+                    <p></p>
+                    <button class="container-fluid" onclick="window.location.href='/Repair/StartRepair?id=@item.Id';">
                         Start repair
                     </button>
                     <div class="mb-5"></div>
@@ -88,7 +89,7 @@
                     <p><h5>Appointment date: </h5><h5><strong>@item.AppointmentDate</strong></h5></p>
                     <p><h5><strong>@item.AppointmentDate.Date.DayOfWeek</strong></h5></p>
                     <div>Problem description: <strong>@item.ProblemDescription</strong></div>
-                    <button class="mt-2" onclick="window.location.href='/Appointment/ProceedAppointment?id=@item.Id';">
+                    <button class="mt-2 container-fluid" onclick="window.location.href='/Appointment/ProceedAppointment?id=@item.Id';">
                         Proceed appointment
                     </button>
                     <div class="mb-5"></div>
@@ -109,7 +110,7 @@
                     <p><h5>Desired date: </h5><h5><strong>@item.AppointmentDate</strong></h5></p>
                     <p><h5><strong>@item.AppointmentDate.Date.DayOfWeek</strong></h5></p>
                     <div>Problem description: <strong>@item.ProblemDescription</strong></div>
-                    <button onclick="window.location.href='/Appointment/ProceedAppointment?id=@item.Id';">
+                    <button class="container-fluid" onclick="window.location.href='/Appointment/ProceedAppointment?id=@item.Id';">
                         Proceed appointment
                     </button>
                     <div class="mb-5"></div>
@@ -130,19 +131,19 @@
                 </div>
                 <p>Repair Started on: <strong>@item.StartDate</strong></p>
                 <p>Car with reg.number: <strong>@item.RegNumber</strong></p>
-                <p>Car brand: @item.CarBrand</p>
-                <p>Car model: @item.CarModel</p>
+                <p>Car brand: <strong style="color:blueviolet">@item.CarBrand</strong></p>
+                <p>Car model: <strong style="color:blueviolet">@item.CarModel</strong></p>
                 <p>Client's email: <strong>@item.ClientEmail</strong></p>
                 <p>Client's phone: <strong>@item.ClientPhoneNumber</strong></p>
                 <p>Client's username: <strong>@item.ClientUserName</strong></p>
-                <p>Repair name: <strong>@item.RepairName</strong></p>
+                <p>Repair name: <strong style="color:darkred; font-size:17px;">@item.RepairName</strong></p>
                 <p>Mechanics operated:</p> 
                     @foreach (var mechanic in item.Mechanics)
                     {
                     <p><strong>@mechanic</strong></p>
                     }
                     <p>Repair description: <strong>@item.RepairDescription</strong></p>
-                    <button onclick="window.location.href='/Repair/ProceedRepair?id=@item.RepairId';">
+                    <button class="container-fluid" onclick="window.location.href='/Repair/ProceedRepair?id=@item.RepairId';">
                         Proceed repair
                     </button>
                     <div class="mb-5"></div>

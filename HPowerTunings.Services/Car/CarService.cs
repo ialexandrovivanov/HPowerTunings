@@ -8,6 +8,7 @@ using HPowerTunings.ViewModels.RepairModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -107,7 +108,7 @@ namespace HPowerTunings.Services.Car
                                        .Where(part => part.Name == p.Name)
                                        .Count();
 
-                    p.Rating = (double)rating / (double)allParts;
+                    p.Rating = Math.Round((double)rating / (double)allParts, 2);
                 }
             }
 
