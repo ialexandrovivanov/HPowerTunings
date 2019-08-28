@@ -37,6 +37,10 @@
                 <input type="date" asp-for=@Model.EndDate class="form-control" />
                 <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
             </div>
+            <div>
+                <input type="hidden" asp-for=@Model.RegisterClient.Email class="form-control" value="pesho@gmail.com" />
+                <input type="hidden" asp-for=@Model.RegisterClient.UserName class="form-control" value="pesho" />
+            </div>
             <div class="text-center mt-5">
                 <button type="submit" class="btn btn-outline-primary">Select period</button>
             </div>

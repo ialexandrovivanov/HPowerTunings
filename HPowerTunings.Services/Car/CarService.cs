@@ -105,7 +105,9 @@ namespace HPowerTunings.Services.Car
 
                     var allParts = this.context
                                        .Parts
-                                       .Where(part => part.Name == p.Name)
+                                       .Where(part => part.Name == p.Name && 
+                                              part.Brand == p.Brand && 
+                                              p.Rating != 0)
                                        .Count();
 
                     p.Rating = Math.Round((double)rating / (double)allParts, 2);

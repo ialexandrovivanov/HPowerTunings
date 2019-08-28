@@ -55,6 +55,7 @@ namespace HPowerTunings.Web.Controllers
             {
                 return View();
             }
+
             var result = await this.customClientService.GetAllClientsPeriodAsync(model);
 
             return View(result);

@@ -59,9 +59,10 @@ namespace HPowerTunings.Web.Controllers
         {
             var result = await this.repairService.StartRepair(id);
             var regNumber = result?.RegNumber;
+            var description = result?.ProblemDescription;
             if (result != null)
             {
-                return Redirect($"/Repair/CreateRepair?regNumber={regNumber}");
+                return Redirect($"/Repair/CreateRepair?regNumber={regNumber}&description={description}");
             }
 
             return View();
@@ -69,10 +70,11 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult CreateRepair(string regNumber = null)
+        public IActionResult CreateRepair(string regNumber = null, string description = null)
         {
             ViewData["AllNames"] = this.repairService.GetAllMechanicNames().ToList();
             ViewData["RegNumber"] = regNumber;
+            ViewData["Description"] = description;
             return View();
         }
 

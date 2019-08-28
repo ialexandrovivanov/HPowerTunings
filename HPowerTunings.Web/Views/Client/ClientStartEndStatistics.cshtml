@@ -8,7 +8,7 @@
 
 <style>
     body {
-        background-color: rgb(240, 240, 240)
+        background-color: rgb(238, 240, 220)
     }
 </style>
 
@@ -21,7 +21,7 @@
         @foreach (var item in Model.OrderByDescending(m => m.TotalMoneyPaid))
         {
             <div class="container-fluid justify-content-center">
-                <div class="text-center pl-5 pr-5" style="background-color:cornsilk; border-radius: 8px">
+                <div class="text-center pl-5 pr-5" style="background-color:darkslategray; color:white; border-radius: 8px">
                     <br />
                     <h5>Client with email</h5>
                     <h5><strong>@item.Email</strong></h5>

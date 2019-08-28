@@ -2,10 +2,12 @@
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.Appointment;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Services.Appointment
@@ -14,12 +16,15 @@ namespace HPowerTunings.Services.Appointment
     {
         private readonly IMapper mapper;
         private ApplicationDbContext context;
+        private object callbackUrl;
         private readonly IHttpContextAccessor httpContextAccessor;
-
+        private readonly IEmailSender emailSender;
         public AppointmentService(ApplicationDbContext context, 
                                   IHttpContextAccessor httpContextAccessor,
-                                  IMapper mapper)
+                                  IMapper mapper,
+                                  IEmailSender emailSender)
         {
+            this.emailSender = emailSender;
             this.httpContextAccessor = httpContextAccessor;
             this.context = context;
             this.mapper = mapper;
@@ -81,6 +86,11 @@ namespace HPowerTunings.Services.Appointment
             appointment.IsAppointmentPending = false;
             appointment.IsAppointmentStarted = false;
             var result = await this.context.SaveChangesAsync();
+            if (result > 0)
+            {
+                await emailSender.SendEmailAsync(model.In.ClientEmail, $"You have an Approved Appointment for: {model.AppointmentDate}",
+                    $"Your appoinment has been approved with actual date {model.AppointmentDate}");
+            }
 
             return result > 0;
         }

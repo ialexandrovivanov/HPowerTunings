@@ -3,7 +3,7 @@
 
 <style>
     body {
-        background-color: rgb(240, 240, 240)
+        background-color: rgb(240, 240, 234)
     }
 </style>
 
@@ -33,9 +33,9 @@
     <hr class="w-100" />
     @foreach (var item in Model)
     {
-        <div class="mt-3 text-center" style="background-color:cornsilk; border-radius:8px">
+        <div class="mt-3 text-center" style="background-color:deepskyblue; border-radius:8px">
             <br />
-            <h5>Car with reg.number: <strong>@item.RegNumber</strong></h5>
+            <h5 >Car with reg.number: <strong style="color:white">@item.RegNumber</strong></h5>
             <br />
         </div>
         <br />
@@ -52,13 +52,14 @@
     }
 </div>
 <br />
-<div class="container-fluid justify-content-center pr-4 pl-4" style="max-width:600px; background-color:chocolate; border-radius: 8px;">
+<div class="container-fluid justify-content-center pr-4 pl-4" style="max-width:600px; background-color:gainsboro; 
+     border-radius: 8px;">
     <br />
     <p>
-        <h5 class="text-center" style="color:antiquewhite">
-            Count of the cars registered in selected period:
+        <h4 class="text-center" style="color:white">
+            Count of the cars registered in this period:
             <strong style="color:indigo">@Model.Count</strong>
-        </h5>
+        </h4>
     </p>
     <hr />
     @foreach (var item in Cars)

@@ -1,7 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+    <head>
+        <script src="~/js/jquery-3.4.1.min.js"></script>
+        <script>
+        $(document).ready(function () {
+            $('#go').click(function () {
+                $('.spinner').css('display', 'block');
+            });
+        });
+        </script>
+    </head>
+<div class="spinner" style="display:none">
+    <div class="center-div">
+        <div class="inner-div">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
 <div class="welcome w-100">
     <section class="carousel-holder">
         <h1 class="site-title text-center">HPowerTunings Car Service</h1>
@@ -40,25 +56,25 @@
 <section id="services" class="services">
     <ul>
         <li>
-            <a href="~/SiteViews/ServicesDiagnostics">
+            <a id="go" href="~/SiteViews/ServicesDiagnostics">
                 <img src="~/img/categories/chiptuning.jpg" alt="chiptunig" />
                 <p style="font-weight:400; color:indigo"><strong>Diagnostics</strong></p>
             </a>
         </li>
         <li>
-            <a href="~/SiteViews/ServicesBodywork">
+            <a  id="go" href="~/SiteViews/ServicesBodywork">
                 <img src="~/img/Categories/bodywork.jpg" alt="bodywork" />
                 <p style="font-weight:400; color:indigo"><strong>Bodywork & Painting</strong></p>
             </a>
         </li>
         <li>
-            <a href="~/SiteViews/ServicesRepair">
+            <a  id="go" href="~/SiteViews/ServicesRepair">
                 <img src="~/img/categories/repair.jpg" alt="repair" />
                 <p style="font-weight:400; color:indigo"><strong>Servicing & Repair</strong></p>
             </a>
         </li>
         <li>
-            <a href="~/SiteViews/ServicesRestoration">
+            <a  id="go" href="~/SiteViews/ServicesRestoration">
                 <img src="~/img/categories/restoration.jpg" alt="restoration" />
                 <p style="font-weight:400; color:indigo"><strong>Restoration</strong></p>
             </a>

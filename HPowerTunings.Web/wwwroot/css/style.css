@@ -285,8 +285,8 @@ form {
     top: 0;
     left: 0;
     background-color: Black;
-    filter: alpha(opacity=60);
-    opacity: 0.6;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
 }
 
 .loader {
@@ -295,8 +295,8 @@ form {
     border-radius: 50%;
     border-top: 16px solid #15a0ec;
     border-bottom: 16px solid #15a0ec;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }
