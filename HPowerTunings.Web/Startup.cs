@@ -27,6 +27,7 @@ using AutoMapper;
 using HPowerTunings.Common.Mapping;
 using System.Reflection;
 using HPowerTunings.Services.PartsFromCars;
+using HPowerTunings.Services.CarsForParts;
 
 namespace HPowerTunings.Web
 {
@@ -109,6 +110,7 @@ namespace HPowerTunings.Web
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IMapper, Mapper>();
             services.AddTransient<PartsFromCarsService, PartsFromCarsService>();
+            services.AddTransient<ICarsForPartsService, CarsForPartsService>();
 
             var mappingConfig = new MapperConfiguration(mc =>
             { mc.AddProfile(new MappingProfile()); });

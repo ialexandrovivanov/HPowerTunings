@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HPowerTunings.ViewModels.Appointment;
 using HPowerTunings.ViewModels.CarModels;
+using HPowerTunings.ViewModels.CarsForParts;
 using HPowerTunings.ViewModels.EmployeeModels;
 using HPowerTunings.ViewModels.PartModels;
 using HPowerTunings.ViewModels.RepairModels;
@@ -37,6 +38,8 @@ namespace HPowerTunings.Web.Core
             CreateMap<Data.Models.Car, DeleteYourCarModel>();
             CreateMap<Data.Models.Part, RatePartViewModel>();
             CreateMap<Data.Models.Part, PartViewModel>();
+            CreateMap<Data.Models.PartFromCar, PartFromCarViewModel>();
+            CreateMap<Data.Models.CarForParts, CarsForPartsMainViewModelIn>();
         }
     }
 }

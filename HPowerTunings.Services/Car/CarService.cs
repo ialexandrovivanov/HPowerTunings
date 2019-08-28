@@ -77,7 +77,7 @@ namespace HPowerTunings.Services.Car
         {
             var car = await this.context.Cars.FindAsync(carId);
 
-            var mainModel = mapper.Map<Data.Models.Car, CarRepairsViewModel>(car);
+            var mainModel = this.mapper.Map<Data.Models.Car, CarRepairsViewModel>(car);
 
             if (car.Repairs != null)
             {
@@ -99,15 +99,15 @@ namespace HPowerTunings.Services.Car
                 {
                     var rating = this.context
                                      .Parts
-                                     .Where(x => x.Name == p.Name)
+                                     .Where(part => part.Name == p.Name &&
+                                            part.Brand == p.Brand)
                                      .Select(x => x.ClientRating)
                                      .Sum();
 
                     var allParts = this.context
                                        .Parts
                                        .Where(part => part.Name == p.Name && 
-                                              part.Brand == p.Brand && 
-                                              p.Rating != 0)
+                                              part.Brand == p.Brand && part.ClientRating > 0)
                                        .Count();
 
                     p.Rating = Math.Round((double)rating / (double)allParts, 2);
@@ -195,7 +195,7 @@ namespace HPowerTunings.Services.Car
         public async Task<DeleteYourCarModel> GetDeleteYourCar(string id)
         {
             var car = await this.context.Cars.FindAsync(id);
-            var model = mapper.Map<Data.Models.Car, DeleteYourCarModel>(car);
+            var model = this.mapper.Map<Data.Models.Car, DeleteYourCarModel>(car);
 
             return model;
         }

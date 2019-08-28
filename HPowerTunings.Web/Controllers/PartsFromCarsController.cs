@@ -21,7 +21,7 @@ namespace HPowerTunings.Web.Controllers
         [Authorize]
         public async Task<IActionResult> RatePart(string id, string pId)
         {
-            if (pId == null || id == null)
+            if (id == null || pId == null)
             {
                 return Redirect($"/Car/Details/{id}");
             }

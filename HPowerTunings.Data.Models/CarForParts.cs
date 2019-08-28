@@ -9,6 +9,7 @@ namespace HPowerTunings.Data.Models
         public string RegistrationNumber { get; set; }
         public string Rama { get; set; }
         public decimal Price { get; set; }
+        public string Color { get; set; }
 
         public virtual ICollection<PartFromCar> PartsFromCar { get; set; }
     }

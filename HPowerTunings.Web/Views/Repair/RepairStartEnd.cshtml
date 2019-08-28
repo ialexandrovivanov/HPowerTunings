@@ -11,12 +11,12 @@
     {
 
         <h3 class="mt-5 pt-5">Finilized repairs for Period</h3>
+        <h4 style="margin-top:20px"></h4>
         <div class="conteiner-fluid justify-content-center text-center" style="max-width:600px;">
-            <hr />
             @foreach (var item in Model.OrderByDescending(m => m.FinishedOn))
             {
-                <div style="border:1px solid #000; border-radius:6px; padding-bottom:15px">
-                    <div class="mb-2" style="background-color:honeydew; border-radius:6px;padding-left:10px;
+                <div style="border:1px solid gainsboro; border-radius:6px; padding-bottom:15px; background-color:gainsboro" >
+                    <div class="mb-2" style="background-color:teal; color:white; border-radius:6px;padding-left:10px;
                          padding-right:10px; padding-top:5px; padding-top:15px; padding-bottom:10px">
                         <h4>
                             Repair on car with Reg. numer: <strong>@item.Car.RegNumber</strong>
@@ -50,8 +50,8 @@
                         <p>Repair finished on:  <strong>@item.FinishedOn</strong></p>
                         <p>Repair price was: <strong>@item.RepairPrice</strong></p>
                     </div>
-                    <div style="background-color:beige;
-                         border-radius:6px;">
+                    <div class="container-fluid" style="background-color:beige;
+                         border-radius:6px; max-width:400px">
                         <h5>
                             <strong>Mechanics operated in this repair:</strong>
                         </h5>
@@ -65,9 +65,9 @@
                         }
                     </div>
                     <div class="text-center">
-                        <h5 class="mt-2 mb-2 text-center w-100" style="background-color:beige;
+                        <h5 class="container-fluid mb-2 text-center w-100" style="background-color:beige;
                              border-radius:6px;
-                            padding-left:60px; padding-right:60px">
+                            padding-left:60px; padding-right:60px; max-width:400px">
                             <strong>Parts used in this repair:</strong>
                         </h5>
                     </div>

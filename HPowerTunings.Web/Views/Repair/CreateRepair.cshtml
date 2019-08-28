@@ -16,45 +16,51 @@
 </head>
 
 <body>
-    <h3 class="pt-5 mt-5">Create new repair</h3>
-    <form id="Car" action="/Repair/CreateRepair" method="post"
-          class="form-group mt-2 container-fluid justify-content-center text-center" style="max-width:400px">
-        <label>On car with reg. number</label>
-        <input asp-for="@Model.CarRegNumber" class="form-control" placeholder="Reg.number" value=@ViewData["RegNumber"]>
-        <span asp-validation-for="@Model.CarRegNumber" class="text-danger"></span>
-        <p></p>
-        <label>Repair name</label>
-        <input asp-for="@Model.RepairName" class="form-control" placeholder="Repair name">
-        <span asp-validation-for="@Model.RepairName" class="text-danger"></span>
-        <p></p>
-        <label>Description</label>
-        <textarea rows="5" cols="60" asp-for="@Model.Description"
-                  class="form-control" placeholder="Description" value="@ViewData["Description"]"></textarea>
-        <span asp-validation-for="@Model.Description" class="text-danger"></span>
-        @{ var result = (List<string>)@ViewData["AllNames"]; }
-        <p></p>
-        <label>Select mechanic one</label>
-        <select asp-for="@Model.Mechanic1FullName" class="form-control">
-            <option selected disabled>-- Select mechanic --</option>
-            @foreach (var item in result)
-            {
-                <option value="@item">@item</option>
-            }
-        </select>
-        <p></p>
-        <label>Select mechanic two</label>
-        <select asp-for="@Model.Mechanic2FullName" class="form-control">
-            <option selected disabled>-- Select mechanic --</option>
-            @foreach (var item in result)
-            {
-                <option value="@item">@item</option>
-            }
-        </select>
-
-        <div class="button-holder mt-4">
-            <button type="submit" class="admincreaterepair btn btn-outline-primary">Create repair</button>
-        </div>
-    </form>
+    
+    <div class="container-fluid justify-content-center text-center" style="max-width:500px; padding:20px; 
+         border-radius:6px; background-color:gainsboro; margin-top:70px">
+        <form id="Car" action="/Repair/CreateRepair" method="post"
+              class="form-group">
+            <div class="d-flex">
+                <h3 class="container-fluid" style="margin-right:60px">Start repair</h3>
+                <div class="button-holder">
+                    <button type="submit" class="btn btn-success" style="margin-left:60px;">&nbsp;Start&nbsp;</button>
+                </div>
+            </div>
+            <p></p>
+            <label style="color:indigo">On car with reg. number</label>
+            <input asp-for="@Model.CarRegNumber" class="form-control" placeholder="Reg.number" value=@ViewData["RegNumber"]>
+            <span asp-validation-for="@Model.CarRegNumber" class="text-danger"></span>
+            <p></p>
+            <label>Repair name</label>
+            <input asp-for="@Model.RepairName" class="form-control" placeholder="Repair name">
+            <span asp-validation-for="@Model.RepairName" class="text-danger"></span>
+            <p></p>
+            <label>Description</label>
+            <textarea rows="5" cols="60" asp-for="@Model.Description"
+                      class="form-control" placeholder="Description" value="@ViewData["Description"]"></textarea>
+            <span asp-validation-for="@Model.Description" class="text-danger"></span>
+            @{ var result = (List<string>)@ViewData["AllNames"]; }
+            <p></p>
+            <label>Select mechanic one</label>
+            <select asp-for="@Model.Mechanic1FullName" class="form-control">
+                <option selected disabled>-- Select mechanic --</option>
+                @foreach (var item in result)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+            <p></p>
+            <label>Select mechanic two</label>
+            <select asp-for="@Model.Mechanic2FullName" class="form-control">
+                <option selected disabled>-- Select mechanic --</option>
+                @foreach (var item in result)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </form>
+    </div>
 </body>
 
 @section Scripts {

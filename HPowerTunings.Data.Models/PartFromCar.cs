@@ -6,7 +6,7 @@ namespace HPowerTunings.Data.Models
     public class PartFromCar : BaseModel
     {
         public decimal Price { get; set; }
-        public string PartName { get; set; }
+        public string Name { get; set; }
         public DateTime? SaledOn { get; set; } = DateTime.Now;
 
         [ForeignKey("CarForParts")]
