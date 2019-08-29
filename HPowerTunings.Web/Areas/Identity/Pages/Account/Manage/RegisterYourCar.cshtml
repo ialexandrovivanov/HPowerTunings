@@ -25,15 +25,16 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid justify-content-center"></div>
-    <div class="container-fluid justify-content-center text-center" style="background-color:cadetblue;
-         opacity:0.9; padding-bottom:10px; padding-left:10px; padding-right:10px; padding-top:10px;
-         max-width:370px; border-radius:6px">
-        <h4 class="text-center"><strong>Register your car</strong></h4>
-    </div>
-    <br />
-    <div class="container-fluid justify-content-center" style="max-width:400px">
+   
+    <div class="container-fluid justify-content-center" style="max-width:400px;
+         padding:20px; background-color:lightgray; opacity:0.7; border-radius:6px;">
         <form id="register-car-form" method="post">
+            <div class="d-flex" style="margin-bottom:30px">
+                <h4>Register your car</h4>
+                <div class="button-holder" style="margin-left:50px">
+                    <button id="Go" type="submit" class="btn btn-outline-primary">Select Brand</button>
+                </div>
+            </div>
             <select class="custom-select" id="CarBrand" name="carBrand">
                 <option selected disabled>-- Choose Car Brand --</option>
                 @foreach (var item in Model.Input.CarBrands)
@@ -41,14 +42,12 @@
                     <option>@item</option>
                 }
             </select>
-            <div class="button-holder mt-4 d-flex justify-content-center">
-                <button id="Go" type="submit" class="btn btn-outline-primary">Select Brand</button>
-            </div>
+           
         </form>
     </div>
     <br />
     <h4 class="text-center">View my car(s)</h4>
-    <hr style="max-width:400px" />
+    <hr style="max-width:480px" />
     <div class="text-center">
         @foreach (var item in Model.Input.ClientCars)
         {

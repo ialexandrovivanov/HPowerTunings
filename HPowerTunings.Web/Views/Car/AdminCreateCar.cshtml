@@ -18,17 +18,23 @@
 </head>
 
 <body>
-    <div class="text-center pt-5 mt-5 w-100">
-        <h3>Create car</h3>
-        <hr class="w-25" />
-        <form class="container-fluid justify-content-center" style="width:400px" id="Car" action="/Car/AdminCreateCar" method="post">
-            <div>
+    <div style="padding:60px"></div>
+    <div class="container-fluid justify-content-center" style="max-width:400px;
+                 padding:20px; background-color:lightgray; opacity:0.7; border-radius:6px;">
+        <form id="Car" action="/Car/AdminCreateCar" method="post">
+            <div class="d-flex" style="padding-bottom:20px">
+                <h3 >Add new car</h3>
+                <div class="button-holder" style="margin-left:120px">
+                    <button type="submit" class="btn btn-outline-primary">Create</button>
+                </div>
+            </div>
+            <div class="text-center">
                 <label>Select reg.number</label>
                 <input asp-for="@Model.RegNumber" class="form-control" placeholder="Reg.number">
                 <span asp-validation-for="@Model.RegNumber" class="text-danger"></span>
             </div>
 
-            <div class="mt-5 mb-2">
+            <div class="mt-5 mb-2 text-center">
                 <label>Select car brand</label>
                 <select asp-for="@Model.CarBrand" class="form-control">
                     <option selected disabled>-- Select car brand --</option>
@@ -37,9 +43,6 @@
                         <option value="@item">@item</option>
                     }
                 </select>
-            </div>
-            <div class="button-holder mt-5">
-                <button type="submit" class="btn btn-outline-primary">Create car</button>
             </div>
         </form>
     </div>

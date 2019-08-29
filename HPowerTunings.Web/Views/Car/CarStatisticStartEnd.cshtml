@@ -29,13 +29,12 @@
 }
 
 <div class="container-fluid justify-content-center" style="max-width:600px">
-    <h3 class="mt-5 pt-5 text-center">Cars registered in the period</h3>
-    <hr class="w-100" />
+    <h3 class="mt-5 pt-5 text-center" style="margin-bottom:30px">Cars registered in the period</h3>
     @foreach (var item in Model)
     {
-        <div class="mt-3 text-center" style="background-color:deepskyblue; border-radius:8px">
+        <div class="mt-3 text-center" style="background-color:cornflowerblue; border-radius:6px;">
             <br />
-            <h5 >Car with reg.number: <strong style="color:white">@item.RegNumber</strong></h5>
+            <h5 style="color:white">Car with reg.number: <strong>@item.RegNumber</strong></h5>
             <br />
         </div>
         <br />
@@ -56,18 +55,16 @@
      border-radius: 8px;">
     <br />
     <p>
-        <h4 class="text-center" style="color:white">
+        <h4 class="text-center" style="color:white; background-color:cornflowerblue; border-radius:6px; padding:5px">
             Count of the cars registered in this period:
-            <strong style="color:indigo">@Model.Count</strong>
+            <strong>@Model.Count</strong>
         </h4>
     </p>
-    <hr />
     @foreach (var item in Cars)
     {
 
         <div class="text-center">
-            <p><strong>@item.Key : </strong><strong style="color:indigo; font-size:16px;">@item.Value</strong></p>
-            <hr />
+            <p><strong>@item.Key </strong><strong style="color:deepskyblue; font-size:18px;">@item.Value</strong></p>
         </div>
 
     }

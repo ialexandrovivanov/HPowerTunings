@@ -25,7 +25,7 @@
     }
     else
     {
-        <div class="container-fluid w-50 mt-5 text-center pt-5">
+        <div class="container-fluid mt-5 text-center pt-5" style="max-width:500px">
             <h3>Service history of my</h3>
             <p>
                 <h3 style="color:indigo"><strong>@Model.CarBrandName / @Model.CarModelName - @Model.RegNumber</strong></h3>
@@ -57,8 +57,8 @@
 
                     @foreach (var part in repair.Parts)
                     {
-                        <div style="border:1px solid #000; border-radius:6px; padding-top:5px;
-                             padding-bottom:10px">
+                        <div style="border:1px solid #808080; border-radius:6px; padding-top:5px;
+                             padding-bottom:10px; background-color:lightgray">
                             <p>
                                 Part name: <strong>@part.Name</strong>
                                 / Part brand: <strong>@part.Brand</strong>
@@ -75,6 +75,7 @@
                     <br />
                     <p>How much I paid: <strong style="color:indigo">$@repair.RepairPrice</strong></p>
                 </div>
+                <div style="padding:10px"></div>
             }
 
             <div class="container-fluid">
