@@ -2,6 +2,7 @@
 
 namespace HPowerTunings.ViewModels.CarsForParts
 {
+
     public class PartFromCarViewModel
     {
         public string Id { get; set; }

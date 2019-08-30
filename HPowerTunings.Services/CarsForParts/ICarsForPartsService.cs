@@ -7,5 +7,6 @@ namespace HPowerTunings.Services.CarsForParts
     public interface ICarsForPartsService
     {
         Task<List<CarsForPartsMainViewModelIn>> GetAllCarModelsAsync();
+        Task<bool> CreateCar(CarsForPartsMainViewModelOut model);
     }
 }

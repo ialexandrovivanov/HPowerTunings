@@ -40,6 +40,7 @@ namespace HPowerTunings.Web.Core
             CreateMap<Data.Models.Part, PartViewModel>();
             CreateMap<Data.Models.PartFromCar, PartFromCarViewModel>();
             CreateMap<Data.Models.CarForParts, CarsForPartsMainViewModelIn>();
+            CreateMap<CarsForPartsMainViewModelOut, Data.Models.CarForParts>();
         }
     }
 }

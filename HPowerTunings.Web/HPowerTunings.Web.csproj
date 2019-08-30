@@ -9,6 +9,7 @@
   <ItemGroup>
     <Content Remove="Views\Appointment\SuccessCreate.cshtml" />
     <Content Remove="Views\CarsForParts\Index.cshtml" />
+    <Content Remove="Views\CarsForParts\SellPart.cshtml" />
     <Content Remove="Views\Car\AdminRegisterCar.cshtml" />
     <Content Remove="Views\Car\CarStatistic.cshtml" />
     <Content Remove="Views\Car\DeleteYourCar.cshtml" />
@@ -59,6 +60,7 @@
   <ItemGroup>
     <None Include="Views\Appointment\SuccessCreate.cshtml" />
     <None Include="Views\CarsForParts\Index.cshtml" />
+    <None Include="Views\CarsForParts\SellPart.cshtml" />
     <None Include="Views\Car\AdminRegisterCar.cshtml" />
     <None Include="Views\Car\CarStatistic.cshtml" />
     <None Include="Views\Car\DeleteYourCar.cshtml" />

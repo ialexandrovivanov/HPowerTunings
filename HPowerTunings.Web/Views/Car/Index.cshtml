@@ -1,88 +1,95 @@
 ﻿@using HPowerTunings.ViewModels.CarModels
 @model UserRegisterCarModel
-    <head>
-        <style>
-            body {
-                background-color: rgb(240, 240, 230)
-            }
-            .center-div {
-                width: 300px;
-                height: 300px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin-left: -150px;
-                margin-top: -150px;
-            }
+<head>
+    <style>
+        body {
+            background-color: rgb(240, 240, 230)
+        }
 
-            .spinner {
-                position: fixed;
-                z-index: 999;
-                height: 100%;
-                width: 100%;
-                top: 0;
-                left: 0;
-                background-color: Black;
-                filter: alpha(opacity=60);
-                opacity: 0.6;
-            }
+        .center-div {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+        }
 
-            .loader {
-                margin: auto;
-                border: 16px solid #f3f3f3;
-                border-radius: 50%;
-                border-top: 16px solid #15a0ec;
-                border-bottom: 16px solid #15a0ec;
-                width: 120px;
-                height: 120px;
-                -webkit-animation: spin 2s linear infinite;
-                animation: spin 2s linear infinite;
-            }
+        .spinner {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+        }
 
-            .inner-div {
-                background-color: white;
-                border-radius: 12px;
-                margin: auto;
-                padding: 2%;
-                width: 150px;
-            }
+        .loader {
+            margin: auto;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #15a0ec;
+            border-bottom: 16px solid #15a0ec;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
 
-            @@-webkit-keyframes spin {
-                0% {
-                    -webkit-transform: rotate(0deg);
-                }
+        .inner-div {
+            background-color: white;
+            border-radius: 12px;
+            margin: auto;
+            padding: 2%;
+            width: 150px;
+        }
 
-                100% {
-                    -webkit-transform: rotate(360deg);
-                }
+        @@-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
             }
 
-            @@keyframes spin {
-                0% {
-                    transform: rotate(0deg);
-                }
-
-                100% {
-                    transform: rotate(360deg);
-                }
+            100% {
+                -webkit-transform: rotate(360deg);
             }
-        </style>    
-        <script src="~/js/jquery-3.4.1.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#').click(function () {
-                    $('.spinner').css('display', 'block');
-                });
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#').click(function () {
+                $('.spinner').css('display', 'block');
             });
-        </script>
-    </head>
+        });
+    </script>
+</head>
 
 
-<div class="container-fluid justify-content-center pt-5 mt-5" style="width:400px">
-    <h4 class="text-center">Register your car</h4>
-    <br />
+<div class="container-fluid justify-content-center pt-5 mt-5" style="max-width:400px">
     <form id="Car" method="post" class="text-center">
         <div class="container-fluid justify-content-center">
+            <div class="d-flex" style="padding-bottom:20px">
+                <h3>Register car</h3>
+                <div class="button-holder" style="margin-left:95px">
+                    <button type="submit" class="btn btn-outline-primary" style="opacity:0.7">
+                        Save car
+                    </button>
+                </div>
+            </div>
             <div class="form-group">
                 <label>Car brand</label>
                 <input asp-for="CarBrand" class="form-control" disabled="disabled" value="@ViewData["CarBrand"]" />
@@ -113,18 +120,14 @@
                 <span asp-validation-for="DistancePassed" class="text-danger"></span>
             </div>
         </div>
-        <div class="button-holder mt-3 d-flex justify-content-center">
-            <button id="btnSubmit" type="submit" class="btnClientRegisterCar btn btn-outline-primary">Save Car</button>
-            <div class="spinner" style="display:none">
-                <div class="center-div">
-                    <div class="inner-div">
-                        <div class="loader"></div>
-                    </div>
-                </div>
+    </form>
+    <div class="spinner" style="display:none">
+        <div class="center-div">
+            <div class="inner-div">
+                <div class="loader"></div>
             </div>
         </div>
-    </form>
-    <br />
+    </div>
 </div>
 
 

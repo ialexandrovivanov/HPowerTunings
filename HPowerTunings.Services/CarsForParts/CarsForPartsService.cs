@@ -18,6 +18,24 @@ namespace HPowerTunings.Services.CarsForParts
             this.context = context;
         }
 
+        public async Task<bool> CreateCar(CarsForPartsMainViewModelOut model)
+        {
+            var car = this.mapper.Map<CarsForPartsMainViewModelOut, Data.Models.CarForParts>(model);
+            if (car != null)
+            {
+                var res =  await this.context.CarsForParts.AddAsync(car);
+                if (res != null)
+                {
+                    await this.context.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
         public async Task<List<CarsForPartsMainViewModelIn>> GetAllCarModelsAsync()
         {
             var cars = this.context

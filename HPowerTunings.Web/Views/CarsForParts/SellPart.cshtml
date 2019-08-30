@@ -1,0 +1,42 @@
+﻿@using HPowerTunings.ViewModels.PartsFromCar
+@model SellPartViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#rate-part').modal('show');
+    });
+</script>
+
+
+<div class="container-fluid justify-content-center text-center" style="margin-top:20px">
+    <button class="btn btn-outline-primary" onClick="location.href='/CarsForParts/Index"> &nbsp; Return &nbsp;</button>
+</div>
+<div class="modal fade" id="rate-part" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title container-fluid text-center" id="addContactLabel">Sell a part</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="text-center" id="RatePart" action="/PartsFromCar/CreatePart" method="post">
+                    <div class="container-fluid justify-content-center">
+                        <label>Part name</label>
+                        <input asp-for="@Model.Name" class="form-control">
+                        <label>Part price</label>
+                        <input asp-for="@Model.Price" class="form-control"/>
+                        <label>Description</label>
+                        <input asp-for="@Model.Description" class="form-control"/>
+                        <input asp-for="@Model.CarForPartsId" class="form-control" type="hidden" value="@Model.CarForPartsId" />
+                        <button type="submit" class="btn btn-outline-primary" style="margin-top:30px">&nbsp;Submit&nbsp;</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

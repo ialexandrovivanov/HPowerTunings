@@ -2,6 +2,7 @@
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.CarModels;
 using HPowerTunings.ViewModels.PartModels;
+using HPowerTunings.ViewModels.PartsFromCar;
 using System.Threading.Tasks;
 
 namespace HPowerTunings.Services.PartsFromCars
@@ -15,6 +16,22 @@ namespace HPowerTunings.Services.PartsFromCars
         {
             this.mapper = mapper;
             this.context = context;
+        }
+
+        public async Task<bool> CreatePart(SellPartViewModel model)
+        {
+            var car = await this.context.CarsForParts.FindAsync(model.CarForPartsId);
+            if (car != null)
+            {
+                var part = this.mapper.Map<SellPartViewModel, Data.Models.PartFromCar>(model);
+                part.CarForPartsId = car.Id;
+                part.CarForParts = car;
+                await this.context.PartsFromCars.AddAsync(part);
+                var result = await this.context.SaveChangesAsync();
+                return result > 0;
+            }
+
+            return false;
         }
 
         public async Task<RatePartViewModel> GetPartDetailsAsync(string pId)

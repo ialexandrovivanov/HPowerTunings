@@ -4,15 +4,16 @@ using HPowerTunings.Services.Car;
 using HPowerTunings.Services.PartsFromCars;
 using HPowerTunings.ViewModels.CarModels;
 using HPowerTunings.ViewModels.PartModels;
+using HPowerTunings.ViewModels.PartsFromCar;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HPowerTunings.Web.Controllers
 {
-    public class PartsFromCarsController : Controller
+    public class PartsFromCarController : Controller
     {
         private readonly IPartsFromCarsService partsFromCarsService;
-        public PartsFromCarsController(PartsFromCarsService partsFromCarsService)
+        public PartsFromCarController(PartsFromCarsService partsFromCarsService)
         {
             this.partsFromCarsService = partsFromCarsService;
         }
@@ -35,12 +36,12 @@ namespace HPowerTunings.Web.Controllers
         [Authorize]
         public async Task<IActionResult> RatePart(RatePartViewModel model)
         {
-           
+
 
             if (ModelState.IsValid)
             {
                 bool result = await this.partsFromCarsService.RatePartAsync(model);
-                if  (result)
+                if (result)
                 {
                     return Redirect($"/Car/Details/{model.RepairId}");
                 }
@@ -49,7 +50,7 @@ namespace HPowerTunings.Web.Controllers
                 {
                     return Redirect($"/PartsFromCars/RatePart?id={model.RepairId}&pId={model.Id}");
                 }
-                
+
             }
 
             return Redirect($"/PartsFromCars/RatePart?id={model.RepairId}&pId={model.Id}");
@@ -61,6 +62,18 @@ namespace HPowerTunings.Web.Controllers
         {
             ViewData["Id"] = id;
             return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult CreatePart(SellPartViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Redirect($"/CarsForParts/SellPart?id={model.CarForPartsId}");
+            }
+            var result = this.partsFromCarsService.CreatePart(model);
+            return Redirect("SuccessCreatePart");
         }
     }
 }

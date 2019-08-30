@@ -47,13 +47,13 @@
     </div>
     <br />
     <h4 class="text-center">View my car(s)</h4>
-    <hr style="max-width:480px" />
-    <div class="text-center">
+    <hr style="max-width:600px" />
+    <div class="text-center" style="max-width:600px">
         @foreach (var item in Model.Input.ClientCars)
         {
             <p>
                 <a id="Go" href="/Car/Details/@item.Id">
-                    <h5>@item.CarBrandName &nbsp;/&nbsp; @item.CarModelName &nbsp;-&nbsp; @item.RegNumber</h5>
+                    <h5>@item.CarBrandName &nbsp;/&nbsp; @item.CarModelName &nbsp;-&nbsp; <span style="color:black">@item.RegNumber</span></h5>
                 </a>
             </p>
             <p style="padding-bottom:1px"> </p>

@@ -16,7 +16,6 @@ namespace HPowerTunings.Services.Appointment
     {
         private readonly IMapper mapper;
         private ApplicationDbContext context;
-        private object callbackUrl;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IEmailSender emailSender;
         public AppointmentService(ApplicationDbContext context, 
