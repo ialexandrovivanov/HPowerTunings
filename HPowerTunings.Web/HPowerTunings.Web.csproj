@@ -21,7 +21,7 @@
     <Content Remove="Views\Company\Index.cshtml" />
     <Content Remove="Views\Employee\Index.cshtml" />
     <Content Remove="Views\Email\Index.cshtml" />
-    <Content Remove="Views\PartsFromCars\RatePart.cshtml" />
+    <Content Remove="Views\PartsFromCar\RatePart.cshtml" />
     <Content Remove="Views\Repair\CreateRepair.cshtml" />
     <Content Remove="Views\Repair\Index.cshtml" />
     <Content Remove="Views\Repair\RepairStartEnd.cshtml" />
@@ -73,7 +73,7 @@
     <None Include="Views\Employee\Index.cshtml" />
     <None Include="Views\Home\Gallery.cshtml" />
     <None Include="Views\Email\Index.cshtml" />
-    <None Include="Views\PartsFromCars\RatePart.cshtml" />
+    <None Include="Views\PartsFromCar\RatePart.cshtml" />
     <None Include="Views\Repair\CreateRepair.cshtml" />
     <None Include="Views\Repair\RepairStartEnd.cshtml" />
     <None Include="Views\Repair\Index.cshtml" />

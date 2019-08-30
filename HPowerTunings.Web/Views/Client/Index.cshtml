@@ -20,14 +20,14 @@
         <div class="container-fluid mt-4"
              style="padding:20px; border-radius:6px; background-color:darkcyan">
             <form class=" text-center" action="/client/admincreateclient" method="get" style="padding-bottom:20px">
-                <button class="btn btn-outline-light mt-3">Create client</button>
+                <button class="btn btn-outline-light mt-3" style="opacity:0.7">Create &nbsp;client</button>
             </form>
         </div>
         <div style="padding:20px; padding-bottom:30px; padding-top:1px; border-radius:6px;
               background-color:floralwhite; border:solid 1px rgb(220, 220, 220); margin-top:20px">
             <form action="/client/clientstartendstatistics" method="post">
                 <div class="text-center mt-5">
-                    <button type="submit" class="btn btn-outline-primary">Select period</button>
+                    <button type="submit" class="btn btn-outline-primary" style="opacity:0.7">Select period</button>
                 </div>
                 <div class="text-center mt-5">
                     <label>Start date (including)</label>
@@ -43,7 +43,6 @@
                     <input type="hidden" asp-for=@Model.RegisterClient.Email class="form-control" value="pesho@gmail.com" />
                     <input type="hidden" asp-for=@Model.RegisterClient.UserName class="form-control" value="pesho" />
                 </div>
-
             </form>
         </div>
 

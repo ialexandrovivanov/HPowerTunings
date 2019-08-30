@@ -65,7 +65,7 @@
                             </p>
                             <p>Part rating: <strong style="color:indigo; font-size:large">@part.Rating</strong></p>
                             <p></p>
-                            <a href="/PartsFromCars/RatePart?id=@Model.Id&pId=@part.Id">
+                            <a href="/PartsFromCar/RatePart?id=@Model.Id&pId=@part.Id">
                                 <button>Rate this part</button>
                             </a>
                         </div>
@@ -82,7 +82,7 @@
                 <div class="mt-5 mb-3 text-center"><h4 style="color:brown">I would like to delete this car and this service history</h4></div>
                 <form action="/car/deleteyourcar/@Model.Id" method="get">
                     <div class="conteiner-fluid button-holder mt-4 d-flex justify-content-center pt-3">
-                        <input type="submit" class="btn btn-outline-primary" value="Delete this car">
+                        <input type="submit" class="btn btn-outline-primary" value="Delete this car" style="opacity:0.7">
                     </div>
                 </form>
             </div>

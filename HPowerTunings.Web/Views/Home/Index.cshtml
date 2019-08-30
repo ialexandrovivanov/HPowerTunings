@@ -1,16 +1,41 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-    <head>
-        <script src="~/js/jquery-3.4.1.min.js"></script>
-        <script>
+<head>
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script>
         $(document).ready(function () {
             $('#go').click(function () {
                 $('.spinner').css('display', 'block');
             });
         });
-        </script>
-    </head>
+    </script>
+</head>
+<script>
+    // direct browser to top right away
+    if (window.location.hash)
+        scroll(0, 0);
+    // takes care of some browsers issue
+    setTimeout(function () { scroll(0, 0); }, 1);
+
+    $(function () {
+        //your current click function
+        $('.scroll').on('click', function (e) {
+            e.preventDefault();
+            $('html,body').animate({
+                scrollTop: $($(this).attr('href')).offset().top + 'px'
+            }, 1000, 'swing');
+        });
+
+        // if we have anchor on the url (calling from other page)
+        if (window.location.hash) {
+            // smooth scroll to the anchor id
+            $('html,body').animate({
+                scrollTop: $(window.location.hash).offset().top + 'px'
+            }, 1000, 'swing');
+        }
+    });
+</script>
 <div class="spinner" style="display:none">
     <div class="center-div">
         <div class="inner-div">
@@ -62,19 +87,19 @@
             </a>
         </li>
         <li>
-            <a  id="go" href="~/SiteViews/ServicesBodywork">
+            <a id="go" href="~/SiteViews/ServicesBodywork">
                 <img src="~/img/Categories/bodywork.jpg" alt="bodywork" />
                 <p style="font-weight:400; color:indigo"><strong>Bodywork & Painting</strong></p>
             </a>
         </li>
         <li>
-            <a  id="go" href="~/SiteViews/ServicesRepair">
+            <a id="go" href="~/SiteViews/ServicesRepair">
                 <img src="~/img/categories/repair.jpg" alt="repair" />
                 <p style="font-weight:400; color:indigo"><strong>Servicing & Repair</strong></p>
             </a>
         </li>
         <li>
-            <a  id="go" href="~/SiteViews/ServicesRestoration">
+            <a id="go" href="~/SiteViews/ServicesRestoration">
                 <img src="~/img/categories/restoration.jpg" alt="restoration" />
                 <p style="font-weight:400; color:indigo"><strong>Restoration</strong></p>
             </a>

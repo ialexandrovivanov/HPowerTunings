@@ -4,6 +4,7 @@ using HPowerTunings.ViewModels.CarModels;
 using HPowerTunings.ViewModels.CarsForParts;
 using HPowerTunings.ViewModels.EmployeeModels;
 using HPowerTunings.ViewModels.PartModels;
+using HPowerTunings.ViewModels.PartsFromCar;
 using HPowerTunings.ViewModels.RepairModels;
 
 namespace HPowerTunings.Web.Core
@@ -41,6 +42,7 @@ namespace HPowerTunings.Web.Core
             CreateMap<Data.Models.PartFromCar, PartFromCarViewModel>();
             CreateMap<Data.Models.CarForParts, CarsForPartsMainViewModelIn>();
             CreateMap<CarsForPartsMainViewModelOut, Data.Models.CarForParts>();
+            CreateMap<SellPartViewModel, Data.Models.PartFromCar>();
         }
     }
 }

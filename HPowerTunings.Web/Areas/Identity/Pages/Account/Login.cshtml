@@ -1,14 +1,22 @@
 ﻿@page
 @model LoginModel
 
+<head>
+    <style>
+        body {
+            background-color: rgb(240, 246, 240)
+        }
+    </style>
+</head>
+
 <body>
     <div style="padding-top:100px"></div>
-    <section class="container-fluid justify-content-center" style="max-width:400px;
+    <section class="container-fluid justify-content-center" style="max-width:420px;
                  padding:20px; background-color:lightgray; opacity:0.7; border-radius:6px;">
         <form id="account" method="post">
             <div class="d-flex">
-                <h3 >Login</h3>
-                <div class="button-holder" style="margin-left:200px">
+                <h3>Login</h3>
+                <div class="button-holder" style="margin-left: auto">
                     <button type="submit" class="btn btn-outline-primary">Log in</button>
                 </div>
             </div>
@@ -31,7 +39,7 @@
                     </label>
                 </div>
             </div>
-           
+
         </form>
         <div class="spinner" style="display:none">
             <div class="center-div">

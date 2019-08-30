@@ -1,13 +1,21 @@
 ﻿@page
 @model RegisterModel
 
+<head>
+    <style>
+        body {
+            background-color: rgb(240, 246, 240)
+        }
+    </style>
+</head>
+
 <div style="padding-top:100px"></div>
-<section class="container-fluid justify-content-center" style="max-width:400px;
+<section class="container-fluid justify-content-center" style="max-width:420px;
                  padding:20px; background-color:lightgray; opacity:0.7; border-radius:6px;">
     <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
         <div class="d-flex" style="margin-bottom:20px">
             <h3 c>Register</h3>
-            <div class="button-holder" style="margin-left:166px">
+            <div class="button-holder" style="margin-left: auto">
                 <button type="submit" class="btn btn-outline-primary">Register</button>
             </div>
         </div>

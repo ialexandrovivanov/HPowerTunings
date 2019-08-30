@@ -14,7 +14,6 @@
 <body>
     <div class="container-fluid justify-content-center mt-5 pt-5" style="max-width:480px">
         <h3 class="text-center">Set final <strong>date/time</strong> for this appointment</h3>
-        <hr />
         <form class="d-flex" id="finalize" method="post">
             <div class="form-group mt-4">
                 <label class="container-fluid justify-content-center text-center">Set appointment date</label>
@@ -26,18 +25,18 @@
             </div>
             <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
             <div class="button-holder justify-content-center" style="margin-top:56px">
-                <button type="submit" class="btn btn-outline-success">Finalize</button>
+                <button type="submit" class="btn btn-outline-success" style="opacity:0.9">Finalize</button>
             </div>
         </form>
 
         <div style="border:solid rgb(220, 220, 220) 1px; border-radius:6px; padding:20px; background-color:aliceblue ">
-            <p>Client username: <strong>@Model.In.ClientUserName</strong></p>
-            <p>Client phone number: <strong>@Model.In.ClientPhoneNumber</strong></p>
-            <p>Client email: <strong>@Model.In.ClientEmail</strong></p>
-            <p>Desired date for appoinment: <strong>@Model.In.AppointmentDate</strong></p>
-            <p>Car brand: <strong>@Model.In.CarBrandName</strong></p>
-            <p>Car model: <strong>@Model.In.CarModelName</strong></p>
-            <p>Problem description: <strong>@Model.In.ProblemDescription</strong></p>
+            <p>Client username: <strong style="color:indigo">@Model.In.ClientUserName</strong></p>
+            <p>Client phone number: <strong style="color:indigo">@Model.In.ClientPhoneNumber</strong></p>
+            <p>Client email: <strong style="color:indigo">@Model.In.ClientEmail</strong></p>
+            <p>Desired date for appoinment: <strong style="color:indigo">@Model.In.AppointmentDate</strong></p>
+            <p>Car brand: <strong style="color:indigo">@Model.In.CarBrandName</strong></p>
+            <p>Car model: <strong style="color:indigo">@Model.In.CarModelName</strong></p>
+            <p>Problem description: <strong style="color:indigo">@Model.In.ProblemDescription</strong></p>
         </div>
     </div>
     <div style="height:80px"></div>

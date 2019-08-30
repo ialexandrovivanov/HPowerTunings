@@ -48,12 +48,12 @@ namespace HPowerTunings.Web.Controllers
 
                 else
                 {
-                    return Redirect($"/PartsFromCars/RatePart?id={model.RepairId}&pId={model.Id}");
+                    return Redirect($"/PartsFromCar/RatePart?id={model.RepairId}&pId={model.Id}");
                 }
 
             }
 
-            return Redirect($"/PartsFromCars/RatePart?id={model.RepairId}&pId={model.Id}");
+            return Redirect($"/PartsFromCar/RatePart?id={model.RepairId}&pId={model.Id}");
         }
 
         [HttpGet]
@@ -66,14 +66,26 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult CreatePart(SellPartViewModel model)
+        public async Task<IActionResult> CreatePart(SellPartViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return Redirect($"/CarsForParts/SellPart?id={model.CarForPartsId}");
             }
-            var result = this.partsFromCarsService.CreatePart(model);
-            return Redirect("SuccessCreatePart");
+            var result = await this.partsFromCarsService.CreatePart(model);
+            if (result)
+            {
+                return Redirect("SuccessCreatePart");
+            }
+            
+            return Redirect($"/CarsForParts/SellPart?id={model.CarForPartsId}");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult SuccessCreatePart()
+        {
+            return View();
         }
     }
 }

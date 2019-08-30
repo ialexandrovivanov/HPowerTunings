@@ -3,12 +3,34 @@
 @{
     ViewData["Title"] = "Check email";
 }
-<br />
-<div class="container-fluid text-center pt-5"style="max-width:600px">
-    <h3>Check your email</h3>
-    <br />
-    <p>Please check your inbox to confirm your account! &nbsp;
-    If you still haven't received an email please check in your 
-    <strong>spam folder!</strong>
-    </p>
-</div>
+
+<body>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('#success-part').modal('show');
+        });
+
+    </script>
+
+    <div class="modal fade" id="success-part" tabindex="-1" role="dialog" aria-labelledby="addContactLabel"
+         aria-hidden="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="padding:50px; background-color:rgba(240,240,232,.6);
+             color:white; margin-top:100px; border-radius:8px;">
+                <div class="modal-body">
+                    <p class="container-fluid text-center" style="color:black">
+                        Please check your inbox to confirm your account! &nbsp;
+                        If you still haven't received an email please check in your
+                        <strong>spam folder!</strong>
+                    </p>
+                    <div class="container-fluid justify-content-center text-center" style="margin-top:40px">
+                        <button class="btn btn-secondary" onClick="location.href='/'">
+                            Return
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
