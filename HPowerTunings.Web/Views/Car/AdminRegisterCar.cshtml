@@ -12,55 +12,58 @@
     <title></title>
     <style>
         body {
-            background-color: rgb(240, 240, 240)
+            background-color: rgba(235, 238, 212, 0.5)
         }
     </style>
 </head>
 <body>
 
-    <div class="container-fluid justify-content-center pt-5 mt-4">
-        <h4 class="text-center">Register new car</h4>
-        <hr class="w-25" />
-        <form id="Car" method="post" class="text-center">
-            <div class="container-fluid justify-content-center" style="max-width:400px">
-                <div class="form-group">
-                    <label>Car brand</label>
-                    <input asp-for="@Model.CarBrand" class="form-control" disabled="disabled" value="@ViewData["CarBrand"]" />
-                </div>
-                <label>Car model</label>
-                <select class="custom-select" id="CarModel" asp-for="@Model.CarModel">
-                    <option selected disabled>-- Choose Model --</option>
-                    @foreach (var item in ViewData["CarModels"] as List<string>)
-                    {
-                        <option>@item</option>
-                    }
-                </select>
-                <div class="form-group mt-3">
-                    <label>Reg.number</label>
-                    <input asp-for="@Model.RegNumber" class="form-control" disabled="disabled" value="@ViewData["RegNumber"]" />
-                </div>
-                <div class="form-group">
-                    <label>VIN number</label>
-                    <input asp-for="@Model.Rama" class="form-control w-100" placeholder="VIN Number" /> 
-                    <span asp-validation-for="@Model.Rama" class=" text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label>Distance passed</label>
-                    <input asp-for="@Model.DistancePassed" class="form-control w-100" placeholder="Passed distance /km" />
-                    <span asp-validation-for="@Model.DistancePassed" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label>Client's email</label>
-                    <input asp-for="@Model.Email" class="form-control w-100" placeholder="Client's email" />
-                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
-                </div>
+    <div class="pt-5 mt-4" style="max-width:420px;">
+        
+    </div>
+    <form id="Car" method="post" class="container-fluid justify-content-center text-center"
+          style="max-width:420px; padding:20px; background-color:honeydew; opacity:0.7; border-radius:6px; border:solid 1px #d5cfc0 ">
+        <div class="d-flex">
+            <h4 style="margin-bottom:20px">Register new car</h4>
+            <div class="button-holder" style="margin-left:auto;">
+                <button type="submit" class="btn btn-outline-primary" style="opacity:0.7">Register Car</button>
             </div>
-
-            <div class="button-holder mt-5 d-flex justify-content-center">
-                <button type="submit" class="adminregcar btn btn-outline-primary">Register Car</button>
+        </div>
+        <div class="justify-content-center">
+            <div class="form-group">
+                <label>Car brand</label>
+                <input asp-for="@Model.CarBrand" class="form-control" disabled="disabled" value="@ViewData["CarBrand"]" />
             </div>
-        </form>
-        <br />
+            <label>Car model</label>
+            <select class="custom-select" id="CarModel" asp-for="@Model.CarModel">
+                <option selected disabled>-- Choose Model --</option>
+                @foreach (var item in ViewData["CarModels"] as List<string>)
+                {
+                    <option>@item</option>
+                }
+            </select>
+            <div class="form-group mt-3">
+                <label>Reg.number</label>
+                <input asp-for="@Model.RegNumber" class="form-control" disabled="disabled" value="@ViewData["RegNumber"]" />
+            </div>
+            <div class="form-group">
+                <label>VIN number</label>
+                <input asp-for="@Model.Rama" class="form-control w-100" placeholder="VIN Number" />
+                <span asp-validation-for="@Model.Rama" class=" text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Distance passed</label>
+                <input asp-for="@Model.DistancePassed" class="form-control w-100" placeholder="Passed distance /km" />
+                <span asp-validation-for="@Model.DistancePassed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Client's email</label>
+                <input asp-for="@Model.Email" class="form-control w-100" placeholder="Client's email" />
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+            </div>
+        </div>
+    </form>
+    <br />
     </div>
 </body>
 </html>

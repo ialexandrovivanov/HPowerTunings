@@ -16,7 +16,7 @@
     var Cars = new Dictionary<string, int>();
     foreach (var item in Model)
     {
-        if (Cars.ContainsKey(item.CarBrandName + "/" + item.CarModelName))
+        if (Cars.ContainsKey(item.CarBrandName + " - " + item.CarModelName))
         {
             Cars[item.CarBrandName + " - " + item.CarModelName] += 1;
         }

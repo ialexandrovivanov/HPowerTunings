@@ -16,6 +16,7 @@ namespace HPowerTunings.ViewModels.AdminModels
         [RegularExpression("^[ABCEHKLMNOPTXY]{1,2}[0-9]{4,6}[ABCEHKLMNOPTXY]{1,2}$", ErrorMessage = regNumberError)]
         public string RegNumber { get; set; }
         public string CarBrand { get; set; }
+        [Required]
         public string CarModel { get; set; }
 
         [Display(Name = "Vehicle identification number (VIN)")]

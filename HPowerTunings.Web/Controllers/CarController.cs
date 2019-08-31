@@ -22,7 +22,7 @@ namespace HPowerTunings.Web.Controllers
         public async Task<IActionResult>Index(string carBrand)
         {
             ViewData["CarBrand"] = carBrand;
-            ViewData["CarModels"] = await this.carService.GetAllCarModels(carBrand);
+            ViewData["CarModels"] = await this.carService.GetAllCarModelsAsync(carBrand);
 
             return this.View();
         }
@@ -49,7 +49,7 @@ namespace HPowerTunings.Web.Controllers
             }
 
             ViewData["CarBrand"] = model.CarBrand;
-            ViewData["CarModels"] = await this.carService.GetAllCarModels(model.CarBrand);
+            ViewData["CarModels"] = await this.carService.GetAllCarModelsAsync(model.CarBrand);
 
             return View(model);
         }
@@ -137,7 +137,7 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AdminCreateCar()
         {
-            var brands = await Task.Run(() => this.carService.GetAllCarBrands());
+            var brands = await this.carService.GetAllCarBrandsAsync();
           
             return this.View(new AdminCreateCarOutputModel() { CarBrands = brands });
         }
@@ -151,9 +151,8 @@ namespace HPowerTunings.Web.Controllers
                 return Redirect($"/Car/AdminRegisterCar?carBrand={model.CarBrand}&regNumber={model.RegNumber}");
             }
 
-            var result = await Task.Run(() => this.carService.GetAllCarBrands());
+            var result = await this.carService.GetAllCarBrandsAsync();
             model.CarBrands = result;
-            await Task.Delay(0);
             return  View(model);
         }
 
@@ -163,9 +162,9 @@ namespace HPowerTunings.Web.Controllers
         {
             ViewData["CarBrand"] = carBrand;
             ViewData["RegNumber"] = regNumber;
-            ViewData["CarModels"] = await this.carService.GetAllCarModels(carBrand);
-
-            return View();
+            ViewData["CarModels"] = await this.carService.GetAllCarModelsAsync(carBrand);
+            var model = new AdminRegisterCarModel();
+            return View(model);
         }
 
         [HttpPost]  
@@ -182,7 +181,7 @@ namespace HPowerTunings.Web.Controllers
 
             ViewData["CarBrand"] = model.CarBrand;
             ViewData["RegNumber"] = model.RegNumber;
-            ViewData["CarModels"] = await this.carService.GetAllCarModels(model.CarBrand);
+            ViewData["CarModels"] = await this.carService.GetAllCarModelsAsync(model.CarBrand);
 
             return View(model);
         }

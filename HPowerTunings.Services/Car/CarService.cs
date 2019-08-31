@@ -60,7 +60,7 @@ namespace HPowerTunings.Services.Car
             return false;
         }
 
-        public async Task<ICollection<string>> GetAllCarModels(string brand)
+        public async Task<ICollection<string>> GetAllCarModelsAsync(string brand)
         {
             var result = this.context
                              .CarModels
@@ -140,9 +140,10 @@ namespace HPowerTunings.Services.Car
             return true;
         }
 
-        public ICollection<string> GetAllCarBrands()
+        public async Task<ICollection<string>> GetAllCarBrandsAsync()
         {
-            return this.context.CarBrands.Select(c => c.Name).ToList();
+            var result = await this.context.CarBrands.Select(c => c.Name).ToListAsync();
+            return result;
         }
 
         public async Task<bool> AdminRegisterCar(AdminRegisterCarModel model)

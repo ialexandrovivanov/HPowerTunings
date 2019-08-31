@@ -7,12 +7,12 @@ namespace HPowerTunings.Services.Car
 {
     public interface ICarService
     {
-        Task<ICollection<string>> GetAllCarModels(string brand);
+        Task<ICollection<string>> GetAllCarModelsAsync(string brand);
         Task<bool> UserCreateCar(UserRegisterCarModel model);
         Task<CarRepairsViewModel> GetCarRepairsAsync(string carId);
         Task<bool> DeleteYourCar(DeleteYourCarModel model);
         Task<CarViewModel> GetCarDetailsAsync(string carId);
-        ICollection<string> GetAllCarBrands();
+        Task<ICollection<string>> GetAllCarBrandsAsync();
         Task<bool> AdminRegisterCar(AdminRegisterCarModel model);
         Task<ICollection<CarStatisticViewModel>> GetAllCarsPeriod(CarStartEndDateViewModel model);
         Task<DeleteYourCarModel> GetDeleteYourCar(string id);
