@@ -1,31 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace HPowerTunings.ViewModels.CarsForParts
 {
-    public class CarsForPartsMainViewModel
+    public class CarsForPartsViewModel
     {
-        public CarsForPartsMainViewModelOut Out { get; set; } 
-                = new CarsForPartsMainViewModelOut();
         public ICollection<CarsForPartsMainViewModelIn> Cars { get; set; } 
                 = new List<CarsForPartsMainViewModelIn>();
-    }
 
-    public class CarsForPartsMainViewModelOut
-    {
-        [Required]
-        public string CarBrand { get; set; }
-
-        [Required]
-        public string CarModel { get; set; }
-
-        public string Vin { get; set; }
-
-        [Required]
-        public string Color { get; set; }
-
-        [Required]
-        public decimal InitialPrice { get; set; }
     }
 
     public class CarsForPartsMainViewModelIn

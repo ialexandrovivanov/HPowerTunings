@@ -10,6 +10,7 @@
     <Content Remove="Views\Appointment\SuccessCreate.cshtml" />
     <Content Remove="Views\CarsForParts\Index.cshtml" />
     <Content Remove="Views\CarsForParts\SellPart.cshtml" />
+    <Content Remove="Views\CarsForParts\SuccessCreateCar.cshtml" />
     <Content Remove="Views\Car\AdminRegisterCar.cshtml" />
     <Content Remove="Views\Car\CarStatistic.cshtml" />
     <Content Remove="Views\Car\DeleteYourCar.cshtml" />
@@ -27,6 +28,7 @@
     <Content Remove="Views\Repair\RepairStartEnd.cshtml" />
     <Content Remove="Views\Repair\SuccessCreate.cshtml" />
     <Content Remove="Views\Service\Index.cshtml" />
+    <Content Remove="Views\SiteViews\Team.cshtml" />
   </ItemGroup>
 
 
@@ -61,6 +63,7 @@
     <None Include="Views\Appointment\SuccessCreate.cshtml" />
     <None Include="Views\CarsForParts\Index.cshtml" />
     <None Include="Views\CarsForParts\SellPart.cshtml" />
+    <None Include="Views\CarsForParts\SuccessCreateCar.cshtml" />
     <None Include="Views\Car\AdminRegisterCar.cshtml" />
     <None Include="Views\Car\CarStatistic.cshtml" />
     <None Include="Views\Car\DeleteYourCar.cshtml" />
@@ -79,6 +82,7 @@
     <None Include="Views\Repair\Index.cshtml" />
     <None Include="Views\Repair\SuccessCreate.cshtml" />
     <None Include="Views\Service\Index.cshtml" />
+    <None Include="Views\SiteViews\Team.cshtml" />
   </ItemGroup>
 
 </Project>

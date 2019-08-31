@@ -66,7 +66,9 @@ namespace HPowerTunings.Services.Client
                                .Clients
                                .Where(c => c.CreatedOn.Value.Date >= model.StartDate &&
                                       c.CreatedOn.Value.Date <= model.EndDate &&
-                                      c.Email != adminEmail);
+                                      c.Email != adminEmail && c.EmailConfirmed == true)
+                               .Select(c => c)
+                               .ToList();
 
             var result = new List<ClientViewModel>();
             foreach (var client in clients)

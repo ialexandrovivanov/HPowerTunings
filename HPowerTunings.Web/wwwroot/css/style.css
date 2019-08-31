@@ -127,6 +127,22 @@ form {
     font-size: 60px;
 }
 
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0 !important;
+}
+
+.team li {
+    flex-basis: 50%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.team img {
+    border-radius: 50%;
+}
+
 .delete-personal-data {
     background-color: rgba(164, 226, 240, 0.8);
     color: #000;
@@ -230,6 +246,8 @@ form {
     left: 50%;
     transform: translateX(-50%);
 }
+
+
 
 .repair {
     border-radius: 18px;

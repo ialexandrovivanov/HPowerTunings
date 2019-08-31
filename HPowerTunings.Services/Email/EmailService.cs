@@ -50,6 +50,7 @@ namespace HPowerTunings.Services.Email
                 allEmails = this.context.Cars
                                         .Where(c => c.CarModel.Name == model.CarModel && c.IsDeleted == false)
                                         .Select(c => c.Client.Email)
+                                        .Distinct()
                                         .ToList();
             }                           
 

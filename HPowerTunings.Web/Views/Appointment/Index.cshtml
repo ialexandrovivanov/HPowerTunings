@@ -1,21 +1,21 @@
 ﻿@using HPowerTunings.ViewModels.Appointment
 @model CreateAppointmetModel
 
-    <head>
-        <script src="~/js/jquery-3.4.1.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#go').click(function () {
-                    $('.spinner').css('display', 'block');
-                });
+<head>
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#go').click(function () {
+                $('.spinner').css('display', 'block');
             });
-        </script>
-        <style>
-            body {
-                background-color: rgb(240, 246, 240)
-            }
-        </style>
-    </head>
+        });
+    </script>
+    <style>
+        body {
+            background-color: rgb(240, 246, 240)
+        }
+    </style>
+</head>
 
 <div class="appoinmentResponsive d-flex container-fluid text-center"
      style="max-width:900px">
@@ -37,18 +37,17 @@
                   padding-right:10px;padding-top:5px;border-radius:6px">
                 @if (item.IsAppointmentPending == true)
                 {
-                    <p class="mt-5" style="font-size:19px">
-                        You have a
+                    <p class="mt-5" style="font-size:19px">You have a</p>
                         <div style="background-color:chocolate; padding-bottom:2px; padding-left:2px;
                              padding-right:2px; padding-top:8px; border-radius:6px; opacity:0.9">
                             <h5>
                                 <span style="color:black">waiting for approval</span>
                             </h5>
-                        </div> appointment for car service with <strong>desired</strong> date:
+                        </div> 
+                        <p>appointment for car service with <strong>desired</strong> date:</p>
                         <h5><strong style="color:indigo">@item.AppointmentDate</strong></h5>
                         <h5><strong style="color:indigo">@item.AppointmentDate.Date.DayOfWeek</strong></h5>
                     <p>With problem description: <strong>@item.ProblemDescription</strong></p>
-                    </p>
                 }
                 else
                 {

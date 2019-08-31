@@ -10,11 +10,9 @@ namespace HPowerTunings.Web.Controllers
     public class EmailController : Controller
     {
         private readonly IEmailService emailService;
-        private readonly IEmailSender emailSender;
 
         public EmailController(IEmailService emailService, IEmailSender emailSender)
         {
-            this.emailSender = emailSender;
             this.emailService = emailService;
         }
 

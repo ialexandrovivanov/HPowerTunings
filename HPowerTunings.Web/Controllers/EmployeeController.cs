@@ -41,7 +41,6 @@ namespace HPowerTunings.Web.Controllers
                 return Redirect("/Employee/SuccessRegisterEmployee");
             }
 
-            ModelState.AddModelError("", "Unable to register employee");
             return Redirect("/Employee/Index");
         }
 

@@ -23,33 +23,63 @@ namespace HPowerTunings.Web.Controllers
         public async Task<IActionResult> Index()
         {
             List<CarsForPartsMainViewModelIn> cars = await this.carsForPartsService.GetAllCarModelsAsync();
-            var model = new CarsForPartsMainViewModel();
+            var model = new CarsForPartsViewModel();
             model.Cars = cars;
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CreateCar(string carModel = null,
+                                                   string carBrand = null,
+                                                   string color = null,
+                                                   string vin = null,
+                                                   string regNumber = null)
+        {
+            var model = new CreateCarViewModel();
+            model.AllBrands = await this.carsForPartsService.GetAllBrandNamesAsync();
+            model.AllModels = await this.carsForPartsService.GetAllModelNamesAsync();
+            model.CarModel = carModel;
+            model.CarBrand = carBrand;
+            model.Color = color;
+            model.Rama = vin;
+            model.RegNumber = regNumber;
             return View(model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> CreateCar(CarsForPartsMainViewModel model)
+        public async Task<IActionResult> CreateCar(CreateCarViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                List<CarsForPartsMainViewModelIn> cars = await this.carsForPartsService.GetAllCarModelsAsync();
-                var model1 = new CarsForPartsMainViewModel();
-                model.Cars = cars;
-                return View(model1);
+                return RedirectToAction("CreateCar", "CarsForParts",
+                                        new
+                                        {
+                                            carModel = model.CarModel,
+                                            carBrand = model.CarBrand,
+                                            color = model.Color,
+                                            vin = model.Rama,
+                                            regNumber = model.RegNumber
+                                        });
             }
 
-            var result = await this.carsForPartsService.CreateCar(model.Out);
+            var result = await this.carsForPartsService.CreateCar(model);
             if (result)
             {
                 return Redirect("SuccessCreateCar");
             }
 
-            List<CarsForPartsMainViewModelIn> cars1 = await this.carsForPartsService.GetAllCarModelsAsync();
-            var model2 = new CarsForPartsMainViewModel();
-            model.Cars = cars1;
-            return View(model2);
+            return RedirectToAction("CreateCar", "CarsForParts",
+                                        new
+                                        {
+                                            carModel = model.CarModel,
+                                            carBrand = model.CarBrand,
+                                            color = model.Color,
+                                            vin = model.Rama,
+                                            regNumber = model.RegNumber
+                                        });
         }
 
         [HttpGet]
@@ -59,6 +89,13 @@ namespace HPowerTunings.Web.Controllers
             await Task.Delay(0);
             var model = new SellPartViewModel() { CarForPartsId = id };
             return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult SuccessCreateCar()
+        {
+            return View();
         }
     }
 }

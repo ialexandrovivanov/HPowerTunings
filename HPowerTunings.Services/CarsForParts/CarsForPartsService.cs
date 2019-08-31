@@ -18,9 +18,9 @@ namespace HPowerTunings.Services.CarsForParts
             this.context = context;
         }
 
-        public async Task<bool> CreateCar(CarsForPartsMainViewModelOut model)
+        public async Task<bool> CreateCar(CreateCarViewModel model)
         {
-            var car = this.mapper.Map<CarsForPartsMainViewModelOut, Data.Models.CarForParts>(model);
+            var car = this.mapper.Map<CreateCarViewModel, Data.Models.CarForParts>(model);
             if (car != null)
             {
                 var res =  await this.context.CarsForParts.AddAsync(car);
@@ -34,6 +34,12 @@ namespace HPowerTunings.Services.CarsForParts
             }
 
             return false;
+        }
+
+        public async Task<ICollection<string>> GetAllBrandNamesAsync()
+        {
+            await Task.Delay(0);
+            return this.context.CarBrands.Select(c => c.Name).ToList();
         }
 
         public async Task<List<CarsForPartsMainViewModelIn>> GetAllCarModelsAsync()
@@ -53,6 +59,12 @@ namespace HPowerTunings.Services.CarsForParts
 
             await Task.Delay(0);
             return cars;
+        }
+
+        public async Task<ICollection<string>> GetAllModelNamesAsync()
+        {
+            await Task.Delay(0);
+            return this.context.CarModels.Select(m => m.Name).OrderBy(x => x).ToList();
         }
     }
 }
