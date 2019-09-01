@@ -106,10 +106,10 @@ namespace HPowerTunings.Services.Employee
 
         public async Task<bool> IsPasswordValid(string password)
         {
-            if (password == null) return false;
+            if (string.IsNullOrEmpty(password)) return false;
 
-            var user = await userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
-            var result = await userManager.CheckPasswordAsync(user, (string)password);
+            var user = await this.userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+            var result = await this.userManager.CheckPasswordAsync(user, (string)password);
 
             if (result) return true;
 

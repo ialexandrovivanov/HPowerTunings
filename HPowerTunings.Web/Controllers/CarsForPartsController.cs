@@ -25,7 +25,8 @@ namespace HPowerTunings.Web.Controllers
             List<CarsForPartsMainViewModelIn> cars = await this.carsForPartsService.GetAllCarModelsAsync();
             var model = new CarsForPartsViewModel();
             model.Cars = cars;
-
+            model.TotalIn = await this.carsForPartsService.GetTotalIn();
+            model.TotalOut = await this.carsForPartsService.GetTotalOut();
             return View(model);
         }
 
@@ -94,6 +95,35 @@ namespace HPowerTunings.Web.Controllers
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult SuccessCreateCar()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteCar(string id)
+        {
+            var car = await this.carsForPartsService.GetCarById(id);
+            var model = new DeleteCarViewModel() { Id = id, CarBrand = car.CarBrand, CarModel = car.CarModel };
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteCar(DeleteCarViewModel model)
+        {
+            var result = await this.carsForPartsService.DeleteCar(model);
+            if (result)
+            {
+                return Redirect("SuccessDeleteCar");
+            }
+
+            return RedirectToAction("DeleteCar", "CarsForParts", new { id = model.Id});
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult SuccessDeleteCar()
         {
             return View();
         }

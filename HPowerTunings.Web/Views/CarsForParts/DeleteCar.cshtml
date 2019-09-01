@@ -1,0 +1,58 @@
+﻿@using HPowerTunings.ViewModels.CarsForParts
+@model DeleteCarViewModel
+@{
+    ViewData["Title"] = "DeleteCar";
+    Layout = "~/Views/Shared/_LayoutBoss.cshtml";
+}
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#add-car').modal('show');
+    });
+</script>
+
+@* --Modal delete-- *@
+<div class="modal fade" id="add-car" tabindex="-1" role="dialog" aria-labelledby="addContactLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body" style="padding-bottom:30px; background-color:beige; border-radius:6px">
+                <div class="container-fluid">
+                    <a class="button-holder" href="/CarsForParts/Index" style="margin-top:60px">
+                        <button class="btn btn-secondary" style="opacity:0.7;">
+                            Return
+                        </button>
+                    </a>
+                </div>
+                <form class="container-fluid text-center" id="createCar" action="/carsforparts/deletecar"
+                      method="post" style="max-width:600px; position:relative;">
+
+                    <div class="d-flex" style="margin-bottom:30px">
+
+                        <div class="button-holder" style="margin-left:auto;">
+                            <button type="submit" class="btn btn-outline-primary"
+                                    style="opacity:0.7; position:absolute; top: -35px; right: 18px;">
+                                Delete
+                            </button>
+                        </div>
+
+                    </div>
+                    <h4 class="modal-title" id="addContactLabel" style="margin-bottom: 30px">
+                        Delete this <strong style="color:indigo">@Model.CarBrand - @Model.CarModel</strong>
+                    </h4>
+                    <div>
+                        <input asp-for="@Model.Id" type="hidden" class="form-control">
+                    </div>
+                    <p></p>
+                    <div>
+                        <label>Password</label>
+                        <input asp-for="@Model.Password" class="form-control">
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

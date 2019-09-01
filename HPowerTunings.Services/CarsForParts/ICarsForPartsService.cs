@@ -10,5 +10,9 @@ namespace HPowerTunings.Services.CarsForParts
         Task<bool> CreateCar(CreateCarViewModel model);
         Task<ICollection<string>> GetAllModelNamesAsync();
         Task<ICollection<string>> GetAllBrandNamesAsync();
+        Task<Data.Models.CarForParts> GetCarById(string id);
+        Task<bool> DeleteCar(DeleteCarViewModel model);
+        Task<decimal> GetTotalIn();
+        Task<decimal> GetTotalOut();
     }
 }

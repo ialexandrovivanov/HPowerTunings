@@ -3,19 +3,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using HPowerTunings.Data;
+using HPowerTunings.Data.Models;
 using HPowerTunings.ViewModels.CarsForParts;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace HPowerTunings.Services.CarsForParts
 {
     public class CarsForPartsService : ICarsForPartsService
     {
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly UserManager<Data.Models.Client> userManager;
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public CarsForPartsService(ApplicationDbContext context, IMapper mapper)
+        public CarsForPartsService(ApplicationDbContext context, 
+                                   IMapper mapper, 
+                                   UserManager<Data.Models.Client> userManager,
+                                   IHttpContextAccessor httpContextAccessor)
         {
             this.mapper = mapper;
             this.context = context;
+            this.userManager = userManager;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<bool> CreateCar(CreateCarViewModel model)
@@ -31,6 +41,24 @@ namespace HPowerTunings.Services.CarsForParts
                 }
 
                 return false;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> DeleteCar(DeleteCarViewModel model)
+        {
+            if (string.IsNullOrEmpty(model.Password)) return false;
+
+            var user = await userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+            var result = await userManager.CheckPasswordAsync(user, (string)model.Password);
+
+            if (result)
+            {
+                var car = await this.context.CarsForParts.FindAsync(model.Id);
+                car.IsDeleted = true;
+                await this.context.SaveChangesAsync();
+                return true;
             }
 
             return false;
@@ -65,6 +93,23 @@ namespace HPowerTunings.Services.CarsForParts
         {
             await Task.Delay(0);
             return this.context.CarModels.Select(m => m.Name).OrderBy(x => x).ToList();
+        }
+
+        public async Task<CarForParts> GetCarById(string id)
+        {
+            return await this.context.CarsForParts.FindAsync(id);
+        }
+
+        public async Task<decimal> GetTotalIn()
+        {
+            await Task.Delay(0);
+            return this.context.CarsForParts.Sum(c => c.Price);
+        }
+
+        public async Task<decimal> GetTotalOut()
+        {
+            await Task.Delay(0);
+            return this.context.CarsForParts.SelectMany(c => c.PartsFromCar).Sum(p => p.Price);
         }
     }
 }

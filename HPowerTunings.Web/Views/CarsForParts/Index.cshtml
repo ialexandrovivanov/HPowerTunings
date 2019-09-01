@@ -30,7 +30,7 @@
     </div>
 
 
-    @foreach (var car in Model.Cars)
+    @foreach (var car in Model.Cars.OrderByDescending(c => c.CreatedOn))
     {
         <div class="container-fluid justify-content-center" style="padding:10px; max-width:600px; border-radius:6px;
              background-color:darkgrey">
@@ -87,18 +87,16 @@
         <p></p>
     }
     @{ 
-        var moneyIn = Model.Cars.Sum(c => c.Price);
-        var moneyOut = Model.Cars.SelectMany(c => c.Parts).Sum(p => p.Price);
-        bool result = moneyIn - moneyOut > 0;
-        var res = moneyIn - moneyOut;
+       
+        var res = Model.TotalIn - Model.TotalOut;
         }
-    @if (result)
+    @if (res > 0)
     {
         
         <div class="container-fluid justify-content-center text-center"
              style="padding:30px; border:solid 1px #c1bfa8; opacity:0.8; max-width:600px; background-color:brown">
-            <p style="color:white">Total money in cars : <strong>@moneyIn</strong></p>
-            <p style="color:white">Total money from parts : <strong>@moneyOut</strong></p>
+            <p style="color:white">Total money in cars : <strong>@Model.TotalIn</strong></p>
+            <p style="color:white">Total money from parts : <strong>@Model.TotalOut</strong></p>
             <p style="color:white">Difference &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong> -@res</strong></p>
         </div> 
     }
@@ -107,8 +105,8 @@
         var r = res * -1;
 <div class="container-fluid justify-content-center text-center"
      style="padding:20px; border:solid 1px #c1bfa8; max-width:600px; background-color:cadetblue">
-    <p style="color:white">Total money in cars : <strong>@Model.Cars.Sum(c => c.Price)</strong></p>
-    <p style="color:white">Total money from parts : <strong>@Model.Cars.SelectMany(c => c.Parts).Sum(p => p.Price)</strong></p>
+    <p style="color:white">Total money in cars : <strong>@Model.TotalIn</strong></p>
+    <p style="color:white">Total money from parts : <strong>@Model.TotalOut</strong></p>
     <p style="color:white">Difference &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@r</strong></p>
 </div>
     }
