@@ -49,10 +49,8 @@
                     && item.IsAppointmentPending == false
                     && item.IsAppointmentStarted == false)
                 {
-                    <div style="background-color:steelblue; border-radius:6px" class="mb-3">
-                        <br />
+                    <div style="background-color:steelblue; border-radius:6px; padding:10px" class="mb-3">
                         <h3 class="text-center"><strong style="color:indigo">This day appointment</strong></h3>
-                        <br />
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
                     <p>On car with reg.number : <strong>@item.RegNumber</strong></p>
@@ -72,13 +70,10 @@
                          && item.IsAppointmentPending == true
                          && item.IsAppointmentStarted == false)
                 {
-                    <div style="background-color:azure; border-radius:6px; padding-left:10px;
-                         padding-right:10px" class="mb-3">
-                        <br />
-                        <h3 class="text-center">
-                            <strong style="color:indigo">Pending appointment for today</strong>
+                    <div style="background-color:azure; border-radius:6px; padding:10px" class="mb-3">
+                        <h3 class="text-center" style="color:indigo">
+                            Pending appointment for today
                         </h3>
-                        <br />
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
                     <p>On car with reg.number : <strong>@item.RegNumber</strong></p>
@@ -96,10 +91,8 @@
                 }
                 else
                 {
-                    <div style="background-color:honeydew; border-radius:6px" class="mb-3">
-                        <br />
-                        <h3 class="text-center"><strong style="color:indigo">Pending appointment</strong></h3>
-                        <br />
+                    <div style="background-color:honeydew; padding:10px; border-radius:6px" class="mb-3">
+                        <h3 class="text-center" style="color:indigo">Pending appointment</h3>
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
                     <p>For car with reg.number: <strong>@item.RegNumber</strong></p>
@@ -124,10 +117,8 @@
             }
             @foreach (var item in result1)
             {
-                <div class="text-center mb-3" style="background-color:rosybrown; border-radius:6px">
-                    <br />
-                    <h3><strong style="color:indigo">Running repair</strong></h3>
-                    <br />
+                <div class="text-center mb-3" style="background-color:rosybrown; border-radius:6px; padding:10px">
+                    <h3 style="color:indigo">Running repair</h3>
                 </div>
                 <p>Repair Started on: <strong>@item.StartDate</strong></p>
                 <p>Car with reg.number: <strong>@item.RegNumber</strong></p>
