@@ -354,6 +354,21 @@ form {
     }
 }
 
+@media screen and (max-width:700px) {
+    footer {
+        display: flex;
+        flex-direction: column-reverse !important;
+        justify-content: center !important;
+        align-items: center;
+    }
+    footer > p {
+        align-self: center !important;
+    }
+    footer div {
+        margin: 35px 0; 
+    }
+}
+
 @media screen and (max-width:560px) {
     .site-title {
         font-size:35px;
