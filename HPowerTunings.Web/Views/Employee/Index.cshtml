@@ -9,13 +9,13 @@
     <title></title>
     <style>
         body {
-            background-color: rgb(238, 244, 230)
+            background-color: rgb(220, 220, 220)
         }
     </style>
 </head>
 <body>
-    <div class="text-center mt-5 pt-5"  style="margin-bottom:30px">
-        <h3  style="margin-bottom:30px">Employee management page</h3>
+    <div class="text-center mt-5 pt-5" style="margin-bottom:30px">
+        <h3 style="margin-bottom:30px">Employee management page</h3>
         @foreach (var item in ViewData["Errors"] as List<string>)
         {
             <div class="text-center">
@@ -23,21 +23,21 @@
             </div>
         }
         <div class="d-flex" style="padding:40px; background-color:ivory; border-radius:6px; border:solid 1px #c7c8a6">
-             <div>
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#hire-employee" 
-                    style="margin-right:110px; opacity:0.7">
-                Hire Employee
-            </button>
-        </div>
-        <div>
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#fire-employee" 
-                    style="opacity:0.7">
-                Fire Employee
-            </button>
-        </div>
+            <div>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#hire-employee"
+                        style="margin-right:110px; opacity:0.7">
+                    Hire Employee
+                </button>
+            </div>
+            <div>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#fire-employee"
+                        style="opacity:0.7">
+                    Fire Employee
+                </button>
+            </div>
         </div>
     </div>
-    <form class="container-fluid justify-content-center" style="max-width:460px; padding-bottom:100px" 
+    <form class="container-fluid justify-content-center" style="max-width:460px; padding-bottom:100px"
           action="/Employee/EmployeeStatistics" method="post">
         <div class="d-flex">
             <h5>Employee statistics</h5>
@@ -55,7 +55,7 @@
             <input type="date" asp-for=@Model.EndDate class="form-control" />
             <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
         </div>
-        
+
     </form>
 
     <!-- Modal Hire -->
@@ -99,7 +99,7 @@
                         </div>
                         <input asp-for="@Model.StartDate" type="hidden">
                         <input asp-for="@Model.EndDate" type="hidden">
-                       
+
                     </form>
                 </div>
             </div>
@@ -111,7 +111,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    
+
                 </div>
                 <div class="modal-body" style="background-color:beige">
                     <form class="text-center" id="createEmployee" action="/employee/deleteEmployee" method="post">
@@ -139,5 +139,5 @@
 </html>
 
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

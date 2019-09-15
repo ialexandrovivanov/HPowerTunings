@@ -36,7 +36,7 @@
         <h5 style="font-family:Calibri; font-size:50px">@greetings Boss!</h5>
         <h5>Choose from the menu</h5>
     </div>
-    
+
     <div class="adminHome d-flex">
         <div class="container-fluid justify-content-center" style="width:390px">
             @{
@@ -128,17 +128,17 @@
                 <p>Client's phone: <strong>@item.ClientPhoneNumber</strong></p>
                 <p>Client's username: <strong>@item.ClientUserName</strong></p>
                 <p>Repair name: <strong style="color:darkred; font-size:17px;">@item.RepairName</strong></p>
-                <p>Mechanics operated:</p> 
-                    @foreach (var mechanic in item.Mechanics)
-                    {
+                <p>Mechanics operated:</p>
+                @foreach (var mechanic in item.Mechanics)
+                {
                     <p><strong>@mechanic</strong></p>
-                    }
-                    <p>Repair description: <strong>@item.RepairDescription</strong></p>
-                    <button class="container-fluid" onclick="window.location.href='/Repair/ProceedRepair?id=@item.RepairId';">
-                        Proceed repair
-                    </button>
-                    <div class="mb-5"></div>
                 }
+                <p>Repair description: <strong>@item.RepairDescription</strong></p>
+                <button class="container-fluid" onclick="window.location.href='/Repair/ProceedRepair?id=@item.RepairId';">
+                    Proceed repair
+                </button>
+                <div class="mb-5"></div>
+            }
         </div>
         <div class="mt-5 pt-5"></div>
     </div>
