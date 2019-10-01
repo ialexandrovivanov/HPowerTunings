@@ -2,8 +2,6 @@
 using HPowerTunings.Data;
 using HPowerTunings.ViewModels.AdminModels;
 using HPowerTunings.ViewModels.CarModels;
-using HPowerTunings.ViewModels.EmployeeModels;
-using HPowerTunings.ViewModels.PartModels;
 using HPowerTunings.ViewModels.RepairModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -135,9 +133,9 @@ namespace HPowerTunings.Services.Car
             };
 
             await this.context.Cars.AddAsync(car);
-            await this.context.SaveChangesAsync();
+            var result = await this.context.SaveChangesAsync();
 
-            return true;
+            return result > 0 ? true: false;
         }
 
         public async Task<ICollection<string>> GetAllCarBrandsAsync()
