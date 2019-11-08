@@ -13,6 +13,7 @@
             background-color: rgb(240, 238, 224)
         }
     </style>
+    <script src="jquery-3.4.1.min.js"></script>
 </head>
 @{
     string greetings;
@@ -32,9 +33,8 @@
 }
 
 <body>
-    <div class="container-boss text-center mt-4 pt-5">
+    <div class="container-boss text-center mt-4 pt-5" style="margin-bottom:20px">
         <h5 style="font-family:Calibri; font-size:50px">@greetings Boss!</h5>
-        <h5>Choose from the menu</h5>
     </div>
 
     <div class="adminHome d-flex">
@@ -50,19 +50,19 @@
                     && item.IsAppointmentStarted == false)
                 {
                     <div style="background-color:steelblue; border-radius:6px; padding:10px" class="mb-3">
-                        <h3 class="text-center"><strong style="color:indigo">This day appointment</strong></h3>
+                        <h3 class="text-center" style="color:white">This day appointment</h3>
                     </div>
                     <p>From client with email : <strong>@item.ClientEmail</strong></p>
                     <p>On car with reg.number : <strong>@item.RegNumber</strong></p>
-                    <p>Car brand: <strong>@item.CarCarBrandName</strong></p>
-                    <p>Car model: <strong>@item.CarCarModelName</strong></p>
+                    <p>Car brand: <strong style="color:blueviolet">@item.CarCarBrandName</strong></p>
+                    <p>Car model: <strong style="color:blueviolet">@item.CarCarModelName</strong></p>
                     <p>Client's username: <strong>@item.ClientUserName</strong></p>
                     <p>Client's phone number: <strong>@item.ClientPhoneNumber</strong></p>
-                    <p><h5>Appointment date: </h5><h5><strong>@item.AppointmentDate</strong></h5></p>
+                    <p><h5>Appointment date: </h5><h5><strong style="color:indigo">@item.AppointmentDate</strong></h5></p>
                     <div>Problem description: <strong>@item.ProblemDescription</strong></div>
                     <p></p>
                     <button class="container-fluid" onclick="window.location.href='/Repair/StartRepair?id=@item.Id';">
-                        Start repair
+                        Start new repair
                     </button>
                     <div class="mb-5"></div>
                 }
@@ -117,8 +117,8 @@
             }
             @foreach (var item in result1)
             {
-                <div class="text-center mb-3" style="background-color:rosybrown; border-radius:6px; padding:10px">
-                    <h3 style="color:indigo">Running repair</h3>
+                <div class="text-center mb-3" style="background-color:powderblue; border-radius:6px; padding:10px">
+                    <h3 class="running" style="color:indigo">Running repair</h3>
                 </div>
                 <p>Repair Started on: <strong>@item.StartDate</strong></p>
                 <p>Car with reg.number: <strong>@item.RegNumber</strong></p>
@@ -135,7 +135,7 @@
                 }
                 <p>Repair description: <strong>@item.RepairDescription</strong></p>
                 <button class="container-fluid" onclick="window.location.href='/Repair/ProceedRepair?id=@item.RepairId';">
-                    Proceed repair
+                    Proceed with repair
                 </button>
                 <div class="mb-5"></div>
             }
@@ -143,5 +143,18 @@
         <div class="mt-5 pt-5"></div>
     </div>
     <div style="height:40px"></div>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            var f = document.getElementsByClassName('running');
+            setInterval(function () {
+                Array.from(f)
+                     .forEach(x => x.style.color = x.style.color == 'white' ? 'indigo' : 'white');
+            }, 780);
+
+        }, false);
+    </script>
 </body>
+
+
+
 </html>

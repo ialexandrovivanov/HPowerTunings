@@ -11,6 +11,11 @@
     }
 </style>
 
+@{ 
+    TimeSpan ts = DateTime.Now.Subtract((DateTime)Model.In.StartedOn);
+    var duration = $"{ts.Hours:D2}:{ts.Minutes:D2}:{ts.Seconds:D2}";
+}
+
 <div class="text-center mt-4 pt-5" style="margin-bottom:20px">
     <h3> Add parts to this repair </h3>
 </div>
@@ -30,12 +35,10 @@
 
 <div class="d-flex container-fluid justify-content-center" style="max-width:600px">
     <div class="container-fluid text-center mt-4">
-        <div class="mb-3" style="background-color:lightblue; border-radius: 6px; padding-top:15px; padding-bottom:5px">
-            <h4><strong style="color:indigo">Repair</strong></h4>
-            <h5>Repair with name: <strong style="color:firebrick">@Model.In.RepairName</strong></h5>
+        <div class="mb-3" style="background-color:gainsboro; border-radius: 6px; padding-top:15px; padding-bottom:5px">
+            <h4><strong style="color:brown">@Model.In.RepairName</strong></h4>
             <h5>On car with reg.Number: <strong>@Model.In.CarRegNumber</strong></h5>
             <h5>Car VIN: <strong>@Model.In.CarRama</strong></h5>
-            <h4><strong style="color:indigo">Parts used:</strong></h4>
         </div>
 
         @foreach (var item in Model.In.Parts.OrderByDescending(p => p.StartedOn))
@@ -47,17 +50,19 @@
             </div>
 
         }
-        <div class="total" style="background-color:darksalmon; border-radius: 6px; padding-bottom:10px; padding-top:10px;">
-            <h5><strong>Count of used parts: </strong>@Model.In.CountParts</h5>
-            <h5><strong>Sum of parts prices: </strong>@Model.In.SumPartsPrices</h5>
+       
+        <div class="total" style="background-color:gray; border-radius: 6px; padding-bottom:10px; padding-top:10px;">
+            <h5 style="color:white"><strong>Count of used parts : </strong>@Model.In.CountParts</h5>
+            <h5 style="color:white"><strong>Total for parts : </strong>@Model.In.SumPartsPrices</h5>
+            <h5 style="color:white"><strong>Total repair time : </strong>@duration</h5>
         </div>
         <div class="mt-5">
-            <button type="button" data-toggle="modal" data-target="#finalize-repair" class="btn btn-outline-success"
-                    style="opacity:0.9">
+            <button type="button" data-toggle="modal" data-target="#finalize-repair" class="btn btn-outline-primary"
+                    style="opacity:0.8">
                 Finalize repair
             </button>
         </div>
-       <div style="height:80px"></div>
+        <div style="height:80px"></div>
     </div>
 </div>
 
@@ -67,14 +72,12 @@
 <div class="modal fade" id="add-part" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-            </div>
             <div class="modal-body" style="background-color:beige">
                 <form class="text-center" id="proceedRepair" action="/part/addpart" method="post">
                     <div class="d-flex" style="padding-bottom:20px">
                         <h4 class="modal-title" id="addContactLabel">Add part</h4>
-                        <div class="button-holder" style="opacity:0.6; margin-left:auto">
-                            <button type="submit" class="btn btn-outline-primary">Add part</button>
+                        <div class="button-holder" style="opacity:0.8; margin-left:auto">
+                            <button type="submit" class="btn btn-outline-primary">&nbsp;&nbsp;Add part&nbsp;&nbsp;</button>
                         </div>
                     </div>
                     <div>
@@ -94,7 +97,7 @@
                     </div>
                     <div class="mt-3">
                         <label>Part supplier</label>
-                        <select asp-for="@Model.Out.PartSupplier" class="form-control" placeholder="Supplier company"  list="suppliers">
+                        <select asp-for="@Model.Out.PartSupplier" class="form-control" placeholder="Supplier company" list="suppliers">
                             @foreach (var item in Model.In.Suppliers)
                             {
                                 <option id="suppliers">@item</option>
@@ -115,9 +118,10 @@
                     <input asp-for="@Model.In.RepairName" type="hidden">
                     <input asp-for="@Model.In.SumPartsPrices" type="hidden">
                     <input asp-for="@Model.In.CountParts" type="hidden">
-
-                    
                 </form>
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal" aria-label="Close" style="margin-top:50px; opacity:0.8;">
+                    <span aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </button>
             </div>
         </div>
     </div>
@@ -127,16 +131,15 @@
 <div class="modal fade" id="add-supplier" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-            </div>
             <div class="modal-body" style="background-color:beige;">
                 <form class="text-center" id="addSupplier" action="/Supplier/CreateSupplier" method="post">
-                    <div class="d-flex" style="padding-bottom:20px">
-                        <h4 class="modal-title" id="addContactLabel">Add part</h4>
-                        <div class="button-holder" style="opacity:0.6; margin-left:auto">
+                    <div class="d-flex" style="padding-top:20px">
+                        <h4 class="modal-title" id="addContactLabel">Add supplier</h4>
+                        <div class="button-holder" style="opacity:0.8; margin-left:auto">
                             <button type="submit" class="btn btn-outline-primary">Add supplier</button>
                         </div>
                     </div>
+                    <div style="padding-top:20px"></div>
                     <div>
                         <label>Supplier name</label>
                         <input asp-for="@Model.Out.SupplierName" class="form-control">
@@ -166,8 +169,11 @@
                     <input asp-for="@Model.In.RepairName" type="hidden">
                     <input asp-for="@Model.In.SumPartsPrices" type="hidden">
                     <input asp-for="@Model.In.CountParts" type="hidden">
-
                 </form>
+
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal" aria-label="Close" style="margin-top:50px; opacity:0.8;">
+                    <span aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </button>
             </div>
         </div>
     </div>
@@ -177,7 +183,7 @@
 <div class="modal fade" id="finalize-repair" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color:gainsboro">
                 <h4 class="modal-title" id="addContactLabel">Finalize repair</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -186,7 +192,7 @@
             <div class="modal-body" style="background-color:beige">
                 <form class="text-center" id="finalizeRepair" action="/repair/finalizeRepair" method="post">
                     <div>
-                        <label style="font-family:Arial; font-size: 20px" ;>Repair price</label>
+                        <label style="font-family:Arial; font-size: 20px">Repair price</label>
                         <input asp-for="@Model.Out.RepairPrice" class="form-control" placeholder="Sum for the client to pay">
                     </div>
 
@@ -200,7 +206,7 @@
                     <input asp-for="@Model.In.CountParts" type="hidden">
 
                     <div class="button-holder mt-5">
-                        <button type="submit" class="btn btn-outline-primary" style="opacity:0.7"> Finalize </button>
+                        <button type="submit" class="btn btn-outline-primary" style="opacity:0.8"> Finalize </button>
                     </div>
                 </form>
             </div>

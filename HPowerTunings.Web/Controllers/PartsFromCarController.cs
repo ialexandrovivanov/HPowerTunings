@@ -37,7 +37,6 @@ namespace HPowerTunings.Web.Controllers
         public async Task<IActionResult> RatePart(RatePartViewModel model)
         {
 
-
             if (ModelState.IsValid)
             {
                 bool result = await this.partsFromCarsService.RatePartAsync(model);

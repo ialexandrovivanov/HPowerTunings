@@ -38,15 +38,19 @@
                 <div>
                     <h5 class="text-center">Car brand : <strong style="color:indigo">@car.CarBrand</strong></h5>
                 </div>
-                <a href="/CarsForParts/SellPart?id=@car.Id" style=" float:right; margin-left: auto;
+                <span style="margin-left:auto">
+                    <a href="/CarsForParts/SellPart?id=@car.Id" style=" float:right; margin-left: auto;
                    opacity:0.7;">
-                    <button>&nbsp;&nbsp;Sell part&nbsp;&nbsp;</button>
+                        <button>&nbsp;&nbsp;Sell part&nbsp;&nbsp;</button>
+                    </a>
+                    
+                </span>
+                <span>
+                    <a href="/CarsForParts/DeleteCar?id=@car.Id" style=" float:right; opacity:0.7;">
+                 <button> Delete car </button>
                 </a>
-                <a href="/CarsForParts/DeleteCar?id=@car.Id" style=" float:right;
-                   opacity:0.7;">
-                    <button> Delete car </button>
-                </a>
-
+                </span>
+               
             </div>
             <h5>Car model : <strong style="color:indigo">@car.CarModel</strong></h5>
             <p>Vin : <strong>@car.Rama</strong></p>
@@ -59,8 +63,8 @@
                         <p>Part name: <strong>@part.Name</strong></p>
                         <h5 class="text-center" style="color:indigo; margin-left:auto"><strong>Part</strong></h5>
                     </div>
-                    <p>Part price: <strong>@part.Price</strong></p>
-                    <p>Saled on: <strong>@part.SaledOn.Value.ToString("dd-MM-yy")</strong></p>
+                    <p>Part price: &nbsp;<strong>@part.Price</strong></p>
+                    <p>Sold on: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@part.SaledOn.Value.ToString("dd-MM-yy")</strong></p>
                 </div>
                 <p></p>
             }

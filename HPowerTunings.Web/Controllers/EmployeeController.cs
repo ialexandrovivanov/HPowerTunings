@@ -94,10 +94,9 @@ namespace HPowerTunings.Web.Controllers
             await Task.Delay(0);
             if (model.StartDate > model.EndDate)
             {
-                return Redirect("/Employee/Index");
+                return RedirectToAction("Index", "Employee", model);
             }
-
-            if (model.StartDate == null || model.EndDate == null)
+            if (model.StartDate == null || model.EndDate == null || (model.StartDate > model.EndDate))
             {
                 ModelState.AddModelError(string.Empty, "Insert correct date and time");
                 return Redirect("/Employee/Index");

@@ -9,7 +9,7 @@
     <title></title>
     <style>
         body {
-            background-color: rgb(220, 220, 220)
+            background-color: rgb(230, 234, 230)
         }
     </style>
 </head>
@@ -22,7 +22,7 @@
                 <p style="color:mediumvioletred">@item</p>
             </div>
         }
-        <div class="d-flex" style="padding:40px; background-color:ivory; border-radius:6px; border:solid 1px #c7c8a6">
+        <div class="d-flex" style="padding:40px; background-color:ivory; border-radius:6px;">
             <div>
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#hire-employee"
                         style="margin-right:110px; opacity:0.7">
@@ -62,16 +62,15 @@
     <div class="modal fade" id="hire-employee" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                </div>
                 <div class="modal-body" style="background-color:beige">
                     <form class="text-center" id="createEmployee" action="/employee/createEmployee" method="post">
-                        <div class="d-flex" style="margin-bottom:30px">
+                        <div class="d-flex" style="margin-top:20px">
                             <h4 class="modal-title" id="addContactLabel">Register Employee</h4>
                             <div class="button-holder" style="margin-left:auto">
-                                <button type="submit" class="btn btn-outline-primary"> Register </button>
+                                <button type="submit" class="btn btn-outline-primary" style="opacity:0.8;">&nbsp;&nbsp; Register &nbsp;&nbsp;</button>
                             </div>
                         </div>
+                        <div style="margin-bottom:30px"></div>
                         <div>
                             <label>Full name</label>
                             <input asp-for="@Model.RegisterEmployee.FullName" class="form-control" placeholder="Full name">
@@ -101,6 +100,11 @@
                         <input asp-for="@Model.EndDate" type="hidden">
 
                     </form>
+                    <a href='/Employee/Index/'>
+                        <button class="btn btn-outline-primary" style="margin-top:70px; opacity:0.8;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -110,15 +114,12 @@
     <div class="modal fade" id="fire-employee" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-
-                </div>
                 <div class="modal-body" style="background-color:beige">
                     <form class="text-center" id="createEmployee" action="/employee/deleteEmployee" method="post">
                         <div class="d-flex" style="margin-bottom:30px">
                             <h4 class="modal-title" id="addContactLabel">Fire employee</h4>
                             <div class="button-holder" style="margin-left:auto">
-                                <button type="submit" class="btn btn-outline-primary">Fire employee</button>
+                                <button type="submit" class="btn btn-outline-primary" style="opacity:0.8;">Fire employee</button>
                             </div>
                         </div>
                         <div>
@@ -131,6 +132,11 @@
                             <span asp-validation-for="@Model.DeleteEmployee.Password" class="text-danger"></span>
                         </div>
                     </form>
+                    <a href='/Employee/Index/'>
+                        <button class="btn btn-outline-primary" style="margin-top:60px; opacity:0.8;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

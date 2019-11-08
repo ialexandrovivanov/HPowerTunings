@@ -31,7 +31,9 @@ namespace HPowerTunings.Web.Controllers
         public IActionResult RepairStartEnd(RepairStartEndDateViewModel model)
         {
             if (model.StartDate > model.EndDate)
-                ModelState.AddModelError(string.Empty, "Insert correct period of time");
+            {
+                return RedirectToAction("Index", "Repair", model);
+            }
 
             if (!ModelState.IsValid)
                 return RedirectToAction("Index", "Repair", model);

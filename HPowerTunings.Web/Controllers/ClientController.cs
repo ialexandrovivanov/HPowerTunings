@@ -51,6 +51,10 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ClientStartEndStatistics(ClientStartEndOutputModel model)
         {
+            if (model.StartDate > model.EndDate)
+            {
+                return RedirectToAction("Index", "Client", model);
+            }
             if (!ModelState.IsValid)
             {
                 return View();
