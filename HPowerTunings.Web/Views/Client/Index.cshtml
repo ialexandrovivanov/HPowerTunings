@@ -28,17 +28,16 @@
               background-color:ivory; border:solid 1px rgb(220, 220, 220); margin-top:30px">
             <form action="/client/clientstartendstatistics" method="post">
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-outline-primary" style="opacity:0.7">Select period</button>
+                    <button type="submit" name="submit" value ="all" class="btn btn-outline-primary" style="opacity:0.7; margin-right: 40px;">&nbsp;&nbsp;&nbsp;All Clients&nbsp;&nbsp;&nbsp;</button>
+                    <button type="submit" name="submit" value="period" class="btn btn-outline-primary" style="opacity:0.7;margin-left: 40px;">Select period</button>
                 </div>
                 <div class="text-center mt-5">
                     <label>Start date (including)</label>
                     <input type="date" asp-for=@Model.StartDate class="form-control" />
-                    <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
                 </div>
                 <div class="text-center mt-5">
                     <label>End date (including)</label>
                     <input type="date" asp-for=@Model.EndDate class="form-control" />
-                    <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
                 </div>
                 <div>
                     <input type="hidden" asp-for=@Model.RegisterClient.Email class="form-control" value="pesho@gmail.com" />
@@ -46,11 +45,8 @@
                 </div>
             </form>
         </div>
-
     </div>
 </body>
 </html>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+

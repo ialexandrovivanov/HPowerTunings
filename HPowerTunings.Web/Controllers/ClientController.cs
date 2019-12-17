@@ -49,20 +49,30 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ClientStartEndStatistics(ClientStartEndOutputModel model)
+        public async Task<IActionResult> ClientStartEndStatistics(ClientStartEndOutputModel model, string submit)
         {
-            if (model.StartDate > model.EndDate)
+            if (submit == "period")
             {
-                return RedirectToAction("Index", "Client", model);
-            }
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction("Index", "Client", model);
+                }
+                if (model.StartDate > model.EndDate)
+                {
+                    return RedirectToAction("Index", "Client", model);
+                }
 
-            var result = await this.customClientService.GetAllClientsPeriodAsync(model);
+                var result = await this.customClientService.GetAllClientsPeriodAsync(model);
 
-            return View(result);
+                return View(result);
+            }
+                   
+
+            model.StartDate = DateTime.MinValue;
+            model.EndDate = DateTime.MaxValue;
+
+            var resultAll = await this.customClientService.GetAllClientsPeriodAsync(model);
+            return View(resultAll);
         }
 
         [HttpGet]

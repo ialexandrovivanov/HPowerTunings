@@ -31,9 +31,11 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateEmployee(EmployeeStartEndStatisticsViewModel model)
         {
+            var error = "";
             if (!ModelState.IsValid)
             {
-                return Redirect("/Employee/Index");
+                error = "Please fill all fields";
+                return Redirect($"/Employee/Index?error={error}");
             }
 
             if (await this.employeeService.CreateEmployee(model.RegisterEmployee))
@@ -89,21 +91,30 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> EmployeeStatistics(EmployeeStartEndStatisticsViewModel model)
+        public async Task<IActionResult> EmployeeStatistics(EmployeeStartEndStatisticsViewModel model, string submit)
         {
-            await Task.Delay(0);
-            if (model.StartDate > model.EndDate)
+            if (submit == "period")
             {
-                return RedirectToAction("Index", "Employee", model);
-            }
-            if (model.StartDate == null || model.EndDate == null || (model.StartDate > model.EndDate))
-            {
-                ModelState.AddModelError(string.Empty, "Insert correct date and time");
-                return Redirect("/Employee/Index");
+                if (model.StartDate > model.EndDate)
+                {
+                    return RedirectToAction("Index", "Employee", model);
+                }
+                if (model.StartDate == null || model.EndDate == null || (model.StartDate > model.EndDate))
+                {
+                    ModelState.AddModelError(string.Empty, "Insert correct date and time");
+                    return Redirect("/Employee/Index");
+                }
+
+                var result = await this.employeeService.EmployeeStartEndStatistics(model);
+                return View(result);
             }
 
-            var result = await this.employeeService.EmployeeStartEndStatistics(model);
-            return View(result);
+            model.StartDate = DateTime.MinValue;
+            model.EndDate = DateTime.MaxValue;
+
+            var resultAll = await this.employeeService.EmployeeStartEndStatistics(model);
+            if (resultAll == null) return View();
+            return View(resultAll);
         }
 
     }

@@ -196,26 +196,36 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> CarStatisticStartEnd(CarStartEndDateViewModel model)
+        public async Task<IActionResult> CarStatisticStartEnd(CarStartEndDateViewModel model, string submit)
         {
-            if (model.StartDate > model.EndDate)
+
+            if (submit == "period")
             {
-                return RedirectToAction("CarStatistic", "Car", model);
+                if (model.StartDate > model.EndDate)
+                {
+                    return RedirectToAction("CarStatistic", "Car", model);
+                }
+
+                if (model.StartDate == default(DateTime) || model.EndDate == default(DateTime))
+                {
+                    ModelState.AddModelError(string.Empty, "Insert correct date and time");
+                    return RedirectToAction("CarStatistic", "Car", model);
+                }
+
+                var result = await this.carService.GetAllCarsPeriod(model);
+                if (result == null) return View();
+
+                return View(result);
             }
 
-            if (model.StartDate == default(DateTime) || model.EndDate == default(DateTime))
-            {
-                ModelState.AddModelError(string.Empty, "Insert correct date and time");
-                return RedirectToAction("CarStatistic", "Car", model);
-            }
-                
-            var result = await this.carService.GetAllCarsPeriod(model);
-            if (result == null)
-            {
-                return View();
-            }
+            model.StartDate = DateTime.MinValue;
+            model.EndDate = DateTime.MaxValue;
 
-            return View(result);
+            var resultAll = await this.carService.GetAllCarsPeriod(model);
+
+            if (resultAll == null) return View();
+
+            return View(resultAll);
         }
     }
 }

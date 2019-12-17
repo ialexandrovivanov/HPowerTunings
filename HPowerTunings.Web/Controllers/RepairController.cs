@@ -3,6 +3,7 @@ using HPowerTunings.Services.Repair;
 using HPowerTunings.ViewModels.RepairModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,23 +29,30 @@ namespace HPowerTunings.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult RepairStartEnd(RepairStartEndDateViewModel model)
+        public IActionResult RepairStartEnd(RepairStartEndDateViewModel model, string submit)
         {
-            if (model.StartDate > model.EndDate)
+            if (submit == "period")
             {
-                return RedirectToAction("Index", "Repair", model);
+                if (model.StartDate > model.EndDate)
+                    return RedirectToAction("Index", "Repair", model);
+
+                if (!ModelState.IsValid)
+                    return RedirectToAction("Index", "Repair", model);
+
+                var result = this.repairService.GetAllRepairsPeriod(model);
+                if (result == null) return View();
+
+                return View(result);
             }
 
-            if (!ModelState.IsValid)
-                return RedirectToAction("Index", "Repair", model);
+            model.StartDate = DateTime.MinValue;
+            model.EndDate = DateTime.MaxValue;
 
-            var result = this.repairService.GetAllRepairsPeriod(model);
-            if (result == null)
-            {
-                return View();
-            }
+            var resultAll = this.repairService.GetAllRepairsPeriod(model);
+            if (resultAll == null) return View();
 
-            return View(result);
+            return View(resultAll);
+
         }
 
         [HttpGet]

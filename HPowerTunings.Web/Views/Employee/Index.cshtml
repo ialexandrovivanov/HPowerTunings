@@ -40,24 +40,23 @@
     <form class="container-fluid justify-content-center" style="max-width:460px; padding-bottom:100px"
           action="/Employee/EmployeeStatistics" method="post">
         <div class="d-flex">
-            <h5>Employee statistics</h5>
-            <div style="margin-left:95px">
-                <button type="submit" class=" btn btn-outline-primary" style="opacity:0.7">Select &nbsp;period&nbsp;</button>
+            <h4>Employee statistics</h4>
+            <div style="margin-left:170px">
+                <button type="submit" name="submit" value="all" class=" btn btn-outline-primary" style="opacity:0.7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                <button type="submit" name="submit" value="period" class=" btn btn-outline-primary" style="opacity:0.7; margin-top:10px">&nbsp;Select period&nbsp;</button>
             </div>
         </div>
         <div class="text-center mt-3">
             <label>Start date (including)</label>
             <input type="date" asp-for=@Model.StartDate class="form-control" />
-            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
         </div>
         <div class="text-center mt-5">
             <label>End date (including)</label>
             <input type="date" asp-for=@Model.EndDate class="form-control" />
-            <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
         </div>
 
     </form>
-
+  
     <!-- Modal Hire -->
     <div class="modal fade" id="hire-employee" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -144,6 +143,3 @@
 </body>
 </html>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
