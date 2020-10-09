@@ -23,7 +23,7 @@
     </div>
     <form class="deleteCarForm mt-5" action="/car/deleteyourcar" method="post">
         <label>Insert your password</label>
-        <input asp-for="Password" class="form-control container-fluid" style="width:300px" />
+        <input asp-for="Password" type="password" class="form-control container-fluid" style="width:300px" />
         <span asp-validation-for=@Model.Password style="color:chocolate"></span>
         <input asp-for="CarBrandName" />
         <input asp-for="CarModelName" />
