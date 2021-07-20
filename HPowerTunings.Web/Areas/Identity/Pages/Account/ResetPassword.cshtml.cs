@@ -13,10 +13,8 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
     {
         private readonly UserManager<Client> _userManager;
 
-        public ResetPasswordModel(UserManager<Client> userManager)
-        {
+        public ResetPasswordModel(UserManager<Client> userManager) =>
             _userManager = userManager;
-        }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -43,15 +41,11 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
         public IActionResult OnGet(string code = null)
         {
             if (code == null)
-            {
                 return BadRequest("A code must be supplied for password reset.");
-            }
             else
             {
-                Input = new InputModel
-                {
-                    Code = code
-                };
+                Input = new InputModel { Code = code };
+
                 return Page();
             }
         }
@@ -59,27 +53,19 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
-            {
-                // Don't reveal that the user does not exist
                 return RedirectToPage("./ResetPasswordConfirmation");
-            }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
-            {
                 return RedirectToPage("./ResetPasswordConfirmation");
-            }
 
             foreach (var error in result.Errors)
-            {
                 ModelState.AddModelError(string.Empty, error.Description);
-            }
+
             return Page();
         }
     }

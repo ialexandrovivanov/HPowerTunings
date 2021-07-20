@@ -4,9 +4,10 @@
     var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
     var showBanner = !consentFeature?.CanTrack ?? false;
     var cookieString = consentFeature?.CreateConsentCookie();
+    var isNotAdmin = !User.IsInRole("Admin");
 }
 
-@if (showBanner)
+@if (showBanner || isNotAdmin)
 {
     <div id="cookieConsent" class="cookieconsent fixed-bottom d-flex alert justify-content-center w-100 p-2 mt-auto" role="alert">
         <span class="text-right mt-2 mr-3">Accept our cookie policy.</span>

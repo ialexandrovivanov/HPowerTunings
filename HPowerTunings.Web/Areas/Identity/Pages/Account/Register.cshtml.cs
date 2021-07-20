@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using HPowerTunings.Data.Models;
 using HPowerTunings.Data;
 using System.Linq;
@@ -19,21 +18,18 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly UserManager<Client> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _Dbcontext;
 
         public RegisterModel(
             UserManager<Client> userManager,
-            ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context)
         {
-            _context = context;
+            _Dbcontext = context;
             _userManager = userManager;
-            _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
         }
@@ -77,16 +73,16 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            if (ModelState.IsValid)
 
+            if (ModelState.IsValid)
             {
                 var user = new Client { UserName = Input.UserName, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var countUsers = _userManager.Users.Count();
-                var isEmployeeEmail = _context.Employees
-                                              .Where(e => e.IsDeleted == false)
-                                              .Select(e => e.Email)
-                                              .Any(e => e == user.Email);
+                var isEmployeeEmail = _Dbcontext.Employees
+                    .Where(e => e.IsDeleted == false)
+                    .Select(e => e.Email)
+                    .Any(e => e == user.Email);
 
                 if (result.Succeeded && countUsers == 1)
                 {
@@ -112,25 +108,22 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Page("/Account/ConfirmEmail",
-                                               pageHandler: null,
-                                               values: new { userId = user.Id, code = code },
-                                               protocol: Request.Scheme);
+                    var confirmationLink = Url.Page(
+                        "/Account/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { userId = user.Id, code = code },
+                        protocol: Request.Scheme);
                     
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email address",
                         $"Please confirm the existence of your email by " +
-                        $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicking here</a>");
+                        $"<a href='{HtmlEncoder.Default.Encode(confirmationLink)}'>Clicking here</a>");
 
                     return RedirectToPage("./CheckEmail");
                 }
 
                 foreach (var error in result.Errors)
-                {
                     ModelState.AddModelError(string.Empty, error.Description);
-                }
             }
 
             return Page();

@@ -59,7 +59,6 @@ namespace HPowerTunings.Web.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Details(string id)
         {
-
             return View();
         }
 
@@ -70,12 +69,13 @@ namespace HPowerTunings.Web.Controllers
             var result = await this.repairService.StartRepair(id);
             var regNumber = result?.RegNumber;
             var description = result?.ProblemDescription;
+
             if (result != null)
             {
                 return Redirect($"/Repair/CreateRepair?regNumber={regNumber}&description={description}");
             }
 
-            return View();
+            return Redirect("/Home");
         }
 
         [HttpGet]

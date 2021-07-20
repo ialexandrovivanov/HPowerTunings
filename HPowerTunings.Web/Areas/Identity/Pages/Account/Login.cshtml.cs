@@ -56,9 +56,7 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
         {
           
             if (!string.IsNullOrEmpty(ErrorMessage))
-            {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
-            }
 
             returnUrl = returnUrl ?? Url.Content("~/");
 
@@ -83,16 +81,10 @@ namespace HPowerTunings.Web.Areas.Identity.Pages.Account
                         await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, true);
 
                     if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
                         return LocalRedirect(returnUrl);
-                    }
 
                     if (result.IsLockedOut)
-                    {
-                        _logger.LogWarning("User account locked out.");
                         return RedirectToPage("./Lockout");
-                    }
                     else
                     {
                         ModelState.AddModelError(string.Empty, "Invalid login attempt.");
