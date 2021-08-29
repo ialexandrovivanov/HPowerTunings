@@ -22,7 +22,7 @@ namespace HPowerTunings.Common.Email
             using (var message = new MailMessage())
             {
                 message.To.Add(new MailAddress(email, "Dear Client"));
-                message.From = new MailAddress("support@hpower.net", "HPowerTunings support team");
+                message.From = new MailAddress("ialexandrovivanov@gmail.com", "HPowerTunings support team");
                 message.Subject = subject;
                 message.Body = htmlMessage;
                 message.IsBodyHtml = true;
@@ -46,7 +46,7 @@ namespace HPowerTunings.Common.Email
                                           string imagePath,
                                           string htmlMessage)
         {
-            var from = new EmailAddress("support@hpower.net", "HPowerTunings support team");
+            var from = new EmailAddress("ialexandrovivanov@gmail.com", "HPowerTunings support team");
             var subj = subject;
             var to = new EmailAddress(email, "Dear Client");
             var body = htmlMessage;
