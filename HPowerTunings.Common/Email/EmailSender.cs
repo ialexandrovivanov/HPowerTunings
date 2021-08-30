@@ -47,7 +47,6 @@ namespace HPowerTunings.Common.Email
                                           string htmlMessage)
         {
             var from = new EmailAddress("ialexandrovivanov@gmail.com", "HPowerTunings support team");
-            var subj = subject;
             var to = new EmailAddress(email, "Dear Client");
             var body = htmlMessage;
             SendGridMessage message = MailHelper.CreateSingleEmail(from, to, subject, body, htmlMessage);
